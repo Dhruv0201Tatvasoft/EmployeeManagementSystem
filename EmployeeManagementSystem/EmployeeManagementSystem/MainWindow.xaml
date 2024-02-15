@@ -4,9 +4,171 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManagementSystem"
+        xmlns:controls="clr-namespace:EmployeeManagementSystem.UserConntrol"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="NormalBackGroundColor" Color="#FAFAFA"/>
+            <SolidColorBrush x:Key="HoverBackGroundColor" Color="#669E40"/>
+            <SolidColorBrush x:Key="PressedBackGroundColor" Color="#60943C"/>
+            <SolidColorBrush x:Key="DisabledBackGroundColor" Color="#C5E0B4"/>
+            <SolidColorBrush x:Key="BorderColor" Color="#507E32"/>
+            <SolidColorBrush x:Key="ForeGroundColor" Color="#99000000"/>
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="FontFamily" Value="Calibri"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                            <Border  Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontWeight" Value="UltraBold"/>
+                <Setter Property="Background" Value="#70AD47"/>
+                <Setter  Property="Foreground" Value="#FFFFFF"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#669E40"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#60943C"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#C5E0B4"/>
+                        <Setter Property="Foreground" Value="#AFABAB"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CustomInputStyle" TargetType="{x:Type Control}">
+                <Setter Property="Background" Value="#FAFAFA" />
+                <Setter Property="BorderBrush" Value="#FF7D8683" />
+                <Setter Property="Foreground" Value="#99000000" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#F3F3F3" />
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="Background" Value="#FFFFFF" />
+                        <Setter Property="BorderBrush" Value="#507E32" />
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#33000000"/>
+                        <Setter Property="Foreground" Value="#66000000" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="DataGridStyle" TargetType="DataGrid">
+                <Setter Property="AlternatingRowBackground" Value="#EBF1E9" />
+                <Setter Property="Foreground" Value="#000000" />
+                <Setter Property="RowStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Foreground" Value="#000000"/>
+                            <Style.Triggers >
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#669E40"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                
+                <Setter Property="CellStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="#000000"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#60943C" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
 
-    </Grid>
+                <Setter Property="ColumnHeaderStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="#70AD47" />
+                            <Setter Property="Foreground" Value="#FFFFFF" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#60943C" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TabItemStyle" TargetType="TabItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <Border Name="Border" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}">
+                                <ContentPresenter x:Name="ContentSite" ContentSource="Header" Margin="10,2"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBackGroundColor}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource HoverBackGroundColor}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackGroundColor}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <ScrollViewer>
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+        <TabControl Grid.Column="0" x:Name="TabControl" Margin="10,0,0,0" Grid.ColumnSpan="2">
+               
+                <TabItem Header="Dashboard" Style="{StaticResource TabItemStyle}">
+            </TabItem>
+            <TabItem Header="Project" Name="ProjectTab" Style="{StaticResource TabItemStyle}">
+                <controls:ProjectWindow/>
+            </TabItem>
+            <TabItem Header="Employee" Style="{StaticResource TabItemStyle}">
+            </TabItem>
+                <TabItem Header="Master" Style="{StaticResource TabItemStyle}">
+                </TabItem>
+                
+            </TabControl>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="Auto">
+                <Button >
+                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="20" Height="20"/>
+                </Button>
+                </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

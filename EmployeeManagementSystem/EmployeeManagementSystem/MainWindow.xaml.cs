@@ -19,6 +19,7 @@ namespace EmployeeManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
         }
     }
 }
