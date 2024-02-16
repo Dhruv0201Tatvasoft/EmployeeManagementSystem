@@ -15,15 +15,18 @@ using System.Windows.Input;
 
 namespace EmployeeManagementSystem.ViewModel
 {
-    internal class ProjectViewModel:INotifyPropertyChanged
+    internal class ProjectViewModel : INotifyPropertyChanged
     {
         private ProjectModel project;
         private DataTable dataTable;
-        public DataTable DataTable { get { return dataTable; } 
-        set { dataTable = value; OnPropertyChanged("DataTable"); }
-        
+        public DataTable DataTable
+        {
+            get { return dataTable; }
+            set { dataTable = value; OnPropertyChanged("dataTable"); }
+
         }
-        private InsertData insertDatatoDataBase;
+
+        private GetData getData;
         private string code;
         public string Code
         {
@@ -35,35 +38,39 @@ namespace EmployeeManagementSystem.ViewModel
         public string Name
         {
             get { return name; }
-            set {  name = value; OnPropertyChanged("Name"); }
+            set { name = value; OnPropertyChanged("Name"); }
         }
 
-        private DateTime startingDate= new DateTime(1990,01,01);
+        private DateTime startingDate = new DateTime(1990, 01, 01);
         public DateTime StartingDate
         {
             get { return startingDate; }
             set
             {
-               
-                startingDate = value; OnPropertyChanged("StartingDate"); }
+
+                startingDate = value; OnPropertyChanged("StartingDate");
+            }
         }
         private DateTime endingDate = DateTime.Now.Date;
         public DateTime EndingDate
         {
             get { return endingDate; }
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     endingDate = DateTime.Now;
                 }
-                
-                endingDate = value; OnPropertyChanged("EndingDate"); }
+
+                endingDate = value; OnPropertyChanged("EndingDate");
+            }
         }
         private ICommand searchCommand;
         public ICommand SearchCommand
         {
             get
             {
-                if(searchCommand == null)
+                if (searchCommand == null)
                 {
                     searchCommand = new RelayCommand(searchExecute, canSearchExecute, false);
                 }
@@ -73,12 +80,12 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void searchExecute(object parameter)
         {
-            dataTable = insertDatatoDataBase.GetProjectSearchData(Code,Name,StartingDate,EndingDate);
+            dataTable = getData.GetProjectSearchData(Code, Name, StartingDate, EndingDate);
             OnPropertyChanged("DataTable");
         }
-        private bool canSearchExecute (object parameter)
+        private bool canSearchExecute(object parameter)
         {
- 
+
             return true;
         }
 
@@ -87,9 +94,9 @@ namespace EmployeeManagementSystem.ViewModel
         {
             get
             {
-                if(clearSearchFieldsCommand == null)
+                if (clearSearchFieldsCommand == null)
                 {
-                    clearSearchFieldsCommand = new RelayCommand(ClearFieldsExecute,CanClearFieldsExecute,false);
+                    clearSearchFieldsCommand = new RelayCommand(ClearFieldsExecute, CanClearFieldsExecute, false);
 
                 }
                 return clearSearchFieldsCommand;
@@ -103,11 +110,11 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ClearFieldsExecute(object obj)
         {
-            Code =String.Empty;
-            Name =String.Empty;
+            Code = String.Empty;
+            Name = String.Empty;
             StartingDate = new DateTime(1990, 01, 01);
             EndingDate = DateTime.Now;
-            dataTable = insertDatatoDataBase.GetProjectData();
+            dataTable = getData.GetProjectData();
             OnPropertyChanged("dataTable");
         }
 
@@ -115,14 +122,14 @@ namespace EmployeeManagementSystem.ViewModel
         {
             project = new ProjectModel();
             dataTable = new DataTable();
-            insertDatatoDataBase = new InsertData();
-            dataTable = insertDatatoDataBase.GetProjectData();
+            getData = new GetData();
+            dataTable = getData.GetProjectData();
             OnPropertyChanged("dataTable");
 
         }
 
 
-    
+
 
 
 
