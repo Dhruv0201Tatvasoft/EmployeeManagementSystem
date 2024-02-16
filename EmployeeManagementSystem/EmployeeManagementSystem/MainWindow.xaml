@@ -151,7 +151,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-        <TabControl Grid.Column="0" x:Name="TabControl" Margin="10,0,0,0" Grid.ColumnSpan="2">
+        <TabControl Grid.Column="0" x:Name="TabControl"  Grid.ColumnSpan="2">
                
                 <TabItem Header="Dashboard" Style="{StaticResource TabItemStyle}">
             </TabItem>
@@ -166,7 +166,7 @@
             </TabControl>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="Auto">
                 <Button >
-                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="20" Height="20"/>
+                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="20" Height="20" RenderTransformOrigin="0.094,1.221"/>
                 </Button>
                 </StackPanel>
         </Grid>

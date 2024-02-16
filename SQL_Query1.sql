@@ -53,7 +53,7 @@ CREATE TABLE EmsTblEmployee (
     FOREIGN KEY (Designation) REFERENCES EmsTblDesignation(Id),
     FOREIGN KEY (Department) REFERENCES EmsTblDepartment(Id)
 );
-
+exec sp_rename 'dbo.EmsTblEmployee.PermenentAddress' ,'PermanentAdress','COLUMN'
 CREATE TABLE EmsTblEmployeeEducation (
     EmployeeCode VARCHAR(10) NOT NULL,
     Degree VARCHAR(10) NOT NULL,
@@ -85,7 +85,6 @@ insert into EmsTblTechnology values
 (8,'Python'),
 (9,'Angular'),
 (10,'Vue')
-select * from EmsTblProject
 insert into EmsTblProject values 
 ('P0001','Employee Management System','2020-12-10','2021-12-20'),
 ('P0002','Inventory System','2018-07-09',null),
@@ -93,5 +92,7 @@ insert into EmsTblProject values
 ('P0004','Hotel Reservation System','2021-06-24',null),
 ('P0005','Hello Doc','2022-04-15',null)
 
+insert into EmsTblTechnologyForProject values
+('P0001',1),('P0001',9) ,('P0002',7),('P0002',6),('P0002',3),('P0003',2),('P0003',5),('P0004',9),('P0004',6),('P0005',1)
 
 

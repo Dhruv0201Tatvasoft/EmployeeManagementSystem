@@ -21,5 +21,7 @@ namespace EmployeeManagementSystem
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
         }
+
+       
     }
 }
