@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagementSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,23 @@ namespace EmployeeManagementSystem.UserConntrol
         public AddEditProject()
         {
             InitializeComponent();
+            AddEditProjectViewModel viewModel = new AddEditProjectViewModel(); 
+            this.DataContext = viewModel;
+            viewModel.ChangeWindowEvent += ChangeWindow;
+        }
+        public void ChangeWindow(object sender, EventArgs e)
+        {
+            ProjectWindow projectWindow = new ProjectWindow();
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+
+            if (mainWindow != null)
+            {
+                if (mainWindow.ProjectTab != null)
+                {
+                    mainWindow.ProjectTab.Content = projectWindow;
+                }
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

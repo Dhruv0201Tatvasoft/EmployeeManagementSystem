@@ -22,6 +22,11 @@ namespace EmployeeManagementSystem.ViewModel
 
         private DataTable dataTable;
         private GetData getData;
+        public event EventHandler ChangeWindowEvent;
+        protected virtual void OnChangeWindowEvent(EventArgs e)
+        {
+            ChangeWindowEvent?.Invoke(this, e);
+        }
         private InsertData insertData;
         private List<int> selectedtechNologyIds = new List<int>();
         public List<int> SelectedTechnologyNames
@@ -94,7 +99,8 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void SaveExecute(object obj)
         {
-            insertData.InsertNewProject(Code, Name, StartingDate, EndingDate,selectedtechNologyIds);
+            //insertData.InsertNewProject(Code, Name, StartingDate, EndingDate,selectedtechNologyIds);
+            OnChangeWindowEvent(EventArgs.Empty);   
         }
 
         public AddEditProjectViewModel()
