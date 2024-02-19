@@ -41,6 +41,11 @@ namespace EmployeeManagementSystem.Behaviours
                 SelectedItem = (DataRowView)e.AddedItems[0];
             }
 
+            if(e.RemovedItems.Count > 0)
+            {
+                SelectedItem = (DataRowView)e.RemovedItems[0];
+            }
+
         }
     }
 }

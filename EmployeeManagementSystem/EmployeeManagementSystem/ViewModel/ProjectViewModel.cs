@@ -12,12 +12,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 
 namespace EmployeeManagementSystem.ViewModel
 {
     internal class ProjectViewModel : INotifyPropertyChanged
     {
-        private ProjectModel project;
+        private DeleteData deleteData;
+        private DataRowView selectedRow;
+        public DataRowView SelectedRow
+        {
+            get { return selectedRow; }
+            set { selectedRow = value; OnPropertyChanged("SelectedRow"); }
+        }
         private DataTable dataTable;
         public DataTable DataTable
         {
@@ -41,8 +48,8 @@ namespace EmployeeManagementSystem.ViewModel
             set { name = value; OnPropertyChanged("Name"); }
         }
 
-        private DateTime startingDate = new DateTime(1990, 01, 01);
-        public DateTime StartingDate
+        private DateTime? startingDate = new DateTime(1990, 01, 01);
+        public DateTime? StartingDate
         {
             get { return startingDate; }
             set
@@ -51,8 +58,8 @@ namespace EmployeeManagementSystem.ViewModel
                 startingDate = value; OnPropertyChanged("StartingDate");
             }
         }
-        private DateTime endingDate = DateTime.Now.Date;
-        public DateTime EndingDate
+        private DateTime? endingDate = DateTime.Now.Date;
+        public DateTime? EndingDate
         {
             get { return endingDate; }
             set
@@ -80,7 +87,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void searchExecute(object parameter)
         {
-            dataTable = getData.GetProjectSearchData(Code, Name, StartingDate, EndingDate);
+            dataTable = getData.GetProjectSearchData(Code, Name, (DateTime)StartingDate, (DateTime)EndingDate);
             OnPropertyChanged("DataTable");
         }
         private bool canSearchExecute(object parameter)
@@ -108,6 +115,31 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        private ICommand deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if(deleteCommand == null)
+                {
+                    deleteCommand = new RelayCommand(DeleteExecute, CanDeleteExecute, false);
+                }
+                return deleteCommand;
+            }
+        }
+
+        private bool CanDeleteExecute(object arg)
+        {
+            if (selectedRow != null) return true;
+            return false;
+        }
+
+        private void DeleteExecute(object obj)
+        {
+            deleteData.DeleteProject((string)(SelectedRow.Row.ItemArray[0]));
+            ClearFieldsExecute(obj);
+        }
+
         private void ClearFieldsExecute(object obj)
         {
             Code = String.Empty;
@@ -120,12 +152,12 @@ namespace EmployeeManagementSystem.ViewModel
 
         public ProjectViewModel()
         {
-            project = new ProjectModel();
+     
             dataTable = new DataTable();
             getData = new GetData();
             dataTable = getData.GetProjectData();
+            deleteData = new DeleteData();
             OnPropertyChanged("dataTable");
-
         }
 
 

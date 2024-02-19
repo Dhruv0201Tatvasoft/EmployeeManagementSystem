@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:EmployeeManagementSystem.ViewModel"
              xmlns:local="clr-namespace:EmployeeManagementSystem.UserConntrol"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="699.246" d:DesignWidth="1334.099">
 
     <UserControl.DataContext>
         <vm:ProjectViewModel/>
@@ -15,13 +15,13 @@
     <UserControl.Resources>
         <vm:ProjectViewModel x:Key="ProjectViewModel"/>
     </UserControl.Resources>
-        <Grid DataContext="{Binding Source={StaticResource ProjectViewModel}}">
+    <Grid DataContext="{Binding Source={StaticResource ProjectViewModel}}">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="20 10 0 0">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto">
-            <TextBlock Text="Project" Margin="20 20 20 0" FontSize="40"/>
-            <Button Content="ADD" Click="Button_Click" Height="32" Width="70"  HorizontalAlignment="Left" Margin="20 10 0 0" Style="{DynamicResource ButtonStyle}"/>
-            <Separator Margin="20 10 20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto">
+                <TextBlock Text="Project" Margin="20 20 20 0" FontSize="40"/>
+                <Button Content="ADD" Click="Button_Click" Height="32" Width="70"  HorizontalAlignment="Left" Margin="20 10 0 0" Style="{DynamicResource ButtonStyle}"/>
+                <Separator Margin="20 10 20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+            </StackPanel>
             <Grid Margin="20 20 0 0">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="50"/>
@@ -40,14 +40,14 @@
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Name:" HorizontalAlignment="Left" Margin="50 0 0 0" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="0" Grid.Column="3"  Width="250" Text="{Binding Name}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock Grid.Row="1" Grid.Column="0"   Text="Start Date:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <DatePicker Grid.Row="1" Grid.Column="1"  SelectedDateFormat="Long" SelectedDate="{x:Null}" DisplayDateStart="01/01/1990" DisplayDateEnd="{x:Static sys:DateTime.Now}" Text="{Binding StartingDate, Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged}" Width="250" Height="32" Style="{DynamicResource CustomInputStyle}"/>
+                <DatePicker Grid.Row="2" Grid.Column="1" Width="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1990" DisplayDateEnd="{x:Static sys:DateTime.Now}" Text="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged}"  Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="End Date:"   HorizontalAlignment="Left" Margin="50 0 0 0" VerticalAlignment="Center"/>
                 <DatePicker Grid.Row="1" Grid.Column="3" Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="{x:Static sys:DateTime.Now}"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
                 <Button Content="Search" HorizontalAlignment="Center" Command="{Binding SearchCommand}" Height="32" Width="80" Grid.Row="1" Grid.Column="4" Style="{DynamicResource ButtonStyle}"/>
                 <Button Content="Clear" HorizontalAlignment="Center" Height="32" Command="{Binding ClearSearhFieldsCommand}" Width="80" Grid.Row="1" Grid.Column="5" Style="{DynamicResource ButtonStyle}"/>
             </Grid>
             <Separator Margin="20 30 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Center" VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+            <DataGrid SelectedItem="{Binding SelectedRow}" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
                     Width="auto"
                       Margin="40 0 "
                       CanUserAddRows="False"
@@ -67,7 +67,7 @@
                                     <Button  Margin="6 0" Background="White">
                                         <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" Width="25" Height="25"  />
                                     </Button>
-                                    <Button Background="White" Margin="6 0">
+                                    <Button Command="{Binding DataContext.DeleteCommand , ElementName=DataGrid}" Background="White" Margin="6 0">
                                         <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\DeleteIcon.png" Width="40" Height="40"/>
                                     </Button>
                                     <Button  Background="White" Margin="6 0">

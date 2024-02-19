@@ -36,13 +36,13 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Code:" Grid.Column="0" Grid.Row="0" ></TextBlock>
-                <TextBox  Text="{Binding Code}" Grid.Row="0" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+                <TextBox  Text="{Binding Code,UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True,NotifyOnValidationError=True}" Grid.Row="0" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center" Text="Name:" Grid.Column="0" Grid.Row="1" ></TextBlock>
-                <TextBox Text="{Binding Name}" Grid.Row="1" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+                <TextBox Text="{Binding Name ,ValidatesOnNotifyDataErrors=True,NotifyOnValidationError=True}" Grid.Row="1" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Start Date:" Grid.Column="0" Grid.Row="2" ></TextBlock>
-                <DatePicker  SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="{x:Static sys:DateTime.Now}"  Text="{Binding StartingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="2" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+                <DatePicker   SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="{x:Static sys:DateTime.Now}"  Text="{Binding StartingDate,TargetNullValue='',UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy,ValidatesOnNotifyDataErrors=True,NotifyOnValidationError=True}"  Grid.Row="2" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
-                <DatePicker SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}" Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+                <DatePicker  SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',  Mode=TwoWay, StringFormat=dd/MM/yyyy,ValidatesOnNotifyDataErrors=True,NotifyOnValidationError=True}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
                 <ListBox ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}" Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" Name="myListBox" SelectionMode="Multiple">
                     <i:Interaction.Behaviors>
