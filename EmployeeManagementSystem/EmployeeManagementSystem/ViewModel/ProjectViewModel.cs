@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.IO.Packaging;
 using System.Linq;
 using System.Printing;
@@ -18,6 +19,11 @@ namespace EmployeeManagementSystem.ViewModel
 {
     internal class ProjectViewModel : INotifyPropertyChanged
     {
+        public event EventHandler EditEvent;
+        public void OnEditEvent(EventArgs e)
+        {
+            EditEvent?.Invoke(this, e);
+        }
         private DeleteData deleteData;
         private DataRowView selectedRow;
         public DataRowView SelectedRow
@@ -113,6 +119,29 @@ namespace EmployeeManagementSystem.ViewModel
         private bool CanClearFieldsExecute(object arg)
         {
             return true;
+        }
+
+        private ICommand editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                if(editCommand == null)
+                {
+                    editCommand = new RelayCommand(EditExecute,CanEditExecute,true);
+                }
+                return editCommand;
+            }
+        }
+
+        private bool CanEditExecute(object arg)
+        {
+            return true;
+        }
+
+        private void EditExecute(object obj)
+        {
+           OnEditEvent(EventArgs.Empty);
         }
 
         private ICommand deleteCommand;

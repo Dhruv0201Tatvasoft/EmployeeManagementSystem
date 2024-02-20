@@ -7,10 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="UserConntrol\AddEditProject.xaml.cs">
+    <Compile Update="UserControls\AddEditProject.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserConntrol\ProjectWindow.xaml.cs">
+    <Compile Update="UserControls\ProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,10 +18,10 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserConntrol\AddEditProject.xaml">
+    <Page Update="UserControls\AddEditProject.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserConntrol\ProjectWindow.xaml">
+    <Page Update="UserControls\ProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

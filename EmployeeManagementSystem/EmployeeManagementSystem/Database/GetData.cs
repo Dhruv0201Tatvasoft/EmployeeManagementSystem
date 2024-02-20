@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using EmployeeManagementSystem.Models;
+using System.Data.Common;
 
 namespace EmployeeManagementSystem.Database
 {
@@ -128,6 +130,53 @@ namespace EmployeeManagementSystem.Database
                 MessageBox.Show("Error in Fetching data from database");
             }
             return dt;
+        }
+
+        public ProjectModel GetProjectFromCode(String Code)
+        {
+            List<int> ProjectTechnologies = new List<int>();
+            ProjectModel project = new ProjectModel();
+
+
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
+
+            
+                string SelectQueryForEmsTbltechnologyForProjectTable = $"SELECT TechnologyId FROM EmsTblTechnologyForProject where ProjectCode = '{Code}'";
+                using (SqlCommand command = new SqlCommand(SelectQueryForEmsTbltechnologyForProjectTable, conn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int value = reader.GetInt32(0);
+                            ProjectTechnologies.Add(value);
+                        }
+                    }
+                }
+                string SelectQueryForEmsTblProject = $"SELECT * from EmsTblProject where Code = '{Code}'";
+                using (SqlCommand command = new SqlCommand(SelectQueryForEmsTblProject, conn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int count = reader.FieldCount;
+                        while (reader.Read())
+                        {
+                            project.Code = reader.GetString(0);
+                            project.Name = reader.GetString(1);
+                            project.StartingDate = reader.GetDateTime(2);
+                            if (reader.IsDBNull(3))
+                            {
+                             project.EndingDate = null;
+                            }
+                            else project.EndingDate=reader.GetDateTime(3);
+                        }
+                    }
+                }
+            }
+            project.AssociatedTechnologies = ProjectTechnologies;
+            return project;
         }
     }
 }

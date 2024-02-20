@@ -31,13 +31,18 @@ namespace EmployeeManagementSystem.Models
             set { startingDate = value; OnPropertyChanged("StartingDate"); }
         }
 
-        private DateTime endingDate;
-        public DateTime EndingDate
+        private DateTime? endingDate;
+        public DateTime? EndingDate
         {
             get { return endingDate; }
             set { endingDate = value; OnPropertyChanged("EndingDate"); }
         }
-
+        private List<int> associatedTechnologies;
+        public List<int> AssociatedTechnologies
+        {
+            get { return associatedTechnologies; }
+            set { associatedTechnologies = value; OnPropertyChanged("AssociatedTechnologies"); }
+        }
         private List<EmployeeModel> associatedEmployees;
         public List<EmployeeModel> AssociatedEmployees
         {

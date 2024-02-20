@@ -11,18 +11,23 @@ using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.IO.Packaging;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
-
 namespace EmployeeManagementSystem.ViewModel
 {
-    internal class AddEditProjectViewModel:INotifyPropertyChanged,INotifyDataErrorInfo
+    internal class AddEditProjectViewModel:INotifyPropertyChanged,IDataErrorInfo
     {
 
         private DataTable dataTable;
+        public DataTable DataTable
+        {
+            get { return dataTable; }
+            set { dataTable = value; OnPropertyChanged("dataTable"); }
+
+        }
         private GetData getData;
         public event EventHandler ChangeWindowEvent;
         protected virtual void OnChangeWindowEvent(EventArgs e)
@@ -30,6 +35,17 @@ namespace EmployeeManagementSystem.ViewModel
             ChangeWindowEvent?.Invoke(this, e);
         }
         private InsertData insertData;
+
+        private bool canSave;
+        public bool CanSave
+        {
+            get { return canSave; }
+            set
+            {
+                canSave = value;
+                OnPropertyChanged("CanSave");
+            }
+        }
         private List<int> selectedtechnlogyIds = new List<int>();
         public List<int> SelectedTechnologyNames
         {
@@ -56,54 +72,38 @@ namespace EmployeeManagementSystem.ViewModel
                 }
             }
         }
-       
-        public DataTable DataTable
-        {
-            get { return dataTable; }
-            set { dataTable = value; OnPropertyChanged("DataTable"); }
 
-        }
 
-        private string code;
+        private string code = string.Empty;
         public string Code
         {get{return code;}  
             set{
                 code = value;
-                ClearErrors("Code");
-                ValidateYourProperty("Code");
                 OnPropertyChanged("Code");
             }
         }
 
-        private string name;
+        private string name=string.Empty;
         public string Name { get {  return name;} 
-            set { name = value;
-                ClearErrors("Name");
-                ValidateYourProperty("Name");
+            set {
+                name = value;
                 OnPropertyChanged("Name");
             } }
 
         private DateTime startingDate = DateTime.Now ;
         public DateTime StartingDate{ 
             get { return startingDate; } 
-            set { startingDate = value;
-                ClearErrors("StartingDate");
+            set {
+                startingDate = value;
                 OnPropertyChanged("StartingDate");}
                 }
         private DateTime? endingDate;
         public DateTime? EndingDate{ get { return endingDate; } 
             set {
                 endingDate= value;
-                ClearErrors("EndingDate");
                 OnPropertyChanged("EndingDate");
             } }
-
-        private bool isValidationEnabled = true;
-        public bool IsValidationEnabled
-        {
-            get { return isValidationEnabled; }
-            set { isValidationEnabled = value; OnPropertyChanged("isValidationEnabled"); }
-        }
+        
 
         private ICommand saveCommand;
         public ICommand SaveCommand
@@ -117,116 +117,62 @@ namespace EmployeeManagementSystem.ViewModel
                 return saveCommand;
             }
         }
-        private readonly Dictionary<string, List<string>> errorsList = new Dictionary<string, List<string>>();
 
-        public IEnumerable GetErrors(string propertyName)
+        public void method(String name)
         {
-            if (string.IsNullOrEmpty(propertyName) || !errorsList.ContainsKey(propertyName))
-                return null;
-
-            return errorsList[propertyName];
-        }
-
-        public bool HasErrors => errorsList.Any();
-
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        protected virtual void OnErrorsChanged(string propertyName)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-        }
-
-        private void ValidateYourProperty(string propertyName)
-        {
-            List<string> errors = new List<string>();
-            string error = null;
-
-            switch (propertyName)
-            {
-                case "Code":
-                    if (isValidationEnabled && string.IsNullOrEmpty(Code))
-                        error = "Project Code is Required";
-                    if (isValidationEnabled && Code.Length > 10)
-                        error = "Code can't be more than 10 characters";
-                    break;
-
-                case "Name":
-                    if (isValidationEnabled && string.IsNullOrEmpty(Name))
-                        error = "Project Name is Required";
-                    if (isValidationEnabled && Name.Length > 40)
-                        error = "Project Name can't be more than 40 characters";
-                    break;
-
-              
-
-                default:
-                    break;
-            }
-
-            if (!string.IsNullOrEmpty(error))
-            {
-                errors.Add(error);
-            }
-
-            errorsList[propertyName] = errors;
-            OnErrorsChanged(propertyName);
-
-        }
-        private void ClearErrors(string propertyName)
-        {
-            if (errorsList.ContainsKey(propertyName))
-            {
-                errorsList.Remove(propertyName);
-                OnErrorsChanged(propertyName);
-            }
+            MessageBox.Show("Hellp");
+            this.code = name;
+            OnPropertyChanged("Code");
         }
 
         public string Error => null;
 
         public string this[string PropertyName]
         {
-            get
-            {
-                string error = null;
-                    switch (PropertyName)
-                    {
-                        case "Code":
-                            if (isValidationEnabled && String.IsNullOrEmpty(Code)) error = "Project Code is Required";
-                            if (isValidationEnabled && Code.Length > 10) error = "Code cant be more than 10 characters";
-                            break;
-                        case "Name":
-                            if (isValidationEnabled && String.IsNullOrEmpty(Name)) error = "Project Name is Required";
-                            if (isValidationEnabled && Name.Length > 40) error = "Project Name cant be more than 40 characters";
-                            break;
-                        case "StartingDate":
-                            if (isValidationEnabled && StartingDate < EndingDate) error = "Starting Date cant be less than Ending Date";
-                            break;
-                        default:
-                            break;
-                    }
-                    return error;
+            get { 
+                string errors = string.Empty;
+                switch (PropertyName)
+                {
+                    case "Code":
+                        if (string.IsNullOrEmpty(Code)) errors = "Code cant be empty";
+                        if (Code.Length > 10) errors = "Code cant be more than 10 characters";
+                        break;
+                    case "Name":
+                        if (string.IsNullOrEmpty(Name)) errors = "Name cant be empty";
+                        if (Name.Length > 40) errors = "Name cant be more than 40 characters";
+                        break;
+                    case "StartingDate":
+                        if (!string.IsNullOrEmpty(EndingDate.ToString()) && StartingDate > EndingDate) errors = "Starting Date cant be greater than ending date ";
+                        break;
+                    case "EndingDate":
+                        if (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate) errors = "Ending Date cant be less than ending date ";
+                        break;
+                }
+               
+                return errors;
             }
         }
 
         private bool CanSaveExecute(object arg)
         {
-             if(HasErrors) return false;
-            return true;
+             //if(string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Code.Length>10 || Name.Length>40 || (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate)) return false;
+             return true;
         }
 
         private void SaveExecute(object obj)
         {
             if (EndingDate != null)
             {
-                //insertData.InsertNewProject(Code, Name, StartingDate, (DateTime)EndingDate, selectedtechnlogyIds);
+                insertData.InsertNewProject(Code, Name, StartingDate, (DateTime)EndingDate, selectedtechnlogyIds);
             }
             else
             {
-                //insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
+                insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
             }
             OnChangeWindowEvent(EventArgs.Empty);   
         }
 
+  
         public AddEditProjectViewModel()
         {
             getData = new GetData();

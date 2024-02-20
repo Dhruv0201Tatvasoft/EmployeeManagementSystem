@@ -96,3 +96,6 @@ insert into EmsTblTechnologyForProject values
 ('P0001',1),('P0001',9) ,('P0002',7),('P0002',6),('P0002',3),('P0003',2),('P0003',5),('P0004',9),('P0004',6),('P0005',1)
 
 select * from EmsTblTechnologyForProject
+
+select * from EmsTblProject
+Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values ('P0013','Everest','2024-02-19','NULL')
