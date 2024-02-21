@@ -23,8 +23,11 @@ namespace EmployeeManagementSystem.UserControls
     /// <summary>
     /// Interaction logic for ProjectWindow.xaml
     /// </summary>
+    /// 
+
     public partial class ProjectWindow : UserControl
     {
+    
 
         private GetData getData;
         public ProjectWindow()
@@ -37,22 +40,15 @@ namespace EmployeeManagementSystem.UserControls
         }
 
         private void ViewModel_EditEvent(object? sender, EventArgs e)
-        {
-            AddEditProject addEditProject = new AddEditProject();
-            
-            
+        {            
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
 
             if (mainWindow != null)
             {
                 if (mainWindow.ProjectTab != null)
                 {
-                    
-                    mainWindow.ProjectTab.Content = addEditProject;
                     ProjectModel pm = getData.GetProjectFromCode((string)((ProjectViewModel)sender).SelectedRow.Row.ItemArray[0]);
-                    addEditProject.setText(pm);
-                    List<int> selected = new List<int> { 0, 2, 4 };
-                  
+                    mainWindow.ProjectTab.Content = new EditWindow(pm) ;
                 }
             }
         }

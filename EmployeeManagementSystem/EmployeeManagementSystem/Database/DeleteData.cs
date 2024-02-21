@@ -33,6 +33,27 @@ namespace EmployeeManagementSystem.Database
                 }
             }
         }
+        public bool DoesExist(String Code,String TblName,string columnName)
+        {
+            string SqlQuery = $"Select * from  {TblName} where {columnName} = '{Code}' ";
+            try
+            {
+                using (SqlConnection conn = connection.GenrateConnection())
+                {
+                    conn.Open();
+                    using (SqlCommand command = new SqlCommand(SqlQuery, conn))
+                    {
+
+                        SqlDataReader reader = command.ExecuteReader();
+                        return reader.HasRows;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+               return false;
+            }
+        }
         
         public bool DeleteWarningMessage(string warning)
         {

@@ -1,6 +1,5 @@
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\EmployeeManagementSystem.csproj.AssemblyReference.cache
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\MainWindow.g.cs
-C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddEditProject.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\ProjectWindow.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
@@ -19,7 +18,6 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\MainWindow.baml
-C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddEditProject.baml
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\ProjectWindow.baml
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\EmployeeManagementSystem.g.resources
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\EmployeeManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
@@ -33,3 +31,7 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\EmployeeManagementSystem.pdb
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\EmployeeManagementSystem.genruntimeconfig.cache
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\ref\EmployeeManagementSystem.dll
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddProject.g.cs
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddProject.baml
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EditWindow.g.cs
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EditWindow.baml
