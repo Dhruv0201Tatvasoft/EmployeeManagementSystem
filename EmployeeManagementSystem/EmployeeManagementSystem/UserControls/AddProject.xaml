@@ -41,13 +41,13 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="top" Text="Code:" Grid.Column="0" Grid.Row="0" ></TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Code:" Grid.Column="0" Grid.Row="0" ></TextBlock>
                 <TextBox x:Name="Code" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
-                <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Top" Text="Name:" Grid.Column="0" Grid.Row="1" ></TextBlock>
+                <TextBlock  HorizontalAlignment="Left" VerticalAlignment="Center" Text="Name:" Grid.Column="0" Grid.Row="1" ></TextBlock>
                 <TextBox x:Name="Name" Text="{Binding Name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Start Date:" Grid.Column="0" Grid.Row="2" ></TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Start Date:" Grid.Column="0" Grid.Row="2" ></TextBlock>
                 <DatePicker  x:Name="StartingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding StartingDate,TargetNullValue='',ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="2" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
                 <DatePicker x:Name="EndingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="top" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
                 <ListBox x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"   Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
@@ -62,7 +62,7 @@
                    
                 </ListBox>
             </Grid>
-            <StackPanel VerticalAlignment="Top" Grid.Row="2" Orientation="Horizontal" Margin="50 50">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="50 50">
                 <Button Style="{DynamicResource ButtonStyle}" Command="{Binding SaveCommand}" Margin="30 0 30 0" Width="70" Height="32" Content="Save">
                 </Button>
                 <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" Content="Cancel" Click="Button_Click"/>

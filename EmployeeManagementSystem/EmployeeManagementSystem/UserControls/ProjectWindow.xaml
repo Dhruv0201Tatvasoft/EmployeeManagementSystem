@@ -7,7 +7,7 @@
              xmlns:b ="clr-namespace:EmployeeManagementSystem.Behaviours"
              xmlns:vm="clr-namespace:EmployeeManagementSystem.ViewModel"
              xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" d:DesignHeight="734.163" d:DesignWidth="1736" 
             >
 
     <UserControl.DataContext>
@@ -65,25 +65,28 @@
                 <Button Content="Clear" HorizontalAlignment="Center" Height="32" Command="{Binding ClearSearhFieldsCommand}" Width="80" Grid.Row="1" Grid.Column="5" Style="{DynamicResource ButtonStyle}"/>
             </Grid>
             <Separator Grid.Row="3" Margin="20 30 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-            <DataGrid SelectedItem="{Binding SelectedRow}" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
-                    Width="auto"
+            <DataGrid SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+                    HorizontalAlignment="Stretch"
                       Grid.Row="4"
                       Margin="40 0 "
                       CanUserAddRows="False"
                       SelectionMode="Single"
                       HeadersVisibility="Column"
                       ItemsSource="{Binding DataTable}"
+                      ScrollViewer.CanContentScroll ="True" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto" 
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Code" Width="100" Binding="{Binding Code}" />
-                    <DataGridTextColumn Header="Name" Width="300" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Start Date" Width="150" Binding="{Binding StartingDate, StringFormat=dd/MM/yyyy}" />
-                    <DataGridTextColumn Header="End Date" Width="150" Binding="{Binding EndingDate, StringFormat=dd/MM/yyyy}" />
-                    <DataGridTemplateColumn Header="Actions" Width="180">
+                    <DataGridTextColumn Header="Code" Width="*" Binding="{Binding Code}" />
+                    <DataGridTextColumn Header="Name" Width="5*" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Start Date" Width="1*" Binding="{Binding StartingDate, StringFormat=dd/MM/yyyy}" />
+                    <DataGridTextColumn Header="End Date" Width="1*" Binding="{Binding EndingDate, StringFormat=dd/MM/yyyy}" />
+                    <DataGridTemplateColumn  Header="Actions" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" >
-                                    <Button Command= "{Binding DataContext.EditCommand , ElementName=DataGrid}" Margin="6 0" Background="White">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  >
+                                    <Button Width="40" Height="40" Command= "{Binding DataContext.EditCommand , ElementName=DataGrid}" Margin="6 0" Background="White">
                                         <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" Width="25" Height="25"  />
                                     </Button>
                                     <Button Command="{Binding DataContext.DeleteCommand , ElementName=DataGrid}" Background="White" Margin="6 0">
