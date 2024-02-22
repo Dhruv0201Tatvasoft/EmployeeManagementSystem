@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManagementSystem"
         xmlns:controls="clr-namespace:EmployeeManagementSystem.UserControls"
+        xmlns:converters="clr-namespace:EmployeeManagementSystem.Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1000"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="800"
+        
+        >
     <Window.Resources>
-        <ResourceDictionary>
-            <SolidColorBrush x:Key="NormalBackGroundColor" Color="#FAFAFA"/>
+        <converters:ProjectWindowResponsive x:Key="ProjectWindowResponsive"/>
+
+        <SolidColorBrush x:Key="NormalBackGroundColor" Color="#FAFAFA"/>
             <SolidColorBrush x:Key="HoverBackGroundColor" Color="#669E40"/>
             <SolidColorBrush x:Key="PressedBackGroundColor" Color="#60943C"/>
             <SolidColorBrush x:Key="DisabledBackGroundColor" Color="#C5E0B4"/>
@@ -124,12 +131,13 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+      
             <Style x:Key="TabItemStyle" TargetType="TabItem">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TabItem">
-                            <Border Name="Border" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}">
-                                <ContentPresenter x:Name="ContentSite" ContentSource="Header" Margin="10,2"/>
+                            <Border  Name="Border" TextBlock.TextAlignment="Center"  BorderThickness="0.5" BorderBrush="Black" Background="{TemplateBinding Background}">
+                                <ContentPresenter Height="20" ContentSource="Header" Width="80"  Margin="10,2"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
@@ -140,23 +148,23 @@
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackGroundColor}"/>
-                                </Trigger>
+                                <Setter TargetName="Border" Property="TextBlock.Foreground" Value="#AFABAB"/>
+                            </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
                 
             </Style>
-        </ResourceDictionary>
     </Window.Resources>
     
     <ScrollViewer>
     <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-        <TabControl Grid.Column="0" x:Name="TabControl"  Grid.ColumnSpan="2">
+        <TabControl Grid.Column="0" x:Name="TabControl"   Grid.ColumnSpan="2">
                
                 <TabItem Header="Dashboard" Style="{StaticResource TabItemStyle}">
             </TabItem>
@@ -170,8 +178,8 @@
                 
             </TabControl>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="Auto">
-                <Button >
-                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="20" Height="20" RenderTransformOrigin="0.094,1.221"/>
+                <Button Height="30" Width="30">
+                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="20" Height="20" RenderTransformOrigin="0.094,1.221 "/>
                 </Button>
                 </StackPanel>
         </Grid>

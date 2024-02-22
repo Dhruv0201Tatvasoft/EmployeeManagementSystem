@@ -35,3 +35,5 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddProject.baml
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EditWindow.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EditWindow.baml
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\MapEmployeeToProjectPopUp.g.cs
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\MapEmployeeToProjectPopUp.baml

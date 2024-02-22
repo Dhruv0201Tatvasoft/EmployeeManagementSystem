@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\App.xaml
-4-2089681873
+51471478605
 
-221095169752
+241080562560
 200627814688
-MainWindow.xaml;UserControls\AddProject.xaml;UserControls\EditWindow.xaml;UserControls\ProjectWindow.xaml;
+MainWindow.xaml;UserControls\AddProject.xaml;UserControls\EditWindow.xaml;UserControls\MapEmployeeToProjectPopUp.xaml;UserControls\ProjectWindow.xaml;
 
 False
 

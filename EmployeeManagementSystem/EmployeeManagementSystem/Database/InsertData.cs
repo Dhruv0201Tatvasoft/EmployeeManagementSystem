@@ -61,7 +61,7 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public void InsertNewProject(String Code,String Name,DateTime StartingDate ,DateTime EndingDate,List<int>TechnologiesId)
+        public bool InsertNewProject(String Code,String Name,DateTime StartingDate ,DateTime EndingDate,List<int>TechnologiesId)
         {
             if (!this.DoesExist(Code, "EmsTblProject", "Code"))
             {
@@ -75,16 +75,18 @@ namespace EmployeeManagementSystem.Database
                 {
                     this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
                 }
+                return true;
             }
             else
             {
                 MessageBox.Show($"There is Already Project With The Code {Code}");
+                return false;
             }
             
     
         }
 
-        public void InsertNewProject(string Code, string Name, DateTime StartingDate, List<int> TechnologiesId)
+        public bool InsertNewProject(string Code, string Name, DateTime StartingDate, List<int> TechnologiesId)
         {
             if (!this.DoesExist(Code, "EmsTblProject", "Code"))
             {
@@ -98,10 +100,12 @@ namespace EmployeeManagementSystem.Database
                 {
                     this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
                 }
+                return true;
             }
             else
             {
                 MessageBox.Show($"There is Already Project With The Code {Code}");
+                return false;
             }
         }
     }

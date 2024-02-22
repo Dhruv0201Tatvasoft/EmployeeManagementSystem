@@ -97,8 +97,10 @@ insert into EmsTblTechnologyForProject values
 
 select * from EmsTblTechnologyForProject
 select * from EmsTblTechnology
-
-
+Select * from  EmsTblProject where Code = 'P0005' 
+delete from EmsTblTechnologyForProject where ProjectCode ='P0001'
+UPDATE  EmsTblProject SET Code = 'P0074' , Name = 'Dhruv' , StartingDate = '2020-12-10',  EndingDate = NULL WHERE Code ='P0001' 
 SELECT * from EmsTblProject where Code = 'P0001'
+UPDATE EmsTblProject SET Code = 'P0078' , Name = 'Mechanical System' , StartingDate = '2019-08-17',  EndingDate = '2021-07-22' WHERE Code ='P0003' 
 delete from EmsTblProject where Code=''
 Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values ('P0013','Everest','2024-02-19','NULL')

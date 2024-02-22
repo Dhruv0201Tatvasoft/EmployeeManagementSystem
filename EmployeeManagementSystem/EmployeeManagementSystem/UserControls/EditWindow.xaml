@@ -53,10 +53,10 @@
 
                 </ListBox>
             </Grid>
-            <StackPanel Orientation="Horizontal" Margin="50 50">
-                <Button Style="{DynamicResource ButtonStyle}" Command="{Binding SaveCommand}" Margin="30 0 30 0" Width="70" Height="32" Content="Save">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="90,60,10,90">
+                <Button Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" Command="{Binding SaveCommand}" Margin="30 0 30 0" Width="70" Height="32" Content="Save">
                 </Button>
-                <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" Content="Cancel" Click="Button_Click"/>
+                <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" VerticalAlignment="Top" Content="Cancel" Click="Button_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -153,15 +153,19 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void SaveExecute(object obj)
         {
+            bool didSaved = false;
             if (EndingDate != null)
             {
-                insertData.InsertNewProject(Code, Name, StartingDate, (DateTime)EndingDate, selectedtechnlogyIds);
+                didSaved = insertData.InsertNewProject(Code, Name, StartingDate, (DateTime)EndingDate, selectedtechnlogyIds);
             }
             else
             {
-                insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
+                didSaved= insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
             }
-            OnChangeWindowEvent(EventArgs.Empty);   
+            if (didSaved)
+            {
+                OnChangeWindowEvent(EventArgs.Empty);
+            }
         }
 
       
