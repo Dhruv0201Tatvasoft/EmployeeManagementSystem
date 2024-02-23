@@ -13,10 +13,10 @@
     <Compile Update="UserControls\EditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\MapEmployeeToProjectPopUp.xaml.cs">
+    <Compile Update="UserControls\ProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\ProjectWindow.xaml.cs">
+    <Compile Update="UserControls\UserControl1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -30,10 +30,10 @@
     <Page Update="UserControls\EditWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\MapEmployeeToProjectPopUp.xaml">
+    <Page Update="UserControls\ProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\ProjectWindow.xaml">
+    <Page Update="UserControls\UserControl1.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

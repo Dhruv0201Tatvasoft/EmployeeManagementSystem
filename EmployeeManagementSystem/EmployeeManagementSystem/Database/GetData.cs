@@ -178,5 +178,53 @@ namespace EmployeeManagementSystem.Database
             project.AssociatedTechnologies = ProjectTechnologies;
             return project;
         }
+
+        public List<String> AllEmployeeNames()
+        {
+           
+            string Query = $"Select Code,Firstname, Lastname from EmsTblEmployee";
+            List<string> Result = new List<string> ();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    string name = string.Empty;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        name = reader.GetString(0);
+                        name += "-";
+                        name += reader.GetString(1);
+                        name += " ";
+                        name += reader.GetString(2);
+                        Result.Add(name);
+                        name = string.Empty;
+                    }
+                }
+            }
+            return Result;
+        }
+        public DataTable GetAssociatedEmployeesToProject(string ProjectCode)
+        {
+            string Query = $"Select CONCAT(Firstname,' ',Lastname) As FullName "  +
+                $"from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on " +
+                $"EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code " +
+                $"where EmsTblEmployeeAssociatedToProject.ProjectCode = '{ProjectCode}'";
+            DataTable dt = new DataTable();
+            using(SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
+                using(SqlCommand command = new SqlCommand(Query, conn))
+                {
+                using(SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+
+                }
+            }
+            return dt;
+        }
     }
 }

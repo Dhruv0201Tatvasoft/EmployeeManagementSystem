@@ -108,6 +108,11 @@ namespace EmployeeManagementSystem.Database
                 return false;
             }
         }
+        public void InsertEmployeeToProject(String projecCode,String EmployeeCode)
+        {
+            string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{projecCode}')";
+            this.executeQuery(Query,"Employee");
+        }
     }
 
 

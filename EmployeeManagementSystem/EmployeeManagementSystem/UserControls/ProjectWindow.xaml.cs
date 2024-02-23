@@ -28,16 +28,14 @@ namespace EmployeeManagementSystem.UserControls
 
     public partial class ProjectWindow : UserControl
     {
-    
 
-        private GetData getData;
-        private Popup popUp; 
-        public Popup Popup
+        public event EventHandler PopupOpenEvent;
+        public void OnPopupOpenEvent(EventArgs e)
         {
-            get { return popUp; }
-            set { popUp = value; }
+            PopupOpenEvent?.Invoke(this, e);
         }
-        private MapEmployeeToProjectPopUp mapEmployeeToProjectPopUp;
+        private GetData getData;
+       
 
         public ProjectWindow()
         {
@@ -47,20 +45,16 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.EditEvent += ViewModel_EditEvent;
             getData = new GetData();
             this.SizeChanged += sizechanged;
-      
+
+
         }
 
-        public ProjectWindow(MapEmployeeToProjectPopUp mapEmployeeToProjectPopUp)
-        {
-            this.mapEmployeeToProjectPopUp = mapEmployeeToProjectPopUp;
-            
-            mapEmployeeToProjectPopUp.ClosePopupEvent += ClosePopup;
-        }
+     
 
         private void ClosePopup(object? sender, EventArgs e)
         {
           
-            this.popUp.IsOpen = false;
+            this.MyPopup.IsOpen = false;
         }
 
         private void sizechanged(object sender, SizeChangedEventArgs e)
@@ -110,11 +104,21 @@ namespace EmployeeManagementSystem.UserControls
 
         private void OpenEmployeeMapingPopupMethod(object sender, RoutedEventArgs e)
         {
-            this.popUp = MyPopup;
-            popUp.PlacementRectangle = new Rect(new Size(
-         SystemParameters.FullPrimaryScreenWidth,
-         SystemParameters.FullPrimaryScreenHeight));
-            popUp.IsOpen = true;
+            
+            MyPopup.PlacementRectangle = new Rect(new Size(
+            SystemParameters.FullPrimaryScreenWidth,
+            SystemParameters.FullPrimaryScreenHeight));
+            MyPopup.IsOpen = true;
+            string projectCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0];
+            ProjectViewModel pw = new ProjectViewModel(this,projectCode);
+            this.DataContext = pw;
+            OnPopupOpenEvent(EventArgs.Empty);
+
+        }    
+        
+        private void ClosePopUpClick(object sender, RoutedEventArgs e) { 
+            MyPopup.IsOpen=false;
         }
+       
     }
 }
