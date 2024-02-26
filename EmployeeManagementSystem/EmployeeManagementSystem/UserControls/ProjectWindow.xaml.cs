@@ -28,12 +28,16 @@ namespace EmployeeManagementSystem.UserControls
 
     public partial class ProjectWindow : UserControl
     {
-
-        public event EventHandler PopupOpenEvent;
-        public void OnPopupOpenEvent(EventArgs e)
+        private string selectedPRoje;
+        public string SelectedPRoje
         {
-            PopupOpenEvent?.Invoke(this, e);
+            get { return selectedPRoje; }
+            set
+            {
+                SelectedPRoje = value;
+            }
         }
+      
         private GetData getData;
        
 
@@ -44,12 +48,19 @@ namespace EmployeeManagementSystem.UserControls
             DataContext = viewModel;
             viewModel.EditEvent += ViewModel_EditEvent;
             getData = new GetData();
+            viewModel.AddEmployeeEvent += refreshEmployeeDatagrid;
             this.SizeChanged += sizechanged;
 
 
         }
 
-     
+        private void refreshEmployeeDatagrid(object? sender, EventArgs e)
+        {
+            PopUpDataGird.ItemsSource = null;
+            PopUpDataGird.ItemsSource = getData.GetAssociatedEmployeesToProject((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]).DefaultView;
+
+
+        }
 
         private void ClosePopup(object? sender, EventArgs e)
         {
@@ -110,9 +121,8 @@ namespace EmployeeManagementSystem.UserControls
             SystemParameters.FullPrimaryScreenHeight));
             MyPopup.IsOpen = true;
             string projectCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0];
-            ProjectViewModel pw = new ProjectViewModel(this,projectCode);
-            this.DataContext = pw;
-            OnPopupOpenEvent(EventArgs.Empty);
+            ProjectNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1];
+            PopUpDataGird.ItemsSource=getData.GetAssociatedEmployeesToProject(projectCode).DefaultView;
 
         }    
         

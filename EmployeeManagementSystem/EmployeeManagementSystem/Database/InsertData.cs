@@ -39,15 +39,14 @@ namespace EmployeeManagementSystem.Database
             }
            
         }
-        public bool DoesExist(String Code, String TblName, string columnName)
+        public bool DoesExist(String Query)
         {
-            string SqlQuery = $"Select * from  {TblName} where {columnName} = '{Code}' ";
             try
             {
                 using (SqlConnection conn = connection.GenrateConnection())
                 {
                     conn.Open();
-                    using (SqlCommand command = new SqlCommand(SqlQuery, conn))
+                    using (SqlCommand command = new SqlCommand(Query, conn))
                     {
 
                         SqlDataReader reader =command.ExecuteReader(); 
@@ -63,7 +62,7 @@ namespace EmployeeManagementSystem.Database
 
         public bool InsertNewProject(String Code,String Name,DateTime StartingDate ,DateTime EndingDate,List<int>TechnologiesId)
         {
-            if (!this.DoesExist(Code, "EmsTblProject", "Code"))
+            if (!this.DoesExist($"Select * from EmsTblProject where Code = '{Code}'"))
             {
                 this.executeQuery($"Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values (" +
                 $"'{Code}'," +
@@ -88,7 +87,7 @@ namespace EmployeeManagementSystem.Database
 
         public bool InsertNewProject(string Code, string Name, DateTime StartingDate, List<int> TechnologiesId)
         {
-            if (!this.DoesExist(Code, "EmsTblProject", "Code"))
+            if (!this.DoesExist($"Select * from EmsTblProject where Code = '{Code}' "))
             {
                 this.executeQuery($"Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values (" +
             $"'{Code}'," +
@@ -108,15 +107,19 @@ namespace EmployeeManagementSystem.Database
                 return false;
             }
         }
-        public void InsertEmployeeToProject(String projecCode,String EmployeeCode)
+        public void InsertEmployeeToProject(String ProjectCode,String EmployeeCode, string EmployeeName)
         {
-            string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{projecCode}')";
-            this.executeQuery(Query,"Employee");
+            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{ProjectCode}' AND EmployeeCode ='{EmployeeCode}'"))
+            {
+                string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{ProjectCode}')";
+                this.executeQuery(Query, "Employee");
+            }
+            else
+            {
+                MessageBox.Show($"{EmployeeName} is already added to this project","Alert",MessageBoxButton.OK,MessageBoxImage.None,MessageBoxResult.OK,MessageBoxOptions.DefaultDesktopOnly);
+            }
         }
+
+        
     }
-
-
-
-
-
 }

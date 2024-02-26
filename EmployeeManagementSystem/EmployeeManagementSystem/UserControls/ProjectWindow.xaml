@@ -161,13 +161,14 @@
                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="850" Height="700">
                     <Grid Background="White" Width="850" Height="700">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height=".1*"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height=".1*"/>
                             <RowDefinition Height=".2*"/>
                             <RowDefinition Height=".5*"/>
                         </Grid.RowDefinitions>
                         <DockPanel  Grid.Row="0">
-                            <TextBlock Margin="20 20 0 0" Text="Employee Mapping "  DockPanel.Dock="Left" FontSize="14" />
+                            <TextBlock Margin="20 20 0 0" Text="Employee Mapping -"  DockPanel.Dock="Left" FontSize="26" />
+                            <TextBlock x:Name="ProjectNameTextBox" Text="doc" TextWrapping="Wrap"  Height="auto" FontSize="26" Width="490" VerticalAlignment="Bottom"/>
                             <Button Click="ClosePopUpClick"  Background="Transparent" BorderBrush="Transparent" Margin="0 10 10 0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
 
                                 <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CancelIcon.png"/>
@@ -182,18 +183,18 @@
                                 <Button VerticalAlignment="Center" Margin=" 0 0 20 0" Command="{Binding AddEmployeeToProject}" Content="ADD" Width="225" Height="30" Style="{DynamicResource ButtonStyle}"/>
                             </StackPanel>
                         </StackPanel>
-                        <DataGrid RowHeight="50" Height="200" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="80 0" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
+                        <DataGrid Background="Transparent" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="80 0 80 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
                                   CanUserAddRows="False"
                                   AutoGenerateColumns="False"
                                   SelectionMode="Single"
                                   HeadersVisibility="Column"
-                                  ItemsSource="{Binding EmployeesAssociatedToProjectDataTable}">     
+                                   SelectedItem="{Binding SelectedEmployeeRow}">     
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding FullName}" Header="Employee Name" Width=".8*" />
                                 <DataGridTemplateColumn Header="Actions" Width=".2*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
+                                            <Button Command="{Binding DataContext.DeleteEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
                                                 <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" Width="20" Height="20"/>
                                             </Button>
                                         </DataTemplate>

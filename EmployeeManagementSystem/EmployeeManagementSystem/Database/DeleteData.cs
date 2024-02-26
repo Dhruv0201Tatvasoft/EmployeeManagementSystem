@@ -33,43 +33,33 @@ namespace EmployeeManagementSystem.Database
                 }
             }
         }
-        public bool DoesExist(String Code,String TblName,string columnName)
-        {
-            string SqlQuery = $"Select * from  {TblName} where {columnName} = '{Code}' ";
-            try
-            {
-                using (SqlConnection conn = connection.GenrateConnection())
-                {
-                    conn.Open();
-                    using (SqlCommand command = new SqlCommand(SqlQuery, conn))
-                    {
 
-                        SqlDataReader reader = command.ExecuteReader();
-                        return reader.HasRows;
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-               return false;
-            }
-        }
-        
+
         public bool DeleteWarningMessage(string warning)
         {
-            MessageBoxResult result = MessageBox.Show("Are You Sure you want to Delete " + warning, "Warning", MessageBoxButton.YesNoCancel);
-           return result == MessageBoxResult.Yes;
+            MessageBoxResult result = MessageBox.Show("Are You Sure you want to  " + warning, "Warning", MessageBoxButton.YesNoCancel,MessageBoxImage.Exclamation,MessageBoxResult.Cancel, MessageBoxOptions.DefaultDesktopOnly);
+            return result == MessageBoxResult.Yes;
         }
-        
+
         public void DeleteProject(String Code)
         {
 
-            if (this.DeleteWarningMessage("Project With Code " + Code))
+            if (this.DeleteWarningMessage("Delete Project With Code " + Code))
             {
-                String TechnologyForProjectTableDeleteQuery = $"delete from EmsTblTechnologyForProject where ProjectCode = '{Code}'";
-                this.executeQuery(TechnologyForProjectTableDeleteQuery);
-                String ProjectTableDeleteQuery = $"delete from EmsTblProject where Code = '{Code}' ";
-                this.executeQuery(ProjectTableDeleteQuery);
+                string Query = $"delete from EmsTblTechnologyForProject where ProjectCode = '{Code}'";
+                this.executeQuery(Query);
+                Query = string.Empty ;
+                Query = $"delete from EmsTblProject where Code = '{Code}' ";
+                this.executeQuery(Query);
+            }
+        }
+
+        public void removeEmployeeFromProject(String EmployeeCode, String ProjectCode, String EmployeeName)
+        {
+            if (this.DeleteWarningMessage("Remove " + EmployeeName + " From this Project"))
+            {
+                string query = $"Delete from EmsTblEmployeeAssociatedToProject Where ProjectCode = '{ProjectCode} ' AND EmployeeCode = '{EmployeeCode}'";
+                this.executeQuery(query);
             }
         }
     }

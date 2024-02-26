@@ -207,7 +207,7 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetAssociatedEmployeesToProject(string ProjectCode)
         {
-            string Query = $"Select CONCAT(Firstname,' ',Lastname) As FullName "  +
+            string Query = $"Select CONCAT(Firstname,' ',Lastname) As FullName,EmsTblEmployee.code "  +
                 $"from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on " +
                 $"EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code " +
                 $"where EmsTblEmployeeAssociatedToProject.ProjectCode = '{ProjectCode}'";

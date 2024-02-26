@@ -20,6 +20,11 @@ namespace EmployeeManagementSystem.ViewModel
 {
     internal class ProjectViewModel : INotifyPropertyChanged
     {
+        public event EventHandler AddEmployeeEvent;
+        public void OnAddEmployeeEvent(EventArgs e)
+        {
+            AddEmployeeEvent?.Invoke(this, e);
+        }
         public event EventHandler EditEvent;
         public void OnEditEvent(EventArgs e)
         {
@@ -33,6 +38,18 @@ namespace EmployeeManagementSystem.ViewModel
             get { return selectedRow; }
             set { selectedRow = value; OnPropertyChanged("SelectedRow"); }
         }
+        private DataRowView selectedEmployeeRow;
+        public DataRowView SelectedEmployeeRow
+        {
+            get
+            {
+                return selectedEmployeeRow;
+            }
+            set
+            {
+                selectedEmployeeRow = value;
+            }
+        }
         private DataTable dataTable;
         public DataTable DataTable
         {
@@ -41,20 +58,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
-        private DataTable employeesAssociatedToProjectDataTable;
-        public DataTable EmployeesAssociatedToProjectDataTable
-        {
-            get
-            {
-                return employeesAssociatedToProjectDataTable;
-            }
-            set
-            {
-                employeesAssociatedToProjectDataTable = value;
-                OnPropertyChanged("EmployeesAssociatedToProjectDataTable");
-            }
-        }
-
+    
         private GetData getData;
         private string code;
         public string Code
@@ -162,6 +166,39 @@ namespace EmployeeManagementSystem.ViewModel
         {
             return true;
         }
+        private void ClearFieldsExecute(object obj)
+        {
+            Code = String.Empty;
+            Name = String.Empty;
+            StartingDate = new DateTime(1990, 01, 01);
+            EndingDate = DateTime.Now;
+            dataTable = getData.GetProjectData();
+            OnPropertyChanged("dataTable");
+        }
+
+        private ICommand deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (deleteCommand == null)
+                {
+                    deleteCommand = new RelayCommand(DeleteExecute, CanDeleteExecute, false);
+                }
+                return deleteCommand;
+            }
+        }
+        private bool CanDeleteExecute(object arg)
+        {
+            if (selectedRow != null) return true;
+            return false;
+        }
+
+        private void DeleteExecute(object obj)
+        {
+            deleteData.DeleteProject((string)(SelectedRow.Row.ItemArray[0]));
+            ClearFieldsExecute(obj);
+        }
 
         private ICommand editCommand;
         public ICommand EditCommand
@@ -186,18 +223,6 @@ namespace EmployeeManagementSystem.ViewModel
             OnEditEvent(EventArgs.Empty);
         }
 
-        private ICommand deleteCommand;
-        public ICommand DeleteCommand
-        {
-            get
-            {
-                if (deleteCommand == null)
-                {
-                    deleteCommand = new RelayCommand(DeleteExecute, CanDeleteExecute, false);
-                }
-                return deleteCommand;
-            }
-        }
 
         private ICommand addEmployeeToProject;
         public ICommand AddEmployeeToProject
@@ -223,31 +248,40 @@ namespace EmployeeManagementSystem.ViewModel
         {
             string ProjectCode = (String)SelectedRow.Row.ItemArray[0];
             string EmployeeCode = employeeName.Split('-')[0];
-            insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode);
-            employeesAssociatedToProjectDataTable = getData.GetAssociatedEmployeesToProject(ProjectCode);
-            OnPropertyChanged("employeesAssociatedToProjectDataTable");
+            string EmployeeName = employeeName.Split('-')[1];
+            insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode,EmployeeName);
+            EmployeeName = "";
+            OnAddEmployeeEvent(EventArgs.Empty);
+           
         }
 
-        private bool CanDeleteExecute(object arg)
+        private ICommand deleteEmployeeFromProject;
+        public ICommand DeleteEmployeeFromProject
         {
-            if (selectedRow != null) return true;
-            return false;
+            get
+            {
+                if(deleteEmployeeFromProject == null)
+                {
+                    deleteEmployeeFromProject = new RelayCommand(DeleteEmployeeFromProjectExecute, CanDeleteEmployeeFromProjectExecute, false);
+                }
+                return deleteEmployeeFromProject;
+            }
         }
 
-        private void DeleteExecute(object obj)
+        private bool CanDeleteEmployeeFromProjectExecute(object arg)
         {
-            deleteData.DeleteProject((string)(SelectedRow.Row.ItemArray[0]));
-            ClearFieldsExecute(obj);
+            if(selectedEmployeeRow==null)return false;
+            return true;
+            
         }
 
-        private void ClearFieldsExecute(object obj)
+        private void DeleteEmployeeFromProjectExecute(object obj)
         {
-            Code = String.Empty;
-            Name = String.Empty;
-            StartingDate = new DateTime(1990, 01, 01);
-            EndingDate = DateTime.Now;
-            dataTable = getData.GetProjectData();
-            OnPropertyChanged("dataTable");
+          string projectcode = (String)SelectedRow.Row.ItemArray[0];
+          string employeecode = (String)SelectedEmployeeRow.Row.ItemArray[1];
+          string employeename = (String)SelectedEmployeeRow.Row.ItemArray[0];
+          deleteData.removeEmployeeFromProject(employeecode,projectcode, employeename);
+          OnAddEmployeeEvent(EventArgs.Empty);
         }
 
         public ProjectViewModel()
@@ -257,28 +291,13 @@ namespace EmployeeManagementSystem.ViewModel
             getData = new GetData();
             dataTable = getData.GetProjectData();
             employeeNames = getData.AllEmployeeNames();
-            selectedRow = this.selectedRow;
+            deleteData = new DeleteData();
             insertData = new InsertData();
             OnPropertyChanged("dataTable");
 
         }
 
-        public ProjectViewModel(ProjectWindow projectWindow, string code)
-        {
-            dataTable = new DataTable();
-            getData = new GetData();
-            insertData = new InsertData();
-            dataTable = getData.GetProjectData();
-            selectedRow = this.selectedRow;
-            employeeNames = getData.AllEmployeeNames();
-            projectWindow.PopupOpenEvent += (sender, e) =>
-            {
-                employeesAssociatedToProjectDataTable = getData.GetAssociatedEmployeesToProject(code);
-                OnPropertyChanged("employeesAssociatedToProjectDataTable");
-
-            };
-
-        }
+      
 
 
 
