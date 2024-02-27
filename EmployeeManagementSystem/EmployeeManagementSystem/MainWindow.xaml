@@ -215,7 +215,7 @@
 
                     <MenuItem Header="Dashboard" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
                 </MenuItem>
-                    <MenuItem Header="Project" Name="ProjectTab" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
+                    <MenuItem Header="Project" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
                     
                 </MenuItem>
                     <MenuItem Header="Employee" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">

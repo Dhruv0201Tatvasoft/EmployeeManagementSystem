@@ -88,7 +88,7 @@ namespace EmployeeManagementSystem.UserControls
 
             if (mainWindow != null)
             {
-                if (mainWindow.ProjectTab != null)
+                if (mainWindow.mainContent != null)
                 {
                     ProjectModel pm = getData.GetProjectFromCode((string)((ProjectViewModel)sender).SelectedRow.Row.ItemArray[0]);
                     mainWindow.mainContent.Content = new EditWindow(pm);
@@ -106,7 +106,7 @@ namespace EmployeeManagementSystem.UserControls
 
             if (mainWindow != null)
             {
-                if (mainWindow.ProjectTab != null)
+                if (mainWindow.mainContent != null)
                 {
                     mainWindow.mainContent.Content = addEditProject;
                 }
