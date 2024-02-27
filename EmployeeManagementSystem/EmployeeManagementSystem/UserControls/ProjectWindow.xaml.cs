@@ -91,7 +91,7 @@ namespace EmployeeManagementSystem.UserControls
                 if (mainWindow.ProjectTab != null)
                 {
                     ProjectModel pm = getData.GetProjectFromCode((string)((ProjectViewModel)sender).SelectedRow.Row.ItemArray[0]);
-                    mainWindow.ProjectTab.Content = new EditWindow(pm) ;
+                    mainWindow.mainContent.Content = new EditWindow(pm);
                 }
             }
         }
@@ -100,7 +100,7 @@ namespace EmployeeManagementSystem.UserControls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddEditProject addEditProject = new AddEditProject();
+            AddProject addEditProject = new AddProject();
 
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
 
@@ -108,7 +108,7 @@ namespace EmployeeManagementSystem.UserControls
             {
                 if (mainWindow.ProjectTab != null)
                 {
-                    mainWindow.ProjectTab.Content = addEditProject;
+                    mainWindow.mainContent.Content = addEditProject;
                 }
             }
         }

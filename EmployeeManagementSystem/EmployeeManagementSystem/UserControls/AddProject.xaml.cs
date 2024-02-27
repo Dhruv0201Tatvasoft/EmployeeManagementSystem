@@ -21,9 +21,9 @@ namespace EmployeeManagementSystem.UserControls
     /// <summary>
     /// Interaction logic for AddEditProject.xaml
     /// </summary>
-    public partial class AddEditProject : UserControl
+    public partial class AddProject : UserControl
     {
-        public AddEditProject()
+        public AddProject()
         {
             InitializeComponent();
             AddProjectViewModel viewModel = new AddProjectViewModel();
@@ -37,9 +37,9 @@ namespace EmployeeManagementSystem.UserControls
             
             if (mainWindow != null)
             {
-                if (mainWindow.ProjectTab != null)
+                if (mainWindow.mainContent != null)
                 {
-                    mainWindow.ProjectTab.Content = projectWindow;
+                    mainWindow.mainContent.Content = projectWindow;
                 }
             }
 
@@ -53,9 +53,9 @@ namespace EmployeeManagementSystem.UserControls
 
             if (mainWindow != null)
             {
-                if (mainWindow.ProjectTab != null)
+                if (mainWindow.mainContent != null)
                 {
-                    mainWindow.ProjectTab.Content = projectWindow;
+                    mainWindow.mainContent.Content = projectWindow;
                 }
             }
 

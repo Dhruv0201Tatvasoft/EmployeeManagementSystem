@@ -16,7 +16,10 @@
     <Compile Update="UserControls\ProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\UserControl1.xaml.cs">
+    <Compile Update="UserControls\SkillWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\TechnologyWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -33,7 +36,10 @@
     <Page Update="UserControls\ProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\UserControl1.xaml">
+    <Page Update="UserControls\SkillWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\TechnologyWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

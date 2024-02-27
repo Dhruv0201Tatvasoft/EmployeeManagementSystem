@@ -16,7 +16,7 @@ namespace EmployeeManagementSystem.Database
     class InsertData
     {
         private GetConnection connection = new GetConnection();
-        public void executeQuery(string sql,string model)
+        public void executeQuery(string sql)
         {
             try
             {
@@ -28,11 +28,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627)
-                {
-                    MessageBox.Show($"There is already an entry with Same {model} Code","Warning");
-                }
-                else
+                
                 {
                     MessageBox.Show("Some error occured");
                 }
@@ -68,11 +64,11 @@ namespace EmployeeManagementSystem.Database
                 $"'{Code}'," +
                 $"'{Name}'," +
                 $"'{StartingDate.ToString("yyyy-MM-dd")}'," +
-                $"'{EndingDate.ToString("yyyy-MM-dd")}')", "Project");
+                $"'{EndingDate.ToString("yyyy-MM-dd")}')");
 
                 foreach (int i in TechnologiesId)
                 {
-                    this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
+                    this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
                 }
                 return true;
             }
@@ -93,11 +89,11 @@ namespace EmployeeManagementSystem.Database
             $"'{Code}'," +
                 $"'{Name}'," +
                 $"'{StartingDate.ToString("yyyy-MM-dd")}'," +
-                $"NULL)", "Project");
+                $"NULL)");
 
                 foreach (int i in TechnologiesId)
                 {
-                    this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
+                    this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
                 }
                 return true;
             }
@@ -112,7 +108,7 @@ namespace EmployeeManagementSystem.Database
             if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{ProjectCode}' AND EmployeeCode ='{EmployeeCode}'"))
             {
                 string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{ProjectCode}')";
-                this.executeQuery(Query, "Employee");
+                this.executeQuery(Query);
             }
             else
             {
@@ -120,6 +116,29 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        
+        public void InsertTechnology (String TechnologyName)
+        {
+            if(!DoesExist($"select * from EmsTblTechnology where Name like '{TechnologyName}'"))
+            {
+                string Query = $"Insert into EmsTblTechnology (Name) Values ('{TechnologyName}')";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($"{TechnologyName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            }
+        }
+        public void InsertSkill(String SkillName)
+        {
+            if (!DoesExist($"select * from EmsTblSkill where Name like '{SkillName}'"))
+            {
+                string Query = $"Insert into EmsTblSkill (Name) Values ('{SkillName}')";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($"{SkillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            }
+        }
     }
 }

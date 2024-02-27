@@ -64,7 +64,7 @@ namespace EmployeeManagementSystem.UserControls
             {
                 if (mainWindow.ProjectTab != null)
                 {
-                    mainWindow.ProjectTab.Content = projectWindow;
+                    mainWindow.mainContent.Content = projectWindow;
 
                 }
             }
@@ -80,7 +80,7 @@ namespace EmployeeManagementSystem.UserControls
             {
                 if (mainWindow.ProjectTab != null)
                 {
-                    mainWindow.ProjectTab.Content = projectWindow;
+                    mainWindow.mainContent.Content = projectWindow;
                 }
             }
 

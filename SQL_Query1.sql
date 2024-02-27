@@ -113,7 +113,7 @@ VALUES
 
 select * from EmsTblTechnologyForProject
 select * from EmsTblTechnology
-select * from EmsTblEmployee]
+select * from EmsTblEmployee
 select CONCAT(FirstName,' ' ,LastName) from EmsTblEmployee 
 Select * from  EmsTblProject where Code = 'P0005' 
 delete from EmsTblTechnologyForProject where ProjectCode ='P0001'
@@ -133,7 +133,19 @@ Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values 
     AS Name
  from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code where EmsTblEmployeeAssociatedToProject.ProjectCode = 'P0005'
 
- Select CONCAT(Firstname,' ',Lastname) As Name  
+ Select CONCAT(Firstname,' ',Lastname)As Name,EmsTblEmployee.Code  
                from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on  
                 EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code  
                where EmsTblEmployeeAssociatedToProject.ProjectCode = 'P0005'
+
+
+delete  from EmsTblEmployeeAssociatedToProject where ProjectCode ='P0005' and  EmployeeCode ='EMP001'
+Alter Table EmsTblTechnology
+Add Id_new Int Identity(1, 1)
+Go
+select * from
+Alter Table EmsTblTechnology Drop Column ID
+
+Go
+
+Exec sp_rename 'EmsTblTechnology.Id_new', 'ID', 'Column'

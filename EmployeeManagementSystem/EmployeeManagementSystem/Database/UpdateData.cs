@@ -11,7 +11,7 @@ namespace EmployeeManagementSystem.Database
     internal class UpdateData
     {
         private GetConnection connection = new GetConnection();
-        public void executeQuery(string sql, string model)
+        public void executeQuery(string sql)
         {
             try
             {
@@ -23,26 +23,20 @@ namespace EmployeeManagementSystem.Database
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627)
-                {
-                    MessageBox.Show($"There is already an entry with Same {model} Code", "Warning");
-                }
-                else
-                {
-                    MessageBox.Show("Some error occured");
-                }
+
+                MessageBox.Show("Some error occured");
             }
 
+
         }
-        public bool DoesExist(String Code, String TblName, string columnName)
+        public bool DoesExist(string Query)
         {
-            string SqlQuery = $"Select * from  {TblName} where {columnName} = '{Code}' ";
             try
             {
                 using (SqlConnection conn = connection.GenrateConnection())
                 {
                     conn.Open();
-                    using (SqlCommand command = new SqlCommand(SqlQuery, conn))
+                    using (SqlCommand command = new SqlCommand(Query, conn))
                     {
 
                         SqlDataReader reader = command.ExecuteReader();
@@ -52,51 +46,51 @@ namespace EmployeeManagementSystem.Database
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"There is already Entry with Code {Code}");
+                MessageBox.Show($"Something Went Wrong");
                 return false;
             }
         }
-        public void UpdateProject(String OldCode, String Code, String Name, DateTime StaringDate, DateTime EndingDate, List<int> TechnologiesId )
+        public void UpdateProject(String OldCode, String Code, String Name, DateTime StaringDate, DateTime EndingDate, List<int> TechnologiesId)
         {
-            
+
             try
             {
                 if (OldCode == Code)
                 {
                     string sqlQuery = string.Empty;
                     sqlQuery = $"DELETE FROM EmsTblTechnologyForProject WHERE ProjectCode ='{OldCode}' ";
-                    this.executeQuery(sqlQuery, "Project");
+                    this.executeQuery(sqlQuery);
                     sqlQuery = $"UPDATE EmsTblProject SET " +
                         $"Code = '{Code}' ," +
                         $" Name = '{Name}' , " +
                         $"StartingDate = '{StaringDate.ToString("yyyy-MM-dd")}',  " +
                         $"EndingDate = '{EndingDate.ToString("yyyy-MM-dd")}'" +
                         $" WHERE Code ='{OldCode}'  ";
-                    this.executeQuery(sqlQuery, "Project");
+                    this.executeQuery(sqlQuery);
                     foreach (int i in TechnologiesId)
                     {
-                        this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
+                        this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
                     }
                 }
-               else if ( OldCode != Code && !this.DoesExist(Code, "EmsTblProject", "Code"))
+                else if (OldCode != Code && !this.DoesExist($"Select * from EmsTblProject where Code like '{Code}'"))
                 {
 
                     string sqlQuery = string.Empty;
                     sqlQuery = $"DELETE FROM EmsTblTechnologyForProject WHERE ProjectCode ='{OldCode}' ";
-                    this.executeQuery(sqlQuery, "Project");
+                    this.executeQuery(sqlQuery);
                     sqlQuery = $"UPDATE EmsTblProject SET " +
                         $"Code = '{Code}' ," +
                         $" Name = '{Name}' , " +
                         $"StartingDate = '{StaringDate.ToString("yyyy-MM-dd")}',  " +
                         $"EndingDate = '{EndingDate.ToString("yyyy-MM-dd")}'" +
                         $" WHERE Code ='{OldCode}'  ";
-                    this.executeQuery(sqlQuery, "Project");
+                    this.executeQuery(sqlQuery);
                     foreach (int i in TechnologiesId)
                     {
-                        this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
+                        this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
                     }
                 }
-                    
+
                 else
                 {
                     MessageBox.Show($"There is Already Project With The Code {Code}");
@@ -107,28 +101,28 @@ namespace EmployeeManagementSystem.Database
             {
                 MessageBox.Show("Some Unexpected Error Occured", "Warning");
             }
-            
+
         }
 
         public void UpdateProject(String OldCode, String Code, String Name, DateTime StaringDate, List<int> TechnologiesId)
         {
             try
             {
-                if (OldCode == Code || (OldCode != Code && !this.DoesExist(Code, "EmsTblProject", "Code")))
+                if (OldCode == Code || (OldCode != Code && !this.DoesExist($"Select * from EmsTblProject where Code like '{Code}'")))
                 {
                     string sqlQuery = string.Empty;
                     sqlQuery = $"DELETE FROM EmsTblTechnologyForProject WHERE ProjectCode ='{OldCode}' ";
-                    this.executeQuery(sqlQuery, "Project");
+                    this.executeQuery(sqlQuery);
                     sqlQuery = $"UPDATE  EmsTblProject SET " +
                         $"Code = '{Code}' ," +
                         $" Name = '{Name}' , " +
                         $"StartingDate = '{StaringDate.ToString("yyyy-MM-dd")}',  " +
                         $"EndingDate = NULL" +
                         $" WHERE Code ='{OldCode}' ";
-                    this.executeQuery(sqlQuery, "Project");
+                    this.executeQuery(sqlQuery);
                     foreach (int i in TechnologiesId)
                     {
-                        this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')", "Project");
+                        this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
                     }
                 }
 
@@ -142,6 +136,32 @@ namespace EmployeeManagementSystem.Database
                 MessageBox.Show("Some Unexpected Error Occured", "Warning");
             }
 
+        }
+        public void UpdateTechnologyName(string NewTechnologyName, string OldTechnologyName)
+        {
+            if (!DoesExist($"Select * from EmsTblTechnology where name like '{NewTechnologyName}'"))
+            {
+                string Query = $"Update EmsTblTechnology SET Name = '{NewTechnologyName}' where name like '{OldTechnologyName}'";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($" {NewTechnologyName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+
+            }
+        }
+        public void UpdateSkillName(string NewSkillName, string OldSkillName)
+        {
+            if (!DoesExist($"Select * from EmsTblSkill where name like '{NewSkillName}'"))
+            {
+                string Query = $"Update EmsTblSkill SET Name = '{NewSkillName}' where name like '{OldSkillName}'";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($" {NewSkillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+
+            }
         }
     }
 }

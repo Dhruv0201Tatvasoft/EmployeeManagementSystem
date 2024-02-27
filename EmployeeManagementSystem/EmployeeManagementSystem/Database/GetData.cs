@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using EmployeeManagementSystem.Models;
 using System.Data.Common;
+using System.Windows.Media.Animation;
 
 namespace EmployeeManagementSystem.Database
 {
@@ -142,7 +143,7 @@ namespace EmployeeManagementSystem.Database
             {
                 conn.Open();
 
-            
+
                 string SelectQueryForEmsTbltechnologyForProjectTable = $"SELECT TechnologyId FROM EmsTblTechnologyForProject where ProjectCode = '{Code}'";
                 using (SqlCommand command = new SqlCommand(SelectQueryForEmsTbltechnologyForProjectTable, conn))
                 {
@@ -168,9 +169,9 @@ namespace EmployeeManagementSystem.Database
                             project.StartingDate = reader.GetDateTime(2);
                             if (reader.IsDBNull(3))
                             {
-                             project.EndingDate = null;
+                                project.EndingDate = null;
                             }
-                            else project.EndingDate=reader.GetDateTime(3);
+                            else project.EndingDate = reader.GetDateTime(3);
                         }
                     }
                 }
@@ -181,9 +182,9 @@ namespace EmployeeManagementSystem.Database
 
         public List<String> AllEmployeeNames()
         {
-           
+
             string Query = $"Select Code,Firstname, Lastname from EmsTblEmployee";
-            List<string> Result = new List<string> ();
+            List<string> Result = new List<string>();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
@@ -207,21 +208,56 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetAssociatedEmployeesToProject(string ProjectCode)
         {
-            string Query = $"Select CONCAT(Firstname,' ',Lastname) As FullName,EmsTblEmployee.code "  +
+            string Query = $"Select CONCAT(Firstname,' ',Lastname) As FullName,EmsTblEmployee.code " +
                 $"from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on " +
                 $"EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code " +
                 $"where EmsTblEmployeeAssociatedToProject.ProjectCode = '{ProjectCode}'";
             DataTable dt = new DataTable();
-            using(SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-                using(SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(Query, conn))
                 {
-                using(SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
                         adapter.Fill(dt);
                     }
 
+                }
+            }
+            return dt;
+        }
+
+        public DataTable GetTechnologyTable()
+        {
+            string Query = "select * from EmsTblTechnology";
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+        public DataTable GetSkillTable()
+        {
+            string Query = "select * from EmsTblSkill";
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
                 }
             }
             return dt;
