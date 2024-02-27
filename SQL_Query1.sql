@@ -140,12 +140,11 @@ Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values 
 
 
 delete  from EmsTblEmployeeAssociatedToProject where ProjectCode ='P0005' and  EmployeeCode ='EMP001'
-Alter Table EmsTblTechnology
-Add Id_new Int Identity(1, 1)
-Go
-select * from
-Alter Table EmsTblTechnology Drop Column ID
-
-Go
-
-Exec sp_rename 'EmsTblTechnology.Id_new', 'ID', 'Column'
+delete  from EmsTblTechnology where Id =6
+select * from EmsTblTechnology where name like 'dotnet'
+update EmsTblTechnology set name ='KHP' where name like 'PHP'
+Update EmsTblTechnology SET Name = 'Iphone' where name like ''	
+select * from EmsTblProject where code like 'P0001'
+delete from EmsTblTechnology where Name like 'Dotnet'
+Delete From EmsTblTechnology where Name like 'Dotnet'
+select * from EmsTblSkill (Name) values  ('Management') ,('Coding'),('Communication'),('Testing')
