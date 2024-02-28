@@ -54,8 +54,130 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="0" Background="{StaticResource HoverBackGroundColor}" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" />
+                <Border Grid.Column="0" CornerRadius="0"  Margin="1" Background="{StaticResource NormalBackGroundColor}" BorderBrush="#FF97A0A5" BorderThickness="0,0,1,0" />
+                <Path x:Name="Arrow" Grid.Column="1" Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M0,0 L4,6 L8,0 Z" />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border  Focusable="False" Background="{StaticResource NormalBackGroundColor}" />
+        </ControlTemplate>
+
+        <Style x:Key="CustomComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton  Name="ToggleButton" Template="{StaticResource ComboBoxToggleButton}"  Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent }}" ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="5,3,23,3" VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                            Background="{StaticResource NormalBackGroundColor}"
+                            Foreground="Green"
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                                x:Name="DropDownBorder"
+                                Background="{StaticResource NormalBackGroundColor}"
+                                    
+                                BorderThickness="1"
+                                BorderBrush="{StaticResource BorderColor}"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{StaticResource DisabledBackGroundColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource HoverBackGroundColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+     
+
+
         <Style x:Key="CustomInputStyle" TargetType="{x:Type Control}">
-            <Setter Property="Background" Value="#FAFAFA" />
+            <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
             <Setter Property="BorderBrush" Value="#FF7D8683" />
             <Setter Property="Foreground" Value="#99000000" />
             <Style.Triggers>
@@ -109,7 +231,7 @@
                         <Setter Property="Foreground" Value="#000000"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#60943C" />
+                                <Setter Property="Background" Value="{StaticResource PressedBackGroundColor}" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -125,7 +247,7 @@
                         <Setter Property="Height" Value="50"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#60943C" />
+                                <Setter Property="Background" Value="{StaticResource PressedBackGroundColor}" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -134,11 +256,11 @@
         </Style>
 
         <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-      <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
-    <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
-    <Setter Property="Foreground" Value="Black" />
-    <Setter Property="Width" Value="120"/>
-    <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Regular"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -159,7 +281,7 @@
                                 </Popup>
                             </Grid>
                         </Border>
-                                        
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{StaticResource HoverBackGroundColor}"/>
@@ -175,13 +297,13 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style> 
+        </Style>
         <Style x:Key="TabItemStyle" TargetType="TabItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
-                        <Border  Name="Border" TextBlock.TextAlignment="Center"  BorderThickness="0.5" BorderBrush="Black" Background="{TemplateBinding Background}">
-                            <ContentPresenter Height="20" ContentSource="Header" Width="80"  Margin="10,2"/>
+                        <Border  Name="Border" TextBlock.TextAlignment="Center"  BorderThickness="0.5" BorderBrush="Black" Background="{TemplateBinding Background}" CornerRadius="10 10 0 0">
+                            <ContentPresenter Height="20" ContentSource="Header" Width="120"  Margin="10,2"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
@@ -210,16 +332,16 @@
             </Grid.RowDefinitions>
             <Border BorderBrush="Black" BorderThickness="0.5">
                 <DockPanel Grid.Row="0" >
-                
-            <Menu  Grid.Column="0" x:Name="MenuControl" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Grid.ColumnSpan="2">
 
-                    <MenuItem Header="Dashboard" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
-                </MenuItem>
-                    <MenuItem Header="Project" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
-                    
-                </MenuItem>
-                    <MenuItem Header="Employee" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
-                </MenuItem>
+                    <Menu  Grid.Column="0" x:Name="MenuControl" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Grid.ColumnSpan="2">
+
+                        <MenuItem Header="Dashboard" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
+                        </MenuItem>
+                        <MenuItem Header="Project" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
+
+                        </MenuItem>
+                        <MenuItem Header="Employee" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
+                        </MenuItem>
                         <MenuItem Header="Master" x:Name="Master"   Style="{StaticResource MenuItemStyle}" >
 
                             <MenuItem Header="Technology" Click="MenuItem_Click"  Style="{StaticResource MenuItemStyle}"  />
@@ -227,15 +349,15 @@
                             <MenuItem Header="Skill" Click="MenuItem_Click" Style="{StaticResource MenuItemStyle}" />
                         </MenuItem>
                     </Menu>
-           
-                <Button HorizontalAlignment="Right" Height="auto" Width="39">
-                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="auto" Height="auto" RenderTransformOrigin="0.094,1.221 "/>
-                </Button>
-            </DockPanel>
-                </Border> 
+
+                    <Button HorizontalAlignment="Right" Height="auto" Width="39">
+                        <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="auto" Height="auto" RenderTransformOrigin="0.094,1.221 "/>
+                    </Button>
+                </DockPanel>
+            </Border>
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Name="mainContent">
-                
-        </ContentControl>
+
+            </ContentControl>
         </Grid>
     </ScrollViewer>
 </Window>

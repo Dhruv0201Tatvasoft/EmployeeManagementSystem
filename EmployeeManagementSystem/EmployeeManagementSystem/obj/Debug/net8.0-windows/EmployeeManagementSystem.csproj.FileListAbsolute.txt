@@ -57,3 +57,7 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\TechnologyWindow.baml
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\SkillWindow.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\SkillWindow.baml
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EmployeeWindow.g.cs
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EmployeeWindow.baml
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddEmployeeWindow.g.cs
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\AddEmployeeWindow.baml

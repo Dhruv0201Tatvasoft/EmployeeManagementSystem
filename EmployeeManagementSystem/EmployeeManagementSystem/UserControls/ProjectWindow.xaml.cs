@@ -28,13 +28,13 @@ namespace EmployeeManagementSystem.UserControls
 
     public partial class ProjectWindow : UserControl
     {
-        private string selectedPRoje;
-        public string SelectedPRoje
+        private string selectedProject;
+        public string SelectedProject
         {
-            get { return selectedPRoje; }
+            get { return selectedProject; }
             set
             {
-                SelectedPRoje = value;
+                SelectedProject = value;
             }
         }
       
@@ -58,7 +58,7 @@ namespace EmployeeManagementSystem.UserControls
         {
             PopUpDataGird.ItemsSource = null;
             PopUpDataGird.ItemsSource = getData.GetAssociatedEmployeesToProject((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]).DefaultView;
-
+            Autocompletebox.SelectedItem ="";
 
         }
 
@@ -73,6 +73,7 @@ namespace EmployeeManagementSystem.UserControls
             if (e.NewSize.Width > 1180)
             {
                 this.DataGridColumnWidth.Width = 0.14 * this.ActualWidth;
+   
          
             }
             else

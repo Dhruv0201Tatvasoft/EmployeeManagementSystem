@@ -25,6 +25,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             AddEmployeeEvent?.Invoke(this, e);
         }
+       
         public event EventHandler EditEvent;
         public void OnEditEvent(EventArgs e)
         {
@@ -250,7 +251,6 @@ namespace EmployeeManagementSystem.ViewModel
             string EmployeeCode = employeeName.Split('-')[0];
             string EmployeeName = employeeName.Split('-')[1];
             insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode,EmployeeName);
-            EmployeeName = "";
             OnAddEmployeeEvent(EventArgs.Empty);
            
         }

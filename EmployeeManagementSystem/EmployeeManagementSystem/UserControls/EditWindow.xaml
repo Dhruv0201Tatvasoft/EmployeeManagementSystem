@@ -15,9 +15,9 @@
         <vm:EditProjectViewModel x:Key="ViewModel"/>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="20 10 0 0">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="20 20 0 0">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto">
-                <TextBlock Text="Project - Edit" Margin="0 20 20 0" FontSize="40"/>
+                <TextBlock Text="Project - Edit" Margin="0 0 20 0" FontSize="40"/>
                 <Separator Margin="0 10 20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
             </StackPanel>
             <Grid Margin="0 0">

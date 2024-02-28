@@ -29,6 +29,8 @@ namespace EmployeeManagementSystem.ViewModel
             set { dataTable = value; OnPropertyChanged("dataTable"); }
 
         }
+        private List<DataRowView> list;
+        public List<DataRowView> List { get { return list; } set { list = value; } }
         private GetData getData;
         public event EventHandler ChangeWindowEvent;
         protected virtual void OnChangeWindowEvent(EventArgs e)

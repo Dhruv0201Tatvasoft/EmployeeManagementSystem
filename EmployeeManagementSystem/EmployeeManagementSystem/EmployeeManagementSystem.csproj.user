@@ -7,10 +7,16 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="UserControls\AddEmployeeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\AddProject.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\EmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\ProjectWindow.xaml.cs">
@@ -27,10 +33,16 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UserControls\AddEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\AddProject.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\EditWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\EmployeeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\ProjectWindow.xaml">

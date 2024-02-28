@@ -51,7 +51,7 @@
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
                 <DatePicker x:Name="EndingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="top" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
-                <ListBox x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"   Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
+            <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"   Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
                     <i:Interaction.Behaviors>
                         <b:ListBoxSelectionBehaviour SelectedItem="{Binding SelectedTechnologyRow, Mode=TwoWay}"/>
                     </i:Interaction.Behaviors>

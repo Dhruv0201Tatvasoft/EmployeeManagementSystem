@@ -58,7 +58,7 @@ namespace EmployeeManagementSystem
                     break;
 
                 case "Employee":
-                    mainContent.Content = new TextBlock() { Text = "Employee Content" };
+                    mainContent.Content = new EmployeeWindow();
                     selectedMenuItem = menuItem;
                     break;
                 case "Technology":
