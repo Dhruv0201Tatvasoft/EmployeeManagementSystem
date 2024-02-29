@@ -91,7 +91,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Code:"  TextAlignment="Left" />
                     
-                    <!--<TextBox Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>-->
+                    <TextBox Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Name:"  TextAlignment="Left"/>
