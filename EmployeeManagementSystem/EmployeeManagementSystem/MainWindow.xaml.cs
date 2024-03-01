@@ -28,11 +28,9 @@ namespace EmployeeManagementSystem
          
         }
 
-    
 
-       
 
-      
+
         private MenuItem selectedMenuItem;
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -42,7 +40,8 @@ namespace EmployeeManagementSystem
 
             if (selectedMenuItem != null)
             {
-                selectedMenuItem.Background = null;
+
+                selectedMenuItem.ClearValue(Control.BackgroundProperty);
             }
 
             switch (menuItem.Header.ToString())

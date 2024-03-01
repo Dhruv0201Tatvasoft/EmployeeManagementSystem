@@ -131,6 +131,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+
+    
+
         private ICommand saveCommand;
         public ICommand SaveCommand
         {
@@ -149,7 +152,6 @@ namespace EmployeeManagementSystem.ViewModel
        
         private bool CanSaveExecute(object arg)
         {
-            if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Code.Length > 10 || Name.Length > 40 || (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate)) return false;
             return true;
         }
 
@@ -177,6 +179,7 @@ namespace EmployeeManagementSystem.ViewModel
             dataTable = new DataTable();
             dataTable = getData.GetTechnologyData();
             insertData = new InsertData();
+           
             OnPropertyChanged("dataTable");   
         }
 
@@ -187,4 +190,5 @@ namespace EmployeeManagementSystem.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+   
 }

@@ -1,17 +1,24 @@
 ﻿<UserControl x:Class="EmployeeManagementSystem.UserControls.EmployeeWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm ="clr-namespace:EmployeeManagementSystem.ViewModel"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
               xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="610" d:DesignWidth="835" Background="White">
     <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
         <converter:ProjectWindowResponsive x:Key="ProjectWindowConverter"/>
-
+        <vm:EmployeeViewModel x:Key="ViewModel"/>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:EmployeeViewModel/>
+    </UserControl.DataContext>
     <Grid VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -32,7 +39,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock  Grid.Row="0" Text="Employee" Margin="20 20 20 0" FontSize="40"/>
-            
+
             <Button Grid.Row="1" Content="ADD" Click="AddEmployee" HorizontalAlignment="Left"  Height="32" Width="70" Margin="20 10 0 0" Style="{DynamicResource ButtonStyle}"/>
         </Grid>
         <Separator HorizontalAlignment="Stretch" VerticalAlignment="top" Grid.Column="0" Grid.Row="1" Margin="20 30 20 30"/>
@@ -40,44 +47,78 @@
             <StackPanel Margin="0 10 0 0 "  Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter} }" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Code:"  TextAlignment="Left" />
-                    <TextBox Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox  Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Name:"  TextAlignment="Left"/>
-                    <TextBox  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="StackPanel1"  Margin="0 0 0 10" Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter}}">
-      
+
 
                 <StackPanel  Orientation="Horizontal">
                     <TextBlock  VerticalAlignment="Center" Width="100" Text="Department:"  TextAlignment="Left"  Margin="0 0 0 20"/>
-                    <ComboBox  VerticalAlignment="Center" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  Style="{DynamicResource CustomComboBoxStyle}"/>
+                    <ComboBox ItemsSource="{Binding Department}" SelectedItem="{Binding SelectedDepartment,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Delay=1}"  VerticalAlignment="Center" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  Style="{DynamicResource CustomComboBoxStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
 
                     <TextBlock  Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Designation:"  TextAlignment="Left"/>
-                    <ComboBox  Width="250"  Margin="0 0 0 20"  Height="32" Style="{DynamicResource CustomComboBoxStyle}">
+                    <ComboBox  SelectedItem="{Binding SelectedDesignation,Mode=TwoWay,Delay=1,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Designation}"   Width="250"  Margin="0 0 0 20"  Height="32" Style="{DynamicResource CustomComboBoxStyle}">
                     </ComboBox>
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">
-                    <Button x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left"  Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
+                    <Button Command="{Binding SearchCommand}" x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left"  Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
 
-                    <Button Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Width="140"  Style="{DynamicResource ButtonStyle}"/>
+                    <Button Command="{Binding ClearCommand}" Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Width="140"  Style="{DynamicResource ButtonStyle}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <DataGrid  VerticalAlignment="Top" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+        <DataGrid  ItemsSource="{Binding EmployeeDatatable}"  VerticalAlignment="Top" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
             HorizontalAlignment="Stretch"
               Grid.Row="4"
               Margin="20 0 "
               CanUserAddRows="False"
               SelectionMode="Single"
-              HeadersVisibility="Column"
-         
-              >
-        
+              HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Code" Binding="{Binding Code}"/>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Email" Binding="{Binding Email}"/>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Designation" Binding="{Binding Designation}"/>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Department" Binding="{Binding Department }"/>
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Joining Date" Binding="{Binding JoiningDate,StringFormat='MMM dd,yyyy'}" />
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Release Date" Binding="{Binding ReleaseDate,StringFormat='MMM dd,yyyy'}" />
+                <DataGridTemplateColumn Width="15.5*" Header="Actions" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
+                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EmployeeIcon.png" Width="25" Height="25" />
+                                </Button>
+                                <Button MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
+                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" Width="25" Height="25"/>
+                                </Button>
+                                <Button MaxWidth="40" MaxHeight="40" Grid.Column="2">
+                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\DeleteIcon.png"
+                                           Width="40" Height="40"/>
+                                </Button>
+                                <Button MaxWidth="40" MaxHeight="40" Grid.Column="3">
+                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\FilesIcon.png" Width="25" Height="25"/>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
         </DataGrid>
     </Grid>
 </UserControl>

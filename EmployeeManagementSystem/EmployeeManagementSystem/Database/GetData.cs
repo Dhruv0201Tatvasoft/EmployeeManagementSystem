@@ -262,5 +262,67 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+        public DataTable GetEmployeeTable()
+        {
+            DataTable dt = new DataTable();
+            string Query = "select Code,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name,Email,Designation,Department,JoiningDate,ReleaseDate from EmsTblEmployee";
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
+        public DataTable GetEmployeeSearchData(String Code, String Name, String Department,String Designation)
+        {
+            DataTable dt = new DataTable();
+            string Query = "Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1";
+
+            if (!String.IsNullOrEmpty(Code))
+            {
+                Query += $" AND Code like '{Code}%'";
+            }
+            if (!String.IsNullOrEmpty(Name))
+            {
+                Query += $" AND  CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) LIKE '%{Name}%'";
+            }
+            if (!String.IsNullOrEmpty(Department))
+            {
+                Query += $" AND Department like '{Department}'";
+            }
+            if (!String.IsNullOrEmpty(Designation))
+            {
+                Query += $" AND Designation like '{Designation}'";
+            }
+            try
+            {
+                {
+                    using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                    {
+                        conn.Open();
+                        using (SqlCommand command = new SqlCommand(Query, conn))
+                        {
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(dt);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+            }
+            return dt;
+        }
+
     }
 }

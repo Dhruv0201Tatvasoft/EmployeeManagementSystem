@@ -13,7 +13,7 @@
     <Compile Update="UserControls\AddProject.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UserControls\EditWindow.xaml.cs">
+    <Compile Update="UserControls\EditProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UserControls\EmployeeWindow.xaml.cs">
@@ -39,7 +39,7 @@
     <Page Update="UserControls\AddProject.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\EditWindow.xaml">
+    <Page Update="UserControls\EditProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\EmployeeWindow.xaml">

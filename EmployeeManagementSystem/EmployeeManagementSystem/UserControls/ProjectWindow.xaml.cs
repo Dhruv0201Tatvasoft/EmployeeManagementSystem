@@ -92,7 +92,7 @@ namespace EmployeeManagementSystem.UserControls
                 if (mainWindow.mainContent != null)
                 {
                     ProjectModel pm = getData.GetProjectFromCode((string)((ProjectViewModel)sender).SelectedRow.Row.ItemArray[0]);
-                    mainWindow.mainContent.Content = new EditWindow(pm);
+                    mainWindow.mainContent.Content = new EditProjectWindow(pm);
                 }
             }
         }

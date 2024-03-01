@@ -148,3 +148,12 @@ select * from EmsTblProject where code like 'P0001'
 delete from EmsTblTechnology where Name like 'Dotnet'
 Delete From EmsTblTechnology where Name like 'Dotnet'
 select * from EmsTblSkill (Name) values  ('Management') ,('Coding'),('Communication'),('Testing')
+
+SELECT Code, CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name, Email, Designation, Department, JoiningDate, ReleaseDate
+FROM EmsTblEmployee
+
+SELECT *
+FROM EmsTblEmployee
+Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND Department like 'Java%'
+WHERE UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Khoradiya%';
+Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND  UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Dhruv%'

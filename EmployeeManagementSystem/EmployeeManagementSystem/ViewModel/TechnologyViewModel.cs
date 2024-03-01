@@ -34,7 +34,7 @@ namespace EmployeeManagementSystem.ViewModel
             set
             {
                 technologyName = value;
-                OnPropertyChanged("SkillName");
+                OnPropertyChanged("TechnologyName");
             }
         }
 
@@ -51,7 +51,7 @@ namespace EmployeeManagementSystem.ViewModel
                 if(value != null)
                 {
                     technologyName = (string)selectedRow.Row.ItemArray[0];
-                    OnPropertyChanged("SkillName");
+                    OnPropertyChanged("TechnologyName");
                 }
                 OnPropertyChanged("SelectedRow");
             }
@@ -86,7 +86,7 @@ namespace EmployeeManagementSystem.ViewModel
             insertData.InsertTechnology(technologyName);
             TechnologyName = String.Empty;
             technologyDataTable = getData.GetTechnologyData();
-            OnPropertyChanged("SkillDataTable");
+            OnPropertyChanged("TechnologyDataTable");
         }
 
         private ICommand deleteCommand;
@@ -107,7 +107,7 @@ namespace EmployeeManagementSystem.ViewModel
             deleteData.DeleteTechnology((string)selectedRow.Row.ItemArray[0]);
             TechnologyName = String.Empty;
             technologyDataTable = getData.GetTechnologyData();
-            OnPropertyChanged("SkillDataTable");
+            OnPropertyChanged("TechnologyDataTable");
 
         }
 
@@ -150,7 +150,7 @@ namespace EmployeeManagementSystem.ViewModel
                 updateData.UpdateTechnologyName(TechnologyName, OldTechnologyName);
                 TechnologyName = String.Empty;
                 technologyDataTable = getData.GetTechnologyData();
-                OnPropertyChanged("SkillDataTable");
+                OnPropertyChanged("TechnologyDataTable");
             }
         }
 
@@ -161,7 +161,7 @@ namespace EmployeeManagementSystem.ViewModel
             insertData = new InsertData();
             updateData = new UpdateData();
             deleteData = new DeleteData();
-            OnPropertyChanged("SkillDataTable");
+            OnPropertyChanged("TechnologyDataTable");
         }
 
 

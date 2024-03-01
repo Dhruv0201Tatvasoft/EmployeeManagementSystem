@@ -132,7 +132,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Code" Width="10*" Binding="{Binding Code}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Name" Width="30*" Binding="{Binding Name}" />
-                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Start Date" Width="8*" Binding="{Binding StartingDate, StringFormat=dd/MM/yyyy}" />
+                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Start Date" Width="8*" Binding="{Binding StartingDate, StringFormat='MMM dd,yyyy'}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="End Date" Width="8*" Binding="{Binding EndingDate, StringFormat=dd/MM/yyyy}" />
                 <DataGridTemplateColumn x:Name="DataGridColumnWidth"  Header="Actions" >
                     <DataGridTemplateColumn.CellTemplate>
@@ -193,8 +193,8 @@
                                 <DataGridTemplateColumn Header="Actions" Width=".2*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Command="{Binding DataContext.DeleteEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
-                                                <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" Width="20" Height="20"/>
+                                            <Button  Command="{Binding DataContext.DeleteEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
+                                               
                                             </Button>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>

@@ -12,7 +12,7 @@ namespace EmployeeManagementSystem.Database
     public class GetConnection
     {
         private string connectionString;
-       
+
 
         public GetConnection()
         {
@@ -22,9 +22,10 @@ namespace EmployeeManagementSystem.Database
         {
             return new SqlConnection(connectionString);
         }
-        public string GetConnectionString() { 
-        return connectionString;
-                }
+        public string GetConnectionString()
+        {
+            return connectionString;
+        }
 
     }
 }

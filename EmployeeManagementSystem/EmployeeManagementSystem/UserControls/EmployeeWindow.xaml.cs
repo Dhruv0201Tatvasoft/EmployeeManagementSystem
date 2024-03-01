@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagementSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace EmployeeManagementSystem.UserControls
         public EmployeeWindow()
         {
             InitializeComponent();
+            EmployeeViewModel viewmodel = new EmployeeViewModel();
+            this.DataContext = viewmodel;
         }
 
         private void AddEmployee(object sender, RoutedEventArgs e)

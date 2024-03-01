@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagementSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,27 @@ namespace EmployeeManagementSystem.UserControls
         public AddEmployeeWindow()
         {
             InitializeComponent();
+            AddEmployeeViewModel viewModel = new AddEmployeeViewModel();
+            this.DataContext =viewModel;
+            
         }
 
+        private void EmployeeDetailsNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            TabControl.SelectedIndex = 1;
 
+        }
+
+        private void PersonalDetailsNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl.SelectedIndex =2;
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.mainContent.Content = new EmployeeWindow();
+        }
     }
 }
