@@ -13,6 +13,7 @@
         <converter:RadioButtonChoiceConverter x:Key="radiobuttonconverter"/>
         <converter:ButtonDisbaleConverter x:Key="ButtonDisableConverter"/>
         <converter:ConvertButton x:Key="ConvertButton"/>
+
     </UserControl.Resources>
     <UserControl.DataContext>
         <vm:AddEmployeeViewModel/>
@@ -170,7 +171,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Button x:Name="PersonalDetailsNextBtn" Click="PersonalDetailsNextBtn_Click" Width="120" Height="32" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5"/>
+                        <Button x:Name="PersonalDetailsNextBtn" Command="{Binding AddEmployeeCommand}"  Click="PersonalDetailsNextBtn_Click" Width="120" Height="32" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5"/>
                         <Button Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
                     </Grid>
 
@@ -197,12 +198,12 @@
                         <Binding ElementName="PermanentAddress" Path="(Validation.HasError)"/>-->
                     </MultiBinding>
                 </TabItem.IsEnabled>
-                <Grid x:Name="dg">
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Button Command="{Binding AddBlankRow}" Grid.Row="0" Width="120" Height="32"  Margin="0 0 20 0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}">
+                    <Button Command="{Binding AddBlankRowEducation}" Grid.Row="0" Width="120" Height="32"  Margin="0 0 20 0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}">
                         <Button.Content>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -214,37 +215,109 @@
                             </Grid>
                         </Button.Content>
                     </Button>
-                    <DataGrid x:Name="DataGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedPerson}" AutoGenerateColumns="False" ItemsSource="{Binding Persons}" Margin="20 0 20 20" HorizontalAlignment="Stretch" >
+                    <DataGrid  Name="DGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedEmployeeEducationModel}" IsReadOnly="True" VerticalAlignment="Top" ItemsSource="{Binding EmployeeEducationList}" AutoGenerateColumns="False" CanUserAddRows="False" >
                         <DataGrid.Columns>
-
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Designation" Binding="{Binding Description }"/>
-                            <DataGridTemplateColumn Header="Actions">
+                            <DataGridTemplateColumn Header="Qualification" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Command="{Binding DataContext.SaveCommand, ElementName=DataGrid}" DataContext="{Binding}" Width="20" Height="20 ">
-                                            <Button.Content>
-                                                <Image>
-                                                    <Image.Style>
-                                                        <Style TargetType="Image">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding IsBlind}" Value="True">
-                                                                    <Setter Property="Source" Value="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\SaveIcon.png"/>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding IsBlind}" Value="False">
-                                                                    <Setter Property="Source" Value="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Image.Style>
-                                                </Image>
-                                            </Button.Content>
-                                        </Button>
+                                        <TextBlock  Text="{Binding Qualification}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1"  Text="{Binding Qualification, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
-
+                            <DataGridTemplateColumn Header="Board/University" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding BoardUniversity}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding BoardUniversity, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Name Of Institute" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding InstituteName}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding InstituteName, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="State" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding State}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Passing Year" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding PassingYear}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding PassingYear, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Percentage" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Percentage}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width=".1*" Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate>
+                                        <StackPanel Width="100" Orientation="Horizontal">
+                                            <Button  Margin="10 0 10 0"  Width="30" Height="30" Click="Button_Click_1">
+                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png"/>
+                                            </Button>
+                                            <Button Margin="10 0 10 0"  Width="30" Height="30" Click="Button_Click_2">
+                                                <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Width="100">
+                                            <Button Margin="10 0 10 0" Width="30" Height="30" Click="Button_Click_3" Command="{Binding DataContext.SaveEducationRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AddIcon.png"/>
+                                            </Button>
+                                            <Button Margin="10 0 10 0" Width="30" Height="30" Click="Button_Click_2">
+                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                          
                         </DataGrid.Columns>
+
                     </DataGrid>
                 </Grid>
             </TabItem>
@@ -268,12 +341,12 @@
                         <Binding ElementName="PermanentAddress" Path="(Validation.HasError)"/>
                     </MultiBinding>-->
                 <!--</TabItem.IsEnabled>-->
-                <Grid>
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Width="120" Height="32"  Margin="0 0 20 0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}">
+                    <Button Command="{Binding AddBlankRowExperience}" Grid.Row="0" Width="120" Height="32"  Margin="0 0 20 0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}">
                         <Button.Content>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -285,7 +358,98 @@
                             </Grid>
                         </Button.Content>
                     </Button>
-                    <DataGrid Grid.Row="1" Style="{DynamicResource DataGridStyle}"  Margin="20 0 20 20" HorizontalAlignment="Stretch" />
+                    <DataGrid  Name="ExperienceDataGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedEmployeeExperienceModel}" IsReadOnly="True" VerticalAlignment="Top" ItemsSource="{Binding EmployeeExperienceList}" AutoGenerateColumns="False" CanUserAddRows="False" >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Organization" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding Organization}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1"  Text="{Binding Organization, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="From" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding FromDate}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding FromDate, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="To" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ToDate}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding InstituteName, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Duration(months)" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Duration}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Designation" Width=".1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Designation}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding Designation, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width=".1*" Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate>
+                                        <StackPanel Width="100" Orientation="Horizontal">
+                                            <Button  Margin="10 0 10 0"  Width="30" Height="30" Click="ExpereinceEditbuttonClick">
+                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png"/>
+                                            </Button>
+                                            <Button Margin="10 0 10 0"  Width="30" Height="30" Click="ExpereinceDeleteButtonClick">
+                                                <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Width="100">
+                                            <Button Margin="10 0 10 0" Width="30" Height="30" Click="ButtoExpereinceAddButtonClick" Command="{Binding DataContext.SaveExperienceRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AddIcon.png"/>
+                                            </Button>
+                                            <Button Margin="10 0 10 0" Width="30" Height="30" Click="ExpereinceDeleteButtonClick">
+                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

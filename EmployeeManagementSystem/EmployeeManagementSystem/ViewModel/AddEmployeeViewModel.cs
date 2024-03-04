@@ -1,11 +1,15 @@
 ﻿using EmployeeManagementSystem.Commands;
+using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
@@ -14,6 +18,7 @@ namespace EmployeeManagementSystem.ViewModel
 {
     class AddEmployeeViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
+        private InsertData insertData;
         private string code = string.Empty;
 
         public string Code
@@ -78,7 +83,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { selectedDesignation = value; OnPropertyChanged("SelectedDesignation"); }
         }
 
-        private DateTime joiningDate;
+        private DateTime joiningDate = DateTime.Now;
 
         public DateTime JoiningDate
         {
@@ -94,7 +99,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { releaseDate = value; OnPropertyChanged("ReleaseDate"); OnPropertyChanged("JoiningDate"); }
         }
 
-        private DateTime dob;
+        private DateTime dob = DateTime.Now;
 
         public DateTime DOB
         {
@@ -207,6 +212,31 @@ namespace EmployeeManagementSystem.ViewModel
             set { maritalstatus = value; OnPropertyChanged("MaritalStatus"); }
 
         }
+        private EmployeeEducationModel selectedEmployeeEducationModel;
+
+        public EmployeeEducationModel SelectedEmployeeEducationModel
+        {
+            get { return selectedEmployeeEducationModel; }
+            set { selectedEmployeeEducationModel = value; }
+        }
+        private EmployeeExperienceModel selectedEmployeeExperienceModel;
+
+        public EmployeeExperienceModel SelectedEmployeeExperienceModel
+        {
+            get { return selectedEmployeeExperienceModel; }
+            set { selectedEmployeeExperienceModel = value; }
+        }
+
+
+
+
+        ObservableCollection<EmployeeEducationModel> employeeEducationList = new ObservableCollection<EmployeeEducationModel>();
+        public ObservableCollection<EmployeeEducationModel> EmployeeEducationList
+        { get { return employeeEducationList; } set { employeeEducationList = value; } }
+
+        ObservableCollection<EmployeeExperienceModel> employeeExperienceList = new ObservableCollection<EmployeeExperienceModel>();
+        public ObservableCollection<EmployeeExperienceModel> EmployeeExperienceList
+        { get { return employeeExperienceList; } set { employeeExperienceList = value; } }
 
         public string Error => null;
 
@@ -270,104 +300,137 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-
-        private ICommand addBlankRow;
-        public ICommand AddBlankRow
+        private ICommand addEmployeeCommand;
+        public ICommand AddEmployeeCommand
         {
             get
             {
-                if (addBlankRow == null)
+                if (addEmployeeCommand == null)
                 {
-                    addBlankRow = new RelayCommand(ExecuteAddRow, CanAddRowExecute, false);
+                    addEmployeeCommand = new RelayCommand(AddEmployeeExecute, CanAddEmployeeExecute, false);
                 }
-                return addBlankRow;
+                return addEmployeeCommand;
             }
         }
 
-        private void ExecuteAddRow(object obj)
-        {
-            Persons.Add(new Person());
-            OnPropertyChanged("Persons");
-        }
-
-        private bool CanAddRowExecute(object arg)
+        private bool CanAddEmployeeExecute(object arg)
         {
             return true;
         }
 
-        private bool isBlank =true;
-        public bool IsBlank
+        private void AddEmployeeExecute(object obj)
         {
-            get { return isBlank; }
-            set
+            if (ReleaseDate != null)
             {
-                if (isBlank != value)
-                {
-                    isBlank = value;
-                    OnPropertyChanged(nameof(IsBlank)); // Implement OnPropertyChanged if needed
-                }
+                insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate,(DateTime) ReleaseDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
             }
-        }
-        private ICommand saveCommand;
-        public ICommand SaveCommand
-        {
-            get
+            else
             {
-                if(saveCommand == null)
-                {
-                    saveCommand = new RelayCommand(SaveExecute, CanSaveExecute, false);
-                }
-                return saveCommand;
+                insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
+
             }
         }
 
-        private bool CanSaveExecute(object arg)
+        private ICommand addBlankRowEducation;
+        public ICommand AddBlankRowEducation
+        {
+            get
+            {
+                if (addBlankRowEducation == null)
+                {
+                    addBlankRowEducation = new RelayCommand(ExecuteAddRowEducation, CanAddRowEducationExecute, false);
+                }
+                return addBlankRowEducation;
+            }
+        }
+        private void ExecuteAddRowEducation(object obj)
+        {
+            EmployeeEducationList.Add(new EmployeeEducationModel());
+            OnPropertyChanged("EmployeeEducationList");
+        }
+
+        private bool CanAddRowEducationExecute(object arg)
         {
             return true;
         }
 
-        private void SaveExecute(object obj)
-        {
-            selectedPerson.IsBlind = !selectedPerson.IsBlind;
-            OnPropertyChanged("SelectedPerson");
-        }
 
-        private Person selectedPerson;
-        public Person SelectedPerson {
+        private ICommand addBlankRowExperience;
+        public ICommand AddBlankRowExperience
+        {
             get
             {
-                return selectedPerson;
+                if (addBlankRowExperience == null)
+                {
+                    addBlankRowExperience = new RelayCommand(ExecuteAddRowExperience, CanAddRowExperienceExecute, false);
+                }
+                return addBlankRowExperience;
             }
-            set
-            {
-                selectedPerson = value;
-                OnPropertyChanged(nameof(SelectedPerson));
-            }
+        }
+
+        private void ExecuteAddRowExperience(object obj)
+        {
+           EmployeeExperienceList.Add(new EmployeeExperienceModel());
+            OnPropertyChanged("EmployeeExperienceList");
+        }
+
+        private bool CanAddRowExperienceExecute(object arg)
+        {
+            return true;
+        }
+
+       
+      
         
-        }
-        public ObservableCollection<Person> Persons { get; set; }
-        private ICommand editCommnad;
-        public ICommand EditCommand
+        private ICommand saveEducationRowCommand;
+        public ICommand SaveEducationRowCommand
         {
             get
             {
-                if(editCommnad == null)
+                if(saveEducationRowCommand == null)
                 {
-                    editCommnad = new RelayCommand(EditExecute, CanEditExecute, false);
+                    saveEducationRowCommand = new RelayCommand(SaveEducationRowExecute, CanSaveEducationRowExecute, false);
                 }
-                return editCommnad;
+                return saveEducationRowCommand;
             }
         }
 
-        private bool CanEditExecute(object arg)
+        private bool CanSaveEducationRowExecute(object arg)
         {
             return true;
         }
 
-        private void EditExecute(object obj)
+        private void SaveEducationRowExecute(object obj)
         {
-            SelectedPerson.IsBlind =!SelectedPerson.IsBlind;
-            OnPropertyChanged("SelectedPerson");
+
+            insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
+            OnPropertyChanged("SelectedEmployeeEducationField");
+        }
+
+
+        private ICommand saveExperienceRowCommand;
+        public ICommand SaveExperienceRowCommand
+        {
+            get
+            {
+                if(saveExperienceRowCommand == null)
+                {
+                    saveExperienceRowCommand = new RelayCommand(SaveExperienceRowExecute, CanSaveExperienceExecute, false);
+                }
+                return saveExperienceRowCommand;
+            }
+        }
+
+        private bool CanSaveExperienceExecute(object arg)
+        {
+            return true;
+        }
+
+
+        private void SaveExperienceRowExecute(object obj)
+        {
+            insertData.InsertExperienceDetails(selectedEmployeeExperienceModel, Code);
+            OnPropertyChanged("SelectedEmployeeEducationField");
         }
 
         public AddEmployeeViewModel()
@@ -375,13 +438,7 @@ namespace EmployeeManagementSystem.ViewModel
             designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
             department = new ObservableCollection<string>(new List<String> { "Dotnet", "Java", "Php", "Mobile", "QA" });
             maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" });
-            Persons = new ObservableCollection<Person>
-        {
-            new Person { Name = "John", Description = "Engineer", IsBlind = true },
-            new Person { Name = "Jane", Description = "Teacher", IsBlind = false },
-            new Person { Name = "Bob", Description = "Doctor", IsBlind = true },
-            // Add more sample data as needed
-        };
+            insertData = new InsertData();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -391,41 +448,5 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
     }
-    public class Person : INotifyPropertyChanged
-    {
-        private String name;
-
-        public String Name
-        {
-            get { return name; }
-            set { name = value; OnPropertyChanged("Name"); }
-        }
-
-        private string description;
-
-        public string Description
-        {
-            get { return description; }
-            set { description = value; OnPropertyChanged("Description"); }
-        }
-
-
-
-        private bool isBlind;
-
-        public bool IsBlind
-        {
-            get { return isBlind; }
-            set { isBlind = value;
-                OnPropertyChanged("IsBlind");
-            }
-        }
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(String propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
+   
 }

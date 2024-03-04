@@ -9,6 +9,8 @@ using System.Windows;
 using EmployeeManagementSystem.Models;
 using System.Data.Common;
 using System.Windows.Media.Animation;
+using System.Collections.ObjectModel;
+using EmployeeManagementSystem.Model;
 
 namespace EmployeeManagementSystem.Database
 {
@@ -323,6 +325,9 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+        //public ObservableCollection<EmployeeEducationModel> GetEmployeeEducation(String C)
+        //{
 
+        //}
     }
 }

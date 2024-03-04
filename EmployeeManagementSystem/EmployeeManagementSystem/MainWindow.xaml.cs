@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.UserControls;
 using EmployeeManagementSystem.ViewModel;
+using System.Collections.ObjectModel;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace EmployeeManagementSystem
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
-         
+           mainContent.Content = new TextBlock() { Text = "Dashboard Content" };
         }
 
 

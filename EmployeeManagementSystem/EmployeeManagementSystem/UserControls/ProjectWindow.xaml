@@ -133,7 +133,7 @@
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Code" Width="10*" Binding="{Binding Code}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Name" Width="30*" Binding="{Binding Name}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Start Date" Width="8*" Binding="{Binding StartingDate, StringFormat='MMM dd,yyyy'}" />
-                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="End Date" Width="8*" Binding="{Binding EndingDate, StringFormat=dd/MM/yyyy}" />
+                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="End Date" Width="8*" Binding="{Binding EndingDate, StringFormat='MMM dd,yyyy'}" />
                 <DataGridTemplateColumn x:Name="DataGridColumnWidth"  Header="Actions" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

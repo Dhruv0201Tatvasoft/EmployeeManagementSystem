@@ -1,9 +1,12 @@
-﻿using System;
+﻿using EmployeeManagementSystem.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -140,5 +143,50 @@ namespace EmployeeManagementSystem.Database
                 MessageBox.Show($"{SkillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
+
+        public void InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime ReleaseDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
+        {
+            if(!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
+            {
+                string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
+                    $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{ReleaseDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($"{Code + " - " + FirstName + LastName } already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+
+            }
+        }
+          public void InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
+        {
+            if(!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
+            {
+                string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
+                    $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($"{Code + " - " + FirstName + LastName } already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+
+            }
+        }
+
+        public void InsertEducationDetails(EmployeeEducationModel educationModel, String Code)
+        {
+            string Query = $"insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values " +
+                   $"('{Code}','{educationModel.Qualification}','{educationModel.BoardUniversity}','{educationModel.InstituteName}'," +
+                   $"'{educationModel.State}','{educationModel.PassingYear}','{educationModel.Percentage}') ";
+            this.executeQuery(Query);
+        }
+        public void InsertExperienceDetails(EmployeeExperienceModel experienceModel, String Code)
+        {
+            string Query = $"insert into EmsTblEmployeeExperience (EmployeeCode,Organization,FromDate,ToDate,Designation) values " +
+                   $"('{Code}','{experienceModel.Organization}','{experienceModel.FromDate}','{experienceModel.ToDate}'," +
+                   $"'{experienceModel.Designation}') ";
+            this.executeQuery(Query);
+        }
+
     }
 }
