@@ -54,13 +54,13 @@ namespace EmployeeManagementSystem.ViewModel
                 selectedTechnologyRow = value;
                 if (selectedTechnologyRow != null)
                 {
-                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[0]))
+                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]))
                     {
-                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[0]);
+                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]);
                     }
                     else
                     {
-                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[0]);
+                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]);
                     }
                 }
             }

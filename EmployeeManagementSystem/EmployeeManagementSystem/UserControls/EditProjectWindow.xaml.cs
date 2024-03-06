@@ -47,10 +47,18 @@ namespace EmployeeManagementSystem.UserControls
             editProjectViewModel.EndingDate = project.EndingDate;
             DataTable dt = GetData.GetTechnologyData();
             myListBox.ItemsSource = dt.DefaultView;
-            foreach(var items in project.AssociatedTechnologies)
-            {
-                myListBox.SelectedItems.Add(myListBox.Items[items-1]);
-            }
+    
+                foreach (DataRowView row in myListBox.Items)
+                {
+                    int id = Convert.ToInt32(row.Row.ItemArray[1]);
+
+                    if (project.AssociatedTechnologies.Contains(id))
+                    {
+                        myListBox.SelectedItems.Add(row);
+
+                    }
+                }
+            
             editProjectViewModel.ChangeWindowEvent += ChangeWindow;
             
         }

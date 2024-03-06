@@ -15,6 +15,30 @@
         <vm:AddProjectViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Padding="7" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#60943C"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#C5E0B4"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <converter:ButtonDisbaleConverter x:Key="ButtonDisableConverter"/>
 
         <vm:AddProjectViewModel x:Key="ViewModel"/>
@@ -54,10 +78,10 @@
                 <DatePicker x:Name="EndingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="top" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
             <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"   Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
-                <!--<ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem"  BasedOn="{DynamicResource ListBoxItemStyle}"/>
-
-                </ListBox.ItemContainerStyle>-->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem"  BasedOn="{StaticResource ListBoxItemStyle}"/>
+    
+                </ListBox.ItemContainerStyle>
                     <i:Interaction.Behaviors>
                         <b:ListBoxSelectionBehaviour SelectedItem="{Binding SelectedTechnologyRow, Mode=TwoWay}"/>
                     </i:Interaction.Behaviors>
