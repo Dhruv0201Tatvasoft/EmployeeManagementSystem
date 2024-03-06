@@ -28,7 +28,21 @@ namespace EmployeeManagementSystem.Converter
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is bool && (bool)value)
+            {
+                object[] convertedValues = new object[targetTypes.Length];
+
+                for (int i = 0; i < targetTypes.Length; i++)
+                {
+                    convertedValues[i] = false;
+                }
+
+                return convertedValues;
+            }
+
+            return new object[targetTypes.Length];
         }
+
+        
     }
 }

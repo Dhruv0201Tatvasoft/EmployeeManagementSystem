@@ -10,6 +10,7 @@ namespace EmployeeManagementSystem.Model
 {
     internal class EmployeeEducationModel:INotifyPropertyChanged
     {
+
 		private string qualification;
 
 		public string Qualification
@@ -53,7 +54,8 @@ namespace EmployeeManagementSystem.Model
 			get { return percentage; }
 			set { percentage = value; OnPropertyChanged("Percentage"); }
 		}
-
+		
+     
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(String propertyName)
         {

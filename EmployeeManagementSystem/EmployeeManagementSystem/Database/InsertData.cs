@@ -144,32 +144,34 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public void InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime ReleaseDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
+        public bool InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime ReleaseDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
         {
             if(!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
             {
                 string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
                     $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{ReleaseDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
                 this.executeQuery(Query);
+                return true;
             }
             else
             {
                 MessageBox.Show($"{Code + " - " + FirstName + LastName } already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-
+                return false;
             }
         }
-          public void InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
+          public bool InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
         {
             if(!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
             {
                 string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
                     $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
                 this.executeQuery(Query);
+                return true;
             }
             else
             {
                 MessageBox.Show($"{Code + " - " + FirstName + LastName } already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-
+                return false;
             }
         }
 
@@ -183,7 +185,7 @@ namespace EmployeeManagementSystem.Database
         public void InsertExperienceDetails(EmployeeExperienceModel experienceModel, String Code)
         {
             string Query = $"insert into EmsTblEmployeeExperience (EmployeeCode,Organization,FromDate,ToDate,Designation) values " +
-                   $"('{Code}','{experienceModel.Organization}','{experienceModel.FromDate}','{experienceModel.ToDate}'," +
+                   $"('{Code}','{experienceModel.Organization}','{experienceModel.FromDate.Value.ToString("yyyy-MM-dd")}','{experienceModel.ToDate.Value.ToString("yyyy-MM-dd")}'," +
                    $"'{experienceModel.Designation}') ";
             this.executeQuery(Query);
         }

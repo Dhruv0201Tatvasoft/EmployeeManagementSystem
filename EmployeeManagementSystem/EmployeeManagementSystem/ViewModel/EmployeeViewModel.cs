@@ -17,6 +17,15 @@ namespace EmployeeManagementSystem.ViewModel
     class EmployeeViewModel : INotifyPropertyChanged
     {
         private GetData getData;
+        private DeleteData deleteData;
+        private DataRowView selectedEmployee;
+
+        public DataRowView SelectedEmployee
+        {
+            get { return selectedEmployee; }
+            set { selectedEmployee = value; OnPropertyChanged("SelectedEmployee"); }
+        }
+
         private DataTable employeeDataTable;
         public DataTable EmployeeDatatable
         {
@@ -147,8 +156,32 @@ namespace EmployeeManagementSystem.ViewModel
                 return searchCommand;
             }
         }
+        private ICommand deleteEmployeeCommand;
+        public ICommand DeleteEmployeeCommand
+        {
+            get
+            {
+                if (deleteEmployeeCommand == null)
+                {
+                    deleteEmployeeCommand = new RelayCommand(DeleteEmployeeCommandExecute, CanDeleteEmployeeCommandExecute, false); 
+                }
+                return deleteEmployeeCommand;
+            }
+        }
 
-       
+        private bool CanDeleteEmployeeCommandExecute(object arg)
+        {
+            return true;
+        }
+
+        private void DeleteEmployeeCommandExecute(object obj)
+        {
+            string EmployeeCode = selectedEmployee[0].ToString();
+            string Name = selectedEmployee[1].ToString();
+            deleteData.DeleteEmployee(EmployeeCode, Name);
+            employeeDataTable = getData.GetEmployeeTable();
+            OnPropertyChanged("EmployeeDataTable");
+        }
 
         private void ExecuteSearch(object obj)
         {
@@ -165,6 +198,7 @@ namespace EmployeeManagementSystem.ViewModel
         public EmployeeViewModel()
         {
             getData = new GetData();
+            deleteData = new DeleteData();
             EmployeeDatatable = getData.GetEmployeeTable();
             designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
             department = new ObservableCollection<string>(new List<String> { "Dotnet", "Java", "Php", "Mobile", "QA" });

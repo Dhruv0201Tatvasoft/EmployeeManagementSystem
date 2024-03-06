@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagementSystem.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -162,6 +163,23 @@ namespace EmployeeManagementSystem.Database
                 MessageBox.Show($" {NewSkillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
 
             }
+        }
+        public void UpdateEmployeeEducation(EmployeeEducationModel newModel, EmployeeEducationModel oldModel,String Code)
+        {
+            string Query = $"Update EmsTblEmployeeEducation SET Qualification = '{newModel.Qualification}' , Board = '{newModel.BoardUniversity}' ," +
+                 $"Institute = '{newModel.InstituteName}' , State = '{newModel.State}' , PassingYear = '{newModel.PassingYear}' , Percentage = '{newModel.Percentage}' " +
+                 $"Where EmployeeCode like '{Code}' AND Qualification like '{oldModel.Qualification}' AND Board like '{oldModel.BoardUniversity}' AND" +
+                 $" Institute like '{oldModel.InstituteName}' AND State like '{oldModel.State}' AND PassingYear like '{oldModel.PassingYear}'" +
+                 $"AND Percentage like '{oldModel.Percentage}' ";
+            this.executeQuery(Query);
+        }
+        public void UpdateEmployeeExperience(EmployeeExperienceModel newModel, EmployeeExperienceModel oldModel, String Code)
+        {
+            string Query = $"Update EmsTblEmployeeExperience SET Organization = '{newModel.Organization}' , FromDate = '{newModel.FromDate.Value.ToString("yyyy-MM-dd")}' ," +
+                 $"ToDate = '{newModel.ToDate.Value.ToString("yyyy-MM-dd")}' , Designation = '{newModel.Designation}' " +
+                 $"Where EmployeeCode like '{Code}' AND Organization like '{oldModel.Organization}' AND FromDate = '{oldModel.FromDate.Value.ToString("yyyy-MM-dd")}' AND" +
+                 $" ToDate = '{oldModel.ToDate.Value.ToString("yyyy-MM-dd")}' AND Designation like '{oldModel.Designation}' ";
+            this.executeQuery(Query);
         }
     }
 }

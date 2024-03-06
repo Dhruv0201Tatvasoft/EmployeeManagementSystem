@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EmployeeManagementSystem
 {
@@ -26,7 +27,9 @@ namespace EmployeeManagementSystem
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
-           mainContent.Content = new TextBlock() { Text = "Dashboard Content" };
+            mainContent.Content =new TextBlock() { Text = "Dashboard Content" };
+            selectedMenuItem = HeaderMenuItem;
+            selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
         }
 
 
@@ -69,10 +72,10 @@ namespace EmployeeManagementSystem
                     mainContent.Content = new SkillWindow();
                     selectedMenuItem = Master;
                     break;
-                
-             
+
+
             }
-       
+
             selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
         }
 

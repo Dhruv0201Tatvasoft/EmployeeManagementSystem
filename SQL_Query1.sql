@@ -45,6 +45,7 @@ CREATE TABLE EmsTblEmployee (
 );
 exec sp_rename 'dbo.EmsTblEmployee.PermenentAddress' ,'PermanentAdress','COLUMN'
 CREATE TABLE EmsTblEmployeeEducation (
+
     EmployeeCode VARCHAR(10) NOT NULL,
     Degree VARCHAR(10) NOT NULL,
     Board VARCHAR(30) NOT NULL,
@@ -151,9 +152,25 @@ select * from EmsTblSkill (Name) values  ('Management') ,('Coding'),('Communicat
 
 SELECT Code, CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name, Email, Designation, Department, JoiningDate, ReleaseDate
 FROM EmsTblEmployee
-
+select * from EmsTblEmployee
 SELECT *
 FROM EmsTblEmployee
 Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND Department like 'Java%'
 WHERE UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Khoradiya%';
 Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND  UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Dhruv%'
+
+Select * from EmsTblEmployeeEducation
+
+exec sp_rename 'dbo.EmsTblEmployeeEducation.Degree' ,'Qualification','COLUMN'
+
+insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values ('EMP001','BE','GTU','LD','GUJ','2024','875') 
+select * from EmsTblEmployeeEducation
+
+select * from EmsTblEmployee where Code like 'EMP001'
+INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES 
+                           ('EMP020','Hetanshi ','Acharya','hetan@gmail.com','1023203304','Developer','Developer','Java','2024-03-04','2024-03-04','9925366629','Male','Single','Ahmedabad,Gujarat','Ahmedabad,Gujarat')
+delete from EmsTblEmployeeEducation where EmployeeCode Like 'EMP001' and Qualification like 'BE' AND Board Like 'GTU' AND Institute like 'LD' AND State Like 'GUJ' AND PassingYear like '2024' AND Percentage like '875'
+select * from EmsTblEmployeeEducation
+insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values ('EMP001','BE','GTU','LD','GUJ','2024','87.5') 
+select * from EmsTblEmployeeExperience
+Update EmsTblEmployeeEducation SET Qualification = 'BE' , Board = 'GTU' ,Institute = 'DDDD' , State = 'HYD' , PassingYear = '2018' , Percentage = '92.33' Where EmployeeCode like 'EMP001' AND Qualification like 'HSC' AND Board like 'GHSEB' AND Institute like 'VIDYANAGAR' AND State like 'GUJ' AND PassingYear like '2020'AND Percentage like '78.33' 

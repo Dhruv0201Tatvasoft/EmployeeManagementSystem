@@ -17,26 +17,31 @@ namespace EmployeeManagementSystem.Model
             get { return organization; }
             set { organization = value; OnPropertyChanged("Organization"); }
         }
-        private DateTime fromDate;
+        private DateTime? fromDate;
 
-        public DateTime FromDate
+        public DateTime? FromDate
         {
             get { return fromDate; }
-            set { fromDate = value; OnPropertyChanged("FromDate"); }
+            set { fromDate = value; UpdateDuration(); OnPropertyChanged("FromDate"); }
         }
-        private DateTime toDate;
+        private DateTime? toDate;
 
-        public DateTime ToDate
+        public DateTime? ToDate
         {
             get { return toDate; }
-            set { toDate = value; OnPropertyChanged("ToDate"); }
+            set { toDate = value; UpdateDuration(); OnPropertyChanged("ToDate"); }
         }
-        private int duration;
+        private int? duration;
 
-        public int Duration
+        public int? Duration
         {
             get { return duration; }
-            set { duration = value; OnPropertyChanged("Duration"); }
+            set
+            {
+                duration = value;
+
+                OnPropertyChanged("Duration");
+            }
         }
         private string designation;
 
@@ -44,6 +49,18 @@ namespace EmployeeManagementSystem.Model
         {
             get { return designation; }
             set { designation = value; OnPropertyChanged("Designation"); }
+        }
+        private void UpdateDuration()
+        {
+            if (FromDate.HasValue && ToDate.HasValue)
+            {
+                int monthDifference = (ToDate.Value.Year - FromDate.Value.Year) *12 + (ToDate.Value.Month - FromDate.Value.Month);
+
+                Duration = monthDifference;
+
+                OnPropertyChanged(nameof(FromDate));
+                OnPropertyChanged(nameof(ToDate));
+            }
         }
 
 

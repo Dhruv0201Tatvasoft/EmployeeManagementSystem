@@ -81,7 +81,9 @@
               Margin="20 0 "
               CanUserAddRows="False"
               SelectionMode="Single"
-              HeadersVisibility="Column">
+              HeadersVisibility="Column"
+              SelectedItem="{Binding SelectedEmployee}"   
+                   >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Code" Binding="{Binding Code}"/>
                 <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Name" Binding="{Binding Name}"/>
@@ -106,7 +108,7 @@
                                 <Button MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
                                     <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" Width="25" Height="25"/>
                                 </Button>
-                                <Button MaxWidth="40" MaxHeight="40" Grid.Column="2">
+                                <Button  Command="{Binding DataContext.DeleteEmployeeCommand ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
                                     <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\DeleteIcon.png"
                                            Width="40" Height="40"/>
                                 </Button>
