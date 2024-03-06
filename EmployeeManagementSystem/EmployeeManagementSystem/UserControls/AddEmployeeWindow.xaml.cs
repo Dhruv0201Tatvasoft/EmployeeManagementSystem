@@ -172,6 +172,13 @@ namespace EmployeeManagementSystem.UserControls
 
                 DataGridCell cell = ((DataGridCell)parent);
                 DataGridTemplateColumn c = (DataGridTemplateColumn)col;
+                if(col.DisplayIndex == 4)
+                {
+                    if (canCommit == true)
+                        ((ComboBox)cell.Content).GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+                    else
+                        ((ComboBox)cell.Content).GetBindingExpression(ComboBox.SelectedItemProperty).UpdateTarget();
+                }
                 if (col.DisplayIndex == 1 || col.DisplayIndex == 2)
                 {
                     if (canCommit == true)
@@ -179,7 +186,7 @@ namespace EmployeeManagementSystem.UserControls
                     else
                         ((DatePicker)cell.Content).GetBindingExpression(DatePicker.SelectedDateProperty).UpdateTarget();
                 }
-                if (col.DisplayIndex != 5 && col.DisplayIndex != 1 && col.DisplayIndex!=2 && col.DisplayIndex!=3)
+                if (col.DisplayIndex != 5 && col.DisplayIndex != 1 && col.DisplayIndex!=2 && col.DisplayIndex!=3 && col.DisplayIndex!=4)
                 {
                     if (canCommit == true)
                         ((TextBox)cell.Content).GetBindingExpression(TextBox.TextProperty).UpdateSource();
