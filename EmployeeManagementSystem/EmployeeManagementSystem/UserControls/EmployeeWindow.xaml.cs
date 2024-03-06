@@ -1,4 +1,6 @@
-﻿using EmployeeManagementSystem.ViewModel;
+﻿using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +23,13 @@ namespace EmployeeManagementSystem.UserControls
     /// </summary>
     public partial class EmployeeWindow : UserControl
     {
+        private GetData getData;
         public EmployeeWindow()
         {
             InitializeComponent();
             EmployeeViewModel viewmodel = new EmployeeViewModel();
             this.DataContext = viewmodel;
+            getData = new GetData();
         }
 
         private void AddEmployee(object sender, RoutedEventArgs e)
@@ -34,6 +38,17 @@ namespace EmployeeManagementSystem.UserControls
             if(mainWindow != null)
             {
                 mainWindow.mainContent.Content = new AddEmployeeWindow();
+            }
+        }
+
+        private void EditEmployeeBtnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            if (mainWindow != null)
+            {
+                EmployeeModel employeeModel = getData.GetEmployeeModelFromCode((string)((System.Data.DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]);
+                mainWindow.mainContent.Content = new EditEmployeeWindow(employeeModel);
+                
             }
         }
     }

@@ -31,12 +31,12 @@ namespace EmployeeManagementSystem.Database
             }
             catch (SqlException ex)
             {
-                
+
                 {
                     MessageBox.Show("Some error occured");
                 }
             }
-           
+
         }
         public bool DoesExist(String Query)
         {
@@ -48,7 +48,7 @@ namespace EmployeeManagementSystem.Database
                     using (SqlCommand command = new SqlCommand(Query, conn))
                     {
 
-                        SqlDataReader reader =command.ExecuteReader(); 
+                        SqlDataReader reader = command.ExecuteReader();
                         return reader.HasRows;
                     }
                 }
@@ -59,7 +59,7 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public bool InsertNewProject(String Code,String Name,DateTime StartingDate ,DateTime EndingDate,List<int>TechnologiesId)
+        public bool InsertNewProject(String Code, String Name, DateTime StartingDate, DateTime EndingDate, List<int> TechnologiesId)
         {
             if (!this.DoesExist($"Select * from EmsTblProject where Code = '{Code}'"))
             {
@@ -80,8 +80,8 @@ namespace EmployeeManagementSystem.Database
                 MessageBox.Show($"There is Already Project With The Code {Code}");
                 return false;
             }
-            
-    
+
+
         }
 
         public bool InsertNewProject(string Code, string Name, DateTime StartingDate, List<int> TechnologiesId)
@@ -106,7 +106,7 @@ namespace EmployeeManagementSystem.Database
                 return false;
             }
         }
-        public void InsertEmployeeToProject(String ProjectCode,String EmployeeCode, string EmployeeName)
+        public void InsertEmployeeToProject(String ProjectCode, String EmployeeCode, string EmployeeName)
         {
             if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{ProjectCode}' AND EmployeeCode ='{EmployeeCode}'"))
             {
@@ -115,13 +115,13 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{EmployeeName} is already added to this project","Alert",MessageBoxButton.OK,MessageBoxImage.None,MessageBoxResult.OK,MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{EmployeeName} is already added to this project", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
-        public void InsertTechnology (String TechnologyName)
+        public void InsertTechnology(String TechnologyName)
         {
-            if(!DoesExist($"select * from EmsTblTechnology where Name like '{TechnologyName}'"))
+            if (!DoesExist($"select * from EmsTblTechnology where Name like '{TechnologyName}'"))
             {
                 string Query = $"Insert into EmsTblTechnology (Name) Values ('{TechnologyName}')";
                 this.executeQuery(Query);
@@ -144,9 +144,9 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public bool InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime ReleaseDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
+        public bool InsertEmployee(String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate, DateTime ReleaseDate, DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
         {
-            if(!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
+            if (!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
             {
                 string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
                     $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{ReleaseDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
@@ -155,13 +155,13 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{Code + " - " + FirstName + LastName } already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{Code + " - " + FirstName + LastName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
         }
-          public bool InsertEmployee(String Code, String FirstName, String LastName,String Email,String Password,String Designation,String Department, DateTime JoiningDate, DateTime DOB,String ContactNumber,String Gender,String MaritalStatus,String PresentAddress,String PermanentAdress)
+        public bool InsertEmployee(String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate, DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
         {
-            if(!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
+            if (!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
             {
                 string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
                     $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
@@ -170,7 +170,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{Code + " - " + FirstName + LastName } already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{Code + " - " + FirstName + LastName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
         }

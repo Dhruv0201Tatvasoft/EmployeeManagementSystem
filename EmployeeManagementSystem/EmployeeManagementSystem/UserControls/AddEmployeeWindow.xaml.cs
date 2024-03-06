@@ -54,7 +54,7 @@ namespace EmployeeManagementSystem.UserControls
             DGrid.SelectedItem = DGrid.Items[DGrid.Items.Count-1];
             DGrid.UpdateLayout();
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.SelectedItem);
-            _showCellsEditingTemplate(row);
+            ShowCellsEditingTemplate(row);
        
         }
 
@@ -76,7 +76,7 @@ namespace EmployeeManagementSystem.UserControls
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
-            _showCellsEditingTemplate(row);
+            ShowCellsEditingTemplate(row);
         }
 
 
@@ -86,10 +86,10 @@ namespace EmployeeManagementSystem.UserControls
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
-            _showCellsNormalTemplate(row, true);
+            ShowCellsNormalTemplate(row, true);
         }
 
-        private void _showCellsEditingTemplate(DataGridRow row)
+        private void ShowCellsEditingTemplate(DataGridRow row)
         {
             foreach (DataGridColumn col in DGrid.Columns)
             {
@@ -104,7 +104,7 @@ namespace EmployeeManagementSystem.UserControls
             }
         }
 
-        private void _showCellsNormalTemplate(DataGridRow row, bool canCommit = false)
+        private void ShowCellsNormalTemplate(DataGridRow row, bool canCommit = false)
         {
             foreach (DataGridColumn col in DGrid.Columns)
             {
@@ -190,9 +190,6 @@ namespace EmployeeManagementSystem.UserControls
             }
         }
 
-        private void DGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
-        {
-            MessageBox.Show("D");
-        }
+       
     }
 }

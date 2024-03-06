@@ -201,7 +201,7 @@ namespace EmployeeManagementSystem.ViewModel
             deleteData = new DeleteData();
             EmployeeDatatable = getData.GetEmployeeTable();
             designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
-            department = new ObservableCollection<string>(new List<String> { "Dotnet", "Java", "Php", "Mobile", "QA" });
+            department = new ObservableCollection<string>(new List<String> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
             OnPropertyChanged("EmployeeDataTable");
         }
 

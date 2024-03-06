@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -164,7 +165,7 @@ namespace EmployeeManagementSystem.Database
 
             }
         }
-        public void UpdateEmployeeEducation(EmployeeEducationModel newModel, EmployeeEducationModel oldModel,String Code)
+        public void UpdateEmployeeEducation(EmployeeEducationModel newModel, EmployeeEducationModel oldModel, String Code)
         {
             string Query = $"Update EmsTblEmployeeEducation SET Qualification = '{newModel.Qualification}' , Board = '{newModel.BoardUniversity}' ," +
                  $"Institute = '{newModel.InstituteName}' , State = '{newModel.State}' , PassingYear = '{newModel.PassingYear}' , Percentage = '{newModel.Percentage}' " +
@@ -180,6 +181,41 @@ namespace EmployeeManagementSystem.Database
                  $"Where EmployeeCode like '{Code}' AND Organization like '{oldModel.Organization}' AND FromDate = '{oldModel.FromDate.Value.ToString("yyyy-MM-dd")}' AND" +
                  $" ToDate = '{oldModel.ToDate.Value.ToString("yyyy-MM-dd")}' AND Designation like '{oldModel.Designation}' ";
             this.executeQuery(Query);
+        }
+        public bool UpdateEmployee(String OldCode, String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate, DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
+        {
+            if (OldCode == Code || (OldCode != Code && !this.DoesExist($"Select * from EmsTblEmployee where Code like '{Code}'")))
+            {
+                string Query = $"UPDATE EmsTblEmployee SET Code = '{Code}', FirstName = '{FirstName}', LastName = '{LastName}',Email = '{Email}', " +
+                    $"Password = '{Password}', Designation = '{Designation}', Department = '{Department}', JoiningDate = '{JoiningDate.ToString("yyyy-MM-dd")}', " +
+                    $"DOB = '{DOB.ToString("yyyy-MM-dd")}', ContactNumber = '{ContactNumber}', Gender = '{Gender}', MaritalStatus = '{MaritalStatus}', PresentAddress = '{PresentAddress}', " +
+                    $"PermanentAdress = '{PermanentAdress}' WHERE Code = '{OldCode}'";
+                this.executeQuery(Query);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show($"There is already an Employee with code {Code} in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
+        }
+
+        public bool UpdateEmployee(String OldCode, String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate,DateTime ReleaseDate ,DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
+        {
+            if (OldCode == Code || (OldCode != Code && !this.DoesExist($"Select * from EmsTblEmployee where Code like '{Code}'")))
+            {
+                string Query = $"UPDATE EmsTblEmployee SET Code = '{Code}', FirstName = '{FirstName}', LastName = '{LastName}',Email = '{Email}', " +
+                    $"Password = '{Password}', Designation = '{Designation}', Department = '{Department}', JoiningDate = '{JoiningDate.ToString("yyyy-MM-dd")}', " +
+                    $"ReleaseDate = '{ReleaseDate.ToString("yyyy-MM-dd")}', DOB = '{DOB.ToString("yyyy-MM-dd")}', ContactNumber = '{ContactNumber}', Gender = '{Gender}', MaritalStatus = '{MaritalStatus}', PresentAddress = '{PresentAddress}', " +
+                    $"PermanentAdress = '{PermanentAdress}' WHERE Code = '{OldCode}'";
+                this.executeQuery(Query);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show($"There is already an Employee with code {Code} in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.Model;
+using EmployeeManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -716,11 +717,12 @@ namespace EmployeeManagementSystem.ViewModel
         public AddEmployeeViewModel()
         {
             designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
-            department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "Php", "Mobile", "QA" });
+            department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
             maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" });
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();
+            GetData getData = new GetData();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

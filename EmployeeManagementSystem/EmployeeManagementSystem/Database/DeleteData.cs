@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.Model;
+using EmployeeManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -87,7 +88,7 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public void DeleteEducationRow(EmployeeEducationModel EmployeeEducationModel, String Code)
+        public bool DeleteEducationRow(EmployeeEducationModel EmployeeEducationModel, String Code)
         {
             if (this.DeleteWarningMessage("Remove this education field form Data"))
             {
@@ -95,9 +96,11 @@ namespace EmployeeManagementSystem.Database
                     $"'{EmployeeEducationModel.Qualification}' AND Board Like '{EmployeeEducationModel.BoardUniversity}' AND Institute like '{EmployeeEducationModel.InstituteName}' AND State Like '{EmployeeEducationModel.State}' AND " +
                     $"PassingYear like '{EmployeeEducationModel.PassingYear}' AND Percentage like '{EmployeeEducationModel.Percentage}'";
                 this.executeQuery(Query);
+                return true;
             }
+            return false;
         }
-        public void DeleteExperienceRow(EmployeeExperienceModel EmployeeExperienceModel, String Code)
+        public bool DeleteExperienceRow(EmployeeExperienceModel EmployeeExperienceModel, String Code)
         {
             if (this.DeleteWarningMessage("Remove this Experience field form Data"))
             {
@@ -106,7 +109,9 @@ namespace EmployeeManagementSystem.Database
                     $" AND ToDate = '{EmployeeExperienceModel.ToDate.Value.ToString("yyyy-MM-dd")}' " +
                     $"AND Designation Like '{EmployeeExperienceModel.Designation}'";
                 this.executeQuery(Query);
+                return true;
             }
+            return false;
         }
         public void DeleteEmployee(String Code ,String Name)
         {
@@ -116,5 +121,7 @@ namespace EmployeeManagementSystem.Database
                 this.executeQuery(Query);
             }
         }
+
+      
     }
 }

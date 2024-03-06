@@ -227,7 +227,7 @@
                             </Grid>
                         </Button.Content>
                     </Button>
-                    <DataGrid AddingNewItem="DGrid_AddingNewItem"  Name="DGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedEmployeeEducationModel}" IsReadOnly="True" VerticalAlignment="Top" ItemsSource="{Binding EmployeeEducationList}" AutoGenerateColumns="False" CanUserAddRows="False" >
+                    <DataGrid  Name="DGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedEmployeeEducationModel}" IsReadOnly="True" VerticalAlignment="Top" ItemsSource="{Binding EmployeeEducationList}" AutoGenerateColumns="False" CanUserAddRows="False" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Qualification" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>

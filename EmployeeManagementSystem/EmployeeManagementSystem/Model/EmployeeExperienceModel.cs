@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Model
 {
-    internal class EmployeeExperienceModel : INotifyPropertyChanged
+    public class EmployeeExperienceModel : INotifyPropertyChanged
     {
 
         private String organization;

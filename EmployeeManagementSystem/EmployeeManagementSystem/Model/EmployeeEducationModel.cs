@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Model
 {
-    internal class EmployeeEducationModel:INotifyPropertyChanged
+    public  class EmployeeEducationModel:INotifyPropertyChanged
     {
 
 		private string qualification;

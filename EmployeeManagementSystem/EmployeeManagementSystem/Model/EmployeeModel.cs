@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using EmployeeManagementSystem.Model;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -15,7 +17,7 @@ namespace EmployeeManagementSystem.Models
         public string FirstName
         {
             get { return firstName; }
-            set { code = value; OnPropertyChanged("FirstName"); }
+            set { firstName = value; OnPropertyChanged("FirstName"); }
         }
 
         private string lastName;
@@ -39,15 +41,15 @@ namespace EmployeeManagementSystem.Models
             set {  password = value; OnPropertyChanged("Password"); }
         }
         
-        private DesignationModel designation;
-        public DesignationModel Designation
+        private String designation;
+        public String Designation
         {
             get { return designation; }
             set { designation = value; OnPropertyChanged("Designation"); }
         }
 
-        private DepartmentModel department;
-        public DepartmentModel Department
+        private string department;
+        public string Department
         {
             get { return department; }
             set { department = value; OnPropertyChanged("Department");}
@@ -59,8 +61,8 @@ namespace EmployeeManagementSystem.Models
             set { joiningDate = value;OnPropertyChanged("JoiningDate"); }
         }
 
-        private DateTime releaseDate;
-        public DateTime ReleaseDate
+        private DateTime? releaseDate;
+        public DateTime? ReleaseDate
         {
             get { return releaseDate; }
             set { releaseDate= value; OnPropertyChanged("ReleaseDate"); }
@@ -116,6 +118,21 @@ namespace EmployeeManagementSystem.Models
             get { return permenentAddress; }
             set { permenentAddress = value; OnPropertyChanged("PermanentAddress"); }
         }
+        private ObservableCollection<EmployeeEducationModel> educationModels = new ObservableCollection<EmployeeEducationModel>();
+
+        public ObservableCollection<EmployeeEducationModel> EducationModels
+        {
+            get { return educationModels; }
+            set { educationModels = value; }
+        }
+        private ObservableCollection<EmployeeExperienceModel> experienceModels = new ObservableCollection<EmployeeExperienceModel>();
+
+        public ObservableCollection<EmployeeExperienceModel> ExperienceModels
+        {
+            get { return experienceModels; }
+            set { experienceModels = value; }
+        }
+
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

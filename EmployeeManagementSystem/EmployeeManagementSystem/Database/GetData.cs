@@ -282,7 +282,7 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
-        public DataTable GetEmployeeSearchData(String Code, String Name, String Department,String Designation)
+        public DataTable GetEmployeeSearchData(String Code, String Name, String Department, String Designation)
         {
             DataTable dt = new DataTable();
             string Query = "Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1";
@@ -325,9 +325,88 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
-        //public ObservableCollection<EmployeeEducationModel> GetEmployeeEducation(String C)
-        //{
+        public EmployeeModel GetEmployeeModelFromCode(String Code)
+        {
+            EmployeeModel employee = new EmployeeModel();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
 
-        //}
+
+                string Query = $"SELECT * from EmsTblEmployee where Code = '{Code}'";
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int count = reader.FieldCount;
+                        while (reader.Read())
+                        {
+                            employee.Code = reader.GetString(0);
+                            employee.FirstName = reader.GetString(1);
+                            employee.LastName = reader.GetString(2);
+                            employee.Email = reader.GetString(3);
+                            employee.Password = reader.GetString(4);
+                            employee.JoiningDate = reader.GetDateTime(5);
+                            if (reader.IsDBNull(6))
+                            {
+                                employee.ReleaseDate = null;
+                            }
+                            else employee.ReleaseDate = reader.GetDateTime(6);
+                            employee.DOB = reader.GetDateTime(7);
+                            employee.ContactNumber = reader.GetString(8);
+                            employee.Gender = reader.GetString(9);
+                            employee.MaritalStauts = reader.GetString(10);
+                            employee.PresentAddress = reader.GetString(11);
+                            employee.PermanentAddress = reader.GetString(12);
+                            employee.Designation = reader.GetString(13);
+                            employee.Department = reader.GetString(14);
+                        }
+                    }
+                }
+                Query = $"Select * from  EmsTblEmployeeEducation where EmployeeCode like '{Code}'";
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int count = reader.FieldCount;
+                        while (reader.Read())
+                        {
+                            EmployeeEducationModel employeeEducation = new EmployeeEducationModel
+                            {
+                                Qualification = reader["Qualification"].ToString(),
+                                BoardUniversity = reader["Board"].ToString(),
+                                InstituteName= reader["Institute"].ToString(),
+                                State= reader["State"].ToString(),
+                                PassingYear= reader["PassingYear"].ToString(),
+                                Percentage= reader["Percentage"].ToString(),
+                            };
+                            employee.EducationModels.Add(employeeEducation);
+                        }
+                    }
+                }
+                Query = $"Select * from  EmsTblEmployeeExperience where EmployeeCode like '{Code}'";
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int count = reader.FieldCount;
+                        while (reader.Read())
+                        {
+                            EmployeeExperienceModel employeeExperienceModel= new EmployeeExperienceModel
+                            {
+                                Organization = reader["Organization"].ToString(),
+                                FromDate= (DateTime)reader["FromDate"],
+                                ToDate = (DateTime)reader["ToDate"],
+                                Designation= reader["Designation"].ToString(),
+                                
+                            };
+                            employee.ExperienceModels.Add(employeeExperienceModel);
+                        }
+                    }
+                }
+
+            }
+            return employee;
+        }
     }
 }

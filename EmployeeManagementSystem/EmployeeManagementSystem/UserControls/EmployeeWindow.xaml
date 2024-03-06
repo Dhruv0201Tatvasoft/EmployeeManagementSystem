@@ -75,7 +75,7 @@
             </StackPanel>
         </StackPanel>
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <DataGrid  ItemsSource="{Binding EmployeeDatatable}"  VerticalAlignment="Top" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+        <DataGrid   ItemsSource="{Binding EmployeeDatatable}"  VerticalAlignment="Top" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
             HorizontalAlignment="Stretch"
               Grid.Row="4"
               Margin="20 0 "
@@ -105,7 +105,7 @@
                                 <Button MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
                                     <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EmployeeIcon.png" Width="25" Height="25" />
                                 </Button>
-                                <Button MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
+                                <Button Click="EditEmployeeBtnClick" MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
                                     <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" Width="25" Height="25"/>
                                 </Button>
                                 <Button  Command="{Binding DataContext.DeleteEmployeeCommand ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
