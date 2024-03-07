@@ -19,7 +19,7 @@ namespace EmployeeManagementSystem.Database
     class InsertData
     {
         private GetConnection connection = new GetConnection();
-        public void executeQuery(string sql)
+        public bool executeQuery(string sql)
         {
             try
             {
@@ -28,12 +28,14 @@ namespace EmployeeManagementSystem.Database
                 conn.Open();
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.ExecuteNonQuery();
+                return true;
             }
             catch (SqlException ex)
             {
 
                 {
                     MessageBox.Show("Some error occured");
+                    return false;
                 }
             }
 
@@ -155,7 +157,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{Code + " - " + FirstName + LastName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"There is aleady an employee with Employee Code {Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
         }
@@ -170,24 +172,27 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{Code + " - " + FirstName + LastName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"There is aleady an employee with Employee Code {Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
         }
 
-        public void InsertEducationDetails(EmployeeEducationModel educationModel, String Code)
+        public bool InsertEducationDetails(EmployeeEducationModel educationModel, String Code)
         {
             string Query = $"insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values " +
                    $"('{Code}','{educationModel.Qualification}','{educationModel.BoardUniversity}','{educationModel.InstituteName}'," +
                    $"'{educationModel.State}','{educationModel.PassingYear}','{educationModel.Percentage}') ";
-            this.executeQuery(Query);
+            bool didExecute = this.executeQuery(Query);
+            return didExecute;
         }
-        public void InsertExperienceDetails(EmployeeExperienceModel experienceModel, String Code)
+        public bool InsertExperienceDetails(EmployeeExperienceModel experienceModel, String Code)
         {
             string Query = $"insert into EmsTblEmployeeExperience (EmployeeCode,Organization,FromDate,ToDate,Designation) values " +
                    $"('{Code}','{experienceModel.Organization}','{experienceModel.FromDate.Value.ToString("yyyy-MM-dd")}','{experienceModel.ToDate.Value.ToString("yyyy-MM-dd")}'," +
                    $"'{experienceModel.Designation}') ";
-            this.executeQuery(Query);
+            bool didExecute = this.executeQuery(Query);
+            return didExecute;
+
         }
 
     }

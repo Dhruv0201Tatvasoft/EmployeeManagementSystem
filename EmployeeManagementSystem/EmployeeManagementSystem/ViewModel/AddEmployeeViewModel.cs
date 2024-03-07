@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -25,6 +26,10 @@ namespace EmployeeManagementSystem.ViewModel
         public event EventHandler AddEducationButtonClickedEvent;
         public event EventHandler AddExprienceButtonClickedEvent;
         public event EventHandler EmployeeAddedEvent;
+        public event EventHandler AddEducationRowEvent;
+        public event EventHandler AddExperienceRowEvent;
+        public event EventHandler EditEducationRowEvent;
+        public event EventHandler EditExprienceRowEvent;
         public void OnAddEducationButtonClicked(EventArgs e)
         {
             AddEducationButtonClickedEvent?.Invoke(this, e);
@@ -37,6 +42,23 @@ namespace EmployeeManagementSystem.ViewModel
         {
             EmployeeAddedEvent?.Invoke(this, e);
         }
+        public void OnAddEducationRowEvent(EventArgs e)
+        {
+            AddEducationRowEvent?.Invoke(this, e);
+        }
+        public void OnEditEducationRowEvent(EventArgs e)
+        {
+            EditEducationRowEvent?.Invoke(this, e);
+        }
+        public void OnAddExperienceRowEvent(EventArgs e)
+        {
+            AddExperienceRowEvent?.Invoke(this, e);
+        }
+        public void OnEditExperienceRowEvent(EventArgs e)
+        {
+            EditExprienceRowEvent.Invoke(this, e);
+        }
+
 
 
         private string code = string.Empty;
@@ -237,7 +259,7 @@ namespace EmployeeManagementSystem.ViewModel
         public EmployeeEducationModel SelectedEmployeeEducationModel
         {
             get { return selectedEmployeeEducationModel; }
-            set { selectedEmployeeEducationModel = value; }
+            set { selectedEmployeeEducationModel = value;  }
         }
         private EmployeeEducationModel selectedOldEmployeeEducationModel;
 
@@ -287,15 +309,15 @@ namespace EmployeeManagementSystem.ViewModel
                         break;
                     case "FirstName":
                         if (string.IsNullOrEmpty(FirstName)) errors = "FirstName cant be empty";
-                        if (FirstName.Length > 10) errors = "FirstName cant be more than 10 characters";
+                        if (FirstName.Length > 20) errors = "FirstName cant be more than 20 characters";
                         break;
                     case "LastName":
                         if (String.IsNullOrEmpty(LastName)) errors = "Last Name cant be Empty";
-                        if (LastName.Length > 10) errors = "LastName cant be more than 10 characters";
+                        if (LastName.Length > 20) errors = "LastName cant be more than 20 characters";
                         break;
                     case "Email":
-                        if (!Email.Contains('@')) errors = "Email must contain @";
-                        if (Email.Length > 15) errors = "Email cant be more than 15 characters";
+                        if (string.IsNullOrEmpty(Email)) errors = "Email cant be Empty";
+                        if (!IsValidEmailAddress(Email)) errors = "Not a valid email address";
                         break;
                     case "Password":
                         if (String.IsNullOrEmpty(Password)) errors = "Password cant be empty";
@@ -319,8 +341,7 @@ namespace EmployeeManagementSystem.ViewModel
                         break;
                     case "ContactNumber":
                         if (String.IsNullOrEmpty(ContactNumber)) errors = "Contact number cant be empty";
-                        if (ContactNumber.Length < 10) errors = "Provide valid contact number";
-                        if (ContactNumber.Length > 13) errors = "Please provide valid contact number";
+                        if (!IsValidContactNumber(ContactNumber)) errors = "Provide valid contact number";
                         break;
                     case "JoiningDate":
                         if (!string.IsNullOrEmpty(ReleaseDate.ToString()) && JoiningDate > ReleaseDate) errors = "Joining Date cant be greater than Releas date ";
@@ -354,33 +375,33 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void AddEmployeeExecute(object obj)
         {
-            //bool didsaved = false;
-            //if (ReleaseDate != null)
-            //{
-            //    MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-            //         $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-            //         $"Release Date: {ReleaseDate}\nBirth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-            //         $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} " ,"Warning", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-            //    if (result == MessageBoxResult.OK)
-            //    {
-            //     didsaved =  insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, (DateTime)ReleaseDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-            //          $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-            //          $"Birth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-            //          $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-            //    if (result == MessageBoxResult.OK)
-            //    {
-            //       didsaved=  insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
-            //    }
-            //}
-            //if(didsaved)
-            //{
-            //}
+            bool didsaved = false;
+            if (ReleaseDate != null)
+            {
+                MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
+                     $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
+                     $"Release Date: {ReleaseDate}\nBirth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
+                     $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    didsaved = insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, (DateTime)ReleaseDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
+                }
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
+                      $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
+                      $"Birth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
+                      $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    didsaved = insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
+                }
+            }
+            if (didsaved)
+            {
                 OnEmployeeAddedEvent(EventArgs.Empty);
+            }
         }
 
         private ICommand addBlankRowEducation;
@@ -452,16 +473,43 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void SaveEducationRowExecute(object obj)
         {
-            if (selectedOldEmployeeEducationModel == null)
-            {
-                insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
-            }
-            else
-            {
-                updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, SelectedOldEmployeeEducationModel, code);
-                selectedOldEmployeeEducationModel = null;
-            }
+           // if (string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) ||
+           //string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) ||
+           //string.IsNullOrEmpty(selectedEmployeeEducationModel.State) ||
+           //string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) ||
+           //string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName))
+           // {
+           //     MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+           //     return;
+           // }
+           // else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) && !IsValidPercentage(selectedEmployeeEducationModel.Percentage))
+           // {
+           //     MessageBox.Show("Please provide valid vlue for percentage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+           //     return;
+           // }
+           // else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear))
+           // {
+           //     MessageBox.Show("Please provide valid vlue for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+           //     return;
+           // }
+           // else
+           // {
+           //     bool didSave = false;
+           //     if (selectedOldEmployeeEducationModel == null)
+           //     {
+           //         didSave = insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
+           //     }
+           //     else
+           //     {
+           //         didSave = updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, SelectedOldEmployeeEducationModel, code);
+           //     }
+           //     if (didSave)
+           //     {
+           //         selectedOldEmployeeEducationModel = null;
+           //     }
+           // }
             OnPropertyChanged("SelectedEmployeeEducationField");
+            OnAddEducationRowEvent(EventArgs.Empty);
         }
 
         private ICommand saveExperienceRowCommand;
@@ -485,14 +533,35 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void SaveExperienceRowExecute(object obj)
         {
-            if (selectedOldEmployeeExprienceModel == null)
+            if (string.IsNullOrEmpty(selectedEmployeeExperienceModel.Organization) ||
+                string.IsNullOrEmpty(selectedEmployeeExperienceModel.Designation) ||
+                selectedEmployeeExperienceModel.FromDate == null ||
+                selectedEmployeeExperienceModel.ToDate == null)
             {
-                insertData.InsertExperienceDetails(selectedEmployeeExperienceModel, Code);
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (selectedEmployeeExperienceModel.Duration < 0)
+            {
+                MessageBox.Show("Please provide valid value for from and to date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             else
             {
-                updateData.UpdateEmployeeExperience(selectedEmployeeExperienceModel, selectedOldEmployeeExprienceModel, code);
-                selectedOldEmployeeExprienceModel = null;
+                bool didsave = false;
+                if (selectedOldEmployeeExprienceModel == null)
+                {
+                    didsave = insertData.InsertExperienceDetails(selectedEmployeeExperienceModel, Code);
+                }
+                else
+                {
+                    didsave = updateData.UpdateEmployeeExperience(selectedEmployeeExperienceModel, selectedOldEmployeeExprienceModel, code);
+                }
+                if (didsave)
+                {
+                    selectedOldEmployeeExprienceModel = null;
+                    OnAddExperienceRowEvent(EventArgs.Empty);
+                }
             }
             OnPropertyChanged("SelectedEmployeeEducationField");
         }
@@ -528,6 +597,7 @@ namespace EmployeeManagementSystem.ViewModel
             selectedOldEmployeeEducationModel.InstituteName = SelectedEmployeeEducationModel.InstituteName;
             selectedOldEmployeeEducationModel.PassingYear = SelectedEmployeeEducationModel.PassingYear;
             selectedOldEmployeeEducationModel.Qualification = selectedEmployeeEducationModel.Qualification;
+            OnEditEducationRowEvent(EventArgs.Empty);
         }
 
         private ICommand editExperienceCommand;
@@ -551,6 +621,7 @@ namespace EmployeeManagementSystem.ViewModel
             selectedOldEmployeeExprienceModel.Designation = selectedEmployeeExperienceModel.Designation;
             selectedOldEmployeeExprienceModel.ToDate = selectedEmployeeExperienceModel.ToDate;
             selectedOldEmployeeExprienceModel.FromDate = selectedEmployeeExperienceModel.FromDate;
+            OnEditExperienceRowEvent(EventArgs.Empty);
         }
 
         private bool CanEditExperienceCommandExecute(object arg)
@@ -629,8 +700,13 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void RemoveEducationFromDataBaseCommandExecute(object obj)
         {
-            deleteData.DeleteEducationRow(selectedEmployeeEducationModel, Code);
-            employeeEducationList.Remove(selectedEmployeeEducationModel);
+            bool didDelete = false;
+            didDelete = deleteData.DeleteEducationRow(selectedEmployeeEducationModel, Code);
+            if (didDelete)
+            {
+                employeeEducationList.Remove(selectedEmployeeEducationModel);
+
+            }
             OnPropertyChanged("employeeEducationList");
         }
 
@@ -649,8 +725,12 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveExperienceFormDataBaseCommand(object obj)
         {
-            deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
-            EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);
+            bool didDelete = false;
+            didDelete = deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
+            if (didDelete)
+            {
+                EmployeeExperienceList.Remove(selectedEmployeeExperienceModel); 
+            }
             OnPropertyChanged("EmployeeExperienceList");
         }
 
@@ -664,7 +744,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             get
             {
-                if(clearEmployeeDetailsCommand == null)
+                if (clearEmployeeDetailsCommand == null)
                 {
                     clearEmployeeDetailsCommand = new RelayCommand(ExecuteclearEmployeeDetailsCommand, CanclearEmployeeDetailsCommandExecute, false);
                 }
@@ -679,7 +759,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteclearEmployeeDetailsCommand(object obj)
         {
-            Code = FirstName = LastName = Email = Password = ConfirmPassword  = String.Empty;
+            Code = FirstName = LastName = Email = Password = ConfirmPassword = String.Empty;
             SelectedDepartment = SelectedDesignation = null;
             JoiningDate = DateTime.Now;
             ReleaseDate = null;
@@ -707,7 +787,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             DOB = DateTime.Now;
             Gender = "Male";
-            ContactNumber = PresentAddress = PermanentAddress =String.Empty;
+            ContactNumber = PresentAddress = PermanentAddress = String.Empty;
             SelectedMaritialStatus = null;
             IsCheckBoxChecked = false;
 
@@ -723,6 +803,39 @@ namespace EmployeeManagementSystem.ViewModel
             deleteData = new DeleteData();
             updateData = new UpdateData();
             GetData getData = new GetData();
+        }
+
+        private bool IsValidPercentage(string Ipercentage)
+        {
+            if (decimal.TryParse(Ipercentage, out decimal Opercentage))
+            {
+
+                return Opercentage >= 0 && Opercentage <= 100;
+            }
+
+            return false;
+        }
+        private bool IsValidYear(string IYear)
+        {
+            if (int.TryParse(IYear, out int OYear))
+            {
+
+                return OYear >= 1900 && OYear <= 3000;
+            }
+
+            return false;
+        }
+
+        private bool IsValidContactNumber(string ContactNumber)
+        {
+            string regexPattern = @"^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
+            return Regex.IsMatch(ContactNumber, regexPattern);
+        }
+
+        private bool IsValidEmailAddress(string EmailAddress)
+        {
+            string regexPattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(EmailAddress, regexPattern);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

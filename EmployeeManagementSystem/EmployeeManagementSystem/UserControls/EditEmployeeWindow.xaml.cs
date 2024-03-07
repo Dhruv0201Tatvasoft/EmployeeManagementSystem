@@ -29,7 +29,11 @@ namespace EmployeeManagementSystem.UserControls
             this.DataContext = viewModel;
             viewModel.AddEducationButtonClickedEvent += ViewModel_AddButtonClickedEvent;
             viewModel.AddExprienceButtonClickedEvent += ViewModel_AddExprienceButtonClickedEvent;
-            viewModel.EmployeeAddedEvent += ViewModel_EmployeeAddedEvent;
+            viewModel.EmployeeUpdatedEvent += ViewModel_EmployeeUpdatedEvent;
+            viewModel.AddEducationRowEvent += ViewModel_AddEducationRowEvent;
+            viewModel.EditEducationRowEvent += ViewModel_EditEducationRowEvent;
+            viewModel.AddExperienceRowEvent += ViewModel_AddExperienceRowEvent;
+            viewModel.EditExprienceRowEvent += ViewModel_EditExprienceRowEvent;
         }
 
     
@@ -40,9 +44,34 @@ namespace EmployeeManagementSystem.UserControls
             this.DataContext = viewModel;
             viewModel.AddEducationButtonClickedEvent += ViewModel_AddButtonClickedEvent;
             viewModel.AddExprienceButtonClickedEvent += ViewModel_AddExprienceButtonClickedEvent;
-            viewModel.EmployeeAddedEvent += ViewModel_EmployeeAddedEvent;
+            viewModel.EmployeeUpdatedEvent += ViewModel_EmployeeUpdatedEvent;
+            viewModel.AddEducationRowEvent += ViewModel_AddEducationRowEvent;
+            viewModel.EditEducationRowEvent += ViewModel_EditEducationRowEvent;
+            viewModel.AddExperienceRowEvent += ViewModel_AddExperienceRowEvent;
+            viewModel.EditExprienceRowEvent += ViewModel_EditExprienceRowEvent;
         }
-        private void ViewModel_EmployeeAddedEvent(object? sender, EventArgs e)
+        private void ViewModel_EditExprienceRowEvent(object? sender, EventArgs e)
+        {
+            DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
+            ShowCellsEditingTemplateExperience(row);
+        }
+        private void ViewModel_AddExperienceRowEvent(object? sender, EventArgs e)
+        {
+            DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
+            ShowCellsNormalTemplateExperience(row, true);
+        }
+        private void ViewModel_EditEducationRowEvent(object? sender, EventArgs e)
+        {
+            DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
+            ShowCellsEditingTemplate(row);
+        }
+        private void ViewModel_AddEducationRowEvent(object? sender, EventArgs e)
+        {
+            DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
+            ShowCellsNormalTemplate(row, true);
+        }
+
+        private void ViewModel_EmployeeUpdatedEvent(object? sender, EventArgs e)
         {
             TabControl.SelectedIndex = 2;
             EmployeeDetailsTabItem.IsEnabled = false;
@@ -80,23 +109,6 @@ namespace EmployeeManagementSystem.UserControls
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             mainWindow.mainContent.Content = new EmployeeWindow();
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
-            ShowCellsEditingTemplate(row);
-        }
-
-
-
-
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
-            ShowCellsNormalTemplate(row, true);
-        }
-
         private void ShowCellsEditingTemplate(DataGridRow row)
         {
             foreach (DataGridColumn col in DGrid.Columns)
@@ -131,26 +143,6 @@ namespace EmployeeManagementSystem.UserControls
                 }
                 cell.Content = c.CellTemplate.LoadContent();
             }
-        }
-
-        private void ExpereinceEditbuttonClick(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
-            ShowCellsEditingTemplateExperience(row);
-        }
-
-        // Cancel
-        private void ExpereinceDeleteButtonClick(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
-            ShowCellsNormalTemplateExperience(row);
-        }
-
-        // Commit
-        private void ButtoExpereinceAddButtonClick(object sender, RoutedEventArgs e)
-        {
-            DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
-            ShowCellsNormalTemplateExperience(row, true);
         }
 
         private void ShowCellsEditingTemplateExperience(DataGridRow row)

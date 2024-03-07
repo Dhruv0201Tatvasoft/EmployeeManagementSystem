@@ -30,7 +30,7 @@ CREATE TABLE EmsTblEmployee (
     Code VARCHAR(10) PRIMARY KEY,
     FirstName VARCHAR(10) NOT NULL,
     LastName VARCHAR(10) NOT NULL,
-    Email VARCHAR(15) NOT NULL,
+    Email VARCHAR(40) NOT NULL,
     Password VARCHAR(20) NOT NULL,
     [Designation] nvarchar(20) NOT NULL CHECK ([Designation] IN ('Developer', 'Senior Developer', 'Team lead', 'Manager')),
     [Department] nvarchar(20) NOT NULL CHECK ([Department] IN ('Dotnet', 'Java', 'Php', 'Mobile', 'QA')),
@@ -160,11 +160,11 @@ WHERE UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE 
 Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND  UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Dhruv%'
 
 Select * from EmsTblEmployeeEducation
-
+SELECT * from EmsTblEmployee where Code = 'EMP001'
 exec sp_rename 'dbo.EmsTblEmployeeEducation.Degree' ,'Qualification','COLUMN'
 
 insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values ('EMP001','BE','GTU','LD','GUJ','2024','875') 
-select * from EmsTblEmployeeEducation
+	Education
 
 select * from EmsTblEmployee where Code like 'EMP001'
 INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES 
@@ -174,3 +174,26 @@ select * from EmsTblEmployeeEducation
 insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values ('EMP001','BE','GTU','LD','GUJ','2024','87.5') 
 select * from EmsTblEmployeeExperience
 Update EmsTblEmployeeEducation SET Qualification = 'BE' , Board = 'GTU' ,Institute = 'DDDD' , State = 'HYD' , PassingYear = '2018' , Percentage = '92.33' Where EmployeeCode like 'EMP001' AND Qualification like 'HSC' AND Board like 'GHSEB' AND Institute like 'VIDYANAGAR' AND State like 'GUJ' AND PassingYear like '2020'AND Percentage like '78.33' 
+delete from EmsTblEmployee where Code like 'EMP050'
+select * from EmsTblEmployee
+select * from EmsTblEmployeeEducation
+SELECT * from EmsTblEmployee where Code = 'EMP001'
+	
+	
+ALTER TABLE EmsTblEmployeeExperience
+select * from EmsTblTechnology
+delete from EmsTblTechnologyForProject where TechnologyId = 13
+delete from EmsTblTechnology Where Id = 13 
+insert into EmsTblEmployee  (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) values('EMP016', 'Rahul', 'Yadav', 'abc@email.com', 'password16', 'Manager', 'Mobile', '2022-11-25', NULL, '1985-05-18', '1234567890', 'Male', 'Single', 'Lucknow, Uttar Pradesh', 'Lucknow, Uttar Pradesh')
+select * from EmsTblTechnologyForProject inner join EmsTblTechnology on TechnologyId = id where ProjectCode ='sd'
+insert into EmsTblEmployeeEducation values ('EMP016','de','Dd','sd','wef','2024','875')
+delete from EmsTblEmployee where Code like 'EMP017'
+alter table EmsTblEmployeeEducation Drop FOREIGN key EmployeeCode
+ALTER TABLE EmsTblEmployeeAssociatedToProject
+ADD CONSTRAINT FK_ProjectCodeForEmployeeAssociatedToProject
+FOREIGN KEY (ProjectCode)
+REFERENCES EmsTblProject(Code)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+select * from EmsTblEmployeeEducation
+update EmsTblEmployee set code = 'EMP001' where code = 'EMP0001'
