@@ -60,13 +60,12 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public void RemoveEmployeeFromProject(String EmployeeCode, String ProjectCode, String EmployeeName)
+        public void RemoveEmployeeFromProject(String EmployeeCode, String ProjectCode)
         {
-            if (this.DeleteWarningMessage("Remove " + EmployeeName + " From this Project"))
-            {
+            
                 string query = $"Delete from EmsTblEmployeeAssociatedToProject Where ProjectCode = '{ProjectCode} ' AND EmployeeCode = '{EmployeeCode}'";
                 this.executeQuery(query);
-            }
+            
         }
 
         public void DeleteTechnology(String TechnologyName)

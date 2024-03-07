@@ -472,7 +472,7 @@
                         </MenuItem>
                     </Menu>
 
-                    <Button HorizontalAlignment="Right" Height="auto" Width="39">
+                    <Button Click="InfoButtonClicked" HorizontalAlignment="Right" Height="auto" Width="39">
                         <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="auto" Height="auto" RenderTransformOrigin="0.094,1.221 "/>
                     </Button>
                 </DockPanel>
@@ -480,6 +480,42 @@
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Name="mainContent">
 
             </ContentControl>
+            <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True">
+
+                <Grid>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="600" Height="650">
+                        <Grid Background="White" Width="600" Height="650">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height=".8*"/>
+                         
+                            </Grid.RowDefinitions>
+                            <DockPanel  Grid.Row="0">
+                                <TextBlock VerticalAlignment="Center" Margin="20 10 0 0" Text="About" Height="auto" DockPanel.Dock="Left" FontSize="26" />
+                                <Button Click="ClosePopUpClick"  Background="Transparent" BorderBrush="Transparent" Margin="15 10 10 0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CancelIcon.png"/>
+                                </Button>
+                            </DockPanel>
+                            <Grid Margin="20 20 20 30" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="Employee Management System" FontSize="30" FontWeight="Bold" TextDecorations="Underline" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text="Version: 1.0.0.0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Copyright @2022" FontWeight="Bold" FontSize="16" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                            </Grid>
+
+
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Popup>
         </Grid>
     </ScrollViewer>
+ 
+
+    
 </Window>

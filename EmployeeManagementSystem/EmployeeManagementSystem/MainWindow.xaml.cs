@@ -79,5 +79,13 @@ namespace EmployeeManagementSystem
             selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
         }
 
+        private void InfoButtonClicked(object sender, RoutedEventArgs e)
+        {
+            this.MyPopup.IsOpen = true;
+        }
+        private void ClosePopUpClick(object sender, RoutedEventArgs e)
+        {
+            MyPopup.IsOpen = false;
+        }
     }
 }

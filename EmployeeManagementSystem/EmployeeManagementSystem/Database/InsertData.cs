@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.Model;
+using EmployeeManagementSystem.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -195,5 +196,17 @@ namespace EmployeeManagementSystem.Database
 
         }
 
+        internal void InsertProjectToEmployee(string ProjectCode, string ProjectName, string EmployeeCode)
+        {
+            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{ProjectCode}' AND EmployeeCode ='{EmployeeCode}'"))
+            {
+                string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{ProjectCode}')";
+                this.executeQuery(Query);
+            }
+            else
+            {
+                MessageBox.Show($"{ProjectName} is already assigned to this Employee", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            }
+        }
     }
 }

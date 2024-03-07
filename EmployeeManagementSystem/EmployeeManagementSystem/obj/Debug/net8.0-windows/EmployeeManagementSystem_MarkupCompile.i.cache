@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\App.xaml
-10-1490912711
+111425680502
 
-42-2079951636
+43-1195428736
 2341583767272
-MainWindow.xaml;UserControls\AddEmployeeWindow.xaml;UserControls\AddProject.xaml;UserControls\DashboardWindow.xaml;UserControls\EditEmployeeWindow.xaml;UserControls\EditProjectWindow.xaml;UserControls\EmployeeWindow.xaml;UserControls\ProjectWindow.xaml;UserControls\SkillWindow.xaml;UserControls\TechnologyWindow.xaml;
+DialogWindow\EmployeeDetails.xaml;MainWindow.xaml;UserControls\AddEmployeeWindow.xaml;UserControls\AddProject.xaml;UserControls\DashboardWindow.xaml;UserControls\EditEmployeeWindow.xaml;UserControls\EditProjectWindow.xaml;UserControls\EmployeeWindow.xaml;UserControls\ProjectWindow.xaml;UserControls\SkillWindow.xaml;UserControls\TechnologyWindow.xaml;
 
 True
 

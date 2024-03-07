@@ -710,20 +710,20 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("employeeEducationList");
         }
 
-        private ICommand removeExperienceFormDataBaseCommand;
-        public ICommand RemoveExperienceFormDataBaseCommand
+        private ICommand removeExperienceFromDataBaseCommand;
+        public ICommand RemoveExperienceFromDataBaseCommand
         {
             get
             {
-                if (removeExperienceFormDataBaseCommand == null)
+                if (removeExperienceFromDataBaseCommand == null)
                 {
-                    removeExperienceFormDataBaseCommand = new RelayCommand(ExecuteRemoveExperienceFormDataBaseCommand, CanRemoveExperienceFormDataBaseCommandExecute, false);
+                    removeExperienceFromDataBaseCommand = new RelayCommand(ExecuteRemoveExperienceFromDataBaseCommand, CanRemoveExperienceFromDataBaseCommandExecute, false);
                 }
-                return removeExperienceFormDataBaseCommand;
+                return removeExperienceFromDataBaseCommand;
             }
         }
 
-        private void ExecuteRemoveExperienceFormDataBaseCommand(object obj)
+        private void ExecuteRemoveExperienceFromDataBaseCommand(object obj)
         {
             bool didDelete = false;
             didDelete = deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
@@ -734,7 +734,7 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeExperienceList");
         }
 
-        private bool CanRemoveExperienceFormDataBaseCommandExecute(object arg)
+        private bool CanRemoveExperienceFromDataBaseCommandExecute(object arg)
         {
             return true;
         }

@@ -186,7 +186,7 @@ namespace EmployeeManagementSystem.UserControls
                     else
                         ((DatePicker)cell.Content).GetBindingExpression(DatePicker.SelectedDateProperty).UpdateTarget();
                 }
-                if (col.DisplayIndex != 5 && col.DisplayIndex != 1 && col.DisplayIndex != 2 && col.DisplayIndex != 3 && col.DisplayIndex==4)
+                if (col.DisplayIndex != 5 && col.DisplayIndex != 1 && col.DisplayIndex != 2 && col.DisplayIndex != 3 && col.DisplayIndex!=4)
                 {
                     if (canCommit == true)
                         ((TextBox)cell.Content).GetBindingExpression(TextBox.TextProperty).UpdateSource();

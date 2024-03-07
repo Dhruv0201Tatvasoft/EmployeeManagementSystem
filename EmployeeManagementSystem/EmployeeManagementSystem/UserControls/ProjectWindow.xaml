@@ -127,9 +127,7 @@
                       CanUserAddRows="False"
                       SelectionMode="Single"
                       HeadersVisibility="Column"
-                      ItemsSource="{Binding DataTable}"
-                  
-                      >
+                      ItemsSource="{Binding DataTable}">
             <DataGrid.Columns>
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Code" Width="10*" Binding="{Binding Code}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Name" Width="30*" Binding="{Binding Name}" />

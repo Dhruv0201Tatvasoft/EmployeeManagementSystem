@@ -113,3 +113,5 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EditEmployeeWindow.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EditEmployeeWindow.baml
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\DialogWindow\EmployeeDetails.g.cs
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\DialogWindow\EmployeeDetails.baml

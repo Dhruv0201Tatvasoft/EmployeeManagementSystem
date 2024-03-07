@@ -280,9 +280,10 @@ namespace EmployeeManagementSystem.ViewModel
           string projectcode = (String)SelectedRow.Row.ItemArray[0];
           string employeecode = (String)SelectedEmployeeRow.Row.ItemArray[1];
           string employeename = (String)SelectedEmployeeRow.Row.ItemArray[0];
-          deleteData.RemoveEmployeeFromProject(employeecode,projectcode, employeename);
+          deleteData.RemoveEmployeeFromProject(employeecode,projectcode);
           OnAddEmployeeEvent(EventArgs.Empty);
         }
+     
 
         public ProjectViewModel()
         {

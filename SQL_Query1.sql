@@ -64,7 +64,7 @@ CREATE TABLE EmsTblEmployeeExperience (
     Designation VARCHAR(15) NOT NULL,
     FOREIGN KEY (EmployeeCode) REFERENCES EmsTblEmployee(Code)
 );
-
+ALTER TABLE EmsTblEmployeeExperience alter column Designation Varchar(30) not null
 create table EmsTblEmployeeAssociatedToProject (
 	EmployeeCode VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES EmsTblEmployee(Code),
 	ProjectCode VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES EmsTblProject(Code))
@@ -86,6 +86,8 @@ insert into EmsTblProject values
 ('P0003','HR Management System','2019-08-17','2021-07-22'),
 ('P0004','Hotel Reservation System','2021-06-24',null),
 ('P0005','Hello Doc','2022-04-15',null)
+
+
 
 insert into EmsTblTechnologyForProject values
 ('P0001',1),('P0001',9) ,('P0002',7),('P0002',6),('P0002',3),('P0003',2),('P0003',5),('P0004',9),('P0004',6),('P0005',1)
@@ -196,4 +198,6 @@ REFERENCES EmsTblProject(Code)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
 select * from EmsTblEmployeeEducation
+Select Code,Name from EmsTblProject
 update EmsTblEmployee set code = 'EMP001' where code = 'EMP0001'
+select * from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like 'EMP001'

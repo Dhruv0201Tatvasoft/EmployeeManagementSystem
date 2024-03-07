@@ -62,11 +62,7 @@ namespace EmployeeManagementSystem.UserControls
 
         }
 
-        private void ClosePopup(object? sender, EventArgs e)
-        {
-          
-            this.MyPopup.IsOpen = false;
-        }
+      
 
         private void sizechanged(object sender, SizeChangedEventArgs e)
         {

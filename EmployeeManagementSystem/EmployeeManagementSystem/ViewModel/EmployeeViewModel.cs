@@ -1,5 +1,7 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.DialogWindow;
+using EmployeeManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,13 +20,28 @@ namespace EmployeeManagementSystem.ViewModel
     {
         private GetData getData;
         private DeleteData deleteData;
+        private InsertData insertData;
         private DataRowView selectedEmployee;
 
+        public event EventHandler AddProjectEvent;
+        private void OnAddProjectEvent(EventArgs empty)
+        {
+            AddProjectEvent?.Invoke(this, empty);
+        }
         public DataRowView SelectedEmployee
         {
             get { return selectedEmployee; }
             set { selectedEmployee = value; OnPropertyChanged("SelectedEmployee"); }
         }
+
+        private DataRowView selectedProjectRow;
+
+        public DataRowView SelectedProjectRow
+        {
+            get { return selectedProjectRow; }
+            set { selectedProjectRow = value; OnPropertyChanged("SelectedProjectRow"); }
+        }
+
 
         private DataTable employeeDataTable;
         public DataTable EmployeeDatatable
@@ -88,7 +105,7 @@ namespace EmployeeManagementSystem.ViewModel
                 code = value;
                 OnPropertyChanged("Code");
             }
-        
+
         }
 
         private string selectedDesignation;
@@ -118,13 +135,37 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        private List<String> projectNames;
+
+        public List<String> ProjectNames
+        {
+            get { return projectNames; }
+            set
+            {
+                projectNames = value;
+                OnPropertyChanged("ProjectNames");
+            }
+        }
+
+        private String projectName;
+
+        public String ProjectName
+        {
+            get { return projectName; }
+            set
+            {
+                projectName = value;
+                OnPropertyChanged("ProjectName");
+            }
+        }
+
 
         private ICommand clearCommand;
         public ICommand ClearCommand
         {
             get
             {
-                if(clearCommand == null)
+                if (clearCommand == null)
                 {
                     clearCommand = new RelayCommand(ClearExecute, CanClearExecute, false);
                 }
@@ -163,7 +204,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (deleteEmployeeCommand == null)
                 {
-                    deleteEmployeeCommand = new RelayCommand(DeleteEmployeeCommandExecute, CanDeleteEmployeeCommandExecute, false); 
+                    deleteEmployeeCommand = new RelayCommand(DeleteEmployeeCommandExecute, CanDeleteEmployeeCommandExecute, false);
                 }
                 return deleteEmployeeCommand;
             }
@@ -186,7 +227,7 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteSearch(object obj)
         {
             employeeDataTable = getData.GetEmployeeSearchData(Code, Name, selectedDepartment, selectedDesignation);
-            Code = String.Empty; Name =String.Empty; SelectedDepartment= null; SelectedDesignation=null;
+            Code = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
             OnPropertyChanged("EmployeeDataTable");
         }
 
@@ -194,12 +235,97 @@ namespace EmployeeManagementSystem.ViewModel
         {
             return true;
         }
+        private ICommand addEmployeeToProject;
+        public ICommand AddEmployeeToProject
+        {
+            get
+            {
+                if (addEmployeeToProject == null)
+                {
+                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute, false);
+
+                }
+                return addEmployeeToProject;
+            }
+        }
+
+        private bool CanAddEmployeeToProjectExecute(object arg)
+        {
+            if (String.IsNullOrEmpty(projectName)) return false;
+            return true;
+        }
+
+        private void ExecuteAddEmployeeToProject(object obj)
+        {
+            string EmployeeCode = (String)selectedEmployee.Row.ItemArray[0];
+            string ProjectCode = projectName.Split('-')[0];
+            string ProjectName = projectName.Split('-')[1];
+            insertData.InsertProjectToEmployee(ProjectCode, ProjectName, EmployeeCode);
+            OnAddProjectEvent(EventArgs.Empty);
+        }
+
+        private ICommand deleteEmployeeFromProject;
+        public ICommand DeleteEmployeeFromProject
+        {
+            get
+            {
+                if (deleteEmployeeFromProject == null)
+                {
+                    deleteEmployeeFromProject = new RelayCommand(DeleteEmployeeFromProjectExecute, CanDeleteEmployeeFromProjectExecute, false);
+                }
+                return deleteEmployeeFromProject;
+            }
+        }
+
+        private bool CanDeleteEmployeeFromProjectExecute(object arg)
+        {
+            if (selectedProjectRow == null) return false;
+            return true;
+
+        }
+
+        private void DeleteEmployeeFromProjectExecute(object obj)
+        {
+            string EmployeeCode = (String)selectedEmployee.Row.ItemArray[0];
+            string ProjectCode = (String)selectedProjectRow.Row.ItemArray[1];
+            deleteData.RemoveEmployeeFromProject(EmployeeCode, ProjectCode);
+            OnAddProjectEvent(EventArgs.Empty);
+        }
+        private ICommand viewEmployeeDetailsCommand;
+        public ICommand ViewEmployeeDetailsCommand
+        {
+            get
+            {
+                if (viewEmployeeDetailsCommand == null)
+                {
+                    viewEmployeeDetailsCommand = new RelayCommand(ExecuteViewEmployeeDetailsCommand, CanViewEmployeeDetailsCommandExecute, false);
+                }
+                return viewEmployeeDetailsCommand;
+            }
+
+        }
+
+        private bool CanViewEmployeeDetailsCommandExecute(object arg)
+        {
+           if (selectedEmployee==null) return false;
+           return true;
+        }
+
+        private void ExecuteViewEmployeeDetailsCommand(object obj)
+        {
+            string EmployeeCode = (string)selectedEmployee.Row.ItemArray[0];
+            EmployeeModel employee = getData.GetEmployeeModelFromCode(EmployeeCode);
+            EmployeeDetails employeeDetails = new EmployeeDetails(employee);
+            employeeDetails.ShowDialog();
+        }
 
         public EmployeeViewModel()
         {
             getData = new GetData();
             deleteData = new DeleteData();
+            insertData = new InsertData();
             EmployeeDatatable = getData.GetEmployeeTable();
+            projectNames = getData.GetProjectNames();
             designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
             department = new ObservableCollection<string>(new List<String> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
             OnPropertyChanged("EmployeeDataTable");

@@ -406,7 +406,7 @@
                                             <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditExperienceCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png"/>
                                             </Button>
-                                            <Button Command="{Binding DataContext.RemoveExperienceFormDataBaseCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
+                                            <Button Command="{Binding DataContext.RemoveExperienceFromDataBaseCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
                                                 <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>

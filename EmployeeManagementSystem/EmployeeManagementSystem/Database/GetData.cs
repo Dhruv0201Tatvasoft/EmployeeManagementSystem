@@ -229,6 +229,24 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+        public DataTable GetAssociatedProjectForEmployees(string EmployeeCode)
+        {
+            string Query = $"select Name,ProjectCode from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like '{EmployeeCode}'";
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+
+                }
+            }
+            return dt;
+        }
 
         public DataTable GetTechnologyTable()
         {
@@ -407,6 +425,30 @@ namespace EmployeeManagementSystem.Database
 
             }
             return employee;
+        }
+
+        internal List<string> GetProjectNames()
+        {
+            string Query = $"Select Code,Name from EmsTblProject";
+            List<string> Result = new List<string>();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    string name = string.Empty;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        name = reader.GetString(0);
+                        name += "-";
+                        name += reader.GetString(1);
+                        Result.Add(name);
+                        name = string.Empty;
+                    }
+                }
+            }
+            return Result;
         }
     }
 }
