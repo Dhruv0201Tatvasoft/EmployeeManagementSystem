@@ -150,7 +150,7 @@ Update EmsTblTechnology SET Name = 'Iphone' where name like ''
 select * from EmsTblProject where code like 'P0001'
 delete from EmsTblTechnology where Name like 'Dotnet'
 Delete From EmsTblTechnology where Name like 'Dotnet'
-select * from EmsTblSkill (Name) values  ('Management') ,('Coding'),('Communication'),('Testing')
+Insert into EmsTblSkill (Name) values  ('Management') ,('Coding'),('Communication'),('Testing')
 
 SELECT Code, CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name, Email, Designation, Department, JoiningDate, ReleaseDate
 FROM EmsTblEmployee
@@ -197,7 +197,9 @@ FOREIGN KEY (ProjectCode)
 REFERENCES EmsTblProject(Code)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
+select *  from EmsTblSkill
 select * from EmsTblEmployeeEducation
+delete from EmsTblSkill
 Select Code,Name from EmsTblProject
 update EmsTblEmployee set code = 'EMP001' where code = 'EMP0001'
 select * from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like 'EMP001'

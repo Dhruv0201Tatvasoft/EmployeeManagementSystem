@@ -27,7 +27,7 @@ namespace EmployeeManagementSystem
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
-            mainContent.Content =new TextBlock() { Text = "Dashboard Content" };
+            mainContent.Content =new DashboardWindow();
             selectedMenuItem = HeaderMenuItem;
             selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
         }

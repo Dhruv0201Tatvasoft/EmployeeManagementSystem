@@ -19,14 +19,20 @@ namespace EmployeeManagementSystem.ViewModel
         private GetData getData;
         private InsertData insertData;
         private UpdateData updateData;
-        private DeleteData deleteData ;
+        private DeleteData deleteData;
         private DataTable technologyDataTable;
         public DataTable TechnologyDataTable
         {
             get { return technologyDataTable; }
             set { technologyDataTable = value; }
         }
+        private string oldTechnologyName;
 
+        public string OldTecnologyName
+        {
+            get { return oldTechnologyName; }
+            set { oldTechnologyName = value; OnPropertyChanged("OldTecnologyName"); }
+        }
         private string technologyName;
         public string TechnologyName
         {
@@ -48,11 +54,6 @@ namespace EmployeeManagementSystem.ViewModel
             set
             {
                 selectedRow = value;
-                if(value != null)
-                {
-                    technologyName = (string)selectedRow.Row.ItemArray[0];
-                    OnPropertyChanged("TechnologyName");
-                }
                 OnPropertyChanged("SelectedRow");
             }
         }
@@ -74,7 +75,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private bool CanSaveCommandExecute(object arg)
         {
-            if (String.IsNullOrEmpty(TechnologyName) || selectedRow != null)
+            if (String.IsNullOrEmpty(TechnologyName))
             {
                 return false;
             }
@@ -83,7 +84,15 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSaveCommand(object obj)
         {
-            insertData.InsertTechnology(technologyName);
+            if (selectedRow != null && !String.IsNullOrEmpty(OldTecnologyName))
+            {
+                updateData.UpdateTechnologyName(technologyName, oldTechnologyName);
+            }
+            else
+            {
+                insertData.InsertTechnology(technologyName);
+            }
+            selectedRow = null;
             TechnologyName = String.Empty;
             technologyDataTable = getData.GetTechnologyData();
             OnPropertyChanged("TechnologyDataTable");
@@ -124,7 +133,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (editCommand == null)
                 {
-                    editCommand = new RelayCommand(EditExecute,CanEditExecute, false);
+                    editCommand = new RelayCommand(EditExecute, CanEditExecute, false);
                 }
                 return editCommand;
             }
@@ -133,25 +142,14 @@ namespace EmployeeManagementSystem.ViewModel
         private bool CanEditExecute(object arg)
         {
             if (selectedRow == null) return false;
-       
+
             return true;
         }
 
         private void EditExecute(object obj)
         {
-            string OldTechnologyName =  (string)selectedRow.Row.ItemArray[0];
-            if(technologyName == String.Empty)
-            {
-                MessageBox.Show("Enter some value to update");
-                return;
-            }
-            else
-            {
-                updateData.UpdateTechnologyName(TechnologyName, OldTechnologyName);
-                TechnologyName = String.Empty;
-                technologyDataTable = getData.GetTechnologyData();
-                OnPropertyChanged("TechnologyDataTable");
-            }
+            oldTechnologyName = technologyName = (string)selectedRow.Row[0];
+            OnPropertyChanged("TechnologyName");
         }
 
         public TechnologyViewModel()
@@ -165,7 +163,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-     
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(String propertyName)

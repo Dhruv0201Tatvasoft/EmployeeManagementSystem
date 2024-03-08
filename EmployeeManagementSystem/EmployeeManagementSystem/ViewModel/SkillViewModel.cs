@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace EmployeeManagementSystem.ViewModel
 {
-    class SkillViewModel:INotifyPropertyChanged
+    class SkillViewModel : INotifyPropertyChanged
     {
         private GetData getData;
         private InsertData insertData;
@@ -23,6 +23,14 @@ namespace EmployeeManagementSystem.ViewModel
         {
             get { return skillDataTable; }
             set { skillDataTable = value; }
+        }
+
+        private string oldSkillName;
+
+        public string OldSKillName
+        {
+            get { return oldSkillName; }
+            set { oldSkillName = value; OnPropertyChanged("OldSKillName"); }
         }
 
         private string skillName;
@@ -46,11 +54,6 @@ namespace EmployeeManagementSystem.ViewModel
             set
             {
                 selectedRow = value;
-                if (value != null)
-                {
-                    skillName = (string)selectedRow.Row.ItemArray[0];
-                    OnPropertyChanged("SkillName");
-                }
                 OnPropertyChanged("SelectedRow");
             }
         }
@@ -72,7 +75,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private bool CanSaveCommandExecute(object arg)
         {
-            if (String.IsNullOrEmpty(SkillName) || selectedRow != null)
+            if (String.IsNullOrEmpty(SkillName))
             {
                 return false;
             }
@@ -81,7 +84,15 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSaveCommand(object obj)
         {
-            insertData.InsertSkill(skillName);
+            if (selectedRow != null && !String.IsNullOrEmpty(oldSkillName))
+            {
+                updateData.UpdateSkillName(skillName, OldSKillName);
+            }
+            else
+            {
+                insertData.InsertSkill(skillName);
+            }
+            selectedRow = null;
             SkillName = String.Empty;
             skillDataTable = getData.GetSkillTable();
             OnPropertyChanged("SkillDataTable");
@@ -137,19 +148,8 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void EditExecute(object obj)
         {
-            string OldSkillName = (string)selectedRow.Row.ItemArray[0];
-            if (skillName == String.Empty)
-            {
-                MessageBox.Show("Enter some value to update");
-                return;
-            }
-            else
-            {
-                updateData.UpdateSkillName(SkillName, OldSkillName);
-                SkillName = String.Empty;
-                skillDataTable = getData.GetSkillTable();
-                OnPropertyChanged("SkillDataTable");
-            }
+            oldSkillName = skillName = (string)selectedRow.Row[0];
+            OnPropertyChanged("SkillName");
         }
 
         public SkillViewModel()
@@ -161,7 +161,7 @@ namespace EmployeeManagementSystem.ViewModel
             deleteData = new DeleteData();
             OnPropertyChanged("SkillDataTable");
         }
-    
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(String propertyName)

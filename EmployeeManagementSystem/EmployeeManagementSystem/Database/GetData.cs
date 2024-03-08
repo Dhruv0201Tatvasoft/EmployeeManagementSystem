@@ -426,8 +426,23 @@ namespace EmployeeManagementSystem.Database
             }
             return employee;
         }
-
-        internal List<string> GetProjectNames()
+        public DataTable GetEmployeeCountInTechnology()
+        {
+            string Query = $"select Name,count(*) as TotalEmployee from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name";
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+        public List<string> GetProjectNames()
         {
             string Query = $"Select Code,Name from EmsTblProject";
             List<string> Result = new List<string>();
