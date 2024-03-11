@@ -259,7 +259,7 @@ namespace EmployeeManagementSystem.ViewModel
         public EmployeeEducationModel SelectedEmployeeEducationModel
         {
             get { return selectedEmployeeEducationModel; }
-            set { selectedEmployeeEducationModel = value;  }
+            set { selectedEmployeeEducationModel = value; }
         }
         private EmployeeEducationModel selectedOldEmployeeEducationModel;
 
@@ -473,43 +473,43 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void SaveEducationRowExecute(object obj)
         {
-           // if (string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) ||
-           //string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) ||
-           //string.IsNullOrEmpty(selectedEmployeeEducationModel.State) ||
-           //string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) ||
-           //string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName))
-           // {
-           //     MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-           //     return;
-           // }
-           // else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) && !IsValidPercentage(selectedEmployeeEducationModel.Percentage))
-           // {
-           //     MessageBox.Show("Please provide valid vlue for percentage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-           //     return;
-           // }
-           // else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear))
-           // {
-           //     MessageBox.Show("Please provide valid vlue for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-           //     return;
-           // }
-           // else
-           // {
-           //     bool didSave = false;
-           //     if (selectedOldEmployeeEducationModel == null)
-           //     {
-           //         didSave = insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
-           //     }
-           //     else
-           //     {
-           //         didSave = updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, SelectedOldEmployeeEducationModel, code);
-           //     }
-           //     if (didSave)
-           //     {
-           //         selectedOldEmployeeEducationModel = null;
-           //     }
-           // }
+            if (string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) ||
+           string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) ||
+           string.IsNullOrEmpty(selectedEmployeeEducationModel.State) ||
+           string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) ||
+           string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName))
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) && !IsValidPercentage(selectedEmployeeEducationModel.Percentage))
+            {
+                MessageBox.Show("Please provide valid vlue for percentage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear))
+            {
+                MessageBox.Show("Please provide valid vlue for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                bool didSave = false;
+                if (selectedOldEmployeeEducationModel == null)
+                {
+                    didSave = insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
+                }
+                else
+                {
+                    didSave = updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, SelectedOldEmployeeEducationModel, code);
+                }
+                if (didSave)
+                {
+                    selectedOldEmployeeEducationModel = null;
+                    OnAddEducationRowEvent(EventArgs.Empty);
+                }
+            }
             OnPropertyChanged("SelectedEmployeeEducationField");
-            OnAddEducationRowEvent(EventArgs.Empty);
         }
 
         private ICommand saveExperienceRowCommand;
@@ -729,7 +729,7 @@ namespace EmployeeManagementSystem.ViewModel
             didDelete = deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
             if (didDelete)
             {
-                EmployeeExperienceList.Remove(selectedEmployeeExperienceModel); 
+                EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);
             }
             OnPropertyChanged("EmployeeExperienceList");
         }

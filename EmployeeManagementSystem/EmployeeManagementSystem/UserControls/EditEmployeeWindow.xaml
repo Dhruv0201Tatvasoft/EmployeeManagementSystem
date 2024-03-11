@@ -288,7 +288,7 @@
                             <DataGridTemplateColumn Header="Percentage" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Percentage}" />
+                                        <TextBlock Text="{Binding Percentage,StringFormat={}{0}%}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
@@ -369,7 +369,7 @@
                             <DataGridTemplateColumn Header="From" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding FromDate, StringFormat='MMM/dd/yyyy'}"/>
+                                        <TextBlock Text="{Binding FromDate, StringFormat=dd/MMM/yyyy}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
@@ -381,7 +381,7 @@
                             <DataGridTemplateColumn Header="To" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding ToDate, StringFormat='MMM/dd/yyyy'}"/>
+                                        <TextBlock Text="{Binding ToDate, StringFormat=dd/MM/yyyy}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>

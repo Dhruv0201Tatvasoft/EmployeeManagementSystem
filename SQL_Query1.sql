@@ -203,3 +203,50 @@ delete from EmsTblSkill
 Select Code,Name from EmsTblProject
 update EmsTblEmployee set code = 'EMP001' where code = 'EMP0001'
 select * from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like 'EMP001'
+
+create table EmsTblSkillForEmployee (
+EmployeeCode VARCHAR(10) Foreign key references EmsTblEmployee(Code) ON DELETE CASCADE ON UPDATE CASCADE,
+SkillId int Foreign key references EmsTblSkill(Id) ON DELETE CASCADE ON UPDATE CASCADE)
+select * from EmsTblTechnology
+select Name,count(*) as TotalEmployee from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name
+
+select count(*) as count ,MONTH(JoiningDate) as Month  from EmsTblEmployee group by (MONTH(JoiningDate)) order by MONTH desc
+UPDATE EmsTblEmployee set JoiningDate= '2024-01-01' where  JoiningDate = '2023-06-14'
+SELECT 
+    YEAR(E.JoiningDate) AS JoiningYear,
+    DATENAME(MONTH, E.JoiningDate) AS Month,
+    ISNULL(COUNT(E.JoiningDate), 0) AS Count
+FROM (
+    VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12)
+) AS Months (MonthNumber)
+LEFT JOIN EmsTblEmployee E ON Month(E.JoiningDate) =MonthNumber
+WHERE E.JoiningDate >= DATEADD(MONTH, -6, GETDATE())
+GROUP BY YEAR(E.JoiningDate), MONTH(E.JoiningDate) ,E.JoiningDate
+ORDER BY YEAR(E.JoiningDate) DESC, MONTH(E.JoiningDate) DESC;
+
+
+UPDATE EmsTblEmployee
+SET joiningdate = DATEADD(YEAR, 2023 - YEAR(joiningdate), joiningdate);
+
+select * from EmsTblEmployee
+
+;WITH Months(Month) AS
+(
+  SELECT 1 AS Month
+  UNION ALL
+  SELECT Month + 1
+  FROM Months
+  WHERE Month < 12
+)
+
+SELECT top 6 M.Month AS Month,
+       ISNULL(COUNT(E.ReleaseDate), 0) AS Count
+FROM Months AS M
+LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate)
+GROUP BY M.Month
+ORDER BY 
+    (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE())
+          ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;
+select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name
+
+select    from EmsTblTechnology Left Join EmsTblTechnologyForProject On TechnologyId = Id

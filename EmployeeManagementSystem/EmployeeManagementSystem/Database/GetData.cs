@@ -426,9 +426,25 @@ namespace EmployeeManagementSystem.Database
             }
             return employee;
         }
-        public DataTable GetEmployeeCountInTechnology()
+        public DataTable DesignationWiseEmployeeCount()
         {
-            string Query = $"select Name,count(*) as TotalEmployee from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name";
+            string Query = $"select COUNT(*) as Count, Designation from EmsTblEmployee Group BY Designation";
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                using (SqlCommand command = new SqlCommand(Query, conn))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+        public DataTable TechnologyWiseEmployeeCount()
+        {
+            string Query = $"select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
@@ -464,6 +480,118 @@ namespace EmployeeManagementSystem.Database
                 }
             }
             return Result;
+        }
+        public DataTable GetPastSixMonthJoinedEmployee()
+        {
+            string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
+                "SELECT top 6 M.Month AS Month, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate) " +
+                "GROUP BY M.Month ORDER BY" +
+                " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
+            DataTable dt = new DataTable();
+            try
+            {
+                {
+                    using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                    {
+                        conn.Open();
+                        using (SqlCommand command = new SqlCommand(query, conn))
+                        {
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(dt);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+            }
+            return dt;
+        }
+        public DataTable GetPastSixMonthReleasedEmployee()
+        {
+            string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
+                "SELECT top 6 M.Month AS Month, ISNULL(COUNT(E.ReleaseDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate) " +
+                "GROUP BY M.Month ORDER BY" +
+                " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
+            DataTable dt = new DataTable();
+            try
+            {
+                {
+                    using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                    {
+                        conn.Open();
+                        using (SqlCommand command = new SqlCommand(query, conn))
+                        {
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(dt);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+            }
+            return dt;
+        }
+        public DataTable GetTechnologyWiseProject()
+        {
+            string query = "SELECT Id,COUNT(ProjectCode)as Count,Name FROM EmsTblTechnology " +
+                "LEFT JOIN EmsTblTechnologyForProject ON " +
+                "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,Id;";
+            DataTable dt = new DataTable();
+            try
+            {
+                {
+                    using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                    {
+                        conn.Open();
+                        using (SqlCommand command = new SqlCommand(query, conn))
+                        {
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(dt);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+            }
+            return dt;
+        }
+        public DataTable GetSkillWiseEmployeeCount()
+        {
+            string query = "select COUNT(*) as Count,SkillId,Name from EmsTblSkillForEmployee inner join EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by SkillId ,Name";
+            DataTable dt = new DataTable();
+            try
+            {
+                {
+                    using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                    {
+                        conn.Open();
+                        using (SqlCommand command = new SqlCommand(query, conn))
+                        {
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(dt);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+            }
+            return dt;
         }
     }
 }

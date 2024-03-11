@@ -14,12 +14,44 @@ namespace EmployeeManagementSystem.ViewModel
     internal class DashboardViewModel : INotifyPropertyChanged
     {
         private GetData getData;
-        public ObservableCollection<DataPoint> JoinedData { get; set; }
-        public ObservableCollection<DataPoint> ReleasedData { get; set; }
-        public DataTable tb { get; set; }
+
+        private DataTable pastSixMonthJoinedEmployee;
+        public DataTable PastSixMonthJoinedEmployee
+        {
+            get
+            {
+                return pastSixMonthJoinedEmployee;
+            }
+            set
+            {
+                pastSixMonthJoinedEmployee = value;
+                OnPropertyChanged("pastSixMonthJoinedEmployee");
+            }
+        }
+        private DataTable technologyNames;
+
+        public DataTable TechnologyNames
+        {
+            get { return technologyNames; }
+            set { technologyNames = value; }
+        }
+
+
+        private DataTable pastSixMonthReleaseDataTable;
+        public DataTable PastSixMonthReleaseDataTable
+        {
+            get
+            {
+                return pastSixMonthReleaseDataTable;
+            }
+            set
+            {
+                pastSixMonthReleaseDataTable = value;
+                OnPropertyChanged("pastSixMonthReleaseDataTable");
+            }
+        }
 
         private DataTable designationWiseEmployee;
-
             
         public DataTable DesignationWiseEmpmloyee
         {
@@ -33,35 +65,40 @@ namespace EmployeeManagementSystem.ViewModel
                 OnPropertyChanged("DesignationWiseEmpmloyee");
             }
         }
+        private DataTable technologyWiseProject;
+
+        public DataTable TechnologyWiseProject
+        {
+            get { return technologyWiseProject; }
+            set { technologyWiseProject = value; }
+        }
+        private DataTable skillWiseEmployee;
+
+        public DataTable  SkillWiseEmployee
+            {
+            get { return skillWiseEmployee; }
+            set { skillWiseEmployee = value; }
+        }
+        private DataTable skillsNames;
+
+        public DataTable SkillsNames
+        {
+            get { return skillsNames; }
+            set { skillsNames = value; }
+        }
+
+
         public DashboardViewModel()
         {
             getData = new GetData();
-            tb = getData.GetEmployeeCountInTechnology();
-            JoinedData = new ObservableCollection<DataPoint>
-            {
-                new DataPoint("January", 10),
-                new DataPoint("February", 15),
-                new DataPoint("March", 20),
-                new DataPoint("April", 20),
-                new DataPoint("May", 20),
-
-            };
-
-            ReleasedData = new ObservableCollection<DataPoint>
-            {
-                new DataPoint("January", 5),
-                new DataPoint("February", 8),
-                new DataPoint("March", 12),
-                new DataPoint("April", 12),
-                new DataPoint("May", 12),
-            };
-            List<DesignationDataItem> designationData = new List<DesignationDataItem>
-            {
-                new DesignationDataItem("Developer", 30),
-                new DesignationDataItem("Manager", 15),
-                new DesignationDataItem("Team Lead", 10)
-                // Add more designations as needed
-            };
+            designationWiseEmployee = getData.DesignationWiseEmployeeCount();
+            pastSixMonthReleaseDataTable = getData.GetPastSixMonthReleasedEmployee();
+            pastSixMonthJoinedEmployee =getData.GetPastSixMonthJoinedEmployee();
+            technologyNames = getData.GetTechnologyTable();
+            technologyWiseProject = getData.GetTechnologyWiseProject();
+            skillWiseEmployee = getData.GetSkillWiseEmployeeCount();
+            skillsNames = getData.GetSkillTable();
+            
 
         }
 
@@ -71,31 +108,8 @@ namespace EmployeeManagementSystem.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    public class DataPoint
-    {
-        public string Month { get; set; }
-        public int Value { get; set; }
+   
+    
 
-        public DataPoint(string month, int value)
-        {
-            Month = month;
-            Value = value;
-        }
-    }
-    public class DesignationDataItem
-    {
-        public string Designation { get; set; }
-        public int Count { get; set; }
-
-        public DesignationDataItem(string designation, int count)
-        {
-            Designation = designation;
-            Count = count;
-        }
-    }
-
-    public class ChartViewModel
-    {
-        public List<DesignationDataItem> DesignationData { get; set; }
-    }
+   
 }

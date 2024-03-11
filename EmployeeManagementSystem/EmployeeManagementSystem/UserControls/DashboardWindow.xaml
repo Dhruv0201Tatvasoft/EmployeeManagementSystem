@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
+             xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              mc:Ignorable="d" 
              xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
              xmlns:chartingpremitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit"
@@ -11,12 +12,18 @@
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <UserControl.Resources>
     <ResourceDictionary>
-                <SolidColorBrush x:Key="GraphColor1">#00441b</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor2">#1b7837</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor3">#1fbf0a</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor4">#a6dba0</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor5">#1ce867</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor6">#aeebc4</SolidColorBrush>
+            <converter:ColorConverter x:Key="colorConverter"/>
+            <SolidColorBrush x:Key="GraphColor1">#132a13</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor2">#31572c</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor3">#4f772d</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor4">#90a955</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor5">#90a955</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor6">#53a548</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor7">#344e41</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor8">#3a5a40</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor9">#588157</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor10">#a3b18a</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor">#87986a</SolidColorBrush>
     </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="mainGrid" Margin="20">
@@ -40,9 +47,8 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Panel.ZIndex="99" FontSize="20" TextWrapping="Wrap" Grid.Row="0" Text="{TemplateBinding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Panel.ZIndex="99" FontSize="30" TextWrapping="Wrap" Grid.Row="0" Text="{TemplateBinding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <StackPanel Grid.Row="1" Panel.ZIndex="99" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
-                                
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Rectangle Fill="{StaticResource GraphColor1}" Width="10" Height="15"/>
                                     <TextBlock Margin="5 0 0 0" Text="Join" Foreground="Black" VerticalAlignment="Center"/>
@@ -52,7 +58,7 @@
                                     <TextBlock Margin="5 0 0 0" Text="Released" Foreground="Black" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </StackPanel>
-                            <chartingpremitives:EdgePanel Grid.Row="2"  x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+                            <chartingpremitives:EdgePanel Grid.Row="2" x:Name="ChartArea" >
                                 
                             </chartingpremitives:EdgePanel>
                         </Grid>
@@ -60,36 +66,36 @@
                 </ControlTemplate>
             </chart:Chart.Template>
             <chart:Chart.Series>
-                
-                <chart:ColumnSeries Title="Joined" ItemsSource="{Binding JoinedData}"  Background="White" IndependentValueBinding="{Binding Month}" DependentValueBinding="{Binding Value}">
+
+                <chart:ColumnSeries   ItemsSource="{Binding PastSixMonthJoinedEmployee}"  Background="White" IndependentValueBinding="{Binding Month}" DependentValueBinding="{Binding Count}">
                     <chart:ColumnSeries.DataPointStyle>
                         <Style TargetType="chart:ColumnDataPoint">
-                           
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="chart:ColumnDataPoint">
                                         <Grid>
-                                            <Rectangle Fill="{StaticResource GraphColor1}" Width="20"   StrokeThickness="1"/>
-                                            <TextBlock Text="{Binding Value}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="top"/>
+                                            <Rectangle Fill="{StaticResource GraphColor1}"  />
+                                            <TextBlock Text="{Binding Count}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="top"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                         </Style>
-                        
+
                     </chart:ColumnSeries.DataPointStyle>
-                 
+
                 </chart:ColumnSeries>
 
-                <chart:ColumnSeries Title="Released" ItemsSource="{Binding ReleasedData}" IndependentValueBinding="{Binding Month}" DependentValueBinding="{Binding Value}">
+                <chart:ColumnSeries Title="Released" ItemsSource="{Binding PastSixMonthReleaseDataTable}" IndependentValueBinding="{Binding Month}" DependentValueBinding="{Binding Count}">
                     <chart:ColumnSeries.DataPointStyle>
                         <Style TargetType="chart:ColumnDataPoint">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="chart:ColumnDataPoint">
                                         <Grid>
-                                            <Rectangle Width="20" Fill="{StaticResource GraphColor2}" StrokeThickness="1"/>
-                                            <TextBlock Text="{Binding Value}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                            <Rectangle  Fill="{StaticResource GraphColor2}" />
+                                            <TextBlock Text="{Binding Count}" Foreground="White" FontWeight="Bold" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                         </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -100,12 +106,12 @@
             </chart:Chart.Series>
             
             <chart:Chart.Axes>
-                <chart:CategoryAxis Title="X Axis Title" Orientation="X" Visibility="Hidden"/>
-                <chart:LinearAxis Title="Number of Employees" ShowGridLines="False" Orientation="Y" Visibility="Hidden"/>
+                <chart:CategoryAxis  Orientation="X" Visibility="Hidden"/>
+                <chart:LinearAxis  ShowGridLines="False" Orientation="Y" Visibility="Hidden"/>
             </chart:Chart.Axes>
            
         </chart:Chart>
-        <chart:Chart x:Name="PieCustomerChart" Title="Designation-Wise Employee" Margin="20">
+        <chart:Chart Grid.Column="0" Grid.Row="0" x:Name="DesignationWiseEmployee" Title="Designation-Wise Employee" Margin="20">
             <chart:Chart.Template>
                 <ControlTemplate TargetType="chart:Chart">
                     <Border 
@@ -113,34 +119,30 @@
          BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Panel.ZIndex="99" FontSize="20" TextWrapping="Wrap" Grid.Row="0" Text="{TemplateBinding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <StackPanel Grid.Row="1" Panel.ZIndex="99" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
-
+                            <TextBlock Panel.ZIndex="99" FontSize="30" TextWrapping="Wrap" Grid.Row="0" Text="{TemplateBinding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <WrapPanel Grid.Row="1" Panel.ZIndex="99" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+                              
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Rectangle Fill="{StaticResource GraphColor1}" Width="10" Height="15"/>
-                                    <TextBlock Margin="5 0 5 0" Text="Analysis" Foreground="Black" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="5 0 5 0" Text="Developer" Foreground="Black" VerticalAlignment="Center"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Rectangle Fill="{StaticResource GraphColor2}"  Width="10" Height="15"/>
-                                    <TextBlock Margin="5 0 5 0" Text="Coding" Foreground="Black" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="5 0 5 0" Text="Manager" Foreground="Black" VerticalAlignment="Center"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Rectangle Fill="{StaticResource GraphColor3}"  Width="10" Height="15"/>
-                                    <TextBlock Margin="5 0 5 0" Text="Communication" Foreground="Black" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="5 0 5 0" Text="Senior Developer" Foreground="Black" VerticalAlignment="Center"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Rectangle Fill="{StaticResource GraphColor4}"  Width="10" Height="15"/>
-                                    <TextBlock Margin="5 0 5 0" Text="Management" Foreground="Black" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="5 0 5 0" Text="Team Lead" Foreground="Black" VerticalAlignment="Center"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Rectangle Fill="{StaticResource GraphColor5}"  Width="10" Height="15"/>
-                                    <TextBlock Margin="5 0 5 0" Text="Testing" Foreground="Black" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </StackPanel>
+                            </WrapPanel>
                             <chartingpremitives:EdgePanel Grid.Row="2"  x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
 
                             </chartingpremitives:EdgePanel>
@@ -148,24 +150,22 @@
                     </Border>
                 </ControlTemplate>
             </chart:Chart.Template>
-            <chart:PieSeries   ItemsSource="{Binding tb}"
-				IndependentValuePath="Name"
-				DependentValuePath="TotalEmployee" 
+            <chart:PieSeries   ItemsSource="{Binding DesignationWiseEmpmloyee}"
+				IndependentValuePath="Designation"
+				DependentValuePath="Count" 
                 HorizontalAlignment="Stretch">
                 <chart:PieSeries.Palette>
                     <datavis:ResourceDictionaryCollection>
-                        <!-- Define a custom palette with different colors -->
-                
-                    <ResourceDictionary>
-                        <Style x:Key="DataPointStyle" TargetType="Control">
-                            <Setter Property="Background" Value="{StaticResource GraphColor1}"/>
-                        </Style>
-                    </ResourceDictionary>
-                    <ResourceDictionary>
-                        <Style x:Key="DataPointStyle" TargetType="Control">
-                            <Setter Property="Background" Value="{StaticResource GraphColor2}"/>
-                        </Style>
-                    </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="Control">
+                                <Setter Property="Background" Value="{StaticResource GraphColor1}"/>
+                            </Style>
+                        </ResourceDictionary>
+                        <ResourceDictionary>
+                            <Style x:Key="DataPointStyle" TargetType="Control">
+                                <Setter Property="Background" Value="{StaticResource GraphColor2}"/>
+                            </Style>
+                        </ResourceDictionary>
                         <ResourceDictionary>
                             <Style x:Key="DataPointStyle" TargetType="Control">
                                 <Setter Property="Background" Value="{StaticResource GraphColor3}"/>
@@ -176,17 +176,134 @@
                                 <Setter Property="Background" Value="{StaticResource GraphColor4}"/>
                             </Style>
                         </ResourceDictionary>
-                        <ResourceDictionary>
-                            <Style x:Key="DataPointStyle" TargetType="Control">
-                                <Setter Property="Background" Value="{StaticResource GraphColor5}"/>
-                            </Style>
-                        </ResourceDictionary>
-     
+                    
+
                     </datavis:ResourceDictionaryCollection>
-                        <!-- Add more ResourceDictionary entries for additional colors -->
-            </chart:PieSeries.Palette>
+                </chart:PieSeries.Palette>
             </chart:PieSeries>
-            
+        </chart:Chart>
+        <chart:Chart Grid.Column="0" Grid.Row="1"  x:Name="TechnologyWiseProject" Title="Technology Wise Projects" Margin="20">
+            <chart:Chart.Template>
+                <ControlTemplate TargetType="chart:Chart">
+                    <Border 
+                        BorderBrush="Black"
+                        BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Panel.ZIndex="99" FontSize="30" TextWrapping="Wrap" Grid.Row="0" Text="{TemplateBinding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <WrapPanel Grid.Row="1"  Panel.ZIndex="99" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+                                <ItemsControl   ItemsSource="{Binding TechnologyNames}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Rectangle Margin="5 0 0 0" Fill="{Binding Id, Converter={StaticResource colorConverter}}" Width="10" Height="15"/>
+                                                <TextBlock Margin="5 0 0 0" Text="{Binding Name}" Foreground="Black" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </WrapPanel>
+                            <chartingpremitives:EdgePanel Grid.Row="2"  x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+
+                            </chartingpremitives:EdgePanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </chart:Chart.Template>
+            <chart:PieSeries Name="TecnologyWiseProjectChart"  ItemsSource="{Binding TechnologyWiseProject}"
+		IndependentValuePath="Name"
+		DependentValuePath="Count" 
+        HorizontalAlignment="Stretch">
+
+                <chart:PieSeries.DataPointStyle>
+                    
+                    <Style TargetType="Control" >
+                        <Setter Property="ToolTip">
+                            <Setter.Value>
+                                <ToolTip>
+                                    <TextBlock Text="{Binding ActualIndependentValue}" />
+                                </ToolTip>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="{Binding Id, Converter={StaticResource colorConverter}}"/>
+                    </Style>
+                </chart:PieSeries.DataPointStyle>
+            </chart:PieSeries>
+        </chart:Chart>
+        <chart:Chart Name="SkillWiseEmployee" Title="Skill Wise Employee"  Background="Transparent" Grid.Column="1" Grid.Row="1"  Margin="20">
+            <chart:Chart.Template>
+                <ControlTemplate TargetType="chart:Chart">
+                    <Border 
+          BorderBrush="Black"
+          BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"  />
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Panel.ZIndex="99" FontSize="30" TextWrapping="Wrap" Grid.Row="0" Text="{TemplateBinding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <WrapPanel Grid.Row="1"  Panel.ZIndex="99" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+                                <ItemsControl   ItemsSource="{Binding SkillsNames}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Rectangle Margin="5 0 0 0" Fill="{Binding Id, Converter={StaticResource colorConverter}}" Width="10" Height="15"/>
+                                                <TextBlock Margin="5 0 0 0" Text="{Binding Name}" Foreground="Black" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </WrapPanel>
+                            <chartingpremitives:EdgePanel Grid.Row="2" x:Name="ChartArea" >
+
+                            </chartingpremitives:EdgePanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </chart:Chart.Template>
+            <chart:Chart.Series>
+
+                <chart:ColumnSeries   ItemsSource="{Binding SkillWiseEmployee}"  Background="White" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Count}">
+                    <chart:ColumnSeries.DataPointStyle>
+                        <Style TargetType="chart:ColumnDataPoint">
+                            
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="chart:ColumnDataPoint">
+                                        <Grid>
+                                            <Rectangle Fill="{Binding SkillId, Converter={StaticResource colorConverter}}"  />
+                                            <TextBlock Text="{Binding Count}" Foreground="White" Margin="0 5 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="top"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </chart:ColumnSeries.DataPointStyle>
+
+                </chart:ColumnSeries>
+
+            </chart:Chart.Series>
+
+            <chart:Chart.Axes>
+                <chart:CategoryAxis  Orientation="X" Visibility="Hidden"/>
+                <chart:LinearAxis  ShowGridLines="False" Orientation="Y" Visibility="Hidden"/>
+            </chart:Chart.Axes>
 
         </chart:Chart>
     </Grid>

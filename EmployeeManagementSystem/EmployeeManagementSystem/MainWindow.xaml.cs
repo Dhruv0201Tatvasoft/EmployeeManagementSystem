@@ -51,7 +51,7 @@ namespace EmployeeManagementSystem
             switch (menuItem.Header.ToString())
             {
                 case "Dashboard":
-                    mainContent.Content = new TextBlock() { Text = "Dashboard Content" };
+                    mainContent.Content = new DashboardWindow();
                     selectedMenuItem = menuItem;
                     break;
 

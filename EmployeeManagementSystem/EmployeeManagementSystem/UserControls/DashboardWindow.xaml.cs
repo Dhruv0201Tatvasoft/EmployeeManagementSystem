@@ -19,6 +19,7 @@ using System.Windows.Controls.DataVisualization.Charting;
 using EmployeeManagementSystem.Database;
 using System.Data;
 using Xceed.Wpf.Toolkit.PropertyGrid.Converters;
+using System.Windows.Controls.DataVisualization;
 
 namespace EmployeeManagementSystem.UserControls
 {
@@ -32,9 +33,10 @@ namespace EmployeeManagementSystem.UserControls
             InitializeComponent();
             DashboardViewModel viewModel = new DashboardViewModel();
             this.DataContext = viewModel;
+            
+
         }
+
     }
-
-
 }
 
