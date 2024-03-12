@@ -49,7 +49,6 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.EditEvent += ViewModel_EditEvent;
             getData = new GetData();
             viewModel.AddEmployeeEvent += refreshEmployeeDatagrid;
-            this.SizeChanged += sizechanged;
 
 
         }
@@ -64,21 +63,7 @@ namespace EmployeeManagementSystem.UserControls
 
       
 
-        private void sizechanged(object sender, SizeChangedEventArgs e)
-        {
-            if (e.NewSize.Width > 1180)
-            {
-                this.DataGridColumnWidth.Width = 0.14 * this.ActualWidth;
    
-         
-            }
-            else
-            {
-                this.DataGridColumnWidth.Width = 0.22 * this.ActualWidth;
-
-            }
-        }
-
         private void ViewModel_EditEvent(object? sender, EventArgs e)
         {            
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
