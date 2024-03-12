@@ -36,7 +36,7 @@
             </StackPanel>
 
             <TextBlock VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Text="Skill:" Margin="20,42,0,0" />
-            <TextBox Text="{Binding SkillName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="250" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,34,0,0" Grid.Column="1" Height="32"  Style="{DynamicResource CustomInputStyle}"/>
+            <TextBox Tag="skill" Text="{Binding SkillName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="250" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,34,0,0" Grid.Column="1" Height="32"  Style="{DynamicResource CustomInputStyle}"/>
             <Button Grid.Column="2" Command="{Binding SaveCommand}" Width="120" Height="30" Margin="0 20 10 0" Content="Save" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
             <Button Grid.Column="3" Command="{Binding EditCommand}" Width="120" Height="30" Margin="0 20 10 0" Content="Edit" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
             <Button Grid.Column="4" Command="{Binding DeleteCommand}" Width="120" Height="30" Margin="0 20 10 0"  Content="Delete" Style="{DynamicResource ButtonStyle}"  Grid.Row="1" ></Button>

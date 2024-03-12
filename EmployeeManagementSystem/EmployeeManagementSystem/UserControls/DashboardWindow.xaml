@@ -17,13 +17,12 @@
             <SolidColorBrush x:Key="GraphColor2">#31572c</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor3">#4f772d</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor4">#90a955</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor5">#90a955</SolidColorBrush>
+            <SolidColorBrush x:Key="GraphColor5">#87986a</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor6">#53a548</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor7">#344e41</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor8">#3a5a40</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor9">#588157</SolidColorBrush>
             <SolidColorBrush x:Key="GraphColor10">#a3b18a</SolidColorBrush>
-            <SolidColorBrush x:Key="GraphColor">#87986a</SolidColorBrush>
     </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="mainGrid" Margin="20">

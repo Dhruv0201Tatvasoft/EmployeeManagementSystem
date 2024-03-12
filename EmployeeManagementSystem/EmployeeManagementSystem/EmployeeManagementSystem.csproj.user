@@ -28,6 +28,9 @@
     <Compile Update="UserControls\EmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UserControls\LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UserControls\ProjectWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +64,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\EmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\ProjectWindow.xaml">

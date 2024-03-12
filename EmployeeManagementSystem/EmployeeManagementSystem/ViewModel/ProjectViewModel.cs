@@ -75,7 +75,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { name = value; OnPropertyChanged("Name"); }
         }
 
-        private DateTime? startingDate = new DateTime(1990, 01, 01);
+        private DateTime? startingDate = DateTime.Now;
         public DateTime? StartingDate
         {
             get { return startingDate; }

@@ -378,25 +378,25 @@ namespace EmployeeManagementSystem.ViewModel
             bool didsaved = false;
             if (ReleaseDate != null)
             {
-                MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-                     $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-                     $"Release Date: {ReleaseDate}\nBirth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-                     $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-                if (result == MessageBoxResult.OK)
-                {
+                //MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
+                //     $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
+                //     $"Release Date: {ReleaseDate}\nBirth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
+                //     $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
+                //if (result == MessageBoxResult.OK)
+                //{
                     didsaved = insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, (DateTime)ReleaseDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
-                }
+                //}
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-                      $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-                      $"Birth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-                      $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-                if (result == MessageBoxResult.OK)
-                {
+                //MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
+                //      $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
+                //      $"Birth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
+                //      $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
+                //if (result == MessageBoxResult.OK)
+                //{
                     didsaved = insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
-                }
+                //}
             }
             if (didsaved)
             {

@@ -5,7 +5,7 @@ using System.Data;
 using System.Windows.Input;
 namespace EmployeeManagementSystem.ViewModel
 {
-    internal class AddProjectViewModel:INotifyPropertyChanged,IDataErrorInfo
+    internal class AddProjectViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
 
         private DataTable dataTable;
@@ -24,12 +24,12 @@ namespace EmployeeManagementSystem.ViewModel
             ChangeWindowEvent?.Invoke(this, e);
         }
         private InsertData insertData;
-      
+
         private List<int> selectedtechnlogyIds = new List<int>();
         public List<int> SelectedTechnologyNames
         {
             get { return selectedtechnlogyIds; }
-            set { selectedtechnlogyIds= value; }   
+            set { selectedtechnlogyIds = value; }
         }
         private DataRowView selectedTechnologyRow;
         public DataRowView SelectedTechnologyRow
@@ -55,33 +55,44 @@ namespace EmployeeManagementSystem.ViewModel
 
         private string code = string.Empty;
         public string Code
-        {get{return code;}  
-            set{
+        {
+            get { return code; }
+            set
+            {
                 code = value;
                 OnPropertyChanged("Code");
             }
         }
 
-        private string name=string.Empty;
-        public string Name { get {  return name;} 
-            set {
+        private string name = string.Empty;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
                 name = value;
                 OnPropertyChanged("Name");
-            } }
+            }
+        }
 
-        private DateTime startingDate = DateTime.Now ;
-        public DateTime StartingDate{ 
-            get { return startingDate; } 
-            set {
+        private DateTime startingDate = DateTime.Now;
+        public DateTime StartingDate
+        {
+            get { return startingDate; }
+            set
+            {
                 startingDate = value;
                 OnPropertyChanged("StartingDate");
-                OnPropertyChanged("EndingDate");    
+                OnPropertyChanged("EndingDate");
             }
-                }
+        }
         private DateTime? endingDate;
-        public DateTime? EndingDate{ get { return endingDate; } 
-            set {
-                endingDate= value;
+        public DateTime? EndingDate
+        {
+            get { return endingDate; }
+            set
+            {
+                endingDate = value;
                 OnPropertyChanged("EndingDate");
                 OnPropertyChanged("StartingDate");
 
@@ -118,7 +129,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-    
+
 
         private ICommand saveCommand;
         public ICommand SaveCommand
@@ -133,9 +144,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-     
 
-       
+
+
         private bool CanSaveExecute(object arg)
         {
             return true;
@@ -150,7 +161,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
             else
             {
-                didSaved= insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
+                didSaved = insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
             }
             if (didSaved)
             {
@@ -158,23 +169,23 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-      
+
         public AddProjectViewModel()
         {
             getData = new GetData();
             dataTable = new DataTable();
             dataTable = getData.GetTechnologyData();
             insertData = new InsertData();
-           
-            OnPropertyChanged("dataTable");   
+
+            OnPropertyChanged("dataTable");
         }
 
-       
+
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(String propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-   
+
 }

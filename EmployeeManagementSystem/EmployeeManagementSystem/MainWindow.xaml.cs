@@ -28,7 +28,7 @@ namespace EmployeeManagementSystem
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
             mainContent.Content =new DashboardWindow();
-            selectedMenuItem = HeaderMenuItem;
+            selectedMenuItem = DashboardMenuItem;
             selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
         }
 
@@ -86,6 +86,11 @@ namespace EmployeeManagementSystem
         private void ClosePopUpClick(object sender, RoutedEventArgs e)
         {
             MyPopup.IsOpen = false;
+        }
+
+        private void login_Click(object sender, RoutedEventArgs e)
+        {
+            mainContent.Content = new LoginWindow();
         }
     }
 }

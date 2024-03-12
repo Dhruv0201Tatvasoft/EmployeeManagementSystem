@@ -59,11 +59,11 @@
             <StackPanel Margin="0 10 0 0 "  Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter} }" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Code:"  TextAlignment="Left" />
-                    <TextBox  Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox  Tag="code" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Name:"  TextAlignment="Left"/>
-                    <TextBox  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox Tag="name"  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="StackPanel1"  Margin="0 0 0 10" Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter}}">
@@ -71,12 +71,12 @@
 
                 <StackPanel  Orientation="Horizontal">
                     <TextBlock  VerticalAlignment="Center" Width="100" Text="Department:"  TextAlignment="Left"  Margin="0 0 0 20"/>
-                    <ComboBox ItemsSource="{Binding Department}" SelectedItem="{Binding SelectedDepartment,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Delay=1}"  VerticalAlignment="Center" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  Style="{DynamicResource CustomComboBoxStyle}"/>
+                    <ComboBox Text="{Binding CombTextDepartment,Mode=TwoWay}" ItemsSource="{Binding Department}" SelectedItem="{Binding SelectedDepartment,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Delay=1}"  VerticalAlignment="Center"   IsEditable="True" IsReadOnly="True" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  Style="{DynamicResource CustomComboBoxStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
 
                     <TextBlock  Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Designation:"  TextAlignment="Left"/>
-                    <ComboBox  SelectedItem="{Binding SelectedDesignation,Mode=TwoWay,Delay=1,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Designation}"   Width="250"  Margin="0 0 0 20"  Height="32" Style="{DynamicResource CustomComboBoxStyle}">
+                    <ComboBox Text="{Binding CombTextDesignation,Mode=TwoWay}"  SelectedItem="{Binding SelectedDesignation,Mode=TwoWay,Delay=1,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Designation}"   Width="250"  IsEditable="True" IsReadOnly="True"  Margin="0 0 0 20"  Height="32" Style="{DynamicResource CustomComboBoxStyle}">
                     </ComboBox>
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">

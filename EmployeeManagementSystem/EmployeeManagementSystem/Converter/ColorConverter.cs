@@ -17,7 +17,7 @@ namespace EmployeeManagementSystem.Converter
             new SolidColorBrush(Color.FromRgb(49, 87, 44)),
             new SolidColorBrush(Color.FromRgb(79, 119, 45)),
             new SolidColorBrush(Color.FromRgb(144, 169, 85)),
-            new SolidColorBrush(Color.FromRgb(144, 169, 85)),
+            new SolidColorBrush(Color.FromRgb(135, 152, 106)),
             new SolidColorBrush(Color.FromRgb(83, 165, 72)),
             new SolidColorBrush(Color.FromRgb(52, 78, 65)),
             new SolidColorBrush(Color.FromRgb(58, 90, 64)),

@@ -63,34 +63,34 @@
                     </Grid.RowDefinitions>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Code:" Margin="20 20 0 0" Height="20" Width="auto" />
-                    <TextBox Text="{Binding Code, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Code" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="code" Text="{Binding Code, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Code" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" Content="First Name:" Margin="20 20 0 0" Height="20" Width="auto"   />
-                    <TextBox Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="FirstName" MaxWidth="250" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="firstname" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="FirstName" MaxWidth="250" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl  Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Content="Last Name:" Margin="20 20 0 0" Height="20"  />
-                    <TextBox   Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="LastName" Grid.Row="1" Grid.Column="3" Height="32" Style="{DynamicResource CustomInputStyle}"  Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0" MaxWidth="250"></TextBox>
+                    <TextBox  Tag="lastname" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="LastName" Grid.Row="1" Grid.Column="3" Height="32" Style="{DynamicResource CustomInputStyle}"  Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0" MaxWidth="250"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Content="Email:" Margin="20 20 0 0" Height="20" />
-                    <TextBox Text="{Binding Email, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Email"  MaxWidth="250" Grid.Row="2" Grid.Column="1" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="email" Text="{Binding Email, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Email"  MaxWidth="250" Grid.Row="2" Grid.Column="1" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}"  MaxWidth="120"  Grid.Row="3" Grid.Column="0"  VerticalAlignment="Center" Content="Password:" Margin="20 20 0 0" Height="20"   />
-                    <TextBox Text="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Password" MaxWidth="250" Grid.Row="3" Grid.Column="1" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="password" Text="{Binding Password, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Password" MaxWidth="250" Grid.Row="3" Grid.Column="1" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
-                    <TextBlock MaxWidth="120" TextWrapping="Wrap" Grid.Row="3"  Grid.Column="2" VerticalAlignment="Center" Text="Confirm Password:" Margin="20 20 0 0" Height="auto"  TextAlignment="Left"  />
-                    <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="ConfirmPassword" MaxWidth="250" Grid.Row="3" Grid.Column="3" Height="32" Width="auto" VerticalAlignment="Top" Style="{DynamicResource CustomInputStyle}" Margin="0,20,0,0"></TextBox>
+                    <TextBlock  MaxWidth="120" TextWrapping="Wrap" Grid.Row="3"  Grid.Column="2" VerticalAlignment="Center" Text="Confirm Password:" Margin="20 20 0 0" Height="auto"  TextAlignment="Left"  />
+                    <TextBox Tag="confirm password" Text="{Binding ConfirmPassword, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="ConfirmPassword" MaxWidth="250" Grid.Row="3" Grid.Column="3" Height="32" Width="auto" VerticalAlignment="Top" Style="{DynamicResource CustomInputStyle}" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" Content="Department:" Margin="20 20 0 0" Height="20"  />
-                    <ComboBox ItemsSource="{Binding Department}" Name="Department" SelectedItem="{Binding SelectedDepartment, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"  MaxWidth="250" Grid.Row="4" Grid.Column="1" Height="32" Width="auto" Style="{DynamicResource CustomComboBoxStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></ComboBox>
+                    <ComboBox IsEditable="True" IsReadOnly="True" Text="Select" ItemsSource="{Binding Department}" Name="Department" SelectedItem="{Binding SelectedDepartment, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"  MaxWidth="250" Grid.Row="4" Grid.Column="1" Height="32" Width="auto" Style="{DynamicResource CustomComboBoxStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></ComboBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Content="Designation:" Margin="20 20 0 0" Height="20" Width="120" />
-                    <ComboBox ItemsSource="{Binding Designation}" Name="Designation" SelectedItem="{Binding SelectedDesignation, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"  MaxWidth="250" Height="32" Width="auto" Grid.Column="3" Grid.Row="4" VerticalAlignment="Top" Style="{DynamicResource CustomComboBoxStyle}"  Margin="0,20,0,0"></ComboBox>
+                    <ComboBox Text="Select" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Designation}" Name="Designation" SelectedItem="{Binding SelectedDesignation, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"  MaxWidth="250" Height="32" Width="auto" Grid.Column="3" Grid.Row="4" VerticalAlignment="Top" Style="{DynamicResource CustomComboBoxStyle}"  Margin="0,20,0,0"></ComboBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120"  VerticalAlignment="Center" Content="Joining Date:" Margin="20 20 0 0" Height="20" Grid.Column="0" Grid.Row="5" />
-                    <DatePicker Name="JoiningDate" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12" Text="{Binding JoiningDate, TargetNullValue='', ValidatesOnDataErrors=True, Mode=TwoWay, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}"   MaxWidth="250" Grid.Row="5" Grid.Column="1" Height="32" Width="auto" Style="{DynamicResource CustomInputStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></DatePicker>
+                    <DatePicker Name="JoiningDate" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/10/12" Text="{Binding JoiningDate, TargetNullValue='', ValidatesOnDataErrors=True, Mode=TwoWay, StringFormat=dd/MM/yyyy, UpdateSourceTrigger=PropertyChanged}"   MaxWidth="250" Grid.Row="5" Grid.Column="1" Height="32" Width="auto"  Style="{DynamicResource CustomDatePickerStyle}"  VerticalAlignment="Top" Margin="0,20,0,0"></DatePicker>
 
                     <TextBlock MaxWidth="120"  Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Text="Release Date:" Margin="20 20 0 0" Height="20" TextAlignment="Left" />
-                    <DatePicker  Name="ReleaseDate" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged, TargetNullValue='', ValidatesOnDataErrors=True, Mode=TwoWay, StringFormat=dd/MM/yyyy}"  MaxWidth="250" Height="32" Width="auto" Grid.Column="3" Grid.Row="5" VerticalAlignment="Top" Style="{DynamicResource CustomInputStyle}"  Margin="0,20,0,0"></DatePicker>
+                    <DatePicker  Name="ReleaseDate" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/10/12"  Text="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged, TargetNullValue='', ValidatesOnDataErrors=True, Mode=TwoWay, StringFormat=dd/MM/yyyy}"  MaxWidth="250" Height="32" Width="auto" Grid.Column="3" Grid.Row="5" VerticalAlignment="Top"  Style="{DynamicResource CustomDatePickerStyle}"   Margin="0,20,0,0"></DatePicker>
 
 
                     <Grid Grid.Row="6" Grid.ColumnSpan="6">
@@ -155,9 +155,9 @@
                     </Grid.RowDefinitions>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}"  MaxWidth="120" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Date Of Birth:" Margin="20 20 0 0" Height="20" Width="auto" />
-                    <DatePicker Name="DOB"  SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="2036/10/12"  Text="{Binding DOB,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></DatePicker>
+                    <DatePicker Name="DOB"  SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Text="{Binding DOB,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250"  Style="{DynamicResource CustomDatePickerStyle}"  Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></DatePicker>
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" Content="Contact Number:" Margin="20 20 0 0" Height="auto" Width="auto"  />
-                    <TextBox x:Name="ContactNumber" Text="{Binding ContactNumber,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" Grid.Column="3" Grid.Row="0" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="contact number" x:Name="ContactNumber" Text="{Binding ContactNumber,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" Grid.Column="3" Grid.Row="0" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Content="Gender:" Margin="20 20 0 0" Height="20"  />
                     <StackPanel Width="auto" Margin="0,20,0,0"  HorizontalAlignment="Stretch"  Height="32" MaxWidth="250"  Orientation="Horizontal"  VerticalAlignment="Top" Grid.Row="1" Grid.Column="1">
@@ -165,16 +165,16 @@
                         <RadioButton Content="Female" IsChecked="{Binding Gender , Converter={StaticResource radiobuttonconverter},ConverterParameter=Female}"   Margin="10 0 0 0" Style="{DynamicResource RadioButtonStyle}" />
                     </StackPanel>
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Content="Maritial Status:" Margin="20 20 0 0" Height="20" />
-                    <ComboBox Name="MaritalStatus" ItemsSource="{Binding MaritalStatus}" SelectedItem="{Binding SelectedMaritialStatus, Mode=TwoWay,ValidatesOnDataErrors=True}" MaxWidth="250" Grid.Row="1" Grid.Column="3" Height="32" Width="auto" Style="{DynamicResource CustomComboBoxStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></ComboBox>
+                    <ComboBox Text="Select"  IsEditable="True" IsReadOnly="True" Name="MaritalStatus" ItemsSource="{Binding MaritalStatus}" SelectedItem="{Binding SelectedMaritialStatus, Mode=TwoWay,ValidatesOnDataErrors=True}" MaxWidth="250" Grid.Row="1" Grid.Column="3" Height="32" Width="auto" Style="{DynamicResource CustomComboBoxStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></ComboBox>
 
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Content="Present Address:" Margin="20 20 0 0" Height="auto" />
-                    <TextBox Name="PresentAddress" Text="{Binding PresentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="present address" Name="PresentAddress" Text="{Binding PresentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
                     
                     <TextBlock TextWrapping="Wrap" MaxWidth="120" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" Text="Permanent Address:" Margin="20 20 0 0" Height="auto" TextAlignment="Left" />
                     <StackPanel Margin="0 20 0 0" Grid.Row="2" Grid.Column="3" VerticalAlignment="top" Height="auto"  Orientation="Vertical">
                         <CheckBox IsChecked="{Binding IsCheckBoxChecked,Mode=TwoWay}" MaxWidth="250" Height="auto" Width="auto" VerticalAlignment="Top" Style="{DynamicResource CustomCheckBoxStyle}"  Content="Same as Peresent"/>
-                        <TextBox x:Name="PermanentAddress"  Text="{Binding PermanentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                        <TextBox Tag="permanent address" x:Name="PermanentAddress"  Text="{Binding PermanentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
                     </StackPanel>
                     <Grid Grid.Row="4" Grid.ColumnSpan="6">
                         <Grid.ColumnDefinitions>
@@ -230,7 +230,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1"  Text="{Binding Qualification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="qualification" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1"  Text="{Binding Qualification, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -242,7 +242,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding BoardUniversity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="board" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding BoardUniversity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -254,7 +254,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding InstituteName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="name of school" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding InstituteName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -266,7 +266,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="state" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -278,7 +278,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding PassingYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="year" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding PassingYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -290,7 +290,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="Percentage" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -355,7 +355,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1"  Text="{Binding Organization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="organization" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1"  Text="{Binding Organization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -367,7 +367,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <DatePicker Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding FromDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DatePicker DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Style="{DynamicResource CustomDatePickerStyle}"  HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding FromDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -379,7 +379,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <DatePicker Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DatePicker DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Style="{DynamicResource CustomDatePickerStyle}"  HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -392,7 +392,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <ComboBox Style="{DynamicResource CustomComboBoxStyle}" ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
+                                        <ComboBox Text="Select" IsEditable="True" IsReadOnly="True" Style="{DynamicResource CustomComboBoxStyle}" ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
                                             
                                         </ComboBox>
                                         

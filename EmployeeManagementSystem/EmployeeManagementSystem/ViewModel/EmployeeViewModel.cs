@@ -107,6 +107,13 @@ namespace EmployeeManagementSystem.ViewModel
             }
 
         }
+        private string combTextDesignation = "Select Designation";
+
+        public string CombTextDesignation
+        {
+            get { return combTextDesignation; }
+            set { combTextDesignation = value; OnPropertyChanged("CombTextDesignation"); }
+        }
 
         private string selectedDesignation;
         public string SelectedDesignation
@@ -119,6 +126,19 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 selectedDesignation = value;
                 OnPropertyChanged("SelectedDesignation");
+            }
+        }
+
+        private string combTextDepartment = "Select Department";
+
+        public string CombTextDepartment
+        {
+            get { return combTextDepartment; }
+            set
+            {
+                combTextDepartment = value;
+
+                OnPropertyChanged("CombTextDepartment");
             }
         }
         private string selectedDepartment;
@@ -228,6 +248,8 @@ namespace EmployeeManagementSystem.ViewModel
         {
             employeeDataTable = getData.GetEmployeeSearchData(Code, Name, selectedDepartment, selectedDesignation);
             Code = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
+            CombTextDepartment = "Select Department";
+            CombTextDesignation = "Select Designation";
             OnPropertyChanged("EmployeeDataTable");
         }
 
@@ -307,8 +329,8 @@ namespace EmployeeManagementSystem.ViewModel
 
         private bool CanViewEmployeeDetailsCommandExecute(object arg)
         {
-           if (selectedEmployee==null) return false;
-           return true;
+            if (selectedEmployee == null) return false;
+            return true;
         }
 
         private void ExecuteViewEmployeeDetailsCommand(object obj)
