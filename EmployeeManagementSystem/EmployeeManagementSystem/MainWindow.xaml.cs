@@ -91,6 +91,7 @@ namespace EmployeeManagementSystem
         private void login_Click(object sender, RoutedEventArgs e)
         {
             mainContent.Content = new LoginWindow();
+            selectedMenuItem.ClearValue(Control.BackgroundProperty);
         }
     }
 }

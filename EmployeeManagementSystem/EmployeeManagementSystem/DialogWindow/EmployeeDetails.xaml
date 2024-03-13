@@ -108,7 +108,7 @@
                     CanUserAddRows="False"
                     SelectionMode="Single"
                     HeadersVisibility="Column"
-                    SelectedItem="{Binding SelectedEmployee}"   >
+                    >
                 <DataGrid.Columns>
                     <DataGridTextColumn Width=".2*" Header="Organization" Binding="{Binding Organization}"/>
                     <DataGridTextColumn Width=".2*" Header="Duration" Binding="{Binding Duration}"/>

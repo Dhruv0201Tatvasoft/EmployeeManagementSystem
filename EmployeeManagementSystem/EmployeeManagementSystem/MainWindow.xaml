@@ -513,8 +513,8 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderBrush="Black" BorderThickness="0.5">
-                <DockPanel Grid.Row="0" >
+            <Border x:Name="menuitem" BorderBrush="Black" BorderThickness="0.5">
+                <DockPanel  Grid.Row="0" >
 
                     <Menu  Grid.Column="0" x:Name="MenuControl" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Grid.ColumnSpan="2">
 

@@ -1,18 +1,8 @@
-﻿using EmployeeManagementSystem.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace EmployeeManagementSystem.UserControls
 {
@@ -25,26 +15,52 @@ namespace EmployeeManagementSystem.UserControls
         {
             InitializeComponent();
             LoginViewModel loginViewModel = new LoginViewModel();
+            loginViewModel.IncorrectLoginEvent += LoginViewModel_IncorrectLoginEvent;
+            loginViewModel.CorrectLoginEvent += LoginViewModel_CorrectLoginEvent;
+            username.GotFocus += Username_GotFocus;
+            passwordBox.GotFocus += Username_GotFocus;
+            textBox.GotFocus += Username_GotFocus;
             this.DataContext = loginViewModel;
         }
 
-        private void PART_ShowHideButton_Click(object sender, RoutedEventArgs e)
+        private void LoginViewModel_CorrectLoginEvent(object? sender, EmployeeEventArgs e)
         {
-            if (textBox.Visibility == Visibility.Collapsed)
-            {
-                passwordBox.Visibility = System.Windows.Visibility.Collapsed;
-                textBox.Visibility = System.Windows.Visibility.Visible;
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.menuitem.Visibility = Visibility.Collapsed;
+            mainWindow.mainContent.Content = new EmployeeLoginDetails(e.emp);
 
-                textBox.Focus();
-            }
-            else
-            {
-                // Show password box and hide plain text box
-                passwordBox.Visibility = System.Windows.Visibility.Visible;
-                textBox.Visibility = System.Windows.Visibility.Collapsed;
-
-                passwordBox.Focus();
-            }
         }
+
+        private void Username_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtBlock.Text = string.Empty;
+        }
+
+        private void LoginViewModel_IncorrectLoginEvent(object? sender, EventArgs e)
+        {
+            txtBlock.Text = "Incorrect username or password";
+        }
+
+
+
+
+
+        private void ShowPasswordCharsCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            passwordBox.Visibility = Visibility.Collapsed;
+            textBox.Visibility = Visibility.Visible;
+        }
+        private void ShowPasswordCharsCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            passwordBox.Visibility = Visibility.Visible;
+            textBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((dynamic)this.DataContext).Password = passwordBox.Password;
+        }
+
+
     }
 }

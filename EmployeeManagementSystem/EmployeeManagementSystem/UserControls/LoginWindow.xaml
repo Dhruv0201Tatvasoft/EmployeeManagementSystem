@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodel="clr-namespace:EmployeeManagementSystem.ViewModel"
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" d:Background="White">
@@ -11,44 +12,7 @@
         <viewmodel:LoginViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
-            <ControlTemplate x:Key="PasswordBoxTemplate" TargetType="PasswordBox">
-        <Grid>
-            <Border x:Name="PART_Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                <Grid>
-                    <PasswordBox x:Name="PART_PasswordBox"
-                                     Padding="{TemplateBinding Padding}"
-                                     HorizontalContentAlignment="Stretch"
-                                     VerticalContentAlignment="Center"
-                                     FontFamily="{TemplateBinding FontFamily}"
-                                     FontSize="{TemplateBinding FontSize}"
-                                     Foreground="{TemplateBinding Foreground}"
-                                     Background="Transparent"
-                                     BorderBrush="Transparent"
-                                     PasswordChar="●"/>
-                    <Button x:Name="PART_ShowHideButton"
-                                Content="👁"
-                                Width="25"
-                                Height="25"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Margin="0,0,5,0"
-                                Click="PART_ShowHideButton_Click"
-                                Background="Transparent"
-                                BorderBrush="Transparent"/>
-                </Grid>
-            </Border>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="PART_Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-                <Setter TargetName="PART_Border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-        </ControlTemplate>
+         
     </UserControl.Resources>
     <Border Background="#dad7cd" CornerRadius="10" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid   HorizontalAlignment="Center" VerticalAlignment="Center" Height="370" Width="520">
@@ -64,11 +28,17 @@
             </Grid.RowDefinitions>
             <TextBlock Margin="20"  Grid.Row="0" FontSize="35" Grid.Column="0" HorizontalAlignment="Center" Text="Login" Grid.ColumnSpan="2"/>
             <TextBlock Margin="20 0 0 0" VerticalAlignment="Center" Text="Username" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" FontSize="16"/>
-            <TextBox Height="32"  Grid.Row="1" Grid.Column="1" MaxHeight="32" Width="300" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBox Name="username" Height="32" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
             <TextBlock Margin="20 0 0 0" Text="Password" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" FontSize="16"/>
-            <PasswordBox  x:Name="passwordBox" PasswordChar="●" Template="{StaticResource PasswordBoxTemplate}" Password="{Binding Text, Mode=TwoWay, ElementName=textBox}" Grid.Row="2"  HorizontalAlignment="Left" Grid.Column="1" MaxHeight="32" Width="300" />
-            <TextBox Grid.Row="2"  HorizontalAlignment="Left" Grid.Column="1" MaxHeight="32" Width="300"  x:Name="textBox" Text="{Binding Password, Mode=TwoWay, ElementName=passwordBox}"  VerticalAlignment="Top" Margin="10" Visibility="Collapsed"/>
-            <Button MaxWidth="100" Height="32" Content="Login" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource ButtonStyle}"/>
+            <StackPanel  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
+                <PasswordBox x:Name="passwordBox" PasswordChar="●"   PasswordChanged="passwordBox_PasswordChanged" HorizontalAlignment="Left" Height="32" Width="300" />
+                <TextBox HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}" Height="32" Width="300" x:Name="textBox" Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"/>
+                <CheckBox x:Name="ShowPasswordCharsCheckBox" Content="Show Password" Checked="ShowPasswordCharsCheckBox_Checked" Unchecked="ShowPasswordCharsCheckBox_Unchecked" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <Button  MaxWidth="100" Height="32" Content="Login" Command="{Binding LoginCommnad}" Style="{DynamicResource ButtonStyle}"/>
+                <TextBlock Name="txtBlock" FontSize="15" VerticalAlignment="Center" Foreground="red" TextAlignment="Center"/>
+            </StackPanel>
 
         </Grid>
     </Border>

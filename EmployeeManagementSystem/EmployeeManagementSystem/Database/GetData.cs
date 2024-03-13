@@ -101,12 +101,13 @@ namespace EmployeeManagementSystem.Database
                         }
                     }
                 }
+                return dt;
             }
             catch (Exception)
             {
                 MessageBox.Show("Error in Fetching data from database");
+                return new DataTable();
             }
-            return dt;
         }
 
         public DataTable GetTechnologyData()
@@ -393,10 +394,10 @@ namespace EmployeeManagementSystem.Database
                             {
                                 Qualification = reader["Qualification"].ToString(),
                                 BoardUniversity = reader["Board"].ToString(),
-                                InstituteName= reader["Institute"].ToString(),
-                                State= reader["State"].ToString(),
-                                PassingYear= reader["PassingYear"].ToString(),
-                                Percentage= reader["Percentage"].ToString(),
+                                InstituteName = reader["Institute"].ToString(),
+                                State = reader["State"].ToString(),
+                                PassingYear = reader["PassingYear"].ToString(),
+                                Percentage = reader["Percentage"].ToString(),
                             };
                             employee.EducationModels.Add(employeeEducation);
                         }
@@ -410,13 +411,13 @@ namespace EmployeeManagementSystem.Database
                         int count = reader.FieldCount;
                         while (reader.Read())
                         {
-                            EmployeeExperienceModel employeeExperienceModel= new EmployeeExperienceModel
+                            EmployeeExperienceModel employeeExperienceModel = new EmployeeExperienceModel
                             {
                                 Organization = reader["Organization"].ToString(),
-                                FromDate= (DateTime)reader["FromDate"],
+                                FromDate = (DateTime)reader["FromDate"],
                                 ToDate = (DateTime)reader["ToDate"],
-                                Designation= reader["Designation"].ToString(),
-                                
+                                Designation = reader["Designation"].ToString(),
+
                             };
                             employee.ExperienceModels.Add(employeeExperienceModel);
                         }
@@ -592,6 +593,34 @@ namespace EmployeeManagementSystem.Database
                 MessageBox.Show("Error in Fetching data from database");
             }
             return dt;
+        }
+        public String ExecuteLogin(string Username, string Password)
+        {
+            string query = $"select Code from EmsTblEmployee Where Email like '{Username}' COLLATE Latin1_General_CS_AS AND password like '{Password}' COLLATE Latin1_General_CS_AS ";
+            string Code = string.Empty;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                {
+                    conn.Open();
+                    using(SqlCommand command = new SqlCommand(query, conn))
+                    {
+                        using(SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Code = reader.IsDBNull(0) ? null : reader.GetString(0);
+                            }
+                        }
+                    }
+                }
+                return Code;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+                return string.Empty;
+            }
         }
     }
 }
