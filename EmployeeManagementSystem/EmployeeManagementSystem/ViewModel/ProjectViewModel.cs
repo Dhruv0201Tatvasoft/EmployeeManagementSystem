@@ -75,7 +75,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { name = value; OnPropertyChanged("Name"); }
         }
 
-        private DateTime? startingDate = DateTime.Now;
+        private DateTime? startingDate;
         public DateTime? StartingDate
         {
             get { return startingDate; }
@@ -85,16 +85,13 @@ namespace EmployeeManagementSystem.ViewModel
                 startingDate = value; OnPropertyChanged("StartingDate");
             }
         }
-        private DateTime? endingDate = DateTime.Now.Date;
+        private DateTime? endingDate ;
         public DateTime? EndingDate
         {
             get { return endingDate; }
             set
             {
-                if (value == null)
-                {
-                    endingDate = DateTime.Now;
-                }
+                
 
                 endingDate = value; OnPropertyChanged("EndingDate");
             }
@@ -140,7 +137,10 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void searchExecute(object parameter)
         {
-            dataTable = getData.GetProjectSearchData(Code, Name, (DateTime)StartingDate, (DateTime)EndingDate);
+            if(!StartingDate.HasValue) startingDate = DateTime.MinValue; if (!EndingDate.HasValue) endingDate = DateTime.MinValue;
+            dataTable = getData.GetProjectSearchData(Code, Name, StartingDate.Value, EndingDate.Value);
+            Name = Code = String.Empty;
+            StartingDate = EndingDate = null;
             OnPropertyChanged("DataTable");
         }
         private bool canSearchExecute(object parameter)
@@ -171,8 +171,8 @@ namespace EmployeeManagementSystem.ViewModel
         {
             Code = String.Empty;
             Name = String.Empty;
-            StartingDate = new DateTime(1990, 01, 01);
-            EndingDate = DateTime.Now;
+            StartingDate = null;
+            EndingDate = null;
             dataTable = getData.GetProjectData();
             OnPropertyChanged("dataTable");
         }

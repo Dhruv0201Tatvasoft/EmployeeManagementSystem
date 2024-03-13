@@ -78,11 +78,11 @@ namespace EmployeeManagementSystem.Database
             {
                 Query += $" AND Name like '{Name}%' ";
             }
-            if (StartingDate.Date != new DateTime(1990, 01, 01))
+            if (StartingDate.Date != DateTime.MinValue)
             {
                 Query += $" AND StartingDate='{StartingDate.ToString("yyyy-MM-dd")}'";
             }
-            if (EndingDate.Date != DateTime.Now.Date)
+            if (EndingDate.Date != DateTime.MinValue)
             {
                 Query += $" AND EndingDate='{EndingDate.ToString("yyyy-MM-dd")}'";
             }
