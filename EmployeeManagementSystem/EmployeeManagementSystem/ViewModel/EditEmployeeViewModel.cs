@@ -800,7 +800,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         public EditEmployeeViewModel()
         {
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
+            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
             department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
             maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" });
             insertData = new InsertData();
@@ -829,9 +829,9 @@ namespace EmployeeManagementSystem.ViewModel
             this.PermanentAddress = employeeModel.PermanentAddress;
             this.EmployeeEducationList = employeeModel.EducationModels;
             this.employeeExperienceList = employeeModel.ExperienceModels;
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
+            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
             department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
-            maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" });
+            maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" }); 
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();

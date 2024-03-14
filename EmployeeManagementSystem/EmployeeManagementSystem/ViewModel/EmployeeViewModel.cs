@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.DialogWindow;
 using EmployeeManagementSystem.Models;
+using Microsoft.Identity.Client.NativeInterop;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,17 +94,17 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private string code;
-        public string Code
+        private string email;
+        public string Email
         {
             get
             {
-                return code;
+                return email;
             }
             set
             {
-                code = value;
-                OnPropertyChanged("Code");
+                email = value;
+                OnPropertyChanged("Email");
             }
 
         }
@@ -200,7 +201,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ClearExecute(object obj)
         {
-            Code = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
+            email = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
             employeeDataTable = getData.GetEmployeeTable();
             OnPropertyChanged("EmployeeDataTable");
         }
@@ -217,6 +218,20 @@ namespace EmployeeManagementSystem.ViewModel
                 return searchCommand;
             }
         }
+        private void ExecuteSearch(object obj)
+        {
+            employeeDataTable = getData.GetEmployeeSearchData(Email, Name, selectedDepartment, selectedDesignation);
+            Email = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
+            CombTextDepartment = "Select Department";
+            CombTextDesignation = "Select Designation";
+            OnPropertyChanged("EmployeeDataTable");
+        }
+
+        private bool CanSearchExecute(object arg)
+        {
+            return true;
+        }
+
         private ICommand deleteEmployeeCommand;
         public ICommand DeleteEmployeeCommand
         {
@@ -244,19 +259,7 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeDataTable");
         }
 
-        private void ExecuteSearch(object obj)
-        {
-            employeeDataTable = getData.GetEmployeeSearchData(Code, Name, selectedDepartment, selectedDesignation);
-            Code = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
-            CombTextDepartment = "Select Department";
-            CombTextDesignation = "Select Designation";
-            OnPropertyChanged("EmployeeDataTable");
-        }
-
-        private bool CanSearchExecute(object arg)
-        {
-            return true;
-        }
+        
         private ICommand addEmployeeToProject;
         public ICommand AddEmployeeToProject
         {
@@ -348,8 +351,8 @@ namespace EmployeeManagementSystem.ViewModel
             insertData = new InsertData();
             EmployeeDatatable = getData.GetEmployeeTable();
             projectNames = getData.GetProjectNames();
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
-            department = new ObservableCollection<string>(new List<String> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
+            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
+            department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
             OnPropertyChanged("EmployeeDataTable");
         }
 

@@ -250,3 +250,6 @@ ORDER BY
 select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name
 
 select    from EmsTblTechnology Left Join EmsTblTechnologyForProject On TechnologyId = Id
+update EmsTblEmployee set Email ='abc@email.com' ,Password ='password1' where Code like 'EMP001'
+select * from EmsTblEmployeeEducation
+	select Code from EmsTblEmployee Where Email like 'abc@email.com' COLLATE Latin1_General_CS_AS AND password like 'password1' COLLATE Latin1_General_CS_AS 

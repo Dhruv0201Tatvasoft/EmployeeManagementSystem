@@ -29,7 +29,7 @@
           "Microsoft.Identity.Client": "4.56.0",
           "Microsoft.Identity.Client.Extensions.Msal": "4.56.0",
           "System.Memory": "4.5.4",
-          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.1.24080.9",
+          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.2.24128.5",
           "System.Text.Json": "4.7.2",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
@@ -37,14 +37,6 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.10.3.0",
             "fileVersion": "1.1000.323.51804"
-          }
-        }
-      },
-      "DotNetProjects.WpfToolkit.DataVisualization/6.1.94": {
-        "runtime": {
-          "lib/net6.0-windows7.0/DotNetProjects.DataVisualization.Toolkit.dll": {
-            "assemblyVersion": "6.1.94.0",
-            "fileVersion": "6.1.94.0"
           }
         }
       },
@@ -135,8 +127,8 @@
           "Microsoft.IdentityModel.JsonWebTokens": "6.35.0",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.35.0",
           "Microsoft.SqlServer.Server": "1.0.0",
-          "System.Configuration.ConfigurationManager": "9.0.0-preview.1.24080.9",
-          "System.Runtime.Caching": "9.0.0-preview.1.24080.9"
+          "System.Configuration.ConfigurationManager": "9.0.0-preview.2.24128.5",
+          "System.Runtime.Caching": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/Microsoft.Data.SqlClient.dll": {
@@ -240,7 +232,7 @@
         "dependencies": {
           "Microsoft.Identity.Client": "4.56.0",
           "System.IO.FileSystem.AccessControl": "5.0.0",
-          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.1.24080.9"
+          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Identity.Client.Extensions.Msal.dll": {
@@ -413,11 +405,11 @@
           }
         }
       },
-      "Microsoft.Win32.Registry.AccessControl/9.0.0-preview.1.24080.9": {
+      "Microsoft.Win32.Registry.AccessControl/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/Microsoft.Win32.Registry.AccessControl.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -425,15 +417,15 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "Microsoft.Win32.SystemEvents/9.0.0-preview.1.24080.9": {
+      "Microsoft.Win32.SystemEvents/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -441,46 +433,46 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "Microsoft.Windows.Compatibility/9.0.0-preview.1.24081.3": {
+      "Microsoft.Windows.Compatibility/9.0.0-preview.2.24128.10": {
         "dependencies": {
-          "Microsoft.Win32.Registry.AccessControl": "9.0.0-preview.1.24080.9",
-          "Microsoft.Win32.SystemEvents": "9.0.0-preview.1.24080.9",
-          "System.CodeDom": "9.0.0-preview.1.24080.9",
-          "System.ComponentModel.Composition": "9.0.0-preview.1.24080.9",
-          "System.ComponentModel.Composition.Registration": "9.0.0-preview.1.24080.9",
-          "System.Configuration.ConfigurationManager": "9.0.0-preview.1.24080.9",
-          "System.Data.Odbc": "9.0.0-preview.1.24080.9",
-          "System.Data.OleDb": "9.0.0-preview.1.24080.9",
+          "Microsoft.Win32.Registry.AccessControl": "9.0.0-preview.2.24128.5",
+          "Microsoft.Win32.SystemEvents": "9.0.0-preview.2.24128.5",
+          "System.CodeDom": "9.0.0-preview.2.24128.5",
+          "System.ComponentModel.Composition": "9.0.0-preview.2.24128.5",
+          "System.ComponentModel.Composition.Registration": "9.0.0-preview.2.24128.5",
+          "System.Configuration.ConfigurationManager": "9.0.0-preview.2.24128.5",
+          "System.Data.Odbc": "9.0.0-preview.2.24128.5",
+          "System.Data.OleDb": "9.0.0-preview.2.24128.5",
           "System.Data.SqlClient": "4.8.6",
-          "System.Diagnostics.EventLog": "9.0.0-preview.1.24080.9",
-          "System.Diagnostics.PerformanceCounter": "9.0.0-preview.1.24080.9",
-          "System.DirectoryServices": "9.0.0-preview.1.24080.9",
-          "System.DirectoryServices.AccountManagement": "9.0.0-preview.1.24080.9",
-          "System.DirectoryServices.Protocols": "9.0.0-preview.1.24080.9",
-          "System.Drawing.Common": "9.0.0-preview.1.24081.2",
-          "System.IO.Packaging": "9.0.0-preview.1.24080.9",
-          "System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "System.Management": "9.0.0-preview.1.24080.9",
-          "System.Reflection.Context": "9.0.0-preview.1.24080.9",
-          "System.Runtime.Caching": "9.0.0-preview.1.24080.9",
-          "System.Security.Cryptography.Pkcs": "9.0.0-preview.1.24080.9",
-          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.1.24080.9",
-          "System.Security.Cryptography.Xml": "9.0.0-preview.1.24080.9",
-          "System.Security.Permissions": "9.0.0-preview.1.24080.9",
+          "System.Diagnostics.EventLog": "9.0.0-preview.2.24128.5",
+          "System.Diagnostics.PerformanceCounter": "9.0.0-preview.2.24128.5",
+          "System.DirectoryServices": "9.0.0-preview.2.24128.5",
+          "System.DirectoryServices.AccountManagement": "9.0.0-preview.2.24128.5",
+          "System.DirectoryServices.Protocols": "9.0.0-preview.2.24128.5",
+          "System.Drawing.Common": "9.0.0-preview.2.24128.3",
+          "System.IO.Packaging": "9.0.0-preview.2.24128.5",
+          "System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "System.Management": "9.0.0-preview.2.24128.5",
+          "System.Reflection.Context": "9.0.0-preview.2.24128.5",
+          "System.Runtime.Caching": "9.0.0-preview.2.24128.5",
+          "System.Security.Cryptography.Pkcs": "9.0.0-preview.2.24128.5",
+          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.2.24128.5",
+          "System.Security.Cryptography.Xml": "9.0.0-preview.2.24128.5",
+          "System.Security.Permissions": "9.0.0-preview.2.24128.5",
           "System.ServiceModel.Duplex": "4.10.0",
           "System.ServiceModel.Http": "4.10.0",
           "System.ServiceModel.NetTcp": "4.10.0",
           "System.ServiceModel.Primitives": "4.10.0",
           "System.ServiceModel.Security": "4.10.0",
-          "System.ServiceModel.Syndication": "9.0.0-preview.1.24080.9",
-          "System.ServiceProcess.ServiceController": "9.0.0-preview.1.24080.9",
-          "System.Speech": "9.0.0-preview.1.24080.9",
-          "System.Text.Encoding.CodePages": "9.0.0-preview.1.24080.9",
-          "System.Threading.AccessControl": "9.0.0-preview.1.24080.9",
+          "System.ServiceModel.Syndication": "9.0.0-preview.2.24128.5",
+          "System.ServiceProcess.ServiceController": "9.0.0-preview.2.24128.5",
+          "System.Speech": "9.0.0-preview.2.24128.5",
+          "System.Text.Encoding.CodePages": "9.0.0-preview.2.24128.5",
+          "System.Threading.AccessControl": "9.0.0-preview.2.24128.5",
           "System.Web.Services.Description": "4.10.0"
         }
       },
@@ -492,7 +484,7 @@
           }
         }
       },
-      "runtime.android-arm.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.android-arm.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/android-arm/native/libSystem.IO.Ports.Native.so": {
             "rid": "android-arm",
@@ -501,7 +493,7 @@
           }
         }
       },
-      "runtime.android-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.android-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/android-arm64/native/libSystem.IO.Ports.Native.so": {
             "rid": "android-arm64",
@@ -510,7 +502,7 @@
           }
         }
       },
-      "runtime.android-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.android-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/android-x64/native/libSystem.IO.Ports.Native.so": {
             "rid": "android-x64",
@@ -519,7 +511,7 @@
           }
         }
       },
-      "runtime.android-x86.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.android-x86.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/android-x86/native/libSystem.IO.Ports.Native.so": {
             "rid": "android-x86",
@@ -528,7 +520,7 @@
           }
         }
       },
-      "runtime.linux-arm.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-arm.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-arm/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-arm",
@@ -537,7 +529,7 @@
           }
         }
       },
-      "runtime.linux-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-arm64/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-arm64",
@@ -546,7 +538,7 @@
           }
         }
       },
-      "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-bionic-arm64/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-bionic-arm64",
@@ -555,7 +547,7 @@
           }
         }
       },
-      "runtime.linux-bionic-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-bionic-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-bionic-x64/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-bionic-x64",
@@ -564,7 +556,7 @@
           }
         }
       },
-      "runtime.linux-musl-arm.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-musl-arm.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-musl-arm/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-musl-arm",
@@ -573,7 +565,7 @@
           }
         }
       },
-      "runtime.linux-musl-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-musl-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-musl-arm64/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-musl-arm64",
@@ -582,7 +574,7 @@
           }
         }
       },
-      "runtime.linux-musl-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-musl-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-musl-x64/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-musl-x64",
@@ -591,7 +583,7 @@
           }
         }
       },
-      "runtime.linux-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.linux-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/linux-x64/native/libSystem.IO.Ports.Native.so": {
             "rid": "linux-x64",
@@ -600,7 +592,7 @@
           }
         }
       },
-      "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/maccatalyst-arm64/native/libSystem.IO.Ports.Native.dylib": {
             "rid": "maccatalyst-arm64",
@@ -609,7 +601,7 @@
           }
         }
       },
-      "runtime.maccatalyst-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.maccatalyst-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/maccatalyst-x64/native/libSystem.IO.Ports.Native.dylib": {
             "rid": "maccatalyst-x64",
@@ -625,27 +617,27 @@
           "runtime.win-x86.runtime.native.System.Data.SqlClient.sni": "4.4.0"
         }
       },
-      "runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "runtime.android-arm.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.android-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.android-x64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.android-x86.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-arm.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-bionic-x64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-musl-arm.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-musl-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-musl-x64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.linux-x64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.maccatalyst-x64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.osx-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9",
-          "runtime.osx-x64.runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9"
+          "runtime.android-arm.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.android-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.android-x64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.android-x86.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-arm.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-bionic-x64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-musl-arm.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-musl-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-musl-x64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.linux-x64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.maccatalyst-x64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.osx-arm64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5",
+          "runtime.osx-x64.runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5"
         }
       },
-      "runtime.osx-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.osx-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/osx-arm64/native/libSystem.IO.Ports.Native.dylib": {
             "rid": "osx-arm64",
@@ -654,7 +646,7 @@
           }
         }
       },
-      "runtime.osx-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "runtime.osx-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
         "runtimeTargets": {
           "runtimes/osx-x64/native/libSystem.IO.Ports.Native.dylib": {
             "rid": "osx-x64",
@@ -690,54 +682,54 @@
           }
         }
       },
-      "System.CodeDom/9.0.0-preview.1.24080.9": {
+      "System.CodeDom/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.CodeDom.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.ComponentModel.Composition/9.0.0-preview.1.24080.9": {
+      "System.ComponentModel.Composition/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.ComponentModel.Composition.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.ComponentModel.Composition.Registration/9.0.0-preview.1.24080.9": {
+      "System.ComponentModel.Composition.Registration/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.ComponentModel.Composition": "9.0.0-preview.1.24080.9",
-          "System.Reflection.Context": "9.0.0-preview.1.24080.9"
+          "System.ComponentModel.Composition": "9.0.0-preview.2.24128.5",
+          "System.Reflection.Context": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.ComponentModel.Composition.Registration.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Configuration.ConfigurationManager/9.0.0-preview.1.24080.9": {
+      "System.Configuration.ConfigurationManager/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Diagnostics.EventLog": "9.0.0-preview.1.24080.9",
-          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.1.24080.9"
+          "System.Diagnostics.EventLog": "9.0.0-preview.2.24128.5",
+          "System.Security.Cryptography.ProtectedData": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Configuration.ConfigurationManager.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Data.Odbc/9.0.0-preview.1.24080.9": {
+      "System.Data.Odbc/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Text.Encoding.CodePages": "9.0.0-preview.1.24080.9"
+          "System.Text.Encoding.CodePages": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Data.Odbc.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -745,25 +737,25 @@
             "rid": "unix",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           },
           "runtimes/win/lib/net8.0/System.Data.Odbc.dll": {
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Data.OleDb/9.0.0-preview.1.24080.9": {
+      "System.Data.OleDb/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Configuration.ConfigurationManager": "9.0.0-preview.1.24080.9",
-          "System.Diagnostics.PerformanceCounter": "9.0.0-preview.1.24080.9"
+          "System.Configuration.ConfigurationManager": "9.0.0-preview.2.24128.5",
+          "System.Diagnostics.PerformanceCounter": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Data.OleDb.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -771,7 +763,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -813,11 +805,11 @@
           }
         }
       },
-      "System.Diagnostics.EventLog/9.0.0-preview.1.24080.9": {
+      "System.Diagnostics.EventLog/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Diagnostics.EventLog.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -831,18 +823,18 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Diagnostics.PerformanceCounter/9.0.0-preview.1.24080.9": {
+      "System.Diagnostics.PerformanceCounter/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Configuration.ConfigurationManager": "9.0.0-preview.1.24080.9"
+          "System.Configuration.ConfigurationManager": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Diagnostics.PerformanceCounter.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -850,15 +842,15 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.DirectoryServices/9.0.0-preview.1.24080.9": {
+      "System.DirectoryServices/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.DirectoryServices.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -866,20 +858,20 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.DirectoryServices.AccountManagement/9.0.0-preview.1.24080.9": {
+      "System.DirectoryServices.AccountManagement/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Configuration.ConfigurationManager": "9.0.0-preview.1.24080.9",
-          "System.DirectoryServices": "9.0.0-preview.1.24080.9",
-          "System.DirectoryServices.Protocols": "9.0.0-preview.1.24080.9"
+          "System.Configuration.ConfigurationManager": "9.0.0-preview.2.24128.5",
+          "System.DirectoryServices": "9.0.0-preview.2.24128.5",
+          "System.DirectoryServices.Protocols": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.DirectoryServices.AccountManagement.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -887,15 +879,15 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.DirectoryServices.Protocols/9.0.0-preview.1.24080.9": {
+      "System.DirectoryServices.Protocols/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.DirectoryServices.Protocols.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -903,42 +895,42 @@
             "rid": "linux",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           },
           "runtimes/osx/lib/net8.0/System.DirectoryServices.Protocols.dll": {
             "rid": "osx",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           },
           "runtimes/win/lib/net8.0/System.DirectoryServices.Protocols.dll": {
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Drawing.Common/9.0.0-preview.1.24081.2": {
+      "System.Drawing.Common/9.0.0-preview.2.24128.3": {
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "9.0.0-preview.1.24080.9"
+          "Microsoft.Win32.SystemEvents": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Drawing.Common.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8102"
+            "fileVersion": "9.0.24.12803"
           },
           "lib/net8.0/System.Private.Windows.Core.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8102"
+            "fileVersion": "9.0.24.12803"
           }
         }
       },
-      "System.Formats.Asn1/9.0.0-preview.1.24080.9": {
+      "System.Formats.Asn1/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Formats.Asn1.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -974,22 +966,22 @@
           }
         }
       },
-      "System.IO.Packaging/9.0.0-preview.1.24080.9": {
+      "System.IO.Packaging/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.IO.Packaging.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.IO.Ports/9.0.0-preview.1.24080.9": {
+      "System.IO.Ports/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "runtime.native.System.IO.Ports": "9.0.0-preview.1.24080.9"
+          "runtime.native.System.IO.Ports": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.IO.Ports.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -997,24 +989,24 @@
             "rid": "unix",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           },
           "runtimes/win/lib/net8.0/System.IO.Ports.dll": {
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Management/9.0.0-preview.1.24080.9": {
+      "System.Management/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.CodeDom": "9.0.0-preview.1.24080.9"
+          "System.CodeDom": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Management.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1022,7 +1014,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1046,7 +1038,7 @@
           "Microsoft.Extensions.ObjectPool": "5.0.10",
           "System.Numerics.Vectors": "4.5.0",
           "System.Reflection.DispatchProxy": "4.7.1",
-          "System.Security.Cryptography.Xml": "9.0.0-preview.1.24080.9",
+          "System.Security.Cryptography.Xml": "9.0.0-preview.2.24128.5",
           "System.Security.Principal.Windows": "5.0.0"
         },
         "runtime": {
@@ -1097,11 +1089,11 @@
           }
         }
       },
-      "System.Reflection.Context/9.0.0-preview.1.24080.9": {
+      "System.Reflection.Context/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Reflection.Context.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1119,14 +1111,14 @@
           "Microsoft.NETCore.Targets": "1.1.0"
         }
       },
-      "System.Runtime.Caching/9.0.0-preview.1.24080.9": {
+      "System.Runtime.Caching/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Configuration.ConfigurationManager": "9.0.0-preview.1.24080.9"
+          "System.Configuration.ConfigurationManager": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Runtime.Caching.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1134,7 +1126,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1182,14 +1174,14 @@
           }
         }
       },
-      "System.Security.Cryptography.Pkcs/9.0.0-preview.1.24080.9": {
+      "System.Security.Cryptography.Pkcs/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Formats.Asn1": "9.0.0-preview.1.24080.9"
+          "System.Formats.Asn1": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Security.Cryptography.Pkcs.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1197,37 +1189,37 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Security.Cryptography.ProtectedData/9.0.0-preview.1.24080.9": {
+      "System.Security.Cryptography.ProtectedData/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Security.Cryptography.ProtectedData.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Security.Cryptography.Xml/9.0.0-preview.1.24080.9": {
+      "System.Security.Cryptography.Xml/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Security.Cryptography.Pkcs": "9.0.0-preview.1.24080.9"
+          "System.Security.Cryptography.Pkcs": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Security.Cryptography.Xml.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Security.Permissions/9.0.0-preview.1.24080.9": {
+      "System.Security.Permissions/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Windows.Extensions": "9.0.0-preview.1.24080.9"
+          "System.Windows.Extensions": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.Security.Permissions.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1316,22 +1308,22 @@
           }
         }
       },
-      "System.ServiceModel.Syndication/9.0.0-preview.1.24080.9": {
+      "System.ServiceModel.Syndication/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.ServiceModel.Syndication.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.ServiceProcess.ServiceController/9.0.0-preview.1.24080.9": {
+      "System.ServiceProcess.ServiceController/9.0.0-preview.2.24128.5": {
         "dependencies": {
-          "System.Diagnostics.EventLog": "9.0.0-preview.1.24080.9"
+          "System.Diagnostics.EventLog": "9.0.0-preview.2.24128.5"
         },
         "runtime": {
           "lib/net8.0/System.ServiceProcess.ServiceController.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1339,15 +1331,15 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
-      "System.Speech/9.0.0-preview.1.24080.9": {
+      "System.Speech/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Speech.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1355,7 +1347,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1366,11 +1358,11 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.Text.Encoding.CodePages/9.0.0-preview.1.24080.9": {
+      "System.Text.Encoding.CodePages/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Text.Encoding.CodePages.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1378,7 +1370,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1398,11 +1390,11 @@
           }
         }
       },
-      "System.Threading.AccessControl/9.0.0-preview.1.24080.9": {
+      "System.Threading.AccessControl/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Threading.AccessControl.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1410,7 +1402,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       },
@@ -1464,11 +1456,19 @@
           }
         }
       },
-      "System.Windows.Extensions/9.0.0-preview.1.24080.9": {
+      "System.Windows.Controls.DataVisualization.Toolkit/4.0.0": {
+        "runtime": {
+          "lib/net40-Client/System.Windows.Controls.DataVisualization.Toolkit.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "System.Windows.Extensions/9.0.0-preview.2.24128.5": {
         "runtime": {
           "lib/net8.0/System.Windows.Extensions.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         },
         "runtimeTargets": {
@@ -1476,7 +1476,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.8009"
+            "fileVersion": "9.0.24.12805"
           }
         }
       }
@@ -1496,13 +1496,6 @@
       "sha512": "sha512-l1Xm2MWOF2Mzcwuarlw8kWQXLZk3UeB55aQXVyjj23aBfDwOZ3gu5GP2kJ6KlmZeZv2TCzw7x4L3V36iNr3gww==",
       "path": "azure.identity/1.10.3",
       "hashPath": "azure.identity.1.10.3.nupkg.sha512"
-    },
-    "DotNetProjects.WpfToolkit.DataVisualization/6.1.94": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-5xmRUH+/F3zRxcI8b93W9OUvOUKXpcHShj7jGJdpBAgQTNPEeMLISA/wsO5egSG74Msx+01xwaYjDFTDTUawhQ==",
-      "path": "dotnetprojects.wpftoolkit.datavisualization/6.1.94",
-      "hashPath": "dotnetprojects.wpftoolkit.datavisualization.6.1.94.nupkg.sha512"
     },
     "DotNetProjects.WpfToolkit.Input/6.1.94": {
       "type": "package",
@@ -1651,26 +1644,26 @@
       "path": "microsoft.win32.registry/4.7.0",
       "hashPath": "microsoft.win32.registry.4.7.0.nupkg.sha512"
     },
-    "Microsoft.Win32.Registry.AccessControl/9.0.0-preview.1.24080.9": {
+    "Microsoft.Win32.Registry.AccessControl/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-u44YGfzgaU7UOMV0OqJcMKThjftui9md0gmsP8pZquRdH6uHqiVvq/xIlG+7rFSmD3O/8a1uProoYqRwTaKECA==",
-      "path": "microsoft.win32.registry.accesscontrol/9.0.0-preview.1.24080.9",
-      "hashPath": "microsoft.win32.registry.accesscontrol.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-NBQ37mNOlvzAbVhQbwA2plI6ImbWPqQ5B7mwGysjdkXjwbOwLkhiZQxs2cNKSL2gvBotXOPgmvTCt0DteMbJOA==",
+      "path": "microsoft.win32.registry.accesscontrol/9.0.0-preview.2.24128.5",
+      "hashPath": "microsoft.win32.registry.accesscontrol.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "Microsoft.Win32.SystemEvents/9.0.0-preview.1.24080.9": {
+    "Microsoft.Win32.SystemEvents/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qAZNqGvPrWzrTBzPhWm2J0kHRDDYq9EZk+xTW6Z7VuM5+4yh4XN0SHrjsSeoHvTcSrSV7IBp9HS8R9W+oQ9Geg==",
-      "path": "microsoft.win32.systemevents/9.0.0-preview.1.24080.9",
-      "hashPath": "microsoft.win32.systemevents.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-2RmmP7k4el5xZ1ISBAJTG9oX7njfza/nSUuICeFxatArtZv+zVjdDi39gSv9GMHioyRaZQgaKAq1IESAjDz8Ig==",
+      "path": "microsoft.win32.systemevents/9.0.0-preview.2.24128.5",
+      "hashPath": "microsoft.win32.systemevents.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "Microsoft.Windows.Compatibility/9.0.0-preview.1.24081.3": {
+    "Microsoft.Windows.Compatibility/9.0.0-preview.2.24128.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-doBVy4Z7wiVQaF2r8N5/3eP7ZGrIcHo7Axsdn63DVs/l1pLU/SC6eODNYAsJqa2KkF68I5iGvP78DtSoo+c8dA==",
-      "path": "microsoft.windows.compatibility/9.0.0-preview.1.24081.3",
-      "hashPath": "microsoft.windows.compatibility.9.0.0-preview.1.24081.3.nupkg.sha512"
+      "sha512": "sha512-v1eyo8yKCcdGuS0eiXHKLQHt1/Ofv5D2iAxFyHe79GXtRrD3mxmgrlj52OiX+N03YIM2okComQTR6P7E7VHMqQ==",
+      "path": "microsoft.windows.compatibility/9.0.0-preview.2.24128.10",
+      "hashPath": "microsoft.windows.compatibility.9.0.0-preview.2.24128.10.nupkg.sha512"
     },
     "Microsoft.Xaml.Behaviors.Wpf/1.1.77": {
       "type": "package",
@@ -1679,103 +1672,103 @@
       "path": "microsoft.xaml.behaviors.wpf/1.1.77",
       "hashPath": "microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512"
     },
-    "runtime.android-arm.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.android-arm.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zAVJK45MNcH/mP2FOX+9M7wS4vf2qb9M09bEjJqFmLonqWIzy8p9D3fTSzs88iIIG4nNl/Ly+VKEpaX7zhm0ww==",
-      "path": "runtime.android-arm.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.android-arm.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-rfUdzVloLVdM2DdWBfl/muti9dQGGjUBCliKFIyOROeRCkCAXcfmCD2rkg1IkVdg5+Qr+BijW+lai3Hye7sX6A==",
+      "path": "runtime.android-arm.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.android-arm.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.android-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.android-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-O7c8oS9DBsnLPXqVkcGlanYhbwxrvFGjXe6Q/Y1j2GmALqo6t7Oo6opxdu5deC38Iq7HPZwcign9iDbLaPUYag==",
-      "path": "runtime.android-arm64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.android-arm64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-ThWX8vjtVoT84LP20rB/UwUqLc42yLoQo73Eluhdpzgh4S2WJjLJB+lwakFfgGor3GgOhd3zj+LHXbM4lmFl9w==",
+      "path": "runtime.android-arm64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.android-arm64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.android-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.android-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XtoKMzTfa+wkAPmz1sZsDT56lUNlD1haPgZxyyPo3+COvQ49aXiq4JlrsBa/fEh1jF1Sn2asxgH5ytf7VQUtAA==",
-      "path": "runtime.android-x64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.android-x64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-uooUAgXw0NzzlLGg4nrIFsDo7HVmJWzRy5MsRj8XamewuyXVvl9Q6NP0KU90yp9M/uuME6COVBCtBCOftXrflw==",
+      "path": "runtime.android-x64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.android-x64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.android-x86.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.android-x86.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vqHIUCAp0tEp/LR0WNNC5cOqa5jEQJuImt7nj4FB4y5d3dEj2lEJyhDOuvjk4Pz5lQU57s/FiGt07dYKVyFCBw==",
-      "path": "runtime.android-x86.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.android-x86.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-PKAURp9gdKFe8LO2k2xjpVV8XZlmLn+FyL7qAJrndf83L+MXKFT9LEPA1PzVvpnupHvsOdBLxYvwLdy5MBHnFg==",
+      "path": "runtime.android-x86.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.android-x86.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-arm.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-arm.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4/9W7X/N1iANsNnXaes8ZKaHfPIU5SLh/ivtAC2zoal39r4nPUF4xlEFyfRgZREwOiX93HAMDODKscojUrTtsQ==",
-      "path": "runtime.linux-arm.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-arm.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-uvqDKjyB1bulRaKzOmd/GSAyxyyvnIXSnu/BuLIGXIxiAd799Dyp4MbppNBHrWl6zrsvkVvHeR25ZHX3m7w+NQ==",
+      "path": "runtime.linux-arm.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-arm.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qnCu8Vo+nG0PZfLXTfloVDmOFKx3wqKSmfbcQFkdhrpAisNrA74SoQe8my8lDTW3dC8U70IPfen9B6mzr/AiqA==",
-      "path": "runtime.linux-arm64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-arm64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-SEYqYCRY5z7PqWPJLhomnjf20DsprUtpAq0XFPXPZDH5PbGCzFH2sStkSztF6rxTwz0j4Lbv+v7Tat/gezNqhw==",
+      "path": "runtime.linux-arm64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-arm64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0W84ANN75sO5GnJatNHxJwuxJ2GV+h6P3+5x5cSk31rwc43APVb8IkmbD54TPbQ/d3R7yRLTVlo9P4/jG6tjxw==",
-      "path": "runtime.linux-bionic-arm64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-bionic-arm64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-WXMglYOwsXdJs8A0E/4/AW+56UEngsDS8r4Ot/kPgkeBVHs7+WDKRrD8bysr+zkyvziNBKOfIvt2WgOdjXORxA==",
+      "path": "runtime.linux-bionic-arm64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-bionic-arm64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-bionic-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-bionic-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zPaaX1BWZ53Oz5Vgo8iUkT0+2QPk3ehYLwBGugd0PJrIoJHKRedsYF7RJXieK7KQsi8gnfgnr3hLFmejsheGlw==",
-      "path": "runtime.linux-bionic-x64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-bionic-x64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-1ZRoLoG5kWQTbn7sNKb1IYB/ThXJuOQ1t9ivsvtXQIFwFux+74F1pdtMfGfddTdV2NnRIWDJc8v/lrq0Rgtvng==",
+      "path": "runtime.linux-bionic-x64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-bionic-x64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-musl-arm.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-musl-arm.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cQdnIf/DlK8brTMPaBS7YOwt7dxteVr4064P18mlVA1A1xsi4IQHgr33Nrg4SyvNHgPOaOk7dtVOQB6KSICMfw==",
-      "path": "runtime.linux-musl-arm.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-musl-arm.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-HZnQouMLKgDcmsiWDh+Ld/7V0PZahMPEUDSViGSteifU1CgLtRmptuCHIStCZ5NSpMyHEnkTNuLPwwSOOW1D0w==",
+      "path": "runtime.linux-musl-arm.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-musl-arm.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-musl-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-musl-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QGExtVO/gyaDiSATrTqtNXPqfxxDr3Kv9jqlOLoFrxK/bfILPNlnoLY0U7laE2wUMOHKQ1L9YkdRqbl3B6ksZQ==",
-      "path": "runtime.linux-musl-arm64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-musl-arm64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-j1FX4u19+n4Cjp5EV4CCejtcsOgroWXDkK2BQRz6PgIf1QmQbL0V6n3CZXlG4gDXpGkMagch0xVHdzmw0XKoeg==",
+      "path": "runtime.linux-musl-arm64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-musl-arm64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-musl-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-musl-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HwXTPHQ1tkH+wUwAMmEqXS3YlqPa0X684TI8A/0TNf9TemLfnQSXDtFqSBAXqtpbo62hHL/f3uBf/GE0agcWMQ==",
-      "path": "runtime.linux-musl-x64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-musl-x64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-J7mBOhJNOnfnR25h7wgGjF32CNbuOEgVvaEyrVbIMR5CnE76mjzUHgC8bi2HWoQfK4S5nvUDFn5MCHWqI6UHzw==",
+      "path": "runtime.linux-musl-x64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-musl-x64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.linux-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.linux-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1W5gW+7kjzRfLNSMrZAlswV/toKFk0T41knnPZ9DVsxAFZ8nUtsZTYnwgJuBlKAQM9Cr38u0s+YbnllGqNAhYw==",
-      "path": "runtime.linux-x64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.linux-x64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-3bLbPB1ofg/Zg6cgPW1yyLd+hgjMtU5Y2sYFKwctsYIXY14/Q2xCL/wQIOaBNSUGRg5kVYOtRUoUgj2Bn/J4qQ==",
+      "path": "runtime.linux-x64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.linux-x64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6jJ16H+uO/q2oOaewKiO/uNJxYtYRmV9Vm95VMkMDrOud0k3rzY6k+w8rLep/L4R3jhg5tGDayLmLCUR5r2MGw==",
-      "path": "runtime.maccatalyst-arm64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.maccatalyst-arm64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-V0G7BR1JMpKnwG72ESkeW5eAEClERZP4aFpTLd9SGYbUfb07CjshpG/zmbbUheAxqqVQCvCQXiqg8GO8cUjc5A==",
+      "path": "runtime.maccatalyst-arm64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.maccatalyst-arm64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.maccatalyst-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.maccatalyst-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/2U9n8jJ4W9YnZq8MoX/QWZakI5JLat5Y091nYBB1kRDIfXduLTNXFx4X9YHHwEsA1qEa72wxfztkrHWjuetRQ==",
-      "path": "runtime.maccatalyst-x64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.maccatalyst-x64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-fSsBMA1Inmv/CPQPoobvcjpTZkErGNm+1CQ6scExkzZB89fBDoWrDQrwDj8dVRhm6eRQQakQ1T9+Vp6ur5bYNg==",
+      "path": "runtime.maccatalyst-x64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.maccatalyst-x64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "type": "package",
@@ -1784,26 +1777,26 @@
       "path": "runtime.native.system.data.sqlclient.sni/4.7.0",
       "hashPath": "runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512"
     },
-    "runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Je0KC4Q7J/wFfnhVaejfTeX9bqvZXC2SEFe+UhgDSYBer6/y+OWBbHHUyGn1IutPaf/EGmH2oYf/wvt4bGH/Pg==",
-      "path": "runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-OuRgCpQ0/HtVbnW1ivOoEoIuVLmr2+5i52xSCXZkKzDbdS2str1SsIJW6ia7fdk9DGXlPqI4DXsBtZRV7fkOOg==",
+      "path": "runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.osx-arm64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.osx-arm64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8Ssh96NKlNdvf7hM0HQW7K2+trqMA0qSx8XynsHMjheEOq/80WBiMIOQ5uOABgirygDcp7Y4ehS/BEhgSWrirw==",
-      "path": "runtime.osx-arm64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.osx-arm64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-2Dtd+Rs58cWFKStk8PisYNIDRZX8mg6yPSuTORD1EN2pKMzmjV51oAPjyUWQPailUXiFHeWaqr2bvgMlQ8Y49w==",
+      "path": "runtime.osx-arm64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.osx-arm64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "runtime.osx-x64.runtime.native.System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "runtime.osx-x64.runtime.native.System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-biONpmZua4932wxq0H7f9Mtgi6HVc4RDK6U1sZt6YhdWqthuw4FfIRy6EjsPA/UI8pWMvRLoF1VogkDgvi7eKQ==",
-      "path": "runtime.osx-x64.runtime.native.system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "runtime.osx-x64.runtime.native.system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-6z1UqmtSk/wY2U5qhAe/Q0idHLlwR4uxHdsQM7OPOYChr+y6A6dNjdZp2+JK3ptS5mPO6x9RzYViKPSmunIcfA==",
+      "path": "runtime.osx-x64.runtime.native.system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "runtime.osx-x64.runtime.native.system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni/4.4.0": {
       "type": "package",
@@ -1826,47 +1819,47 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "System.CodeDom/9.0.0-preview.1.24080.9": {
+    "System.CodeDom/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-d+c/PlPyrWVS0J2pKKgYuVVgkuuRQ/Q7oIAN2XwGfq7Rkgos15O08uJWhoaiCZ3sN5YLAlOHN3gNn84C9hg2yg==",
-      "path": "system.codedom/9.0.0-preview.1.24080.9",
-      "hashPath": "system.codedom.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-pZzX+icZoMvuCFpuqYmIdY6Gg5Ezyji1g7/JlZy/DsAmgZchglj8iMqkdv1++yBpsxT1uUTqSy9200LcAqVC4Q==",
+      "path": "system.codedom/9.0.0-preview.2.24128.5",
+      "hashPath": "system.codedom.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.ComponentModel.Composition/9.0.0-preview.1.24080.9": {
+    "System.ComponentModel.Composition/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-DQH5w5wtU7SQ1PENDDqm6O5Zye9KmGVL7gDFoXsW54Qmcuyp+wNgbXr0sbVEpcv3XmGM/WbeszHR2Y/y1WbKhQ==",
-      "path": "system.componentmodel.composition/9.0.0-preview.1.24080.9",
-      "hashPath": "system.componentmodel.composition.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-5yYdUh7Opy+P9wyUtTpVdwV8byHwAHtOBf7Gm6LFJbsRgk5ENfjBkaSWz/NOLT9B3dP7t/YIcY3g37inKlN3GQ==",
+      "path": "system.componentmodel.composition/9.0.0-preview.2.24128.5",
+      "hashPath": "system.componentmodel.composition.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.ComponentModel.Composition.Registration/9.0.0-preview.1.24080.9": {
+    "System.ComponentModel.Composition.Registration/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QzVwD2/8cWU2GML4CDFarpendUjq0T2Oigdi0yh5fCnwhxKgHEqnLODQLLrUdrGE5VczV/YznqOhkX1YAGjgtg==",
-      "path": "system.componentmodel.composition.registration/9.0.0-preview.1.24080.9",
-      "hashPath": "system.componentmodel.composition.registration.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-oPixR3+52PhpZA8Jp2xVHFrsbVEkTbRk53iwFdcs7chd1HxzOIoob4ub0rW4P5wOe8+RxmfUJ4IHmb3YkqQe8w==",
+      "path": "system.componentmodel.composition.registration/9.0.0-preview.2.24128.5",
+      "hashPath": "system.componentmodel.composition.registration.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Configuration.ConfigurationManager/9.0.0-preview.1.24080.9": {
+    "System.Configuration.ConfigurationManager/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-7V6nuqJ/ckZrl+ui+UDBnZyDC9KMarJ6ZuDmzYGbvR+jbX79TU++5J3K7caDV903PqunezDVxCdyP/rWYvLTCQ==",
-      "path": "system.configuration.configurationmanager/9.0.0-preview.1.24080.9",
-      "hashPath": "system.configuration.configurationmanager.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-sdNGnk1OkkxobPXcmGaKbwYryoG9aHt68yeYPiiZL1uAYrNh3/dYhABZzEpOGvSXBZk6/lc/Hiu8ZJT+xgdwmg==",
+      "path": "system.configuration.configurationmanager/9.0.0-preview.2.24128.5",
+      "hashPath": "system.configuration.configurationmanager.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Data.Odbc/9.0.0-preview.1.24080.9": {
+    "System.Data.Odbc/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qIaeIswX4QWpo7myrR3VBpi4oTpstjbDqjcxGVJecOvSFQtx7LBjyqtcpaA0UBCy7bX8ftSg0gkglhMAwpISJQ==",
-      "path": "system.data.odbc/9.0.0-preview.1.24080.9",
-      "hashPath": "system.data.odbc.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-rN868n4/3r4iqCPhRTrSB6sC8AFeCXb8xarqxouvc2vwqoKY7Y9vcEzl6INmNBeWY+aOWX2+UOPyho+h2qrpKA==",
+      "path": "system.data.odbc/9.0.0-preview.2.24128.5",
+      "hashPath": "system.data.odbc.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Data.OleDb/9.0.0-preview.1.24080.9": {
+    "System.Data.OleDb/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9IvdUp/Fw15v4HsGTp0YjEkHOGyuxLCnpcERl6YGWX1Ed09iUmZ/0WBU2aOSjZhCJAhbubHSZPsrrAFWCoNvUw==",
-      "path": "system.data.oledb/9.0.0-preview.1.24080.9",
-      "hashPath": "system.data.oledb.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-dRHLpNuNwaDZtaN4JvfDxhnD1opw9sQ3N4FHM3M7j2KHORSPdmlryP4CmFxvHYT7PMoAZl7oWOm4271Zeq3w7g==",
+      "path": "system.data.oledb/9.0.0-preview.2.24128.5",
+      "hashPath": "system.data.oledb.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Data.SqlClient/4.8.6": {
       "type": "package",
@@ -1882,54 +1875,54 @@
       "path": "system.diagnostics.diagnosticsource/6.0.1",
       "hashPath": "system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512"
     },
-    "System.Diagnostics.EventLog/9.0.0-preview.1.24080.9": {
+    "System.Diagnostics.EventLog/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xI+StVqSBm8AXS2LvhIlmcWc1YgQYxKNv5W+mZWmc3luV9n7izF6UleENl0Iv7HEEHrApr+eyYHgddGTFr/WeQ==",
-      "path": "system.diagnostics.eventlog/9.0.0-preview.1.24080.9",
-      "hashPath": "system.diagnostics.eventlog.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-Vx+NQpHiEFS6vrIHzkqUaLtvfhFV1TDRkmtO+/yeb/NOXOMHRIIt0JEdOEbUUMEqQ8EaFcBRKTz/DRFvP6o/zA==",
+      "path": "system.diagnostics.eventlog/9.0.0-preview.2.24128.5",
+      "hashPath": "system.diagnostics.eventlog.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Diagnostics.PerformanceCounter/9.0.0-preview.1.24080.9": {
+    "System.Diagnostics.PerformanceCounter/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cpVXfRth5ArYoOxyQHe7OSUAul+G9D9bjtbIzQlgeeB47K3rc4kw9g+cqxkNZC15ZTgqptrYgfekOnKEJLfc/g==",
-      "path": "system.diagnostics.performancecounter/9.0.0-preview.1.24080.9",
-      "hashPath": "system.diagnostics.performancecounter.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-HtGKim2B9mZFv/z/5MaiMSNusk1etmxG0hhjsXViy1MhF1j7U1RytqWFZ0G4A1mKOxoKQrMeXAn/aXTg2FcpGw==",
+      "path": "system.diagnostics.performancecounter/9.0.0-preview.2.24128.5",
+      "hashPath": "system.diagnostics.performancecounter.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.DirectoryServices/9.0.0-preview.1.24080.9": {
+    "System.DirectoryServices/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NdjDyJ1LhBcAJ9ZDpmbGL5+KBFSNSU5ZhPxVTstTDQBnyCSawVw+Q9ImnmIg+FnUScL6gnEB/qPnTgqK5n9Lcg==",
-      "path": "system.directoryservices/9.0.0-preview.1.24080.9",
-      "hashPath": "system.directoryservices.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-xEw5ZgEPeided6UZ3r/4yt7XXelAv+WcCquFD+ltkUsQ1ygOHNfQ3UFdCS1fGK5q0nYPy6IfOfSHWo14iI62VA==",
+      "path": "system.directoryservices/9.0.0-preview.2.24128.5",
+      "hashPath": "system.directoryservices.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.DirectoryServices.AccountManagement/9.0.0-preview.1.24080.9": {
+    "System.DirectoryServices.AccountManagement/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-glWIz/aNaC9D3OLpj+F7swy1Lws3L+J7/ScXWK3anqbUmRsC0Grm4wis0TFkVk2C+uAdMVmMMWABWKx5MbklkA==",
-      "path": "system.directoryservices.accountmanagement/9.0.0-preview.1.24080.9",
-      "hashPath": "system.directoryservices.accountmanagement.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-E47mQFmu2tmUyxYqKM+Z5IVIqSYV9u4Mq/sOubfXfoZwMrTOHq6rlAuIQXrXl2fwgteGGdYhwiCMehh3Ri4kew==",
+      "path": "system.directoryservices.accountmanagement/9.0.0-preview.2.24128.5",
+      "hashPath": "system.directoryservices.accountmanagement.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.DirectoryServices.Protocols/9.0.0-preview.1.24080.9": {
+    "System.DirectoryServices.Protocols/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-300mCtxI/d17uiu/f2PK0B8yABTC0wbjpHmOG7Ef0of3UgcXsNItz5cIlnWFBVR/2FpGe76U3uI28ZUXnZPZ7g==",
-      "path": "system.directoryservices.protocols/9.0.0-preview.1.24080.9",
-      "hashPath": "system.directoryservices.protocols.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-yVHnYvY5EVDN2o8/4Ookw7y+yHLeMToIZ5kVGhm1cciH0j0RlzhuNc9i4K1KjJTJYtg1eAjjDOj7I5DKVdGtkQ==",
+      "path": "system.directoryservices.protocols/9.0.0-preview.2.24128.5",
+      "hashPath": "system.directoryservices.protocols.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Drawing.Common/9.0.0-preview.1.24081.2": {
+    "System.Drawing.Common/9.0.0-preview.2.24128.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zmP6qRu9oxbeYXHlwT//oQE56CNlsToBFg+9F8Lcrqsh6A7MVSppqBeCrIjtCFeOBxil2OS1DdPfv4WncIA8Pg==",
-      "path": "system.drawing.common/9.0.0-preview.1.24081.2",
-      "hashPath": "system.drawing.common.9.0.0-preview.1.24081.2.nupkg.sha512"
+      "sha512": "sha512-Kx/K7a8fjb2NtcAZFvPOHAWASut04PtgkGdfOrs5Fd4fMQ5YAUuWA803JWzz4G7BR1e6HEslf4p2tKB2+LewHA==",
+      "path": "system.drawing.common/9.0.0-preview.2.24128.3",
+      "hashPath": "system.drawing.common.9.0.0-preview.2.24128.3.nupkg.sha512"
     },
-    "System.Formats.Asn1/9.0.0-preview.1.24080.9": {
+    "System.Formats.Asn1/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3uMKNpOiGXIZv5bvr3WtmpVY62Si0nLO4iAE5dEZrvi0ea5oupOf6wI2sEvAG05aE/DlsiSQsXqxugpLr91xWA==",
-      "path": "system.formats.asn1/9.0.0-preview.1.24080.9",
-      "hashPath": "system.formats.asn1.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-mNeWuS9YBQyR3sxgbTqEXGzjqk4TNtxudSHEp9XC6aPPo6KW+jNKRfbAldSxbaaMffc53EWUqkr9lY2UAQ0Gwg==",
+      "path": "system.formats.asn1/9.0.0-preview.2.24128.5",
+      "hashPath": "system.formats.asn1.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/6.35.0": {
       "type": "package",
@@ -1945,26 +1938,26 @@
       "path": "system.io.filesystem.accesscontrol/5.0.0",
       "hashPath": "system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512"
     },
-    "System.IO.Packaging/9.0.0-preview.1.24080.9": {
+    "System.IO.Packaging/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ICDAz48VEgLju62jqcWxryBBn5UF6VCmZ/BsSiFVTSm/Nat7mRcuaO1vKbWSRARA6l7RUDs3BRmukbnMn3Cgow==",
-      "path": "system.io.packaging/9.0.0-preview.1.24080.9",
-      "hashPath": "system.io.packaging.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-CLgkg7c5+ZJZjWf8LFs9iwhmf3XKVN8o2YxOi9HpsvciHoYPSQ9m9fUIo/gMI0dZCbE3hCTv2VwQYnaxTTn4+Q==",
+      "path": "system.io.packaging/9.0.0-preview.2.24128.5",
+      "hashPath": "system.io.packaging.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.IO.Ports/9.0.0-preview.1.24080.9": {
+    "System.IO.Ports/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aSKhDnHht8jCgyf8La2azRuAwQwAfrpR49vQYzPSv2w66A5NAyRTlVjn/Nt6j+WXuT9xOFWssaDgdSjwQQzTlA==",
-      "path": "system.io.ports/9.0.0-preview.1.24080.9",
-      "hashPath": "system.io.ports.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-SqWlx6h0X2OF7TmTagey40MKu1CGLRdkvfebLM/zeH8I4DYp0AFRsqf2Po0W75dWsQwNIxOaVD4YkGTtg1LYeg==",
+      "path": "system.io.ports/9.0.0-preview.2.24128.5",
+      "hashPath": "system.io.ports.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Management/9.0.0-preview.1.24080.9": {
+    "System.Management/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1oJiPufNlYXdJsFVZC66ZCIFn17MHvwByIr75+zp564OXQcPQ454zxxHVYmRZ7aWTz0iOMswOlT+szM39S22FA==",
-      "path": "system.management/9.0.0-preview.1.24080.9",
-      "hashPath": "system.management.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-IuuZE+/KkSFg+60wwF/AwKNm4BkBQXh0AT0y1QG3TO3ijj1PG7NPSp6z7yjOxqUE5uIqpFWb4vvEUDM22SEX5g==",
+      "path": "system.management/9.0.0-preview.2.24128.5",
+      "hashPath": "system.management.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Memory/4.5.4": {
       "type": "package",
@@ -1994,12 +1987,12 @@
       "path": "system.private.servicemodel/4.10.0",
       "hashPath": "system.private.servicemodel.4.10.0.nupkg.sha512"
     },
-    "System.Reflection.Context/9.0.0-preview.1.24080.9": {
+    "System.Reflection.Context/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ptiTi0o1LTw2XURjycyYXnY68n+8U0Ic91xJvOQ4WZnxhnkUFun/QGNzko/OpwX8UxebTwCJsffctswNVSphKg==",
-      "path": "system.reflection.context/9.0.0-preview.1.24080.9",
-      "hashPath": "system.reflection.context.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-3dDHEzF75G4Cq672r9RHWEVaaZJne11yq2td+QpYXKkFBbWqY3r+hiJ3GJqq4ixTQcjaqCDnI9E/3igQ/1ZI1A==",
+      "path": "system.reflection.context/9.0.0-preview.2.24128.5",
+      "hashPath": "system.reflection.context.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Reflection.DispatchProxy/4.7.1": {
       "type": "package",
@@ -2015,12 +2008,12 @@
       "path": "system.runtime/4.3.0",
       "hashPath": "system.runtime.4.3.0.nupkg.sha512"
     },
-    "System.Runtime.Caching/9.0.0-preview.1.24080.9": {
+    "System.Runtime.Caching/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-pb84ASD2SOQBeImetcgx9tbZXLQjC+u6EAjFe0Scibc6EqX2DcLbDtauhCrFmMD9JCYHsJe6xhrLLjZV+WTKiw==",
-      "path": "system.runtime.caching/9.0.0-preview.1.24080.9",
-      "hashPath": "system.runtime.caching.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-TUVYDsBexU1+uzZhSEYLeASyivEG0l+QLo+xx3/JwPAu3zQd3FRs3ib11duFjb9dH+h96Cj+OX5dNa5d3MxCwg==",
+      "path": "system.runtime.caching/9.0.0-preview.2.24128.5",
+      "hashPath": "system.runtime.caching.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
       "type": "package",
@@ -2043,33 +2036,33 @@
       "path": "system.security.cryptography.cng/4.5.0",
       "hashPath": "system.security.cryptography.cng.4.5.0.nupkg.sha512"
     },
-    "System.Security.Cryptography.Pkcs/9.0.0-preview.1.24080.9": {
+    "System.Security.Cryptography.Pkcs/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qhIkR1d3bL3/i/sjeMYIszW4lbj4ugLzFJ9c8Y9371sRQcwgBWwy2zZ3qpxaXK7INn0YWMFjD6ejaDqoZ5NjMA==",
-      "path": "system.security.cryptography.pkcs/9.0.0-preview.1.24080.9",
-      "hashPath": "system.security.cryptography.pkcs.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-k2fVNfX8uQMGxs205qfm//A0fojFxCUHlBMAKGT6c2XvAjkjspVkL5UjE10yMZ7408HVQPw6zkVLBoXmNsTx3w==",
+      "path": "system.security.cryptography.pkcs/9.0.0-preview.2.24128.5",
+      "hashPath": "system.security.cryptography.pkcs.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Security.Cryptography.ProtectedData/9.0.0-preview.1.24080.9": {
+    "System.Security.Cryptography.ProtectedData/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kky/e+bNFjXzTEmcmhElo1GdNDYAlD6gH8BF9r8oX3uGdXKfamrVRrTM+be5jCpURIxZS9T5K0G5jY0ZQgmAMw==",
-      "path": "system.security.cryptography.protecteddata/9.0.0-preview.1.24080.9",
-      "hashPath": "system.security.cryptography.protecteddata.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-8Wkl/TnWKRfFxRv7jPH66uYSLov2g2moVKUt3tPMytAUvWf7nIXBkfOmMzb/aJCfR4b2OLn73RHn3eyP25X+xw==",
+      "path": "system.security.cryptography.protecteddata/9.0.0-preview.2.24128.5",
+      "hashPath": "system.security.cryptography.protecteddata.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Security.Cryptography.Xml/9.0.0-preview.1.24080.9": {
+    "System.Security.Cryptography.Xml/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5kT0lVRvoucvwtSAl7f6QvWmlp/UgAuI/SS3CEUbI+FQnwVQ2VKNzeYkF6UASkEjEFcmAx+Sg+cU2ZnkKMsSbg==",
-      "path": "system.security.cryptography.xml/9.0.0-preview.1.24080.9",
-      "hashPath": "system.security.cryptography.xml.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-QWGEOJiuH+jzIV2Hmw1fwwFmhGO224VQBpF5E5UBtWkDxecTWYJFUCyItrHwoHW6IRw0YgYQ5UqgGyL6TVYeJA==",
+      "path": "system.security.cryptography.xml/9.0.0-preview.2.24128.5",
+      "hashPath": "system.security.cryptography.xml.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Security.Permissions/9.0.0-preview.1.24080.9": {
+    "System.Security.Permissions/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zBi/uLejol+FxZ2PhobAO26s+KmbLHDd9wFjDqAjdm4OpAhW708zi+AwFyC2iauTKQRf9KocY4xqww/y6G5U+w==",
-      "path": "system.security.permissions/9.0.0-preview.1.24080.9",
-      "hashPath": "system.security.permissions.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-13TqsvsybT8KKwcysw4E6wOHvHm80al6HqjJSaUJUSKPKLjW6rcl9U8YL5r7Rng1bniiTIXqRY8opIZHKF3TWQ==",
+      "path": "system.security.permissions/9.0.0-preview.2.24128.5",
+      "hashPath": "system.security.permissions.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Security.Principal.Windows/5.0.0": {
       "type": "package",
@@ -2113,26 +2106,26 @@
       "path": "system.servicemodel.security/4.10.0",
       "hashPath": "system.servicemodel.security.4.10.0.nupkg.sha512"
     },
-    "System.ServiceModel.Syndication/9.0.0-preview.1.24080.9": {
+    "System.ServiceModel.Syndication/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-yGT62IOWKShKyzhThsYBYdJhGQ+nPAuHGPJNi47Of4oYgN+nO8QbR/1c9pFF6o/r2y508TPP37lWkRS2fqyJxQ==",
-      "path": "system.servicemodel.syndication/9.0.0-preview.1.24080.9",
-      "hashPath": "system.servicemodel.syndication.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-elcv5mECZ7EhipqWTXHkm+ZeneZ3j+DZAMjaMsOPE3HM4YxBUWTWug8bdDZAXFOxG2q0sQ16T8RG60jmdFEo4A==",
+      "path": "system.servicemodel.syndication/9.0.0-preview.2.24128.5",
+      "hashPath": "system.servicemodel.syndication.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.ServiceProcess.ServiceController/9.0.0-preview.1.24080.9": {
+    "System.ServiceProcess.ServiceController/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-U/HIBEDxI2qBbTkTtO+UAILJZWgG7jSPNbQUYJ6pJ/tU4s26N9VINrADvj6bIj7XG5naGu5Oth30tFiY5gnQFw==",
-      "path": "system.serviceprocess.servicecontroller/9.0.0-preview.1.24080.9",
-      "hashPath": "system.serviceprocess.servicecontroller.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-UZznDhxtOEbkm8PS06f++NjZZZUuuQ748TDXjSjVddn4Apk2266jUaaXehhMwBU+4hD2mc6qUCD8bPHeCsgoPg==",
+      "path": "system.serviceprocess.servicecontroller/9.0.0-preview.2.24128.5",
+      "hashPath": "system.serviceprocess.servicecontroller.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
-    "System.Speech/9.0.0-preview.1.24080.9": {
+    "System.Speech/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QylPeFviKb+kOs75toHUEufLCDrONd/5vbHwUdo6Sse1Jtn6z0Nf0HiXAzFn6rcbMnkYXCmbp3XKguiO0rUxWQ==",
-      "path": "system.speech/9.0.0-preview.1.24080.9",
-      "hashPath": "system.speech.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-KlZuTRYKP+v47VQuDLngMDEBjCNjAGu1aFJz5DVt3IrqKQNZage1OQq61JzxmulYLvZS6BOQ6m4lN045ZGESVw==",
+      "path": "system.speech/9.0.0-preview.2.24128.5",
+      "hashPath": "system.speech.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Text.Encoding/4.3.0": {
       "type": "package",
@@ -2141,12 +2134,12 @@
       "path": "system.text.encoding/4.3.0",
       "hashPath": "system.text.encoding.4.3.0.nupkg.sha512"
     },
-    "System.Text.Encoding.CodePages/9.0.0-preview.1.24080.9": {
+    "System.Text.Encoding.CodePages/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oxZxhSDyAj4Vphwpvetsx78hG1Cgs0xUsiEWCs60lm9/NIjBP4lHHjYlBd15qZwJuaEhkNzAygYsVJqfbuxfug==",
-      "path": "system.text.encoding.codepages/9.0.0-preview.1.24080.9",
-      "hashPath": "system.text.encoding.codepages.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-Rl0mtw/KTaBCFfkasA3u13UUlCY+ilrWvrbaAh2BgdSfOcvl1k64WlPCCXPXbnQzAZWEITsoqBjM6WyzruF8Xg==",
+      "path": "system.text.encoding.codepages/9.0.0-preview.2.24128.5",
+      "hashPath": "system.text.encoding.codepages.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Text.Encodings.Web/4.7.2": {
       "type": "package",
@@ -2162,12 +2155,12 @@
       "path": "system.text.json/4.7.2",
       "hashPath": "system.text.json.4.7.2.nupkg.sha512"
     },
-    "System.Threading.AccessControl/9.0.0-preview.1.24080.9": {
+    "System.Threading.AccessControl/9.0.0-preview.2.24128.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Kufl1Jal+mXx1rCMPQFB2bzfyxpa1DrOp5AzMp8YrtSbw8tsbQc81GTURxVjM05/iCaEiUEgvKMwGjNHIFESRg==",
-      "path": "system.threading.accesscontrol/9.0.0-preview.1.24080.9",
-      "hashPath": "system.threading.accesscontrol.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-uDaaKR0553AUU4KFzK7ot1U4xKhyIKRM0wY2TQswdmzj1Yw8StrCf9g+1nawDGdC0Xc+JM4JVw8q8au6loDP7w==",
+      "path": "system.threading.accesscontrol/9.0.0-preview.2.24128.5",
+      "hashPath": "system.threading.accesscontrol.9.0.0-preview.2.24128.5.nupkg.sha512"
     },
     "System.Threading.Tasks.Extensions/4.5.4": {
       "type": "package",
@@ -2183,12 +2176,19 @@
       "path": "system.web.services.description/4.10.0",
       "hashPath": "system.web.services.description.4.10.0.nupkg.sha512"
     },
-    "System.Windows.Extensions/9.0.0-preview.1.24080.9": {
+    "System.Windows.Controls.DataVisualization.Toolkit/4.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bxluIXUS++iMFHDllpOpvt3C4t+L/P464K85+gG6k8h3CwyuACkhTknCG7otEakuSh2TObhr9R0hR+DoXtdlzA==",
-      "path": "system.windows.extensions/9.0.0-preview.1.24080.9",
-      "hashPath": "system.windows.extensions.9.0.0-preview.1.24080.9.nupkg.sha512"
+      "sha512": "sha512-UqBiEXh2YmYdJE5BpJC9c1I+AzcmFlzZ1h7fn5iU2lhOLn3snSxqf46/2XHpoJetJBN4HAavqG77wzaBi5jxfQ==",
+      "path": "system.windows.controls.datavisualization.toolkit/4.0.0",
+      "hashPath": "system.windows.controls.datavisualization.toolkit.4.0.0.nupkg.sha512"
+    },
+    "System.Windows.Extensions/9.0.0-preview.2.24128.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d1HCE7ah5kovIWTd5w/sQQEKmgusdpYWr+2TBj55gIEKXQrCNsBgFt/Fuy46ZTVolg9ADIEj0qJgfS5v3WnYfA==",
+      "path": "system.windows.extensions/9.0.0-preview.2.24128.5",
+      "hashPath": "system.windows.extensions.9.0.0-preview.2.24128.5.nupkg.sha512"
     }
   }
 }

@@ -796,7 +796,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         public AddEmployeeViewModel()
         {
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team lead", "Manager" });
+            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
             department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
             maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" });
             insertData = new InsertData();

@@ -35,7 +35,22 @@ namespace EmployeeManagementSystem.Converter
                
                 return colors[i%colors.Length];
             }
-
+            else if(value is string s)
+            {
+                switch (s)
+                {
+                    case "Developer":
+                        return colors[0];
+                    case "Manager":
+                        return colors[1];
+                    case "Senior Developer":
+                        return colors[2];
+                    case "Team Lead":
+                        return colors[3];
+                    default:
+                        return colors[new Random().Next(0, colors.Length)];
+                }
+            }
             return Binding.DoNothing;
         }
 

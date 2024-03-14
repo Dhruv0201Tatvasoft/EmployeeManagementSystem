@@ -5,7 +5,6 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\EmployeeManagementSystem.pdb
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\Azure.Core.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\Azure.Identity.dll
-C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\DotNetProjects.DataVisualization.Toolkit.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\DotNetProjects.Input.Toolkit.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\Xceed.Wpf.AvalonDock.NET5.dll
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\Xceed.Wpf.AvalonDock.Themes.Aero.NET5.dll
@@ -218,3 +217,4 @@ C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\Emplo
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\LoginWindow.baml
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EmployeeLoginDetails.g.cs
 C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\obj\Debug\net8.0-windows\UserControls\EmployeeLoginDetails.baml
+C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\bin\Debug\net8.0-windows\System.Windows.Controls.DataVisualization.Toolkit.dll

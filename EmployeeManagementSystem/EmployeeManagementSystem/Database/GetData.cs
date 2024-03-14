@@ -301,14 +301,14 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
-        public DataTable GetEmployeeSearchData(String Code, String Name, String Department, String Designation)
+        public DataTable GetEmployeeSearchData(String Email, String Name, String Department, String Designation)
         {
             DataTable dt = new DataTable();
             string Query = "Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1";
 
-            if (!String.IsNullOrEmpty(Code))
+            if (!String.IsNullOrEmpty(Email))
             {
-                Query += $" AND Code like '{Code}%'";
+                Query += $" AND Email like '{Email}%'";
             }
             if (!String.IsNullOrEmpty(Name))
             {
@@ -485,7 +485,7 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetPastSixMonthJoinedEmployee()
         {
             string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
-                "SELECT top 6 M.Month AS Month, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate) " +
+                "SELECT top 6 DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate) " +
                 "GROUP BY M.Month ORDER BY" +
                 " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
             DataTable dt = new DataTable();
@@ -514,7 +514,7 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetPastSixMonthReleasedEmployee()
         {
             string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
-                "SELECT top 6 M.Month AS Month, ISNULL(COUNT(E.ReleaseDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate) " +
+                "SELECT top 6  DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.ReleaseDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate) " +
                 "GROUP BY M.Month ORDER BY" +
                 " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
             DataTable dt = new DataTable();

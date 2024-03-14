@@ -62,7 +62,7 @@
                     </Grid.RowDefinitions>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Code:" Margin="20 20 0 0" Height="20" Width="auto" />
-                    <TextBox  IsEnabled="False" Text="{Binding Code, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Code" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Text="{Binding Code, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Code" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" Content="First Name:" Margin="20 20 0 0" Height="20" Width="auto"   />
                     <TextBox Tag="Name" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="FirstName" MaxWidth="250" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
@@ -369,7 +369,7 @@
                             <DataGridTemplateColumn Header="From" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding FromDate, StringFormat=dd/MMM/yyyy}"/>
+                                        <TextBlock Text="{Binding FromDate, StringFormat=dd/MM/yyyy}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
