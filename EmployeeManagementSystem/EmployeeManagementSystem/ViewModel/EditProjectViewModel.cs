@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.UserControls;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace EmployeeManagementSystem.ViewModel
         private UpdateData updateData;
 
         private List<int> selectedtechnlogyIds = new List<int>();
-        public List<int> SelectedTechnologyNames
+        public List<int> SelectedTechnologyIds
         {
             get { return selectedtechnlogyIds; }
             set { selectedtechnlogyIds = value; }
@@ -183,11 +184,13 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (EndingDate != null)
             {
-                updateData.UpdateProject(OldCode,Code, Name, StartingDate, (DateTime)EndingDate, selectedtechnlogyIds);
+                ProjectModel project = new ProjectModel() {Code = Code, Name = Name, StartingDate = StartingDate, EndingDate = (DateTime)EndingDate,AssociatedTechnologies = SelectedTechnologyIds};
+                updateData.UpdateProject(OldCode,project);
             }
             else
             {
-                updateData.UpdateProject(OldCode,Code, Name, StartingDate, selectedtechnlogyIds);
+                ProjectModel project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
+                updateData.UpdateProjectWithoutEndingDate(OldCode,project);
             }
             OnChangeWindowEvent(EventArgs.Empty);
         }

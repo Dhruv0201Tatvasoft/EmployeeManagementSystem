@@ -20,35 +20,34 @@ namespace EmployeeManagementSystem.Database
     class InsertData
     {
         private GetConnection connection = new GetConnection();
-        public bool executeQuery(string sql)
+        public bool ExecuteQuery(string query)
         {
             try
             {
 
                 SqlConnection conn = connection.GenrateConnection();
                 conn.Open();
-                SqlCommand command = new SqlCommand(sql, conn);
+                SqlCommand command = new SqlCommand(query, conn);
                 command.ExecuteNonQuery();
                 return true;
             }
             catch (SqlException ex)
             {
-
                 {
-                    MessageBox.Show("Some error occured");
+                    MessageBox.Show("Error in inserting data to database");
                     return false;
                 }
             }
 
         }
-        public bool DoesExist(String Query)
+        public bool DoesExist(String query)
         {
             try
             {
                 using (SqlConnection conn = connection.GenrateConnection())
                 {
                     conn.Open();
-                    using (SqlCommand command = new SqlCommand(Query, conn))
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
 
                         SqlDataReader reader = command.ExecuteReader();
@@ -62,150 +61,158 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public bool InsertNewProject(String Code, String Name, DateTime StartingDate, DateTime EndingDate, List<int> TechnologiesId)
+        public bool InsertNewProject(ProjectModel project)
         {
-            if (!this.DoesExist($"Select * from EmsTblProject where Code = '{Code}'"))
+            if (!this.DoesExist($"Select * from EmsTblProject where code = '{project.Code}'"))
             {
-                this.executeQuery($"Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values (" +
-                $"'{Code}'," +
-                $"'{Name}'," +
-                $"'{StartingDate.ToString("yyyy-MM-dd")}'," +
-                $"'{EndingDate.ToString("yyyy-MM-dd")}')");
+                this.ExecuteQuery($"Insert into EmsTblProject (code,name,StartingDate,EndingDate) values ("
+                    + $"'{project.Code}',"
+                    + $"'{project.Name}',"
+                    + $"'{project.StartingDate.ToString("yyyy-MM-dd")}',"
+                    + $"'{project.EndingDate.Value.ToString("yyyy-MM-dd")}')");
 
-                foreach (int i in TechnologiesId)
+                foreach (int i in project.AssociatedTechnologies)
                 {
-                    this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
+                    this.ExecuteQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{project.Code}','{i}')");
                 }
                 return true;
             }
             else
             {
-                MessageBox.Show($"There is Already Project With The Code {Code}");
+                MessageBox.Show($"There is Already Project With The code {project.Code}");
                 return false;
             }
 
 
         }
 
-        public bool InsertNewProject(string Code, string Name, DateTime StartingDate, List<int> TechnologiesId)
+        public bool InsertNewProjectWithOutEndingDate(ProjectModel project)
         {
-            if (!this.DoesExist($"Select * from EmsTblProject where Code = '{Code}' "))
+            if (!this.DoesExist($"Select * from EmsTblProject where code = '{project.Code}' "))
             {
-                this.executeQuery($"Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values (" +
-            $"'{Code}'," +
-                $"'{Name}'," +
-                $"'{StartingDate.ToString("yyyy-MM-dd")}'," +
-                $"NULL)");
+                string query = $"Insert into EmsTblProject (code,name,StartingDate,EndingDate) values (" +
+                $"'{project.Code}'," +
+                $"'{project.Name}'," +
+                $"'{project.StartingDate.ToString("yyyy-MM-dd")}'," +
+                $"NULL)";
 
-                foreach (int i in TechnologiesId)
+                this.ExecuteQuery(query);
+                foreach (int i in project.AssociatedTechnologies)
                 {
-                    this.executeQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{Code}','{i}')");
+                    this.ExecuteQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{project.Code}','{i}')");
                 }
                 return true;
             }
             else
             {
-                MessageBox.Show($"There is Already Project With The Code {Code}");
+                MessageBox.Show($"There is Already Project With The code {project.Code}");
                 return false;
             }
         }
-        public void InsertEmployeeToProject(String ProjectCode, String EmployeeCode, string EmployeeName)
+        public void InsertEmployeeToProject(String projectCode, String employeeCode, string employeeName)
         {
-            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{ProjectCode}' AND EmployeeCode ='{EmployeeCode}'"))
+            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{projectCode}' AND EmployeeCode ='{employeeCode}'"))
             {
-                string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{ProjectCode}')";
-                this.executeQuery(Query);
+                string query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{employeeCode}','{projectCode}')";
+                this.ExecuteQuery(query);
             }
             else
             {
-                MessageBox.Show($"{EmployeeName} is already added to this project", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{employeeName} is already added to this project", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
-        public void InsertTechnology(String TechnologyName)
+        public void InsertTechnology(String technologyName)
         {
-            if (!DoesExist($"select * from EmsTblTechnology where Name like '{TechnologyName}'"))
+            if (!DoesExist($"select * from EmsTblTechnology where Name like '{technologyName}'"))
             {
-                string Query = $"Insert into EmsTblTechnology (Name) Values ('{TechnologyName}')";
-                this.executeQuery(Query);
+                string query = $"Insert into EmsTblTechnology (Name) Values ('{technologyName}')";
+                this.ExecuteQuery(query);
             }
             else
             {
-                MessageBox.Show($"{TechnologyName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{technologyName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
-        public void InsertSkill(String SkillName)
+        public void InsertSkill(String skillName)
         {
-            if (!DoesExist($"select * from EmsTblSkill where Name like '{SkillName}'"))
+            if (!DoesExist($"select * from EmsTblSkill where Name like '{skillName}'"))
             {
-                string Query = $"Insert into EmsTblSkill (Name) Values ('{SkillName}')";
-                this.executeQuery(Query);
+                string query = $"Insert into EmsTblSkill (Name) Values ('{skillName}')";
+                this.ExecuteQuery(query);
             }
             else
             {
-                MessageBox.Show($"{SkillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{skillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
-        public bool InsertEmployee(String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate, DateTime ReleaseDate, DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
+        public bool InsertEmployee(EmployeeModel employee)
         {
-            if (!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
+            if (!DoesExist($"select * from EmsTblEmployee where Code like '{employee.Code}'"))
             {
-                string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
-                    $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{ReleaseDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
-                this.executeQuery(Query);
+                string query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, " +
+                    $"MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
+                 $"('{employee.Code}','{employee.FirstName}','{employee.LastName}','{employee.Email}','{employee.Password}','{employee.Designation}','{employee.Department}','" +
+                 $"{employee.JoiningDate.ToString("yyyy-MM-dd")}','{employee.ReleaseDate?.ToString("yyyy-MM-dd")}','{employee.DOB.ToString("yyyy-MM-dd")}','{employee.ContactNumber}'," +
+                 $"'{employee.Gender}','{employee.MaritalStauts}','{employee.PresentAddress}','{employee.PermanentAddress}')";
+                this.ExecuteQuery(query);
+                return true;
+
+            }
+            else
+            {
+                MessageBox.Show($"There is aleady an employee with Employee Code {employee.Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                return false;
+            }
+        }
+        public bool InsertEmployeeWithoutReleaseDate(EmployeeModel employee)
+        {
+            if (!DoesExist($"select * from EmsTblEmployee where Code like '{employee.Code}'"))
+            {
+                string query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, " +
+                    $"MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
+                 $"('{employee.Code}','{employee.FirstName}','{employee.LastName}','{employee.Email}','{employee.Password}','{employee.Designation}','{employee.Department}','" +
+                 $"{employee.JoiningDate.ToString("yyyy-MM-dd")}','{employee.ReleaseDate?.ToString("yyyy-MM-dd")}','{employee.ContactNumber}'," +
+                 $"'{employee.Gender}','{employee.MaritalStauts}','{employee.PresentAddress}','{employee.PermanentAddress}')";
+                this.ExecuteQuery(query);
                 return true;
             }
             else
             {
-                MessageBox.Show($"There is aleady an employee with Employee Code {Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-                return false;
-            }
-        }
-        public bool InsertEmployee(String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate, DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
-        {
-            if (!DoesExist($"select * from EmsTblEmployee where Code like '{Code}'"))
-            {
-                string Query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
-                    $"('{Code}','{FirstName}','{LastName}','{Email}','{Password}','{Designation}','{Department}','{JoiningDate.ToString("yyyy-MM-dd")}','{DOB.ToString("yyyy-MM-dd")}','{ContactNumber}','{Gender}','{MaritalStatus}','{PresentAddress}','{PermanentAdress}')";
-                this.executeQuery(Query);
-                return true;
-            }
-            else
-            {
-                MessageBox.Show($"There is aleady an employee with Employee Code {Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"There is aleady an employee with Employee Code {employee.Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
         }
 
-        public bool InsertEducationDetails(EmployeeEducationModel educationModel, String Code)
+        public bool InsertEducationDetails(EmployeeEducationModel educationModel, String code)
         {
-            string Query = $"insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values " +
-                   $"('{Code}','{educationModel.Qualification}','{educationModel.BoardUniversity}','{educationModel.InstituteName}'," +
+            string query = $"insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values " +
+                   $"('{code}','{educationModel.Qualification}','{educationModel.BoardUniversity}','{educationModel.InstituteName}'," +
                    $"'{educationModel.State}','{educationModel.PassingYear}','{educationModel.Percentage}') ";
-            bool didExecute = this.executeQuery(Query);
+            bool didExecute = this.ExecuteQuery(query);
             return didExecute;
         }
-        public bool InsertExperienceDetails(EmployeeExperienceModel experienceModel, String Code)
+        public bool InsertExperienceDetails(EmployeeExperienceModel experienceModel, String code)
         {
             string Query = $"insert into EmsTblEmployeeExperience (EmployeeCode,Organization,FromDate,ToDate,Designation) values " +
-                   $"('{Code}','{experienceModel.Organization}','{experienceModel.FromDate.Value.ToString("yyyy-MM-dd")}','{experienceModel.ToDate.Value.ToString("yyyy-MM-dd")}'," +
+                   $"('{code}','{experienceModel.Organization}','{experienceModel.FromDate.Value.ToString("yyyy-MM-dd")}','{experienceModel.ToDate.Value.ToString("yyyy-MM-dd")}'," +
                    $"'{experienceModel.Designation}') ";
-            bool didExecute = this.executeQuery(Query);
+            bool didExecute = this.ExecuteQuery(Query);
             return didExecute;
 
         }
 
-        internal void InsertProjectToEmployee(string ProjectCode, string ProjectName, string EmployeeCode)
+        public void InsertProjectToEmployee(string projectCode, string projectName, string employeeCode)
         {
-            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{ProjectCode}' AND EmployeeCode ='{EmployeeCode}'"))
+            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{projectCode}' AND EmployeeCode ='{employeeCode}'"))
             {
-                string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{EmployeeCode}','{ProjectCode}')";
-                this.executeQuery(Query);
+                string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{employeeCode}','{projectCode}')";
+                this.ExecuteQuery(Query);
             }
             else
             {
-                MessageBox.Show($"{ProjectName} is already assigned to this Employee", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{projectName} is already assigned to this Employee", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
     }

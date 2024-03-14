@@ -17,28 +17,7 @@ namespace EmployeeManagementSystem.Database
     internal class GetData
     {
         private GetConnection connection = new GetConnection();
-        public void executeQuery(string sql)
-        {
-            try
-            {
-                SqlConnection conn = connection.GenrateConnection();
-                conn.Open();
-                SqlCommand command = new SqlCommand(sql, conn);
-                command.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                /// Exeption number 2627 belongs to Duplicate primary key exception. 
-                if (ex.Number == 2627)
-                {
-                    MessageBox.Show("Duplicate Data");
-                }
-                else
-                {
-                    MessageBox.Show("Some error occured");
-                }
-            }
-        }
+
 
         public DataTable GetProjectData()
         {
@@ -65,26 +44,26 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
-        public DataTable GetProjectSearchData(String Code, String Name, DateTime StartingDate, DateTime EndingDate)
+        public DataTable GetProjectSearchData(String code, String name, DateTime startingDate, DateTime endingDate)
         {
             DataTable dt = new DataTable();
-            string Query = "Select * from EmsTblProject where 1=1";
+            string query = "Select * from EmsTblProject where 1=1";
 
-            if (!String.IsNullOrEmpty(Code))
+            if (!String.IsNullOrEmpty(code))
             {
-                Query += $" AND Code like '{Code}%'";
+                query += $" AND code like '{code}%'";
             }
-            if (!String.IsNullOrEmpty(Name))
+            if (!String.IsNullOrEmpty(name))
             {
-                Query += $" AND Name like '{Name}%' ";
+                query += $" AND name like '{name}%' ";
             }
-            if (StartingDate.Date != DateTime.MinValue)
+            if (startingDate.Date != DateTime.MinValue)
             {
-                Query += $" AND StartingDate='{StartingDate.ToString("yyyy-MM-dd")}'";
+                query += $" AND startingDate='{startingDate.ToString("yyyy-MM-dd")}'";
             }
-            if (EndingDate.Date != DateTime.MinValue)
+            if (endingDate.Date != DateTime.MinValue)
             {
-                Query += $" AND EndingDate='{EndingDate.ToString("yyyy-MM-dd")}'";
+                query += $" AND endingDate='{endingDate.ToString("yyyy-MM-dd")}'";
             }
             try
             {
@@ -92,7 +71,7 @@ namespace EmployeeManagementSystem.Database
                     using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                     {
                         conn.Open();
-                        using (SqlCommand command = new SqlCommand(Query, conn))
+                        using (SqlCommand command = new SqlCommand(query, conn))
                         {
                             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                             {
@@ -136,31 +115,29 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
-        public ProjectModel GetProjectFromCode(String Code)
+        public ProjectModel GetProjectFromCode(String code)
         {
-            List<int> ProjectTechnologies = new List<int>();
+            List<int> projectTechnologies = new List<int>();
             ProjectModel project = new ProjectModel();
 
 
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-
-
-                string SelectQueryForEmsTbltechnologyForProjectTable = $"SELECT TechnologyId FROM EmsTblTechnologyForProject where ProjectCode = '{Code}'";
-                using (SqlCommand command = new SqlCommand(SelectQueryForEmsTbltechnologyForProjectTable, conn))
+                string query = $"SELECT TechnologyId FROM EmsTblTechnologyForProject where projectCode = '{code}'";
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             int value = reader.GetInt32(0);
-                            ProjectTechnologies.Add(value);
+                            projectTechnologies.Add(value);
                         }
                     }
                 }
-                string SelectQueryForEmsTblProject = $"SELECT * from EmsTblProject where Code = '{Code}'";
-                using (SqlCommand command = new SqlCommand(SelectQueryForEmsTblProject, conn))
+                query = $"SELECT * from EmsTblProject where code = '{code}'";
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -179,19 +156,19 @@ namespace EmployeeManagementSystem.Database
                     }
                 }
             }
-            project.AssociatedTechnologies = ProjectTechnologies;
+            project.AssociatedTechnologies = projectTechnologies;
             return project;
         }
 
         public List<String> AllEmployeeNames()
         {
 
-            string Query = $"Select Code,Firstname, Lastname from EmsTblEmployee";
-            List<string> Result = new List<string>();
+            string query = $"Select code,Firstname, Lastname from EmsTblEmployee";
+            List<string> result = new List<string>();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     string name = string.Empty;
                     SqlDataReader reader = command.ExecuteReader();
@@ -202,24 +179,24 @@ namespace EmployeeManagementSystem.Database
                         name += reader.GetString(1);
                         name += " ";
                         name += reader.GetString(2);
-                        Result.Add(name);
+                        result.Add(name);
                         name = string.Empty;
                     }
                 }
             }
-            return Result;
+            return result;
         }
-        public DataTable GetAssociatedEmployeesToProject(string ProjectCode)
+        public DataTable GetAssociatedEmployeesToProject(string projectCode)
         {
-            string Query = $"Select CONCAT(Firstname,' ',Lastname) As FullName,EmsTblEmployee.code " +
+            string query = $"Select CONCAT(Firstname,' ',Lastname) As FullName,EmsTblEmployee.code " +
                 $"from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on " +
-                $"EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code " +
-                $"where EmsTblEmployeeAssociatedToProject.ProjectCode = '{ProjectCode}'";
+                $"EmsTblEmployeeAssociatedToProject.employeeCode = EmsTblEmployee.code " +
+                $"where EmsTblEmployeeAssociatedToProject.projectCode = '{projectCode}'";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -230,14 +207,14 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
-        public DataTable GetAssociatedProjectForEmployees(string EmployeeCode)
+        public DataTable GetAssociatedProjectForEmployees(string employeeCode)
         {
-            string Query = $"select Name,ProjectCode from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like '{EmployeeCode}'";
+            string query = $"select name,projectCode from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On projectCode = code where employeeCode Like '{employeeCode}'";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -251,11 +228,11 @@ namespace EmployeeManagementSystem.Database
 
         public DataTable GetTechnologyTable()
         {
-            string Query = "select * from EmsTblTechnology";
+            string query = "select * from EmsTblTechnology";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -268,11 +245,11 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetSkillTable()
         {
-            string Query = "select * from EmsTblSkill";
+            string query = "select * from EmsTblSkill";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
 
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -287,10 +264,10 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetEmployeeTable()
         {
             DataTable dt = new DataTable();
-            string Query = "select Code,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name,Email,Designation,Department,JoiningDate,ReleaseDate from EmsTblEmployee";
+            string query = "select Code,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name,Email,Designation,Department,JoiningDate,ReleaseDate from EmsTblEmployee";
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -301,26 +278,26 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
-        public DataTable GetEmployeeSearchData(String Email, String Name, String Department, String Designation)
+        public DataTable GetEmployeeSearchData(String email, String name, String department, String designation)
         {
             DataTable dt = new DataTable();
-            string Query = "Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1";
+            string query = "Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1";
 
-            if (!String.IsNullOrEmpty(Email))
+            if (!String.IsNullOrEmpty(email))
             {
-                Query += $" AND Email like '{Email}%'";
+                query += $" AND Email like '{email}%'";
             }
-            if (!String.IsNullOrEmpty(Name))
+            if (!String.IsNullOrEmpty(name))
             {
-                Query += $" AND  CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) LIKE '%{Name}%'";
+                query += $" AND  CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) LIKE '%{name}%'";
             }
-            if (!String.IsNullOrEmpty(Department))
+            if (!String.IsNullOrEmpty(department))
             {
-                Query += $" AND Department like '{Department}'";
+                query += $" AND Department like '{department}'";
             }
-            if (!String.IsNullOrEmpty(Designation))
+            if (!String.IsNullOrEmpty(designation))
             {
-                Query += $" AND Designation like '{Designation}'";
+                query += $" AND Designation like '{designation}'";
             }
             try
             {
@@ -328,7 +305,7 @@ namespace EmployeeManagementSystem.Database
                     using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                     {
                         conn.Open();
-                        using (SqlCommand command = new SqlCommand(Query, conn))
+                        using (SqlCommand command = new SqlCommand(query, conn))
                         {
                             using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                             {
@@ -340,11 +317,11 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database");
             }
             return dt;
         }
-        public EmployeeModel GetEmployeeModelFromCode(String Code)
+        public EmployeeModel GetEmployeeModelFromCode(String code)
         {
             EmployeeModel employee = new EmployeeModel();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
@@ -352,8 +329,8 @@ namespace EmployeeManagementSystem.Database
                 conn.Open();
 
 
-                string Query = $"SELECT * from EmsTblEmployee where Code = '{Code}'";
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                string query = $"SELECT * from EmsTblEmployee where Code Like '{code}'";
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -382,8 +359,8 @@ namespace EmployeeManagementSystem.Database
                         }
                     }
                 }
-                Query = $"Select * from  EmsTblEmployeeEducation where EmployeeCode like '{Code}'";
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                query = $"Select * from  EmsTblEmployeeEducation where EmployeeCode like '{code}'";
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -403,8 +380,8 @@ namespace EmployeeManagementSystem.Database
                         }
                     }
                 }
-                Query = $"Select * from  EmsTblEmployeeExperience where EmployeeCode like '{Code}'";
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                query = $"Select * from  EmsTblEmployeeExperience where EmployeeCode like '{code}'";
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -416,7 +393,7 @@ namespace EmployeeManagementSystem.Database
                                 Organization = reader["Organization"].ToString(),
                                 FromDate = (DateTime)reader["FromDate"],
                                 ToDate = (DateTime)reader["ToDate"],
-                                Designation = reader["Designation"].ToString(),
+                                Designation = reader["designation"].ToString(),
 
                             };
                             employee.ExperienceModels.Add(employeeExperienceModel);
@@ -429,11 +406,11 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable DesignationWiseEmployeeCount()
         {
-            string Query = $"select COUNT(*) as Count, Designation from EmsTblEmployee Group BY Designation";
+            string query = $"select COUNT(*) as Count, Designation from EmsTblEmployee Group BY Designation";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -445,11 +422,11 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable TechnologyWiseEmployeeCount()
         {
-            string Query = $"select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name";
+            string query = $"select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On employeeCode = code group by Name";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
@@ -461,12 +438,12 @@ namespace EmployeeManagementSystem.Database
         }
         public List<string> GetProjectNames()
         {
-            string Query = $"Select Code,Name from EmsTblProject";
-            List<string> Result = new List<string>();
+            string query = $"Select Code,Name from EmsTblProject";
+            List<string> result = new List<string>();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand(Query, conn))
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     string name = string.Empty;
                     SqlDataReader reader = command.ExecuteReader();
@@ -475,17 +452,18 @@ namespace EmployeeManagementSystem.Database
                         name = reader.GetString(0);
                         name += "-";
                         name += reader.GetString(1);
-                        Result.Add(name);
+                        result.Add(name);
                         name = string.Empty;
                     }
                 }
             }
-            return Result;
+            return result;
         }
         public DataTable GetPastSixMonthJoinedEmployee()
         {
             string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
-                "SELECT top 6 DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate) " +
+                "SELECT top 6 DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT" +
+                " JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate) " +
                 "GROUP BY M.Month ORDER BY" +
                 " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
             DataTable dt = new DataTable();
@@ -514,7 +492,8 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetPastSixMonthReleasedEmployee()
         {
             string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
-                "SELECT top 6  DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.ReleaseDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate) " +
+                "SELECT top 6  DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.ReleaseDate), 0) AS Count FROM Months AS M LEFT" +
+                " JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate) " +
                 "GROUP BY M.Month ORDER BY" +
                 " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
             DataTable dt = new DataTable();
@@ -542,7 +521,7 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetTechnologyWiseProject()
         {
-            string query = "SELECT Id,COUNT(ProjectCode)as Count,Name FROM EmsTblTechnology " +
+            string query = "SELECT Id,COUNT(projectCode)as Count,Name FROM EmsTblTechnology " +
                 "LEFT JOIN EmsTblTechnologyForProject ON " +
                 "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,Id;";
             DataTable dt = new DataTable();
@@ -594,18 +573,18 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
-        public String ExecuteLogin(string Username, string Password)
+        public String ExecuteLogin(string username, string password)
         {
-            string query = $"select Code from EmsTblEmployee Where Email like '{Username}' COLLATE Latin1_General_CS_AS AND password like '{Password}' COLLATE Latin1_General_CS_AS ";
+            string query = $"select Code from EmsTblEmployee Where Email like '{username}' COLLATE Latin1_General_CS_AS AND Password like '{password}' COLLATE Latin1_General_CS_AS ";
             string Code = string.Empty;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
                     conn.Open();
-                    using(SqlCommand command = new SqlCommand(query, conn))
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        using(SqlDataReader reader = command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {

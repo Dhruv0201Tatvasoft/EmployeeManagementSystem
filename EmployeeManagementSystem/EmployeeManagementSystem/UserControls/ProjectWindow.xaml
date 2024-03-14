@@ -143,13 +143,13 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Button MaxWidth="40" MaxHeight="40" Command= "{Binding DataContext.EditCommand , ElementName=DataGrid}" Background="White">
-                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" Width="25" Height="25"  />
+                                    <Image Source="\Icons\EditIcon.png" Width="25" Height="25"  />
                                 </Button>
                                 <Button Command="{Binding DataContext.DeleteCommand , ElementName=DataGrid}" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="1">
-                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\DeleteIcon.png" Width="40" Height="40"/>
+                                    <Image Source="\Icons\DeleteIcon.png" Width="40" Height="40"/>
                                 </Button>
                                 <Button Click="OpenEmployeeMapingPopupMethod" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="2">
-                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\ViewEmployee.jpg" Width="40" Height="40"/>
+                                    <Image Source="\Icons\ViewEmployee.jpg" Width="40" Height="40"/>
 
                                 </Button>
 
@@ -176,7 +176,7 @@
                             <TextBlock x:Name="ProjectNameTextBox" TextWrapping="Wrap" Margin="0 10 0 0"  Height="auto" FontSize="26" Width="250" VerticalAlignment="Center"/>
                             <Button Click="ClosePopUpClick"  Background="Transparent" BorderBrush="Transparent" Margin="15 10 10 0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
 
-                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CancelIcon.png"/>
+                                <Image Source="\Icons\CancelIcon.png"/>
                             </Button>
                         </DockPanel>
                         <Separator Margin="10 0 10 0" Grid.Row="1"/>

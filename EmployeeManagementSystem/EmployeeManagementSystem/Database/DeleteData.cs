@@ -13,7 +13,7 @@ namespace EmployeeManagementSystem.Database
     class DeleteData
     {
         private GetConnection connection = new GetConnection();
-        public void executeQuery(string sql)
+        public void ExecuteQuery(string sql)
         {
             try
             {
@@ -47,77 +47,77 @@ namespace EmployeeManagementSystem.Database
             return result == MessageBoxResult.Yes;
         }
 
-        public void DeleteProject(String Code)
+        public void DeleteProject(string code)
         {
 
-            if (this.DeleteWarningMessage("Delete Project With Code " + Code))
+            if (this.DeleteWarningMessage("Delete Project With code " + code))
             {
-                string Query = $"delete from EmsTblTechnologyForProject where ProjectCode = '{Code}'";
-                this.executeQuery(Query);
-                Query = string.Empty;
-                Query = $"delete from EmsTblProject where Code = '{Code}' ";
-                this.executeQuery(Query);
+                string query = $"delete from EmsTblTechnologyForProject where projectCode = '{code}'";
+                this.ExecuteQuery(query);
+                query = string.Empty;
+                query = $"delete from EmsTblProject where code = '{code}' ";
+                this.ExecuteQuery(query);
             }
         }
 
-        public void RemoveEmployeeFromProject(String EmployeeCode, String ProjectCode)
+        public void RemoveEmployeeFromProject(String employeeCode, String projectCode)
         {
             
-                string query = $"Delete from EmsTblEmployeeAssociatedToProject Where ProjectCode = '{ProjectCode} ' AND EmployeeCode = '{EmployeeCode}'";
-                this.executeQuery(query);
+                string query = $"Delete from EmsTblEmployeeAssociatedToProject Where projectCode = '{projectCode} ' AND employeeCode = '{employeeCode}'";
+                this.ExecuteQuery(query);
             
         }
 
-        public void DeleteTechnology(String TechnologyName)
+        public void DeleteTechnology(String technologyName)
         {
 
-            if (this.DeleteWarningMessage("Remove " + TechnologyName + " From Data"))
+            if (this.DeleteWarningMessage("Remove " + technologyName + " From Data"))
             {
-                string Query = $"Delete From EmsTblTechnology where Name like '{TechnologyName}'";
-                this.executeQuery(Query);
+                string query = $"Delete From EmsTblTechnology where name like '{technologyName}'";
+                this.ExecuteQuery(query);
             }
         }
-        public void DeleteSkill(String SkillName)
+        public void DeleteSkill(String skillName)
         {
 
-            if (this.DeleteWarningMessage("Remove " + SkillName + " From Data"))
+            if (this.DeleteWarningMessage("Remove " + skillName + " From Data"))
             {
-                string Query = $"Delete From EmsTblSkill where Name like '{SkillName}'";
-                this.executeQuery(Query);
+                string query = $"Delete From EmsTblSkill where name like '{skillName}'";
+                this.ExecuteQuery(query);
             }
         }
 
-        public bool DeleteEducationRow(EmployeeEducationModel EmployeeEducationModel, String Code)
+        public bool DeleteEducationRow(EmployeeEducationModel employeeEducationModel, String code)
         {
             if (this.DeleteWarningMessage("Remove this education field form Data"))
             {
-                string Query = $"Delete from EmsTblEmployeeEducation where EmployeeCode Like '{Code}' and Qualification like " +
-                    $"'{EmployeeEducationModel.Qualification}' AND Board Like '{EmployeeEducationModel.BoardUniversity}' AND Institute like '{EmployeeEducationModel.InstituteName}' AND State Like '{EmployeeEducationModel.State}' AND " +
-                    $"PassingYear like '{EmployeeEducationModel.PassingYear}' AND Percentage like '{EmployeeEducationModel.Percentage}'";
-                this.executeQuery(Query);
+                string query = $"Delete from EmsTblEmployeeEducation where employeeCode Like '{code}' and Qualification like " +
+                    $"'{employeeEducationModel.Qualification}' AND Board Like '{employeeEducationModel.BoardUniversity}' AND Institute like '{employeeEducationModel.InstituteName}' AND State Like '{employeeEducationModel.State}' AND " +
+                    $"PassingYear like '{employeeEducationModel.PassingYear}' AND Percentage like '{employeeEducationModel.Percentage}'";
+                this.ExecuteQuery(query);
                 return true;
             }
             return false;
         }
-        public bool DeleteExperienceRow(EmployeeExperienceModel EmployeeExperienceModel, String Code)
+        public bool DeleteExperienceRow(EmployeeExperienceModel employeeExperienceModel, String code)
         {
             if (this.DeleteWarningMessage("Remove this Experience field form Data"))
             {
-                string Query = $"Delete from EmsTblEmployeeExperience where EmployeeCode Like '{Code}' and Organization like " +
-                    $"'{EmployeeExperienceModel.Organization}' AND FromDate = '{EmployeeExperienceModel.FromDate.Value.ToString("yyyy-MM-dd")}'" +
-                    $" AND ToDate = '{EmployeeExperienceModel.ToDate.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND Designation Like '{EmployeeExperienceModel.Designation}'";
-                this.executeQuery(Query);
+                string query = $"Delete from EmsTblEmployeeExperience where employeeCode Like '{code}' and Organization like " +
+                    $"'{employeeExperienceModel.Organization}' AND FromDate = '{employeeExperienceModel.FromDate.Value.ToString("yyyy-MM-dd")}'" +
+                    $" AND ToDate = '{employeeExperienceModel.ToDate.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND Designation Like '{employeeExperienceModel.Designation}'";
+                this.ExecuteQuery(query);
                 return true;
             }
             return false;
         }
-        public void DeleteEmployee(String Code ,String Name)
+        public void DeleteEmployee(String code ,String name)
         {
-            if(this.DeleteWarningMessage($"Delete {Name} From Data"))
+            if(this.DeleteWarningMessage($"Delete {name} From Data"))
             {
-                string Query = $"Delete From EmsTblEmployee where code like '{Code}'";
-                this.executeQuery(Query);
+                string query = $"Delete From EmsTblEmployee where code like '{code}'";
+                this.ExecuteQuery(query);
             }
         }
 

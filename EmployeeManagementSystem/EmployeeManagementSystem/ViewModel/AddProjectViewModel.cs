@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.Models;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Input;
@@ -26,7 +27,7 @@ namespace EmployeeManagementSystem.ViewModel
         private InsertData insertData;
 
         private List<int> selectedtechnlogyIds = new List<int>();
-        public List<int> SelectedTechnologyNames
+        public List<int> SelectedTechnologyIds
         {
             get { return selectedtechnlogyIds; }
             set { selectedtechnlogyIds = value; }
@@ -157,11 +158,14 @@ namespace EmployeeManagementSystem.ViewModel
             bool didSaved = false;
             if (EndingDate != null)
             {
-                didSaved = insertData.InsertNewProject(Code, Name, StartingDate, (DateTime)EndingDate, selectedtechnlogyIds);
+                ProjectModel project = new ProjectModel() { Code = Code, Name = Name, EndingDate = (DateTime)EndingDate,StartingDate=StartingDate,AssociatedTechnologies = SelectedTechnologyIds};
+                didSaved = insertData.InsertNewProject(project);
             }
             else
             {
-                didSaved = insertData.InsertNewProject(Code, Name, StartingDate, selectedtechnlogyIds);
+                ProjectModel project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
+
+                didSaved = insertData.InsertNewProjectWithOutEndingDate(project);
             }
             if (didSaved)
             {

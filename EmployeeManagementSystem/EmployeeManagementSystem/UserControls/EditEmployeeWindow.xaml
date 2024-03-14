@@ -218,7 +218,7 @@
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="80"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AddIcon.png" />
+                                <Image Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="\Icons\AddIcon.png" />
                                 <TextBlock Grid.Column="1" Text="ADD" HorizontalAlignment="Left" VerticalAlignment="Center" />
                             </Grid>
                         </Button.Content>
@@ -302,10 +302,10 @@
                                     <DataTemplate>
                                         <StackPanel Width="100" Orientation="Horizontal">
                                             <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditEducationRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
-                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png" />
+                                                <Image Source="\Icons\EditIcon.png" />
                                             </Button>
                                             <Button Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.RemoveEducationFromDataBaseCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
-                                                <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png"/>
+                                                <Image  Source="\Icons\CircleCrossIcon.png"/>
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>
@@ -317,7 +317,7 @@
 
                                             </Button>
                                             <Button Style="{StaticResource CircleButton}" Margin="10 0 10 0" Width="30" Height="30" Command="{Binding DataContext.RemoveEducationFromListCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
-                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" />
+                                                <Image Source="\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>
@@ -347,7 +347,7 @@
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="80"/>
                                 </Grid.ColumnDefinitions>
-                                <Image Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AddIcon.png" />
+                                <Image Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Source="\Icons\AddIcon.png" />
                                 <TextBlock Grid.Column="1" Text="ADD" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Grid>
                         </Button.Content>
@@ -409,10 +409,10 @@
                                     <DataTemplate>
                                         <StackPanel Width="100" Orientation="Horizontal">
                                             <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditExperienceCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
-                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\EditIcon.png"/>
+                                                <Image Source="\Icons\EditIcon.png"/>
                                             </Button>
                                             <Button Command="{Binding DataContext.RemoveExperienceFromDataBaseCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
-                                                <Image  Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" />
+                                                <Image  Source="\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>
@@ -423,7 +423,7 @@
                                             <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveExperienceRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                             </Button>
                                             <Button Margin="10 0 10 0" Width="30" Height="30"  Command="{Binding DataContext.RemoveExperienceFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
-                                                <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png"  />
+                                                <Image Source="\Icons\CircleCrossIcon.png"  />
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>

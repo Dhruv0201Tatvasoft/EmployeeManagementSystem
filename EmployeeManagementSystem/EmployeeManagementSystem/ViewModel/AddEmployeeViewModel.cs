@@ -384,7 +384,25 @@ namespace EmployeeManagementSystem.ViewModel
                 //     $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
                 //if (result == MessageBoxResult.OK)
                 //{
-                    didsaved = insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, (DateTime)ReleaseDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
+                EmployeeModel employee = new EmployeeModel
+                {
+                    Code = Code,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    Password = Password,
+                    Designation = SelectedDesignation,
+                    Department = SelectedDepartment,
+                    JoiningDate = JoiningDate, 
+                    ReleaseDate = ReleaseDate,
+                    DOB = DOB, 
+                    ContactNumber = ContactNumber,
+                    Gender = Gender,
+                    MaritalStauts = SelectedMaritialStatus,
+                    PresentAddress = PresentAddress,
+                    PermanentAddress = PermanentAddress
+                };
+                didsaved = insertData.InsertEmployee(employee);
                 //}
             }
             else
@@ -395,7 +413,25 @@ namespace EmployeeManagementSystem.ViewModel
                 //      $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
                 //if (result == MessageBoxResult.OK)
                 //{
-                    didsaved = insertData.InsertEmployee(Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
+                //{
+                EmployeeModel employee = new EmployeeModel
+                {
+                    Code = Code,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    Password = Password,
+                    Designation = SelectedDesignation,
+                    Department = SelectedDepartment,
+                    JoiningDate = JoiningDate,
+                    DOB = DOB,
+                    ContactNumber = ContactNumber,
+                    Gender = Gender,
+                    MaritalStauts = SelectedMaritialStatus,
+                    PresentAddress = PresentAddress,
+                    PermanentAddress = PermanentAddress
+                };
+                didsaved = insertData.InsertEmployeeWithoutReleaseDate(employee);
                 //}
             }
             if (didsaved)

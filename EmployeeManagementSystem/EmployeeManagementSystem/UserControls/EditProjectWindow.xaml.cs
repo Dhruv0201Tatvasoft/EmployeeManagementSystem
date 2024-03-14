@@ -40,7 +40,7 @@ namespace EmployeeManagementSystem.UserControls
             this.DataContext = editProjectViewModel;
             GetData = new GetData();
             editProjectViewModel.OldCode = project.Code;
-            editProjectViewModel.SelectedTechnologyNames = project.AssociatedTechnologies;
+            editProjectViewModel.SelectedTechnologyIds = project.AssociatedTechnologies;
             editProjectViewModel.Code = project.Code;
             editProjectViewModel.Name = project.Name;
             editProjectViewModel.StartingDate = project.StartingDate;

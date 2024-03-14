@@ -12,6 +12,7 @@ namespace EmployeeManagementSystem.Behaviours
         protected override DataPoint CreateDataPoint()
         {
             return new PieDataPoint();
+           
         }
     }
 }
