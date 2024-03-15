@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using EmployeeManagementSystem.Models;
-using System.Data.Common;
-using System.Windows.Media.Animation;
-using System.Collections.ObjectModel;
 using EmployeeManagementSystem.Model;
 
 namespace EmployeeManagementSystem.Database
@@ -461,11 +453,16 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetPastSixMonthJoinedEmployee()
         {
-            string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
-                "SELECT top 6 DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT" +
-                " JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate) " +
-                "GROUP BY M.Month ORDER BY" +
-                " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
+            string query = "SELECT " +
+                                "COUNT(*) AS Count,MONTH(JoiningDate) AS MonthNumber, DATENAME(month, JoiningDate) AS Month " +
+                            "FROM " +
+                                "EmsTblEmployee" +
+                            " WHERE " +
+                                "JoiningDate between DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE())) AND EOMONTH(GETDATE(),-1)" +
+                            "GROUP BY " +
+                                "MONTH(JoiningDate), DATENAME(month, JoiningDate) " +
+                            "ORDER BY " +
+                            "(MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;";
             DataTable dt = new DataTable();
             try
             {
@@ -491,11 +488,16 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetPastSixMonthReleasedEmployee()
         {
-            string query = "WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12) " +
-                "SELECT top 6  DateName( month , DateAdd( month , M.Month, 0 ) - 1 ) AS Month, ISNULL(COUNT(E.ReleaseDate), 0) AS Count FROM Months AS M LEFT" +
-                " JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate) " +
-                "GROUP BY M.Month ORDER BY" +
-                " (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;";
+            string query = "SELECT " +
+                                "COUNT(*) AS Count,MONTH(ReleaseDate) AS MonthNumber, DATENAME(month, ReleaseDate) AS Month " +
+                            "FROM " +
+                                "EmsTblEmployee" +
+                            " WHERE " +
+                                "ReleaseDate between DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE())) AND EOMONTH(GETDATE(),-1)" +
+                            "GROUP BY " +
+                                "MONTH(ReleaseDate), DATENAME(month, ReleaseDate) " +
+                            "ORDER BY " +
+                            "(MONTH(GETDATE()) - MONTH(ReleaseDate) + 12) % 12;";
             DataTable dt = new DataTable();
             try
             {

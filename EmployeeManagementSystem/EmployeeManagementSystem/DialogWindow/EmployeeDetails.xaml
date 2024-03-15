@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmployeeManagementSystem.DialogWindow"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"    
         Title="Employee Details" Height="400" Width="750"
@@ -103,8 +102,8 @@
             <TextBlock x:Name="Department" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3"/>
             <TextBlock x:Name="Designation" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
             <TextBlock x:Name="JoiningDate" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5"/>
-            <DataGrid x:Name="Experience" Grid.Row="6" Grid.Column="1" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Top" Style="{StaticResource DataGridStyle}" 
-                     Margin="0 0 20 0 "
+            <DataGrid IsReadOnly="True" x:Name="Experience" Grid.Row="6" Grid.Column="1" AutoGenerateColumns="False" VerticalAlignment="Top" Style="{StaticResource DataGridStyle}" 
+                     Margin="1,0,19,0"
                     CanUserAddRows="False"
                     SelectionMode="Single"
                     HeadersVisibility="Column"
@@ -113,7 +112,7 @@
                     <DataGridTextColumn Width=".2*" Header="Organization" Binding="{Binding Organization}"/>
                     <DataGridTextColumn Width=".2*" Header="Duration" Binding="{Binding Duration}"/>
                     <DataGridTextColumn Width=".2*" Header="Designation" Binding="{Binding Designation}"/>
-                    
+
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

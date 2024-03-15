@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.ComponentModel;
 
 namespace EmployeeManagementSystem.Models
 {
-  public class ProjectModel:INotifyPropertyChanged
+    public class ProjectModel:INotifyPropertyChanged
     {
         private string code;
         public string Code

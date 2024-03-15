@@ -2,8 +2,6 @@
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.Models;
 using System.ComponentModel;
-using System.ServiceModel.Channels;
-using System.Windows;
 using System.Windows.Input;
 
 namespace EmployeeManagementSystem.ViewModel

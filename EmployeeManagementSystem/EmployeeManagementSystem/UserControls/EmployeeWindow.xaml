@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-             xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
-              xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
+             xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="610" d:DesignWidth="835" Background="White">
     <UserControl.Resources>
@@ -58,7 +57,7 @@
             <StackPanel Margin="0 10 0 0 "  Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter} }" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Name:"  TextAlignment="Left" />
-                    <TextBox  Tag="name" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox  Tag="employee name" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Email:"  TextAlignment="Left"/>
@@ -85,7 +84,7 @@
             </StackPanel>
         </StackPanel>
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <DataGrid   ItemsSource="{Binding EmployeeDatatable}"  VerticalAlignment="Top" Name="DataGrid"   AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+        <DataGrid  IsReadOnly="True"  ItemsSource="{Binding EmployeeDatatable}"  VerticalAlignment="Top" Name="DataGrid"   AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
             HorizontalAlignment="Stretch"
               Grid.Row="4"
               Margin="20 0 "
@@ -100,8 +99,8 @@
                 <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Email" Binding="{Binding Email}" />
                 <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Designation" Binding="{Binding Designation}" />
                 <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Department" Binding="{Binding Department }" />
-                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Joining Date" Binding="{Binding JoiningDate,StringFormat='MMM dd,yyyy'}" />
-                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Release Date" Binding="{Binding ReleaseDate,StringFormat='MMM dd,yyyy'}"  />
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Joining Date" Binding="{Binding JoiningDate,StringFormat='MMMM dd, yyyy'}" />
+                <DataGridTextColumn Width="12*" ElementStyle="{StaticResource WrapText}" Header="Release Date" Binding="{Binding ReleaseDate,StringFormat='MMMM dd, yyyy'}"  />
                 <DataGridTemplateColumn Width="15.5*" Header="Actions"  >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -153,7 +152,7 @@
                         <Separator Margin="10 0 10 0" Grid.Row="1"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="top" Height="auto" Grid.Row="2">
                             <TextBlock Height="18"  Width="auto" VerticalAlignment="Center" Text="Project:" Margin="10 0 0 0" TextAlignment="Center"/>
-                            <input:AutoCompleteBox SelectedItem="{Binding ProjectName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0"  FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32" ItemsSource="{Binding ProjectNames}"/>
+                            <input:AutoCompleteBox Placeholder="Select project" SelectedItem="{Binding ProjectName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0"  FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32" ItemsSource="{Binding ProjectNames}"/>
                             <Button Command="{Binding AddEmployeeToProject}" VerticalAlignment="Center" Margin=" 0 0 10 0" Content="ADD" Width="90" Height="30" Style="{DynamicResource ButtonStyle}"/>
                         </StackPanel>
                         <DataGrid Background="Transparent" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="10 0 10 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  

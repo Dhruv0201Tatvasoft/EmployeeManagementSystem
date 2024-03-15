@@ -1,13 +1,6 @@
 ﻿using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.Models;
-using Microsoft.Identity.Client.NativeInterop;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace EmployeeManagementSystem.Database
@@ -164,13 +157,13 @@ namespace EmployeeManagementSystem.Database
             bool didExecute = this.ExecuteQuery(query);
             return didExecute;
         }
-        public bool UpdateEmployee(string oldCode,EmployeeModel employee)
+        public bool UpdateEmployeeWithoutReleaseDate(string oldCode,EmployeeModel employee)
         {
             if (oldCode == employee.Code || (oldCode != employee.Code && !this.DoesExist($"Select * from EmsTblEmployee where Code like '{employee.Code}'")))
             {
                 string Query = $"UPDATE EmsTblEmployee SET Code = '{employee.Code}', FirstName = '{employee.FirstName}', LastName = '{employee.LastName}',Email = '{employee.Email}', " +
                     $"Password = '{employee.Password}', Designation = '{employee.Designation}', Department = '{employee.Department}', JoiningDate = '{employee.JoiningDate.ToString("yyyy-MM-dd")}', " +
-                    $"DOB = '{employee.DOB.ToString("yyyy-MM-dd")}', ContactNumber = '{employee.ContactNumber}', Gender = '{employee.Gender}', MaritalStatus = '{employee.MaritalStauts}'," +
+                    $"ReleaseDate = NULL, DOB = '{employee.DOB.ToString("yyyy-MM-dd")}', ContactNumber = '{employee.ContactNumber}', Gender = '{employee.Gender}', MaritalStatus = '{employee.MaritalStauts}'," +
                     $" PresentAddress = '{employee.PresentAddress}', PermanentAdress = '{employee.PermanentAddress}' WHERE Code = '{oldCode}'";
                 this.ExecuteQuery(Query);
                 return true;
@@ -182,20 +175,20 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-        public bool UpdateEmployee(String OldCode, String Code, String FirstName, String LastName, String Email, String Password, String Designation, String Department, DateTime JoiningDate,DateTime ReleaseDate ,DateTime DOB, String ContactNumber, String Gender, String MaritalStatus, String PresentAddress, String PermanentAdress)
+        public bool UpdateEmployee(string oldCode,EmployeeModel employee)
         {
-            if (OldCode == Code || (OldCode != Code && !this.DoesExist($"Select * from EmsTblEmployee where Code like '{Code}'")))
+            if (oldCode == employee.Code || (oldCode!= employee.Code && !this.DoesExist($"Select * from EmsTblEmployee where Code like '{employee.Code}'")))
             {
-                string Query = $"UPDATE EmsTblEmployee SET Code = '{Code}', FirstName = '{FirstName}', LastName = '{LastName}',Email = '{Email}', " +
-                    $"Password = '{Password}', Designation = '{Designation}', Department = '{Department}', JoiningDate = '{JoiningDate.ToString("yyyy-MM-dd")}', " +
-                    $"ReleaseDate = '{ReleaseDate.ToString("yyyy-MM-dd")}', DOB = '{DOB.ToString("yyyy-MM-dd")}', ContactNumber = '{ContactNumber}', Gender = '{Gender}', MaritalStatus = '{MaritalStatus}', PresentAddress = '{PresentAddress}', " +
-                    $"PermanentAdress = '{PermanentAdress}' WHERE Code = '{OldCode}'";
+                string Query = $"UPDATE EmsTblEmployee SET Code = '{employee.Code}', FirstName = '{employee.FirstName}', LastName = '{employee.LastName}',Email = '{employee.Email}', " +
+                    $"Password = '{employee.Password}', Designation = '{employee.Designation}', Department = '{employee.Department}', JoiningDate = '{employee.JoiningDate.ToString("yyyy-MM-dd")}', " +
+                    $"ReleaseDate = '{employee.ReleaseDate?.ToString("yyyy-MM-dd")}', DOB = '{employee.DOB.ToString("yyyy-MM-dd")}', ContactNumber = '{employee.ContactNumber}', Gender = '{employee.Gender}', MaritalStatus = '{employee.MaritalStauts}', PresentAddress = '{employee.PresentAddress}', " +
+                    $"PermanentAdress = '{employee.PermanentAddress}' WHERE Code = '{oldCode}'";
                 this.ExecuteQuery(Query);
                 return true;
             }
             else
             {
-                MessageBox.Show($"There is aleady an employee with Employee Code {Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"There is aleady an employee with Employee Code {employee.Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
         }

@@ -1,23 +1,9 @@
 ﻿using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EmployeeManagementSystem.UserControls
 {
@@ -28,16 +14,6 @@ namespace EmployeeManagementSystem.UserControls
 
     public partial class ProjectWindow : UserControl
     {
-        private string selectedProject;
-        public string SelectedProject
-        {
-            get { return selectedProject; }
-            set
-            {
-                SelectedProject = value;
-            }
-        }
-      
         private GetData getData;
        
 
@@ -48,17 +24,14 @@ namespace EmployeeManagementSystem.UserControls
             DataContext = viewModel;
             viewModel.EditEvent += ViewModel_EditEvent;
             getData = new GetData();
-            viewModel.AddEmployeeEvent += refreshEmployeeDatagrid;
-
-
+            viewModel.AddEmployeeEvent += RefreshEmployeeDatagrid;
         }
 
-        private void refreshEmployeeDatagrid(object? sender, EventArgs e)
+        private void RefreshEmployeeDatagrid(object? sender, EventArgs e)
         {
             PopUpDataGird.ItemsSource = null;
             PopUpDataGird.ItemsSource = getData.GetAssociatedEmployeesToProject((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]).DefaultView;
             Autocompletebox.SelectedItem ="";
-
         }
 
       

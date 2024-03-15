@@ -5,14 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              xmlns:vm ="clr-namespace:EmployeeManagementSystem.ViewModel"
-             xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <vm:EditEmployeeViewModel x:Key="ViewModel"/>
         <converter:RadioButtonChoiceConverter x:Key="radiobuttonconverter"/>
         <converter:ButtonDisbaleConverter x:Key="ButtonDisableConverter"/>
-        <converter:ConvertButton x:Key="ConvertButton"/>
         <Style x:Key="CircleButton" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -168,12 +166,12 @@
 
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Content="Present Address:" Margin="20 20 0 0" Height="auto" />
-                    <TextBox Tag="present address" Name="PresentAddress" Text="{Binding PresentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox  Name="PresentAddress" Text="{Binding PresentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <TextBlock TextWrapping="Wrap" MaxWidth="120" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" Text="Permanent Address:" Margin="20 20 0 0" Height="auto" TextAlignment="Left" />
                     <StackPanel Margin="0 20 0 0" Grid.Row="2" Grid.Column="3" VerticalAlignment="top" Height="auto"  Orientation="Vertical">
                         <CheckBox IsChecked="{Binding IsCheckBoxChecked,Mode=TwoWay}" MaxWidth="250" Height="auto" Width="auto" VerticalAlignment="Top" Style="{DynamicResource CustomCheckBoxStyle}"  Content="Same as Peresent"/>
-                        <TextBox Tag="permanent address" x:Name="PermanentAddress"  Text="{Binding PermanentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                        <TextBox x:Name="PermanentAddress"  Text="{Binding PermanentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
                     </StackPanel>
                     <Grid Grid.Row="4" Grid.ColumnSpan="6">
                         <Grid.ColumnDefinitions>
@@ -281,7 +279,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox Tag="passing year" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding PassingYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Tag="year" Style="{DynamicResource CustomInputStyle}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" Text="{Binding PassingYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -399,7 +397,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <ComboBox Text="Select" IsEditable="True" IsReadOnly="True" Style="{DynamicResource CustomComboBoxStyle}" ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
+                                        <ComboBox Style="{DynamicResource CustomComboBoxStyle}" ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
                                         </ComboBox>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>

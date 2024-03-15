@@ -1,20 +1,8 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
-using EmployeeManagementSystem.Models;
-using EmployeeManagementSystem.UserControls;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.IO.Packaging;
-using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Markup.Localizer;
 
 namespace EmployeeManagementSystem.ViewModel
 {

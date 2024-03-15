@@ -25,7 +25,11 @@ CREATE TABLE EmsTblTechnologyForProject (
     FOREIGN KEY (ProjectCode) REFERENCES EmsTblProject(Code),
     FOREIGN KEY (TechnologyId) REFERENCES EmsTblTechnology(Id)
 );
-
+ALTER TABLE EmsTblEmployee 
+ALTER COLUMN [Designation] nvarchar(20) NOT NULL;
+ALTER TABLE EmsTblEmployee 
+ADD CONSTRAINT CHK_ValidDesignation 
+CHECK ([Designation] IN ('Developer', 'Senior Developer', 'Team Lead', 'Manager'));
 CREATE TABLE EmsTblEmployee (
     Code VARCHAR(10) PRIMARY KEY,
     FirstName VARCHAR(10) NOT NULL,
@@ -251,5 +255,10 @@ select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner jo
 
 select    from EmsTblTechnology Left Join EmsTblTechnologyForProject On TechnologyId = Id
 update EmsTblEmployee set Email ='abc@email.com' ,Password ='password1' where Code like 'EMP001'
-select * from EmsTblEmployeeEducation
-	select Code from EmsTblEmployee Where Email like 'abc@email.com' COLLATE Latin1_General_CS_AS AND password like 'password1' COLLATE Latin1_General_CS_AS 
+select Code from EmsTblEmployee Where Email like 'abc@email.com' COLLATE Latin1_General_CS_AS AND password like 'password1' COLLATE Latin1_General_CS_AS 
+
+WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12)
+SELECT top 6	, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate)
+GROUP BY M.Month ORDER BY
+(CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;
+Select * From EmsTblTechnologyForProject

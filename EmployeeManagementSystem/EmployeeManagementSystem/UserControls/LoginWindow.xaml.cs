@@ -1,8 +1,6 @@
-﻿using EmployeeManagementSystem.Models;
-using EmployeeManagementSystem.ViewModel;
+﻿using EmployeeManagementSystem.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace EmployeeManagementSystem.UserControls
 {

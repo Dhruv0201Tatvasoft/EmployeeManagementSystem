@@ -3,15 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:b ="clr-namespace:EmployeeManagementSystem.Behaviours"
              xmlns:vm="clr-namespace:EmployeeManagementSystem.ViewModel"
              xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-            
              xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
-             xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
-             
-             
              mc:Ignorable="d" 
              
                 Background="White" d:DesignHeight="840" d:DesignWidth="1565"
@@ -92,11 +86,11 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Code:"  TextAlignment="Left" />
 
-                    <TextBox Tag="code" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox Tag="project code" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Name:"  TextAlignment="Left"/>
-                    <TextBox Tag="name"  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
+                    <TextBox Tag="project name"  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="StackPanel1"  Margin="0 0 0 10" Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter}}">
@@ -104,12 +98,12 @@
 
                 <StackPanel  Orientation="Horizontal">
                     <TextBlock  VerticalAlignment="Center" Width="100" Text="Start Date:"  TextAlignment="Left"  Margin="0 0 0 20"/>
-                    <DatePicker  VerticalAlignment="Center" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="{x:Static sys:DateTime.Now}"  SelectedDate="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=False}"  Style="{DynamicResource CustomDatePickerStyle}"  />
+                    <DatePicker  VerticalAlignment="Center" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  SelectedDate="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=False}"  Style="{DynamicResource CustomDatePickerStyle}"  />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
 
                     <TextBlock  Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="End Date:"  TextAlignment="Left"/>
-                    <DatePicker  Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="{x:Static sys:DateTime.Now}" Margin="0 0 0 20"  SelectedDate="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy,ValidatesOnDataErrors=False}" Height="32"  Style="{DynamicResource CustomDatePickerStyle}" />
+                    <DatePicker  Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31" Margin="0 0 0 20"  SelectedDate="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy,ValidatesOnDataErrors=False}" Height="32"  Style="{DynamicResource CustomDatePickerStyle}" />
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">
                     <Button x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SearchCommand}" Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
@@ -120,7 +114,7 @@
         </StackPanel>
 
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <DataGrid  SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+        <DataGrid  IsReadOnly="True" SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
                     HorizontalAlignment="Stretch"
                       Grid.Row="4"
                       Margin="20 0 "
@@ -131,8 +125,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Code" Width="10*" Binding="{Binding Code}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Name" Width="30*" Binding="{Binding Name}" />
-                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Start Date" Width="8*" Binding="{Binding StartingDate, StringFormat='MMM dd,yyyy'}" />
-                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="End Date" Width="8*" Binding="{Binding EndingDate, StringFormat='MMM dd,yyyy'}" />
+                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Start Date" Width="8*" Binding="{Binding StartingDate, StringFormat='MMMM dd, yyyy'}" />
+                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="End Date" Width="8*" Binding="{Binding EndingDate, StringFormat='MMMM dd, yyyy'}" />
                 <DataGridTemplateColumn x:Name="DataGridColumnWidth" MaxWidth="225" Width="10*"  Header="Actions" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -182,11 +176,11 @@
                         <Separator Margin="10 0 10 0" Grid.Row="1"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="top" Height="auto" Grid.Row="2">
                             <TextBlock Height="18"  Width="auto" VerticalAlignment="Center" Text="Employee:" Margin="10 0 0 0" TextAlignment="Center"/>
-                            <input:AutoCompleteBox SelectedItem="{Binding EmployeeName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0" ItemsSource="{Binding EmployeeNames}" FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32">
+                            <input:AutoCompleteBox Placeholder="select employee" SelectedItem="{Binding EmployeeName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0" ItemsSource="{Binding EmployeeNames}" FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32">
                             </input:AutoCompleteBox>
                             <Button VerticalAlignment="Center" Margin=" 0 0 10 0" Command="{Binding AddEmployeeToProject}" Content="ADD" Width="90" Height="30" Style="{DynamicResource ButtonStyle}"/>
                         </StackPanel>
-                        <DataGrid Background="Transparent" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="10 0 10 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
+                        <DataGrid IsReadOnly="True" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}"  Grid.Row="3"  Margin="10 0 10 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
                                   CanUserAddRows="False"
                                   AutoGenerateColumns="False"
                                   SelectionMode="Single"

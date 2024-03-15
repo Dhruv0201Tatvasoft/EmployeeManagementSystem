@@ -2,15 +2,9 @@
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -406,7 +400,7 @@ namespace EmployeeManagementSystem.ViewModel
                     PresentAddress = PresentAddress,
                     PermanentAddress = PermanentAddress
                 };
-                didsaved = updateData.UpdateEmployee(Old,employee);
+                didsaved = updateData.UpdateEmployee(oldCode,employee);
                 //}
             }
             else
@@ -434,8 +428,7 @@ namespace EmployeeManagementSystem.ViewModel
                     PresentAddress = PresentAddress,
                     PermanentAddress = PermanentAddress
                 };
-                didsaved = updateData.UpdateEmployeeWithoutReleaseDate(OldCode, Code, FirstName, LastName, Email, Password, SelectedDesignation, SelectedDepartment, JoiningDate, DOB, ContactNumber, Gender, SelectedMaritialStatus, PresentAddress, PermanentAddress);
-                //}
+                didsaved = updateData.UpdateEmployeeWithoutReleaseDate(oldCode, employee);
             }
             if (didsaved)
             {

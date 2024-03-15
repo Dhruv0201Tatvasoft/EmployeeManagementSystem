@@ -24,6 +24,7 @@ namespace EmployeeManagementSystem.Model
             get { return fromDate; }
             set { fromDate = value; UpdateDuration(); OnPropertyChanged("FromDate"); }
         }
+
         private DateTime? toDate;
 
         public DateTime? ToDate
