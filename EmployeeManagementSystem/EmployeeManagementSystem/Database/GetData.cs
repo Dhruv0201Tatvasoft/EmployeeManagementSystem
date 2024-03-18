@@ -183,7 +183,7 @@ namespace EmployeeManagementSystem.Database
             string query = $"Select CONCAT(Firstname,' ',Lastname) As FullName,EmsTblEmployee.code " +
                 $"from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on " +
                 $"EmsTblEmployeeAssociatedToProject.employeeCode = EmsTblEmployee.code " +
-                $"where EmsTblEmployeeAssociatedToProject.projectCode = '{projectCode}'";
+                $"where EmsTblEmployeeAssociatedToProject.ProjectCode = '{projectCode}'";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
@@ -201,7 +201,7 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable GetAssociatedProjectForEmployees(string employeeCode)
         {
-            string query = $"select name,projectCode from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On projectCode = code where employeeCode Like '{employeeCode}'";
+            string query = $"select Name,ProjectCode from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like '{employeeCode}'";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {

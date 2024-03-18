@@ -7,30 +7,22 @@ namespace EmployeeManagementSystem.Database
     class DeleteData
     {
         private GetConnection connection = new GetConnection();
-        public void ExecuteQuery(string sql)
+        public bool ExecuteQuery(string query)
         {
             try
             {
+
                 SqlConnection conn = connection.GenrateConnection();
                 conn.Open();
-                SqlCommand command = new SqlCommand(sql, conn);
+                SqlCommand command = new SqlCommand(query, conn);
                 command.ExecuteNonQuery();
+                return true;
             }
             catch (SqlException ex)
             {
-                /// Exeption number 2627 belongs to Duplicate primary key exception. 
-                if (ex.Number == 2627)
-                {
-                    MessageBox.Show("Same Recoed Already Exist in Data", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else if (ex.Number == 547)
-                {
-                    MessageBox.Show("Cannot delete the record due to existing references in other Projects.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    MessageBox.Show("Some error occured");
-                }
+
+                MessageBox.Show("Error in deleting data from database.", "Error");
+                return false;
             }
         }
 
@@ -46,9 +38,8 @@ namespace EmployeeManagementSystem.Database
 
             if (this.DeleteWarningMessage("Delete Project With code " + code))
             {
-                string query = $"delete from EmsTblTechnologyForProject where projectCode = '{code}'";
+                string query = $"delete from EmsTblTechnologyForProject where ProjectCode = '{code}'";
                 this.ExecuteQuery(query);
-                query = string.Empty;
                 query = $"delete from EmsTblProject where code = '{code}' ";
                 this.ExecuteQuery(query);
             }
@@ -57,7 +48,7 @@ namespace EmployeeManagementSystem.Database
         public void RemoveEmployeeFromProject(String employeeCode, String projectCode)
         {
             
-                string query = $"Delete from EmsTblEmployeeAssociatedToProject Where projectCode = '{projectCode} ' AND employeeCode = '{employeeCode}'";
+                string query = $"delete from EmsTblEmployeeAssociatedToProject where ProjectCode = '{projectCode} ' AND EmployeeCode = '{employeeCode}'";
                 this.ExecuteQuery(query);
             
         }
@@ -67,7 +58,7 @@ namespace EmployeeManagementSystem.Database
 
             if (this.DeleteWarningMessage("Remove " + technologyName + " From Data"))
             {
-                string query = $"Delete From EmsTblTechnology where name like '{technologyName}'";
+                string query = $"delete From EmsTblTechnology where name like '{technologyName}'";
                 this.ExecuteQuery(query);
             }
         }
@@ -76,7 +67,7 @@ namespace EmployeeManagementSystem.Database
 
             if (this.DeleteWarningMessage("Remove " + skillName + " From Data"))
             {
-                string query = $"Delete From EmsTblSkill where name like '{skillName}'";
+                string query = $"delete From EmsTblSkill where name like '{skillName}'";
                 this.ExecuteQuery(query);
             }
         }
@@ -85,7 +76,7 @@ namespace EmployeeManagementSystem.Database
         {
             if (this.DeleteWarningMessage("Remove this education field form Data"))
             {
-                string query = $"Delete from EmsTblEmployeeEducation where employeeCode Like '{code}' and Qualification like " +
+                string query = $"delete from EmsTblEmployeeEducation where employeeCode Like '{code}' and Qualification like " +
                     $"'{employeeEducationModel.Qualification}' AND Board Like '{employeeEducationModel.BoardUniversity}' AND Institute like '{employeeEducationModel.InstituteName}' AND State Like '{employeeEducationModel.State}' AND " +
                     $"PassingYear like '{employeeEducationModel.PassingYear}' AND Percentage like '{employeeEducationModel.Percentage}'";
                 this.ExecuteQuery(query);
@@ -110,7 +101,7 @@ namespace EmployeeManagementSystem.Database
         {
             if(this.DeleteWarningMessage($"Delete {name} From Data"))
             {
-                string query = $"Delete From EmsTblEmployee where code like '{code}'";
+                string query = $"delete From EmsTblEmployee where code like '{code}'";
                 this.ExecuteQuery(query);
             }
         }

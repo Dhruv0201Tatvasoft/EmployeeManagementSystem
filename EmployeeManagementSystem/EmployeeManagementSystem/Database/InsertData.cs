@@ -68,7 +68,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"There is Already Project With The code {project.Code}");
+                MessageBox.Show($"Project with code {project.Code} already exist in database.","Error");
                 return false;
             }
 
@@ -94,7 +94,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"There is Already Project With The code {project.Code}");
+                MessageBox.Show($"Project with code {project.Code} already exist in database.","Error");
                 return false;
             }
         }
@@ -120,7 +120,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{technologyName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{technologyName} already exist in data", "Error");
             }
         }
         public void InsertSkill(String skillName)
@@ -132,7 +132,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{skillName} already exist in data", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{skillName} already exist in data", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -151,7 +151,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"There is aleady an employee with Employee Code {employee.Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"Employee with code {employee.Code} already exist in database.", "Error");
                 return false;
             }
         }
@@ -169,7 +169,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"There is aleady an employee with Employee Code {employee.Code}", "Warning", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"Employee with code {employee.Code} already exist in database.", "Error");
                 return false;
             }
         }

@@ -22,7 +22,7 @@ namespace EmployeeManagementSystem.Database
             catch (SqlException ex)
             {
 
-                MessageBox.Show("Some error occured");
+                MessageBox.Show("Error in updating data to database.","Error");
                 return false;
             }
 

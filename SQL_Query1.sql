@@ -257,8 +257,39 @@ select    from EmsTblTechnology Left Join EmsTblTechnologyForProject On Technolo
 update EmsTblEmployee set Email ='abc@email.com' ,Password ='password1' where Code like 'EMP001'
 select Code from EmsTblEmployee Where Email like 'abc@email.com' COLLATE Latin1_General_CS_AS AND password like 'password1' COLLATE Latin1_General_CS_AS 
 
-WITH Months(Month) AS(SELECT 1 AS Month UNION ALL SELECT Month + 1 FROM Months WHERE Month < 12)
-SELECT top 6	, ISNULL(COUNT(E.JoiningDate), 0) AS Count FROM Months AS M LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate)
-GROUP BY M.Month ORDER BY
-(CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE()) ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;
-Select * From EmsTblTechnologyForProject
+WITH Months(Month) AS
+(
+    SELECT MONTH(GETDATE()) AS Month
+    UNION ALL
+    SELECT Month - 1 
+    FROM Months 
+    WHERE Month > MONTH(GETDATE()) - 6
+)
+SELECT TOP 6
+    DateName(month, DateAdd(month, M.Month, 0) - 1) as Month,
+    ISNULL(COUNT(E.JoiningDate), 0) AS Count 
+FROM 
+    Months AS M 
+LEFT JOIN 
+    EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate)
+GROUP BY 
+    M.Month 
+ORDER BY 
+    M.Month DESC 
+SELECT 
+    COUNT(*) AS count,
+    MONTH(JoiningDate) AS c,
+    DATENAME(month, JoiningDate) AS Month
+FROM 
+    EmsTblEmployee 
+WHERE 
+ JoiningDate between DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE())) AND EOMONTH(GETDATE(),-1)
+	  
+GROUP BY 
+    MONTH(JoiningDate), DATENAME(month, JoiningDate)
+ORDER BY 
+    (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
+select DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE()))
+select EOMONTH(GETDATE(),-1)
+DBCC checkident ('EmsTblSkill',reseed ,4)
+
