@@ -1,7 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
-using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.Model;
 
 namespace EmployeeManagementSystem.Database
@@ -116,7 +115,7 @@ namespace EmployeeManagementSystem.Database
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-                string query = $"SELECT TechnologyId FROM EmsTblTechnologyForProject where projectCode = '{code}'";
+                string query = $"SELECT TechnologyId FROM EmsTblTechnologyForProject where ProjectCode like '{code}'";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -414,7 +413,7 @@ namespace EmployeeManagementSystem.Database
         }
         public DataTable TechnologyWiseEmployeeCount()
         {
-            string query = $"select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On employeeCode = code group by Name";
+            string query = $"select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = Code group by Name";
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {

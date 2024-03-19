@@ -23,9 +23,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <vm:EditEmployeeViewModel/>
-    </UserControl.DataContext>
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -37,7 +35,7 @@
             <Button Content="Back" Name="BackBtn" Click="BackBtn_Click" Style="{DynamicResource ButtonStyle}" Width="70" Height="32" HorizontalAlignment="Right" Margin="0,0,20,7" VerticalAlignment="Bottom"/>
         </DockPanel>
         <Separator Grid.Row="1"  Margin="20 10 20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <TabControl x:Name="TabControl" Margin="20 0 20 20" Grid.Row="2" >
+        <TabControl x:Name="TabControl"  BorderBrush="#507E32" BorderThickness="0.5" Margin="20 0 20 20" Grid.Row="2" >
             <TabItem Name="EmployeeDetailsTabItem" Header="Employee Details" Style="{DynamicResource TabItemStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -112,7 +110,7 @@
                                 </MultiBinding>
                             </Button.IsEnabled>
                         </Button>
-                        <Button Command="{Binding ClearEmployeeDetailsCommand}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
+                        <Button Command="{Binding ClearEmployeeDetails}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
                     </Grid>
 
                 </Grid>
@@ -179,7 +177,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Button x:Name="PersonalDetailsNextBtn" Command="{Binding UpdateEmployeeCommand}"  Width="120" Height="32" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5"
+                        <Button x:Name="PersonalDetailsNextBtn" Command="{Binding UpdateEmployee}"  Width="120" Height="32" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5"
                             >
                             <Button.IsEnabled>
                                 <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay">
@@ -192,7 +190,7 @@
                             </Button.IsEnabled>
                         </Button>
 
-                        <Button Command="{Binding ClearPersonlaDetalisCommand}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
+                        <Button Command="{Binding ClearPersonalDetalis}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
                     </Grid>
 
                 </Grid>
@@ -299,10 +297,10 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate>
                                         <StackPanel Width="100" Orientation="Horizontal">
-                                            <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditEducationRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="\Icons\EditIcon.png" />
                                             </Button>
-                                            <Button Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.RemoveEducationFromDataBaseCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.RemoveEducationFromDataBase, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image  Source="\Icons\CircleCrossIcon.png"/>
                                             </Button>
                                         </StackPanel>
@@ -311,10 +309,10 @@
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Width="100">
-                                            <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveEducationRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
 
                                             </Button>
-                                            <Button Style="{StaticResource CircleButton}" Margin="10 0 10 0" Width="30" Height="30" Command="{Binding DataContext.RemoveEducationFromListCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button Style="{StaticResource CircleButton}" Margin="10 0 10 0" Width="30" Height="30" Command="{Binding DataContext.RemoveEducationFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>
@@ -406,10 +404,10 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate>
                                         <StackPanel Width="100" Orientation="Horizontal">
-                                            <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditExperienceCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditExperience, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="\Icons\EditIcon.png"/>
                                             </Button>
-                                            <Button Command="{Binding DataContext.RemoveExperienceFromDataBaseCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
+                                            <Button Command="{Binding DataContext.RemoveExperienceFromDataBase, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
                                                 <Image  Source="\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>
@@ -418,7 +416,7 @@
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Width="100">
-                                            <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveExperienceRowCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveExperienceRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                             </Button>
                                             <Button Margin="10 0 10 0" Width="30" Height="30"  Command="{Binding DataContext.RemoveExperienceFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                                 <Image Source="\Icons\CircleCrossIcon.png"  />

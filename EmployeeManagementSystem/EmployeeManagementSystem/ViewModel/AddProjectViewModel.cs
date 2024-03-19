@@ -1,6 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Input;
@@ -132,28 +132,28 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-        private ICommand saveCommand;
-        public ICommand SaveCommand
+        private ICommand saveProject;
+        public ICommand SaveProject
         {
             get
             {
-                if (saveCommand == null)
+                if (saveProject == null)
                 {
-                    saveCommand = new RelayCommand(SaveExecute, CanSaveExecute, false);
+                    saveProject = new RelayCommand(ExecuteSaveProject, CanSaveProjectExecute, false);
                 }
-                return saveCommand;
+                return saveProject;
             }
         }
 
 
 
 
-        private bool CanSaveExecute(object arg)
+        private bool CanSaveProjectExecute(object arg)
         {
             return true;
         }
 
-        private void SaveExecute(object obj)
+        private void ExecuteSaveProject(object obj)
         {
             bool didSaved = false;
             if (EndingDate != null)

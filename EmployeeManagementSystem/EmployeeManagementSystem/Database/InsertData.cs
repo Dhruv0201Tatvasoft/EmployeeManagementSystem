@@ -1,5 +1,4 @@
 ﻿using EmployeeManagementSystem.Model;
-using EmployeeManagementSystem.Models;
 using System.Data.SqlClient;
 using System.Windows;
 
@@ -13,7 +12,7 @@ namespace EmployeeManagementSystem.Database
         {
             try
             {
-
+                
                 SqlConnection conn = connection.GenrateConnection();
                 conn.Open();
                 SqlCommand command = new SqlCommand(query, conn);

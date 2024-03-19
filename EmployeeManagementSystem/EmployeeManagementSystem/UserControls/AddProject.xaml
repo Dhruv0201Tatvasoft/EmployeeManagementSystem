@@ -9,9 +9,7 @@
              mc:Ignorable="d" 
              xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              d:DesignHeight="800" d:DesignWidth="1000">
-    <UserControl.DataContext>
-        <vm:AddProjectViewModel/>
-    </UserControl.DataContext>
+ 
     <UserControl.Resources>
        
         <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
@@ -20,15 +18,16 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Name="Border" Padding="7" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <Border Name="Border" Padding="7" SnapsToDevicePixels="True"  Background="{TemplateBinding Background}">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
+                          
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter TargetName="Border" Property="Background" Value="#60943C"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#C5E0B4"/>
+                                        <Setter TargetName="Border" Property="Background" Value="#669E40"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Foreground" Value="Green"/>
@@ -76,7 +75,7 @@
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
             <DatePicker x:Name="EndingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left"   Style="{DynamicResource CustomDatePickerStyle}" />
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="top" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
-            <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"   Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
+            <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"  BorderBrush="#507E32" BorderThickness="1"  Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem"  BasedOn="{StaticResource ListBoxItemStyle}"/>
     
@@ -93,7 +92,7 @@
                 </ListBox>
             </Grid>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="90,60,10,90">
-                <Button Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" Command="{Binding SaveCommand}" Margin="30 0 30 0" Width="70" Height="32" Content="Save">
+            <Button Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" Command="{Binding SaveProject}" Margin="30 0 30 0" Width="70" Height="32" Content="Save">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay"  >
                         <Binding ElementName="Code" Path="(Validation.HasError)" />

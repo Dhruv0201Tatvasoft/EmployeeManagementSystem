@@ -1,7 +1,7 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.DialogWindow;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
@@ -173,76 +173,75 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-        private ICommand clearCommand;
-        public ICommand ClearCommand
+        private ICommand clearFields;
+        public ICommand ClearFields
         {
             get
             {
-                if (clearCommand == null)
+                if (clearFields == null)
                 {
-                    clearCommand = new RelayCommand(ClearExecute, CanClearExecute, false);
+                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute, false);
                 }
-                return clearCommand;
+                return clearFields;
             }
         }
 
-        private bool CanClearExecute(object arg)
+        private bool CanClearFieldsExecute(object arg)
         {
             return true;
         }
 
-        private void ClearExecute(object obj)
+        private void ExecuteClearFields(object obj)
         {
             email = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
+            CombTextDepartment = "Select Department";
+            CombTextDesignation= "Select Designation";
             employeeDataTable = getData.GetEmployeeTable();
             OnPropertyChanged("EmployeeDataTable");
         }
 
-        private ICommand searchCommand;
-        public ICommand SearchCommand
+        private ICommand searchEmployee;
+        public ICommand SearchEmployee
         {
             get
             {
-                if (searchCommand == null)
+                if (searchEmployee == null)
                 {
-                    searchCommand = new RelayCommand(ExecuteSearch, CanSearchExecute, false);
+                    searchEmployee = new RelayCommand(ExecuteSearchEmployee, CanSearchEmployeeExecute, false);
                 }
-                return searchCommand;
+                return searchEmployee;
             }
         }
-        private void ExecuteSearch(object obj)
+        private void ExecuteSearchEmployee(object obj)
         {
             employeeDataTable = getData.GetEmployeeSearchData(Email, Name, selectedDepartment, selectedDesignation);
-            Email = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
-            CombTextDepartment = "Select Department";
-            CombTextDesignation = "Select Designation";
             OnPropertyChanged("EmployeeDataTable");
         }
 
-        private bool CanSearchExecute(object arg)
+        private bool CanSearchEmployeeExecute(object arg)
         {
             return true;
         }
 
-        private ICommand deleteEmployeeCommand;
-        public ICommand DeleteEmployeeCommand
+        private ICommand deleteEmployee;
+        public ICommand DeleteEmployee
         {
             get
             {
-                if (deleteEmployeeCommand == null)
+                if (deleteEmployee == null)
                 {
-                    deleteEmployeeCommand = new RelayCommand(DeleteEmployeeCommandExecute, CanDeleteEmployeeCommandExecute, false);
+                    deleteEmployee = new RelayCommand(ExecuteDeleteEmployee, CanDeleteEmployeeExecute, false);
                 }
-                return deleteEmployeeCommand;
+                return deleteEmployee;
             }
         }
 
-        private bool CanDeleteEmployeeCommandExecute(object arg)
+        private bool CanDeleteEmployeeExecute(object arg)
         {
             return true;
         }
 
-        private void DeleteEmployeeCommandExecute(object obj)
+        private void ExecuteDeleteEmployee(object obj)
         {
             string EmployeeCode = selectedEmployee[0].ToString();
             string Name = selectedEmployee[1].ToString();
@@ -281,54 +280,54 @@ namespace EmployeeManagementSystem.ViewModel
             OnAddProjectEvent(EventArgs.Empty);
         }
 
-        private ICommand deleteEmployeeFromProject;
-        public ICommand DeleteEmployeeFromProject
+        private ICommand removeEmployeeFromProject;
+        public ICommand RemoveEmployeeFromProject
         {
             get
             {
-                if (deleteEmployeeFromProject == null)
+                if (removeEmployeeFromProject == null)
                 {
-                    deleteEmployeeFromProject = new RelayCommand(DeleteEmployeeFromProjectExecute, CanDeleteEmployeeFromProjectExecute, false);
+                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute, false);
                 }
-                return deleteEmployeeFromProject;
+                return removeEmployeeFromProject;
             }
         }
 
-        private bool CanDeleteEmployeeFromProjectExecute(object arg)
+        private bool CanRemoveEmployeeFromProjectExecute(object arg)
         {
             if (selectedProjectRow == null) return false;
             return true;
 
         }
 
-        private void DeleteEmployeeFromProjectExecute(object obj)
+        private void ExecuteRemoveEmployeeFromProject(object obj)
         {
             string EmployeeCode = (String)selectedEmployee.Row.ItemArray[0];
             string ProjectCode = (String)selectedProjectRow.Row.ItemArray[1];
             deleteData.RemoveEmployeeFromProject(EmployeeCode, ProjectCode);
             OnAddProjectEvent(EventArgs.Empty);
         }
-        private ICommand viewEmployeeDetailsCommand;
-        public ICommand ViewEmployeeDetailsCommand
+        private ICommand viewEmployeeDetails;
+        public ICommand ViewEmployeeDetails
         {
             get
             {
-                if (viewEmployeeDetailsCommand == null)
+                if (viewEmployeeDetails == null)
                 {
-                    viewEmployeeDetailsCommand = new RelayCommand(ExecuteViewEmployeeDetailsCommand, CanViewEmployeeDetailsCommandExecute, false);
+                    viewEmployeeDetails = new RelayCommand(ExecuteViewEmployeeDetails, CanViewEmployeeDetailsExecute, false);
                 }
-                return viewEmployeeDetailsCommand;
+                return viewEmployeeDetails;
             }
 
         }
 
-        private bool CanViewEmployeeDetailsCommandExecute(object arg)
+        private bool CanViewEmployeeDetailsExecute(object arg)
         {
             if (selectedEmployee == null) return false;
             return true;
         }
 
-        private void ExecuteViewEmployeeDetailsCommand(object obj)
+        private void ExecuteViewEmployeeDetails(object obj)
         {
             string EmployeeCode = (string)selectedEmployee.Row.ItemArray[0];
             EmployeeModel employee = getData.GetEmployeeModelFromCode(EmployeeCode);

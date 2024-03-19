@@ -1,7 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.Model;
-using EmployeeManagementSystem.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
@@ -184,8 +183,12 @@ namespace EmployeeManagementSystem.ViewModel
             set
             {
                 permanentAddress = value;
+                if (IsCheckBoxChecked)
+                {
+                    presentAddress = permanentAddress;
 
-
+                }
+                OnPropertyChanged("PresentAddress");
                 OnPropertyChanged("PermanentAddress");
             }
 
@@ -347,16 +350,16 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private ICommand addEmployeeCommand;
-        public ICommand AddEmployeeCommand
+        private ICommand addEmployee;
+        public ICommand AddEmployee
         {
             get
             {
-                if (addEmployeeCommand == null)
+                if (addEmployee == null)
                 {
-                    addEmployeeCommand = new RelayCommand(AddEmployeeExecute, CanAddEmployeeExecute, false);
+                    addEmployee = new RelayCommand(ExecuteAddEmployee, CanAddEmployeeExecute, false);
                 }
-                return addEmployeeCommand;
+                return addEmployee;
             }
         }
 
@@ -365,7 +368,7 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private void AddEmployeeExecute(object obj)
+        private void ExecuteAddEmployee(object obj)
         {
             bool didsaved = false;
             if (ReleaseDate != null)
@@ -481,16 +484,16 @@ namespace EmployeeManagementSystem.ViewModel
         {
             return true;
         }
-        private ICommand saveEducationRowCommand;
-        public ICommand SaveEducationRowCommand
+        private ICommand saveEducationRow;
+        public ICommand SaveEducationRow
         {
             get
             {
-                if (saveEducationRowCommand == null)
+                if (saveEducationRow == null)
                 {
-                    saveEducationRowCommand = new RelayCommand(SaveEducationRowExecute, CanSaveEducationRowExecute, false);
+                    saveEducationRow = new RelayCommand(ExecuteSaveEducationRow, CanSaveEducationRowExecute, false);
                 }
-                return saveEducationRowCommand;
+                return saveEducationRow;
             }
         }
 
@@ -499,7 +502,7 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private void SaveEducationRowExecute(object obj)
+        private void ExecuteSaveEducationRow(object obj)
         {
             if (string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) ||
            string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) ||
@@ -518,6 +521,26 @@ namespace EmployeeManagementSystem.ViewModel
             else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear))
             {
                 MessageBox.Show("Please provide valid vlue for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if(!string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName) && (selectedEmployeeEducationModel.InstituteName.Length > 35))
+            {
+                MessageBox.Show("Maximum character limit reached from Institute Name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) && (selectedEmployeeEducationModel.Qualification.Length > 10))
+            {
+                MessageBox.Show("Maximum character limit reached from Qualification Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) && (selectedEmployeeEducationModel.BoardUniversity.Length > 30))
+            {
+                MessageBox.Show("Maximum character limit reached from Board/Universtiy Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.State) && (selectedEmployeeEducationModel.State.Length > 15))
+            {
+                MessageBox.Show("Maximum character limit reached from State Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
@@ -540,16 +563,16 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("SelectedEmployeeEducationField");
         }
 
-        private ICommand saveExperienceRowCommand;
-        public ICommand SaveExperienceRowCommand
+        private ICommand saveExperienceRow;
+        public ICommand SaveExperienceRow
         {
             get
             {
-                if (saveExperienceRowCommand == null)
+                if (saveExperienceRow == null)
                 {
-                    saveExperienceRowCommand = new RelayCommand(SaveExperienceRowExecute, CanSaveExperienceExecute, false);
+                    saveExperienceRow = new RelayCommand(ExecuteSaveExperienceRow, CanSaveExperienceExecute, false);
                 }
-                return saveExperienceRowCommand;
+                return saveExperienceRow;
             }
         }
 
@@ -559,7 +582,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-        private void SaveExperienceRowExecute(object obj)
+        private void ExecuteSaveExperienceRow(object obj)
         {
             if (string.IsNullOrEmpty(selectedEmployeeExperienceModel.Organization) ||
                 string.IsNullOrEmpty(selectedEmployeeExperienceModel.Designation) ||
@@ -594,31 +617,30 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("SelectedEmployeeEducationField");
         }
 
-        private ICommand editEducationRowCommand;
-        public ICommand EditEducationRowCommand
+        private ICommand editEducationRow;
+        public ICommand EditEducationRow
         {
             get
             {
-                if (editEducationRowCommand == null)
+                if (editEducationRow == null)
                 {
-                    editEducationRowCommand = new RelayCommand(ExecuteEditEducationRowCommand, CanEditEducationRowCommandExecute, false);
+                    editEducationRow = new RelayCommand(ExecuteEditEducationRow, CanEditEducationRowExecute, false);
                 }
-                return editEducationRowCommand;
+                return editEducationRow;
             }
 
 
         }
 
-        private bool CanEditEducationRowCommandExecute(object arg)
+        private bool CanEditEducationRowExecute(object arg)
         {
             return true;
 
         }
 
-        private void ExecuteEditEducationRowCommand(object obj)
+        private void ExecuteEditEducationRow(object obj)
         {
             selectedOldEmployeeEducationModel = new EmployeeEducationModel();
-
             selectedOldEmployeeEducationModel.State = SelectedEmployeeEducationModel.State;
             selectedOldEmployeeEducationModel.Percentage = SelectedEmployeeEducationModel.Percentage;
             selectedOldEmployeeEducationModel.BoardUniversity = SelectedEmployeeEducationModel.BoardUniversity;
@@ -628,20 +650,20 @@ namespace EmployeeManagementSystem.ViewModel
             OnEditEducationRowEvent(EventArgs.Empty);
         }
 
-        private ICommand editExperienceCommand;
-        public ICommand EditExperienceCommand
+        private ICommand editExperience;
+        public ICommand EditExperience
         {
             get
             {
-                if (editExperienceCommand == null)
+                if (editExperience == null)
                 {
-                    editExperienceCommand = new RelayCommand(ExecuteEditExperienceCommand, CanEditExperienceCommandExecute, false);
+                    editExperience = new RelayCommand(ExecuteEditExperience, CanEditExperienceExecute, false);
                 }
-                return editExperienceCommand;
+                return editExperience;
             }
         }
 
-        private void ExecuteEditExperienceCommand(object obj)
+        private void ExecuteEditExperience(object obj)
         {
             selectedOldEmployeeExprienceModel = new EmployeeExperienceModel();
             selectedOldEmployeeExprienceModel.Organization = selectedEmployeeExperienceModel.Organization;
@@ -652,27 +674,27 @@ namespace EmployeeManagementSystem.ViewModel
             OnEditExperienceRowEvent(EventArgs.Empty);
         }
 
-        private bool CanEditExperienceCommandExecute(object arg)
+        private bool CanEditExperienceExecute(object arg)
         {
             return true;
         }
 
-        private ICommand removeEducationFromListCommand;
-        public ICommand RemoveEducationFromListCommand
+        private ICommand removeEducationFromList;
+        public ICommand RemoveEducationFromList
         {
             get
             {
-                if (removeEducationFromListCommand == null)
+                if (removeEducationFromList == null)
                 {
-                    removeEducationFromListCommand = new RelayCommand(ExecuteRemoveEducationFromList, CanRemoveEducationFromListCommandExecute, false);
+                    removeEducationFromList = new RelayCommand(ExecuteRemoveEducationFromList, CanRemoveEducationFromListExecute, false);
                 }
-                return removeEducationFromListCommand;
+                return removeEducationFromList;
             }
         }
 
 
 
-        private bool CanRemoveEducationFromListCommandExecute(object arg)
+        private bool CanRemoveEducationFromListExecute(object arg)
         {
             return true;
         }
@@ -707,26 +729,26 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeExperienceList");
         }
 
-        private ICommand removeEducationFromDataBaseCommand;
-        public ICommand RemoveEducationFromDataBaseCommand
+        private ICommand removeEducationFromDataBase;
+        public ICommand RemoveEducationFromDataBase
         {
             get
             {
-                if (removeEducationFromDataBaseCommand == null)
+                if (removeEducationFromDataBase == null)
                 {
-                    removeEducationFromDataBaseCommand = new RelayCommand(RemoveEducationFromDataBaseCommandExecute, CanRemoveEducationFromDataBaseCommandExecute, false);
+                    removeEducationFromDataBase = new RelayCommand(ExecuteRemoveEducationFromDataBase, CanRemoveEducationFromDataBaseExecute, false);
                 }
-                return removeEducationFromDataBaseCommand;
+                return removeEducationFromDataBase;
             }
         }
 
-        private bool CanRemoveEducationFromDataBaseCommandExecute(object arg)
+        private bool CanRemoveEducationFromDataBaseExecute(object arg)
         {
             return true;
 
         }
 
-        private void RemoveEducationFromDataBaseCommandExecute(object obj)
+        private void ExecuteRemoveEducationFromDataBase(object obj)
         {
             bool didDelete = false;
             didDelete = deleteData.DeleteEducationRow(selectedEmployeeEducationModel, Code);
@@ -738,20 +760,20 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("employeeEducationList");
         }
 
-        private ICommand removeExperienceFromDataBaseCommand;
-        public ICommand RemoveExperienceFromDataBaseCommand
+        private ICommand removeExperienceFromDataBase;
+        public ICommand RemoveExperienceFromDataBase
         {
             get
             {
-                if (removeExperienceFromDataBaseCommand == null)
+                if (removeExperienceFromDataBase == null)
                 {
-                    removeExperienceFromDataBaseCommand = new RelayCommand(ExecuteRemoveExperienceFromDataBaseCommand, CanRemoveExperienceFromDataBaseCommandExecute, false);
+                    removeExperienceFromDataBase = new RelayCommand(ExecuteRemoveExperienceFromDataBase, CanRemoveExperienceFromDataBaseExecute, false);
                 }
-                return removeExperienceFromDataBaseCommand;
+                return removeExperienceFromDataBase;
             }
         }
 
-        private void ExecuteRemoveExperienceFromDataBaseCommand(object obj)
+        private void ExecuteRemoveExperienceFromDataBase(object obj)
         {
             bool didDelete = false;
             didDelete = deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
@@ -762,30 +784,30 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeExperienceList");
         }
 
-        private bool CanRemoveExperienceFromDataBaseCommandExecute(object arg)
+        private bool CanRemoveExperienceFromDataBaseExecute(object arg)
         {
             return true;
         }
 
-        private ICommand clearEmployeeDetailsCommand;
-        public ICommand ClearEmployeeDetailsCommand
+        private ICommand clearEmployeeDetails;
+        public ICommand ClearEmployeeDetails
         {
             get
             {
-                if (clearEmployeeDetailsCommand == null)
+                if (clearEmployeeDetails == null)
                 {
-                    clearEmployeeDetailsCommand = new RelayCommand(ExecuteclearEmployeeDetailsCommand, CanclearEmployeeDetailsCommandExecute, false);
+                    clearEmployeeDetails = new RelayCommand(ExecuteClearEmployeeDetails, CanClearEmployeeDetailsExecute, false);
                 }
-                return clearEmployeeDetailsCommand;
+                return clearEmployeeDetails;
             }
         }
 
-        private bool CanclearEmployeeDetailsCommandExecute(object arg)
+        private bool CanClearEmployeeDetailsExecute(object arg)
         {
             return true;
         }
 
-        private void ExecuteclearEmployeeDetailsCommand(object obj)
+        private void ExecuteClearEmployeeDetails(object obj)
         {
             Code = FirstName = LastName = Email = Password = ConfirmPassword = String.Empty;
             SelectedDepartment = SelectedDesignation = null;
@@ -793,25 +815,25 @@ namespace EmployeeManagementSystem.ViewModel
             ReleaseDate = null;
             OnPropertyChanged(nameof(ReleaseDate));
         }
-        private ICommand clearPersonlaDetalisCommand;
-        public ICommand ClearPersonlaDetalisCommand
+        private ICommand clearPersonalDetalis;
+        public ICommand ClearPersonalDetalis
         {
             get
             {
-                if (clearPersonlaDetalisCommand == null)
+                if (clearPersonalDetalis == null)
                 {
-                    clearPersonlaDetalisCommand = new RelayCommand(ExecuteClearPersonlaDetalisCommand, CanClearPersonlaDetalisCommandExecute, false);
+                    clearPersonalDetalis = new RelayCommand(ExecuteClearPersonalDetalis, CanClearPersonalDetalisExecute, false);
                 }
-                return clearPersonlaDetalisCommand;
+                return clearPersonalDetalis;
             }
         }
 
-        private bool CanClearPersonlaDetalisCommandExecute(object arg)
+        private bool CanClearPersonalDetalisExecute(object arg)
         {
             return true;
         }
 
-        private void ExecuteClearPersonlaDetalisCommand(object obj)
+        private void ExecuteClearPersonalDetalis(object obj)
         {
             DOB = DateTime.Now;
             Gender = "Male";
@@ -837,7 +859,6 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (decimal.TryParse(Ipercentage, out decimal Opercentage))
             {
-
                 return Opercentage >= 0 && Opercentage <= 100;
             }
 

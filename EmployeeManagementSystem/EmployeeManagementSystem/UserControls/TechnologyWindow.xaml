@@ -9,9 +9,7 @@
     <UserControl.Resources>
         <vm:TechnologyViewModel x:Key="viewmodel"/>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <vm:TechnologyViewModel/>
-    </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" MaxHeight="100"/>
@@ -35,9 +33,9 @@
 
         <TextBlock VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Text="Technology:" Margin="20,42,0,0" />
         <TextBox Tag="technology name" Text="{Binding TechnologyName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="250" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,34,0,0" Grid.Column="1" Height="32"  Style="{DynamicResource CustomInputStyle}"/>
-        <Button Grid.Column="2" Command="{Binding SaveCommand}" Width="120" Height="30" Margin="0 20 10 0" Content="Save" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
-        <Button Grid.Column="3" Command="{Binding EditCommand}" Width="120" Height="30" Margin="0 20 10 0" Content="Edit" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
-        <Button Grid.Column="4" Command="{Binding DeleteCommand}" Width="120" Height="30" Margin="0 20 10 0"  Content="Delete" Style="{DynamicResource ButtonStyle}"  Grid.Row="1" ></Button>
+        <Button Grid.Column="2" Command="{Binding SaveTechnology}" Width="120" Height="30" Margin="0 20 10 0" Content="Save" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
+        <Button Grid.Column="3" Command="{Binding EditTechnology}" Width="120" Height="30" Margin="0 20 10 0" Content="Edit" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
+        <Button Grid.Column="4" Command="{Binding DeleteTechnology}" Width="120" Height="30" Margin="0 20 10 0"  Content="Delete" Style="{DynamicResource ButtonStyle}"  Grid.Row="1" ></Button>
         <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedRow}" Height="auto" ItemsSource="{Binding TechnologyDataTable }" VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}"   Grid.Row="3" Grid.ColumnSpan="5" Margin="20 10 20 0"  Name="DataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserAddRows="False" SelectionMode="Single" HeadersVisibility="Column">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Id" Width=".3*" MaxWidth="300" Binding="{Binding Id}"/>

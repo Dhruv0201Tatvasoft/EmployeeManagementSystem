@@ -1,6 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -44,26 +44,26 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private ICommand loginCommnad;
-        public ICommand LoginCommnad
+        private ICommand login;
+        public ICommand Login
         {
             get
             {
-                if (loginCommnad == null)
+                if (login == null)
                 {
-                    loginCommnad = new RelayCommand(ExecuteLoginCommand, CanLoginCommandExecute, false);
+                    login = new RelayCommand(ExecuteLogin, CanLoginExecute, false);
                 }
-                return loginCommnad;
+                return login;
             }
         }
 
-        private bool CanLoginCommandExecute(object arg)
+        private bool CanLoginExecute(object arg)
         {
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password)) return false;
             return true;
         }
 
-        private void ExecuteLoginCommand(object obj)
+        private void ExecuteLogin(object obj)
         {
             string code = getData.ExecuteLogin(UserName, Password);
             if (!String.IsNullOrEmpty(code))

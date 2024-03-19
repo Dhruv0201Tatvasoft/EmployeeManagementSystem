@@ -1,5 +1,4 @@
 ﻿using EmployeeManagementSystem.Model;
-using EmployeeManagementSystem.Models;
 using System.Data.SqlClient;
 using System.Windows;
 

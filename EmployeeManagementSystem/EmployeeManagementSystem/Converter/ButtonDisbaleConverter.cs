@@ -36,7 +36,5 @@ namespace EmployeeManagementSystem.Converter
 
             return new object[targetTypes.Length];
         }
-
-        
     }
 }

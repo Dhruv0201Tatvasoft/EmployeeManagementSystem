@@ -1,10 +1,9 @@
-﻿using EmployeeManagementSystem.Model;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace EmployeeManagementSystem.Models
+namespace EmployeeManagementSystem.Model
 {
-  public  class EmployeeModel : INotifyPropertyChanged
+    public class EmployeeModel : INotifyPropertyChanged
     {
         private string code;
         public string Code
@@ -21,7 +20,7 @@ namespace EmployeeManagementSystem.Models
         }
 
         private string lastName;
-        public String LastName
+        public string LastName
         {
             get { return lastName; }
             set { lastName = value; OnPropertyChanged("LastName"); }
@@ -38,11 +37,11 @@ namespace EmployeeManagementSystem.Models
         public string Password
         {
             get { return password; }
-            set {  password = value; OnPropertyChanged("Password"); }
+            set { password = value; OnPropertyChanged("Password"); }
         }
-        
-        private String designation;
-        public String Designation
+
+        private string designation;
+        public string Designation
         {
             get { return designation; }
             set { designation = value; OnPropertyChanged("Designation"); }
@@ -52,20 +51,20 @@ namespace EmployeeManagementSystem.Models
         public string Department
         {
             get { return department; }
-            set { department = value; OnPropertyChanged("Department");}
+            set { department = value; OnPropertyChanged("Department"); }
         }
         private DateTime joiningDate;
         public DateTime JoiningDate
         {
-            get { return joiningDate;}
-            set { joiningDate = value;OnPropertyChanged("JoiningDate"); }
+            get { return joiningDate; }
+            set { joiningDate = value; OnPropertyChanged("JoiningDate"); }
         }
 
         private DateTime? releaseDate;
         public DateTime? ReleaseDate
         {
             get { return releaseDate; }
-            set { releaseDate= value; OnPropertyChanged("ReleaseDate"); }
+            set { releaseDate = value; OnPropertyChanged("ReleaseDate"); }
         }
 
         private DateTime dob;
@@ -79,7 +78,7 @@ namespace EmployeeManagementSystem.Models
         private string contactNumber;
         public string ContactNumber
         {
-            get { return contactNumber;} 
+            get { return contactNumber; }
             set
             {
                 contactNumber = value;
@@ -90,7 +89,7 @@ namespace EmployeeManagementSystem.Models
         private string gender;
         public string Gender
         {
-            get { return gender;}
+            get { return gender; }
             set
             {
                 gender = value;
@@ -101,7 +100,7 @@ namespace EmployeeManagementSystem.Models
         private string maritalStauts;
         public string MaritalStauts
         {
-            get { return maritalStauts;}
+            get { return maritalStauts; }
             set { maritalStauts = value; OnPropertyChanged("MaritalStatus"); }
         }
 
@@ -136,7 +135,7 @@ namespace EmployeeManagementSystem.Models
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(String propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

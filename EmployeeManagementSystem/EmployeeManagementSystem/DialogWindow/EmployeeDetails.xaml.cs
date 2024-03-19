@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using EmployeeManagementSystem.Model;
+using System.Windows;
 
 namespace EmployeeManagementSystem.DialogWindow
 {
@@ -11,7 +12,7 @@ namespace EmployeeManagementSystem.DialogWindow
         {
             InitializeComponent();
         }
-        public EmployeeDetails(Models.EmployeeModel employee)
+        public EmployeeDetails(EmployeeModel employee)
         {
             InitializeComponent();
             Code.Text = employee.Code;

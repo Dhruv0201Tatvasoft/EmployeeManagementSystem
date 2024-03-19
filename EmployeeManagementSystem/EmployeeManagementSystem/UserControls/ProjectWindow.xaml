@@ -11,9 +11,7 @@
                 Background="White" d:DesignHeight="840" d:DesignWidth="1565"
              >
 
-    <UserControl.DataContext>
-        <vm:ProjectViewModel/>
-    </UserControl.DataContext>
+
     <UserControl.Resources>
         <Style x:Key="CircleButton" TargetType="Button">
             <Setter Property="Template">
@@ -78,8 +76,8 @@
                 <DatePicker Grid.Row="2" Grid.Column="1" Width="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1990" DisplayDateEnd="{x:Static sys:DateTime.Now}" Text="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged}"   Style="{DynamicResource CustomDatePickerStyle}"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="End Date:"   HorizontalAlignment="Left" Margin="50 0 0 0" VerticalAlignment="Center"/>
                 <DatePicker Grid.Row="1" Grid.Column="3" Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="{x:Static sys:DateTime.Now}"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}" Height="32"  Style="{DynamicResource CustomDatePickerStyle}" />
-                <Button Content="Search" HorizontalAlignment="Center" Command="{Binding SearchCommand}" Height="32" Width="80" Grid.Row="1" Grid.Column="4" Style="{DynamicResource ButtonStyle}"/>
-                <Button Content="Clear" HorizontalAlignment="Center" Height="32" Command="{Binding ClearSearhFieldsCommand}" Width="80" Grid.Row="1" Grid.Column="5" Style="{DynamicResource ButtonStyle}"/>
+                <Button Content="Search" HorizontalAlignment="Center" Command="{Binding SearchProject}" Height="32" Width="80" Grid.Row="1" Grid.Column="4" Style="{DynamicResource ButtonStyle}"/>
+                <Button Content="Clear" HorizontalAlignment="Center" Height="32" Command="{Binding ClearFields}" Width="80" Grid.Row="1" Grid.Column="5" Style="{DynamicResource ButtonStyle}"/>
             </Grid>-->
         <StackPanel Grid.Row="2" Margin="20 10 0 0" Orientation="Vertical">
             <StackPanel Margin="0 10 0 0 "  Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter} }" HorizontalAlignment="Left">
@@ -106,44 +104,44 @@
                     <DatePicker  Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31" Margin="0 0 0 20"  SelectedDate="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy,ValidatesOnDataErrors=False}" Height="32"  Style="{DynamicResource CustomDatePickerStyle}" />
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">
-                    <Button x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SearchCommand}" Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
+                    <Button x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SearchProject}" Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
 
-                    <Button Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Command="{Binding ClearSearhFieldsCommand}" Width="140"  Style="{DynamicResource ButtonStyle}"/>
+                    <Button Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Command="{Binding ClearFields}" Width="140"  Style="{DynamicResource ButtonStyle}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
 
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <DataGrid  IsReadOnly="True" SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+        <DataGrid   IsReadOnly="True" SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" x:Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
                     HorizontalAlignment="Stretch"
                       Grid.Row="4"
-                      Margin="20 0 "
+                      Margin="20 0 20 20 "
                       CanUserAddRows="False"
                       SelectionMode="Single"
                       HeadersVisibility="Column"
                       ItemsSource="{Binding DataTable}">
             <DataGrid.Columns>
-                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Code" Width="10*" Binding="{Binding Code}" />
+                <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Code" Width="6*" Binding="{Binding Code}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Name" Width="30*" Binding="{Binding Name}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="Start Date" Width="8*" Binding="{Binding StartingDate, StringFormat='MMMM dd, yyyy'}" />
                 <DataGridTextColumn ElementStyle="{StaticResource WrapText}" Header="End Date" Width="8*" Binding="{Binding EndingDate, StringFormat='MMMM dd, yyyy'}" />
-                <DataGridTemplateColumn x:Name="DataGridColumnWidth" MaxWidth="225" Width="10*"  Header="Actions" >
+                <DataGridTemplateColumn x:Name="DataGridColumnWidth"  Width="10*"   Header="Actions" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Grid  >
+                            <Grid HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.33*" />
+                                    <ColumnDefinition  Width="0.33*"/>
+                                    <ColumnDefinition  Width="0.33*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button MaxWidth="40" MaxHeight="40" Command= "{Binding DataContext.EditCommand , ElementName=DataGrid}" Background="White">
-                                    <Image Source="\Icons\EditIcon.png" Width="25" Height="25"  />
+                                <Button Grid.Column="0" HorizontalAlignment="Right"  Width="40"  MaxHeight="40" Command= "{Binding DataContext.EditProject , ElementName=DataGrid}" Background="White">
+                                    <Image HorizontalAlignment="Center" Source="\Icons\EditIcon.png" Width="25" Height="25"  />
                                 </Button>
-                                <Button Command="{Binding DataContext.DeleteCommand , ElementName=DataGrid}" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="1">
+                                <Button Command="{Binding DataContext.DeleteProject , ElementName=DataGrid}" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="1">
                                     <Image Source="\Icons\DeleteIcon.png" Width="40" Height="40"/>
                                 </Button>
-                                <Button Click="OpenEmployeeMapingPopupMethod" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="2">
-                                    <Image Source="\Icons\ViewEmployee.jpg" Width="40" Height="40"/>
+                                <Button HorizontalAlignment="Left"  Width="40"   Click="OpenEmployeeMapingPopupMethod" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="2">
+                                    <Image Source="\Icons\ViewEmployee.jpg" HorizontalAlignment="Center" Width="40" Height="40"/>
 
                                 </Button>
 
@@ -191,9 +189,9 @@
                                 <DataGridTemplateColumn Header="Actions" Width=".2*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button  Command="{Binding DataContext.DeleteEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
+                                            <Button  Command="{Binding DataContext.RemoveEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
                                                 
-                                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" />
+                                                    <Image Source="\Icons\CircleCrossIcon.png" />
                                                
                                             </Button>
                                         </DataTemplate>

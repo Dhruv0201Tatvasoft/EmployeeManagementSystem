@@ -26,9 +26,6 @@
         <converter:ProjectWindowResponsive x:Key="ProjectWindowConverter"/>
         <vm:EmployeeViewModel x:Key="ViewModel"/>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <vm:EmployeeViewModel/>
-    </UserControl.DataContext>
     <Grid VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -77,9 +74,9 @@
                     <ComboBox Text="{Binding CombTextDesignation,Mode=TwoWay}"  SelectedItem="{Binding SelectedDesignation,Mode=TwoWay,Delay=1,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Designation}"   Width="250"  IsEditable="True" IsReadOnly="True"  Margin="0 0 0 20"  Height="32" Style="{DynamicResource CustomComboBoxStyle}"/>
                 </StackPanel>
                 <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">
-                    <Button Command="{Binding SearchCommand}" x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left"  Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
+                    <Button Command="{Binding SearchEmployee}" x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left"  Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
 
-                    <Button Command="{Binding ClearCommand}" Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Width="140"  Style="{DynamicResource ButtonStyle}"/>
+                    <Button Command="{Binding ClearFields}" Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Width="140"  Style="{DynamicResource ButtonStyle}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -111,13 +108,13 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Button Command="{Binding DataContext.ViewEmployeeDetailsCommand ,ElementName=DataGrid}"  MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
+                                <Button Command="{Binding DataContext.ViewEmployeeDetails ,ElementName=DataGrid}"  MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
                                     <Image Source="/Icons/EmployeeIcon.png" Width="25" Height="25" />
                                 </Button>
                                 <Button Click="EditEmployeeBtnClick" MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
                                     <Image Source="/Icons/EditIcon.png" Width="25" Height="25"/>
                                 </Button>
-                                <Button  Command="{Binding DataContext.DeleteEmployeeCommand ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
+                                <Button  Command="{Binding DataContext.DeleteEmployee ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
                                     <Image Source="/Icons/DeleteIcon.png"
                                            Width="40" Height="40"/>
                                 </Button>
@@ -130,7 +127,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True">
+        <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True" >
 
             <Grid>
                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="600" Height="650">
@@ -155,7 +152,7 @@
                             <input:AutoCompleteBox Placeholder="Select project" SelectedItem="{Binding ProjectName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0"  FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32" ItemsSource="{Binding ProjectNames}"/>
                             <Button Command="{Binding AddEmployeeToProject}" VerticalAlignment="Center" Margin=" 0 0 10 0" Content="ADD" Width="90" Height="30" Style="{DynamicResource ButtonStyle}"/>
                         </StackPanel>
-                        <DataGrid Background="Transparent" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="10 0 10 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
+                        <DataGrid Background="Transparent" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="10 0 10 10" IsReadOnly="True" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
                            CanUserAddRows="False"
                            AutoGenerateColumns="False"
                            SelectionMode="Single"
@@ -167,7 +164,7 @@
                                 <DataGridTemplateColumn Header="Actions" Width=".2*" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Command="{Binding DataContext.DeleteEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
+                                            <Button Command="{Binding DataContext.RemoveEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
 
                                                 <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" />
 

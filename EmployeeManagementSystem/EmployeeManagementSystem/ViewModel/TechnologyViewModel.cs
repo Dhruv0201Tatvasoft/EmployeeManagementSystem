@@ -53,19 +53,19 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-        private ICommand saveCommand;
-        public ICommand SaveCommand
+        private ICommand saveTechnology;
+        public ICommand SaveTechnology
         {
             get
             {
-                if (saveCommand == null)
+                if (saveTechnology == null)
                 {
-                    saveCommand = new RelayCommand(ExecuteSaveCommand, CanSaveCommandExecute, false);
+                    saveTechnology = new RelayCommand(ExecuteSaveTechnology, CanSaveTechnologyExecute, false);
                 }
-                return saveCommand;
+                return saveTechnology;
             }
         }
-        private bool CanSaveCommandExecute(object arg)
+        private bool CanSaveTechnologyExecute(object arg)
         {
             if (String.IsNullOrEmpty(TechnologyName))
             {
@@ -74,7 +74,7 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private void ExecuteSaveCommand(object obj)
+        private void ExecuteSaveTechnology(object obj)
         {
             if (selectedRow != null && !String.IsNullOrEmpty(OldTecnologyName))
             {
@@ -90,20 +90,20 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("TechnologyDataTable");
         }
 
-        private ICommand deleteCommand;
-        public ICommand DeleteCommand
+        private ICommand deleteTechnology;
+        public ICommand DeleteTechnology
         {
             get
             {
-                if (deleteCommand == null)
+                if (deleteTechnology == null)
                 {
-                    deleteCommand = new RelayCommand(DeleteCommandExecute, CanDeleteCommandExecute, false);
+                    deleteTechnology = new RelayCommand(ExecuteDeleteTechnology, CanDeleteTechnologyExecute, false);
                 }
-                return deleteCommand;
+                return deleteTechnology;
             }
         }
 
-        private void DeleteCommandExecute(object obj)
+        private void ExecuteDeleteTechnology(object obj)
         {
             deleteData.DeleteTechnology((string)selectedRow.Row.ItemArray[0]);
             TechnologyName = String.Empty;
@@ -112,33 +112,33 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
-        private bool CanDeleteCommandExecute(object arg)
+        private bool CanDeleteTechnologyExecute(object arg)
         {
             if (selectedRow == null) return false;
             return true;
         }
 
-        private ICommand editCommand;
-        public ICommand EditCommand
+        private ICommand editTechnology;
+        public ICommand EditTechnology
         {
             get
             {
-                if (editCommand == null)
+                if (editTechnology == null)
                 {
-                    editCommand = new RelayCommand(EditExecute, CanEditExecute, false);
+                    editTechnology = new RelayCommand(ExecuteEditTechnology, CanEditTechnologyExecute, false);
                 }
-                return editCommand;
+                return editTechnology;
             }
         }
 
-        private bool CanEditExecute(object arg)
+        private bool CanEditTechnologyExecute(object arg)
         {
             if (selectedRow == null) return false;
 
             return true;
         }
 
-        private void EditExecute(object obj)
+        private void ExecuteEditTechnology(object obj)
         {
             oldTechnologyName = technologyName = (string)selectedRow.Row[0];
             OnPropertyChanged("TechnologyName");

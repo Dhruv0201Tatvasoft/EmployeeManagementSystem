@@ -9,7 +9,7 @@
              xmlns:b="clr-namespace:EmployeeManagementSystem.Behaviours"
              xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:chartingpremitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="450" d:DesignWidth="800" d:Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="PieDataPointStyle" TargetType="{x:Type b:PieDataPoint}">
@@ -88,7 +88,7 @@
             <SolidColorBrush x:Key="GraphColor10">#a3b18a</SolidColorBrush>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Name="mainGrid" Margin="20">
+    <Grid Name="mainGrid" Margin="20" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -97,7 +97,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <chart:Chart Name="employeeChart" Title="Employee"  Background="Transparent" Grid.Column="1" Grid.Row="0"  Margin="20">
+        <chart:Chart Name="employeeChart" Title="Employee"  Background="Transparent" Grid.Column="1" Grid.Row="0"  Margin="10 ">
             <chart:Chart.Template>
                 <ControlTemplate TargetType="chart:Chart">
                     <Border 
@@ -117,11 +117,10 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Rectangle Fill="{StaticResource GraphColor2}"  Width="10" Height="15"/>
-                                    <TextBlock FontFamily="Calibri" Margin="5 0 0 0" Text="Released" Foreground="Black" VerticalAlignment="Center"/>
+                                    <TextBlock FontFamily="Calibri" Margin="5 0 0 0" Text="Release" Foreground="Black" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </StackPanel>
-                            <chartingpremitives:EdgePanel Grid.Row="2" x:Name="ChartArea" >
-
+                            <chartingpremitives:EdgePanel Grid.Row="2" x:Name="ChartArea">
                             </chartingpremitives:EdgePanel>
                         </Grid>
                     </Border>
@@ -181,7 +180,7 @@
             </chart:Chart.Axes>
 
         </chart:Chart>
-        <chart:Chart Grid.Column="0" Grid.Row="0" x:Name="DesignationWiseEmployee" Title="Designation-Wise Employee" Margin="20">
+        <chart:Chart Grid.Column="0" Grid.Row="0" x:Name="DesignationWiseEmployee" Title="Designation-wise Employee" Margin="10">
             <chart:Chart.Template>
                 <ControlTemplate TargetType="chart:Chart">
                     <Border 
@@ -231,7 +230,7 @@
                 </b:PieSeries.DataPointStyle>
             </b:PieSeries>
         </chart:Chart>
-        <chart:Chart Grid.Column="0" Grid.Row="1"  x:Name="TechnologyWiseProject" Title="Technology Wise Projects" Margin="20">
+        <chart:Chart Grid.Column="0" Grid.Row="1"  x:Name="TechnologyWiseProject" Title="Technology-wise Project" Margin="10">
             <chart:Chart.Template>
                 <ControlTemplate TargetType="chart:Chart">
                     <Border 
@@ -286,7 +285,7 @@
        
             </b:PieSeries>
         </chart:Chart>-->
-        <chart:Chart Name="SkillWiseEmployee" Title="Skill Wise Employee"  Background="Transparent" Grid.Column="1" Grid.Row="1"  Margin="20">
+        <chart:Chart Name="SkillWiseEmployee" Title="Skill-wise Employee"  Background="Transparent" Grid.Column="1" Grid.Row="1"  Margin="10">
             <chart:Chart.Template>
                 <ControlTemplate TargetType="chart:Chart">
                     <Border 
@@ -328,12 +327,12 @@
                 <chart:ColumnSeries   ItemsSource="{Binding SkillWiseEmployee}"  Background="White" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Count}">
                     <chart:ColumnSeries.DataPointStyle>
                         <Style TargetType="chart:ColumnDataPoint">
-
+                         
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="chart:ColumnDataPoint">
                                         <Grid>
-                                            <Rectangle Fill="{Binding SkillId, Converter={StaticResource colorConverter}}" >
+                                            <Rectangle Fill="{Binding SkillId, Converter={StaticResource colorConverter}}"  >
                                                 <Rectangle.ToolTip>
                                                     <TextBlock FontFamily="Calibri" Text="{Binding Name}"/>
                                                 </Rectangle.ToolTip>

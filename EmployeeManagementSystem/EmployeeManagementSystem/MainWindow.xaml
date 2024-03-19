@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:EmployeeManagementSystem.Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000"
+        Title="EMS" Height="450" Width="1000"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         MinWidth="800"
@@ -37,7 +37,11 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="*" VerticalAlignment="Top" Foreground="Red"/>
+                            <TextBlock Text="*" VerticalAlignment="Top" Foreground="Red">
+                                <TextBlock.ToolTip>
+                                    <TextBlock Text="This field is compulsory to fill"/>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
                             <TextBlock TextWrapping="WrapWithOverflow" Text="{TemplateBinding Content}" Grid.Column="1"/>
                         </Grid>
                     </ControlTemplate>
@@ -121,7 +125,8 @@
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
                             Margin="3,3,23,3"
-                            Focusable="True" 
+                            Focusable="True"
+                          
                             Background="{StaticResource NormalBackGroundColor}"
                             Foreground="Black"
                             Visibility="Hidden"
@@ -189,7 +194,7 @@
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <ControlTemplate  TargetType="{x:Type ComboBoxItem}">
                         <Border Name="Border"
                               Padding="2"
                               SnapsToDevicePixels="true">
@@ -206,6 +211,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         </Style>
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
             <Setter Property="Template">
@@ -225,52 +231,60 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="RadioMark" Property="Background" Value="#70AD47" />
+                                <Setter TargetName="RadioOuter" Property="Background" Value="#70AD47" />
                             </Trigger>
                             <Trigger Property="IsChecked" Value="False">
-                                <Setter TargetName="RadioMark" Property="BorderBrush" Value="{StaticResource ForeGroundColor}" />
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="{StaticResource ForeGroundColor}" />
                             </Trigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsMouseOver" Value="True" />
                                     <Condition Property="IsChecked" Value="True" />
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="RadioMark" Property="Background" Value="{StaticResource HoverBackGroundColor}"/>
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="Background" Value="{StaticResource HoverBackGroundColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="True"/>
                                     <Condition Property="IsPressed" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="RadioMark" Property="Background" Value="{StaticResource PressedBackGroundColor}"/>
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="Background" Value="{StaticResource PressedBackGroundColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsEnabled" Value="False"/>
                                     <Condition Property="IsChecked" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="RadioMark" Property="Background" Value="{StaticResource DisabledBackGroundColor}"/>
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="Background" Value="{StaticResource DisabledBackGroundColor}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="False"/>
                                     <Condition Property="IsMouseOver" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="RadioMark" Property="Background" Value="#CC000000"/>
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="Background" Value="#CC000000"/>
+                                
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="False"/>
                                     <Condition Property="IsPressed" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="RadioMark" Property="Background" Value="#FF000000"/>
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="Background" Value="#FF000000"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsChecked" Value="False"/>
                                     <Condition Property="IsEnabled" Value="False"/>
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="RadioMark" Property="Background" Value="#66000000"/>
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="Background" Value="#66000000"/>
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
 
@@ -483,8 +497,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
-                        <Border  Name="Border" TextBlock.TextAlignment="Center"  BorderThickness="0.5" BorderBrush="Black" Background="{TemplateBinding Background}" CornerRadius="10 10 0 0">
-                            <ContentPresenter Height="20" ContentSource="Header" Width="120"  Margin="10,2"/>
+                        <Border  Name="Border" TextBlock.TextAlignment="Center" Margin="2 0 2 0"  BorderThickness="0.5" BorderBrush="#507E32" Background="{TemplateBinding Background}" >
+                            <ContentPresenter Height="20" ContentSource="Header" Width="120"  />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
@@ -519,7 +533,7 @@
                         <MenuItem Header="Dashboard" Style="{StaticResource MenuItemStyle}" Name="DashboardMenuItem"  Click="MenuItem_Click">
                         </MenuItem>
                         <MenuItem Header="Project" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
-
+                            
                         </MenuItem>
                         <MenuItem Header="Employee" Style="{StaticResource MenuItemStyle}"  Click="MenuItem_Click">
                         </MenuItem>
@@ -533,7 +547,7 @@
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button x:Name="login" Click="login_Click"  Content="Login" Width="70"  Margin="0 0 20 0" Style="{DynamicResource ButtonStyle}"/>
                     <Button Click="InfoButtonClicked"  Height="auto" Width="39">
-                        <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\AboutIcon.png" Width="auto" Height="auto" RenderTransformOrigin="0.094,1.221 "/>
+                        <Image Source="\Icons\AboutIcon.png" Width="auto" Height="auto"/>
                     </Button>
                     </StackPanel>
                 </DockPanel>
@@ -541,7 +555,7 @@
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Name="mainContent">
 
             </ContentControl>
-            <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True">
+            <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True" >
 
                 <Grid>
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="600" Height="650">
@@ -555,7 +569,7 @@
                                 <TextBlock VerticalAlignment="Center" Margin="20 10 0 0" Text="About" Height="auto" DockPanel.Dock="Left" FontSize="26" />
                                 <Button Click="ClosePopUpClick"  Background="Transparent" BorderBrush="Transparent" Margin="15 10 10 0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
 
-                                    <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CancelIcon.png"/>
+                                    <Image Source="\Icons\CancelIcon.png"/>
                                 </Button>
                             </DockPanel>
                             <Grid Margin="20 20 20 30" Grid.Row="1">

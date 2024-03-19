@@ -1,4 +1,4 @@
-﻿using EmployeeManagementSystem.Models;
+﻿using EmployeeManagementSystem.Model;
 using System.Windows;
 using System.Windows.Controls;
 

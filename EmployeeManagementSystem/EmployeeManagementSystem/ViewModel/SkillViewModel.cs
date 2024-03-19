@@ -55,19 +55,19 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-        private ICommand saveCommand;
-        public ICommand SaveCommand
+        private ICommand saveSkill;
+        public ICommand SaveSkill
         {
             get
             {
-                if (saveCommand == null)
+                if (saveSkill == null)
                 {
-                    saveCommand = new RelayCommand(ExecuteSaveCommand, CanSaveCommandExecute, false);
+                    saveSkill = new RelayCommand(ExecuteSaveSkill, CanSaveSkillExecute, false);
                 }
-                return saveCommand;
+                return saveSkill;
             }
         }
-        private bool CanSaveCommandExecute(object arg)
+        private bool CanSaveSkillExecute(object arg)
         {
             if (String.IsNullOrEmpty(SkillName))
             {
@@ -76,7 +76,7 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private void ExecuteSaveCommand(object obj)
+        private void ExecuteSaveSkill(object obj)
         {
             if (selectedRow != null && !String.IsNullOrEmpty(oldSkillName))
             {
@@ -92,20 +92,20 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("SkillDataTable");
         }
 
-        private ICommand deleteCommand;
-        public ICommand DeleteCommand
+        private ICommand deleteSkill;
+        public ICommand DeleteSkill
         {
             get
             {
-                if (deleteCommand == null)
+                if (deleteSkill == null)
                 {
-                    deleteCommand = new RelayCommand(DeleteCommandExecute, CanDeleteCommandExecute, false);
+                    deleteSkill = new RelayCommand(ExecuteDeleteSkill, CanDeleteSkillExecute, false);
                 }
-                return deleteCommand;
+                return deleteSkill;
             }
         }
 
-        private void DeleteCommandExecute(object obj)
+        private void ExecuteDeleteSkill(object obj)
         {
             deleteData.DeleteSkill((string)selectedRow.Row.ItemArray[0]);
             SkillName = String.Empty;
@@ -114,33 +114,33 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
-        private bool CanDeleteCommandExecute(object arg)
+        private bool CanDeleteSkillExecute(object arg)
         {
             if (selectedRow == null) return false;
             return true;
         }
 
-        private ICommand editCommand;
-        public ICommand EditCommand
+        private ICommand editSkill;
+        public ICommand EditSkill
         {
             get
             {
-                if (editCommand == null)
+                if (editSkill == null)
                 {
-                    editCommand = new RelayCommand(EditExecute, CanEditExecute, false);
+                    editSkill = new RelayCommand(ExecuteEditSkill, CanEditSkillExecute, false);
                 }
-                return editCommand;
+                return editSkill;
             }
         }
 
-        private bool CanEditExecute(object arg)
+        private bool CanEditSkillExecute(object arg)
         {
             if (selectedRow == null) return false;
 
             return true;
         }
 
-        private void EditExecute(object obj)
+        private void ExecuteEditSkill(object obj)
         {
             oldSkillName = skillName = (string)selectedRow.Row[0];
             OnPropertyChanged("SkillName");

@@ -1,5 +1,5 @@
 ﻿using EmployeeManagementSystem.Database;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.ViewModel;
 using System.Data;
 using System.Windows;
@@ -16,23 +16,23 @@ namespace EmployeeManagementSystem.UserControls
         public EditProjectWindow()
         {
             InitializeComponent();
-            EditProjectViewModel editProjectViewModel = new EditProjectViewModel();
-            this.DataContext = editProjectViewModel;
+            EditProjectViewModel viewModel = new EditProjectViewModel();
+            this.DataContext = viewModel;
            
         }
 
         public EditProjectWindow(ProjectModel project)
         {
             InitializeComponent();
-            EditProjectViewModel editProjectViewModel = new EditProjectViewModel();
-            this.DataContext = editProjectViewModel;
+            EditProjectViewModel viewModel = new EditProjectViewModel();
+            this.DataContext = viewModel;
             GetData = new GetData();
-            editProjectViewModel.OldCode = project.Code;
-            editProjectViewModel.SelectedTechnologyIds = project.AssociatedTechnologies;
-            editProjectViewModel.Code = project.Code;
-            editProjectViewModel.Name = project.Name;
-            editProjectViewModel.StartingDate = project.StartingDate;
-            editProjectViewModel.EndingDate = project.EndingDate;
+            viewModel.OldCode = project.Code;
+            viewModel.SelectedTechnologyIds = project.AssociatedTechnologies;
+            viewModel.Code = project.Code;
+            viewModel.Name = project.Name;
+            viewModel.StartingDate = project.StartingDate;
+            viewModel.EndingDate = project.EndingDate;
             DataTable dt = GetData.GetTechnologyData();
             myListBox.ItemsSource = dt.DefaultView;
     
@@ -47,7 +47,7 @@ namespace EmployeeManagementSystem.UserControls
                     }
                 }
             
-            editProjectViewModel.ChangeWindowEvent += ChangeWindow;
+            viewModel.ChangeWindowEvent += ChangeWindow;
             
         }
      

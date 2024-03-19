@@ -12,13 +12,13 @@ namespace EmployeeManagementSystem.UserControls
         public LoginWindow()
         {
             InitializeComponent();
-            LoginViewModel loginViewModel = new LoginViewModel();
-            loginViewModel.IncorrectLoginEvent += LoginViewModel_IncorrectLoginEvent;
-            loginViewModel.CorrectLoginEvent += LoginViewModel_CorrectLoginEvent;
+            LoginViewModel viewModel = new LoginViewModel();
+            viewModel.IncorrectLoginEvent += LoginViewModel_IncorrectLoginEvent;
+            viewModel.CorrectLoginEvent += LoginViewModel_CorrectLoginEvent;
             username.GotFocus += Username_GotFocus;
             passwordBox.GotFocus += Username_GotFocus;
             textBox.GotFocus += Username_GotFocus;
-            this.DataContext = loginViewModel;
+            this.DataContext = viewModel;
         }
 
         private void LoginViewModel_CorrectLoginEvent(object? sender, EmployeeEventArgs e)

@@ -1,6 +1,6 @@
 ﻿using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.DialogWindow;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.ViewModel;
 using System.Data;
 using System.Windows;
@@ -17,9 +17,9 @@ namespace EmployeeManagementSystem.UserControls
         public EmployeeWindow()
         {
             InitializeComponent();
-            EmployeeViewModel viewmodel = new EmployeeViewModel();
-            this.DataContext = viewmodel;
-            viewmodel.AddProjectEvent += RefreshEmployeeDatagrid;
+            EmployeeViewModel viewModel = new EmployeeViewModel();
+            this.DataContext = viewModel;
+            viewModel.AddProjectEvent += RefreshEmployeeDatagrid;
             getData = new GetData();
         }
 

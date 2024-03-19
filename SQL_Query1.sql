@@ -25,18 +25,15 @@ CREATE TABLE EmsTblTechnologyForProject (
     FOREIGN KEY (ProjectCode) REFERENCES EmsTblProject(Code),
     FOREIGN KEY (TechnologyId) REFERENCES EmsTblTechnology(Id)
 );
-ALTER TABLE EmsTblEmployee 
-ALTER COLUMN [Designation] nvarchar(20) NOT NULL;
-ALTER TABLE EmsTblEmployee 
-ADD CONSTRAINT CHK_ValidDesignation 
-CHECK ([Designation] IN ('Developer', 'Senior Developer', 'Team Lead', 'Manager'));
+
+
 CREATE TABLE EmsTblEmployee (
     Code VARCHAR(10) PRIMARY KEY,
     FirstName VARCHAR(10) NOT NULL,
     LastName VARCHAR(10) NOT NULL,
     Email VARCHAR(40) NOT NULL,
     Password VARCHAR(20) NOT NULL,
-    [Designation] nvarchar(20) NOT NULL CHECK ([Designation] IN ('Developer', 'Senior Developer', 'Team lead', 'Manager')),
+    [Designation] nvarchar(30) NOT NULL CHECK ([Designation] IN ('Developer', 'Senior Developer', 'Team lead', 'Manager')),
     [Department] nvarchar(20) NOT NULL CHECK ([Department] IN ('Dotnet', 'Java', 'Php', 'Mobile', 'QA')),
     JoiningDate DATE NOT NULL,
     ReleaseDate DATE,
@@ -72,6 +69,14 @@ ALTER TABLE EmsTblEmployeeExperience alter column Designation Varchar(30) not nu
 create table EmsTblEmployeeAssociatedToProject (
 	EmployeeCode VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES EmsTblEmployee(Code),
 	ProjectCode VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES EmsTblProject(Code))
+
+create table EmsTblSkillForEmployee (
+EmployeeCode VARCHAR(10) Foreign key references EmsTblEmployee(Code) ON DELETE CASCADE ON UPDATE CASCADE,
+SkillId int Foreign key references EmsTblSkill(Id) ON DELETE CASCADE ON UPDATE CASCADE)
+
+
+
+
 
 insert into EmsTblTechnology values 
 (1,'Dotnet'),
@@ -118,167 +123,54 @@ VALUES
     ('EMP017', 'Asha', 'Verma', 'abc@email.com', 'password17', 'Developer', 'Java', '2023-03-05', NULL, '1991-08-15', '1234567890', 'Female', 'Married','Ahmedabad, Gujarat',NULL)
 
 
-select * from EmsTblTechnologyForProject
-select * from EmsTblTechnology
-select * from EmsTblEmployee
-select CONCAT(FirstName,' ' ,LastName) from EmsTblEmployee 
-Select * from  EmsTblProject where Code = 'P0005' 
-delete from EmsTblTechnologyForProject where ProjectCode ='P0001'
-UPDATE  EmsTblProject SET Code = 'P0074' , Name = 'Dhruv' , StartingDate = '2020-12-10',  EndingDate = NULL WHERE Code ='P0001' 
-SELECT * from EmsTblProject where Code = 'P0001'
-UPDATE EmsTblProject SET Code = 'P0078' , Name = 'Mechanical System' , StartingDate = '2019-08-17',  EndingDate = '2021-07-22' WHERE Code ='P0003' 
-delete from EmsTblProject where Code=''
-Insert into EmsTblProject (Code,Name,StartingDate,EndingDate) values ('P0013','Everest','2024-02-19','NULL')
-Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('EMP001','P0005')
-
- SELECT 
-
-        CONCAT(
-            COALESCE(FirstName + ' ', '')
-            , COALESCE(Lastname, '')
-        )
-    AS Name
- from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code where EmsTblEmployeeAssociatedToProject.ProjectCode = 'P0005'
-
- Select CONCAT(Firstname,' ',Lastname)As Name,EmsTblEmployee.Code  
-               from EmsTblEmployeeAssociatedToProject inner join EmsTblEmployee on  
-                EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code  
-               where EmsTblEmployeeAssociatedToProject.ProjectCode = 'P0005'
-
-
-delete  from EmsTblEmployeeAssociatedToProject where ProjectCode ='P0005' and  EmployeeCode ='EMP001'
-delete  from EmsTblTechnology where Id =6
-select * from EmsTblTechnology where name like 'dotnet'
-update EmsTblTechnology set name ='KHP' where name like 'PHP'
-Update EmsTblTechnology SET Name = 'Iphone' where name like ''	
-select * from EmsTblProject where code like 'P0001'
-delete from EmsTblTechnology where Name like 'Dotnet'
-Delete From EmsTblTechnology where Name like 'Dotnet'
-Insert into EmsTblSkill (Name) values  ('Management') ,('Coding'),('Communication'),('Testing')
-
-SELECT Code, CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name, Email, Designation, Department, JoiningDate, ReleaseDate
-FROM EmsTblEmployee
-select * from EmsTblEmployee
-SELECT *
-FROM EmsTblEmployee
-Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND Department like 'Java%'
-WHERE UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Khoradiya%';
-Select *,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name from EmsTblEmployee where 1=1 AND  UPPER(CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, ''))) LIKE '%Dhruv%'
-
-Select * from EmsTblEmployeeEducation
-SELECT * from EmsTblEmployee where Code = 'EMP001'
 exec sp_rename 'dbo.EmsTblEmployeeEducation.Degree' ,'Qualification','COLUMN'
 
-insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values ('EMP001','BE','GTU','LD','GUJ','2024','875') 
-	Education
 
-select * from EmsTblEmployee where Code like 'EMP001'
-INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) VALUES 
-                           ('EMP020','Hetanshi ','Acharya','hetan@gmail.com','1023203304','Developer','Developer','Java','2024-03-04','2024-03-04','9925366629','Male','Single','Ahmedabad,Gujarat','Ahmedabad,Gujarat')
-delete from EmsTblEmployeeEducation where EmployeeCode Like 'EMP001' and Qualification like 'BE' AND Board Like 'GTU' AND Institute like 'LD' AND State Like 'GUJ' AND PassingYear like '2024' AND Percentage like '875'
-select * from EmsTblEmployeeEducation
-insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values ('EMP001','BE','GTU','LD','GUJ','2024','87.5') 
-select * from EmsTblEmployeeExperience
-Update EmsTblEmployeeEducation SET Qualification = 'BE' , Board = 'GTU' ,Institute = 'DDDD' , State = 'HYD' , PassingYear = '2018' , Percentage = '92.33' Where EmployeeCode like 'EMP001' AND Qualification like 'HSC' AND Board like 'GHSEB' AND Institute like 'VIDYANAGAR' AND State like 'GUJ' AND PassingYear like '2020'AND Percentage like '78.33' 
-delete from EmsTblEmployee where Code like 'EMP050'
-select * from EmsTblEmployee
-select * from EmsTblEmployeeEducation
-SELECT * from EmsTblEmployee where Code = 'EMP001'
-	
-	
-ALTER TABLE EmsTblEmployeeExperience
-select * from EmsTblTechnology
-delete from EmsTblTechnologyForProject where TechnologyId = 13
-delete from EmsTblTechnology Where Id = 13 
-insert into EmsTblEmployee  (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAdress) values('EMP016', 'Rahul', 'Yadav', 'abc@email.com', 'password16', 'Manager', 'Mobile', '2022-11-25', NULL, '1985-05-18', '1234567890', 'Male', 'Single', 'Lucknow, Uttar Pradesh', 'Lucknow, Uttar Pradesh')
-select * from EmsTblTechnologyForProject inner join EmsTblTechnology on TechnologyId = id where ProjectCode ='sd'
-insert into EmsTblEmployeeEducation values ('EMP016','de','Dd','sd','wef','2024','875')
-delete from EmsTblEmployee where Code like 'EMP017'
+
 alter table EmsTblEmployeeEducation Drop FOREIGN key EmployeeCode
+ALTER TABLE EmsTblEmployeeEducation
+ADD CONSTRAINT FK_EmployeeCode
+FOREIGN KEY (EmployeeCode)
+REFERENCES EmsTblEmployee(Code)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
 ALTER TABLE EmsTblEmployeeAssociatedToProject
 ADD CONSTRAINT FK_ProjectCodeForEmployeeAssociatedToProject
 FOREIGN KEY (ProjectCode)
 REFERENCES EmsTblProject(Code)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
-select *  from EmsTblSkill
-select * from EmsTblEmployeeEducation
-delete from EmsTblSkill
-Select Code,Name from EmsTblProject
-update EmsTblEmployee set code = 'EMP001' where code = 'EMP0001'
-select * from EmsTblEmployeeAssociatedToProject inner join EmsTblProject On ProjectCode = Code where EmployeeCode Like 'EMP001'
 
-create table EmsTblSkillForEmployee (
-EmployeeCode VARCHAR(10) Foreign key references EmsTblEmployee(Code) ON DELETE CASCADE ON UPDATE CASCADE,
-SkillId int Foreign key references EmsTblSkill(Id) ON DELETE CASCADE ON UPDATE CASCADE)
-select * from EmsTblTechnology
-select Name,count(*) as TotalEmployee from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name
+alter table EmsTblEmployeeExperience Drop FOREIGN key EmployeeCode
+ALTER TABLE EmsTblEmployeeExperience
+ADD CONSTRAINT FK_EmployeeCodeExperience
+FOREIGN KEY (EmployeeCode)
+REFERENCES EmsTblEmployee(Code)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
 
-select count(*) as count ,MONTH(JoiningDate) as Month  from EmsTblEmployee group by (MONTH(JoiningDate)) order by MONTH desc
-UPDATE EmsTblEmployee set JoiningDate= '2024-01-01' where  JoiningDate = '2023-06-14'
-SELECT 
-    YEAR(E.JoiningDate) AS JoiningYear,
-    DATENAME(MONTH, E.JoiningDate) AS Month,
-    ISNULL(COUNT(E.JoiningDate), 0) AS Count
-FROM (
-    VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12)
-) AS Months (MonthNumber)
-LEFT JOIN EmsTblEmployee E ON Month(E.JoiningDate) =MonthNumber
-WHERE E.JoiningDate >= DATEADD(MONTH, -6, GETDATE())
-GROUP BY YEAR(E.JoiningDate), MONTH(E.JoiningDate) ,E.JoiningDate
-ORDER BY YEAR(E.JoiningDate) DESC, MONTH(E.JoiningDate) DESC;
+alter table EmsTblTechnologyForProject Drop FOREIGN key ProjectCode
+ALTER TABLE EmsTblTechnologyForProject
+ADD CONSTRAINT FK_ProjectCode
+FOREIGN KEY (ProjectCode)
+REFERENCES EmsTblProject(Code)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+alter table EmsTblTechnologyForProject Drop FOREIGN key TechnologyId
+ALTER TABLE EmsTblTechnologyForProject
+ADD CONSTRAINT FK_TechnologyId
+FOREIGN KEY (TechnologyId)
+REFERENCES EmsTblTechnology(Id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;0
 
 
-UPDATE EmsTblEmployee
-SET joiningdate = DATEADD(YEAR, 2023 - YEAR(joiningdate), joiningdate);
 
-select * from EmsTblEmployee
-
-;WITH Months(Month) AS
-(
-  SELECT 1 AS Month
-  UNION ALL
-  SELECT Month + 1
-  FROM Months
-  WHERE Month < 12
-)
-
-SELECT top 6 M.Month AS Month,
-       ISNULL(COUNT(E.ReleaseDate), 0) AS Count
-FROM Months AS M
-LEFT JOIN EmsTblEmployee AS E ON M.Month = MONTH(E.ReleaseDate)
-GROUP BY M.Month
-ORDER BY 
-    (CASE WHEN M.Month >= MONTH(GETDATE()) THEN M.Month - MONTH(GETDATE())
-          ELSE M.Month + 12 - MONTH(GETDATE()) END) DESC;
-select Name as Technology,count(*) as Count from EmsTblSkillForEmployee inner join EmsTblSkill On SkillId=id inner join EmsTblEmployee On EmployeeCode = code group by Name
-
-select    from EmsTblTechnology Left Join EmsTblTechnologyForProject On TechnologyId = Id
-update EmsTblEmployee set Email ='abc@email.com' ,Password ='password1' where Code like 'EMP001'
-select Code from EmsTblEmployee Where Email like 'abc@email.com' COLLATE Latin1_General_CS_AS AND password like 'password1' COLLATE Latin1_General_CS_AS 
-
-WITH Months(Month) AS
-(
-    SELECT MONTH(GETDATE()) AS Month
-    UNION ALL
-    SELECT Month - 1 
-    FROM Months 
-    WHERE Month > MONTH(GETDATE()) - 6
-)
-SELECT TOP 6
-    DateName(month, DateAdd(month, M.Month, 0) - 1) as Month,
-    ISNULL(COUNT(E.JoiningDate), 0) AS Count 
-FROM 
-    Months AS M 
-LEFT JOIN 
-    EmsTblEmployee AS E ON M.Month = MONTH(E.JoiningDate)
-GROUP BY 
-    M.Month 
-ORDER BY 
-    M.Month DESC 
 SELECT 
     COUNT(*) AS count,
-    MONTH(JoiningDate) AS c,
+    MONTH(JoiningDate) AS MonthNumber,
     DATENAME(month, JoiningDate) AS Month
 FROM 
     EmsTblEmployee 
@@ -289,7 +181,7 @@ GROUP BY
     MONTH(JoiningDate), DATENAME(month, JoiningDate)
 ORDER BY 
     (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
-select DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE()))
-select EOMONTH(GETDATE(),-1)
-DBCC checkident ('EmsTblSkill',reseed ,4)
+
+
+select *  from EmsTblEmployee left join EmsTblEmployeeAssociatedToProject on Code = EmployeeCode where ProjectCode is null
 

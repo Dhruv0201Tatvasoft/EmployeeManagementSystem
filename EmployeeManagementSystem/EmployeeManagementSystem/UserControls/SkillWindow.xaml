@@ -4,14 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             xmlns:vm ="clr-namespace:EmployeeManagementSystem.ViewModel"
+             xmlns:vm ="clr-namespace:EmployeeManagementSystem.ViewModel"                  
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <UserControl.Resources>
-        <vm:SkillViewModel x:Key="ViewModel"/>
+        <vm:SkillViewModel x:Key="ViewModel"/> 
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <vm:SkillViewModel></vm:SkillViewModel>
-    </UserControl.DataContext>
+   
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -23,9 +21,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="5*" MinWidth="250"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="3*" MaxWidth="150"/>
+                <ColumnDefinition Width="3*" MaxWidth="150"/>
+                <ColumnDefinition Width="3*" MaxWidth="150"/>
 
             </Grid.ColumnDefinitions>
 
@@ -36,13 +34,13 @@
 
             <TextBlock VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Text="Skill:" Margin="20,42,0,0" />
             <TextBox Tag="skill" Text="{Binding SkillName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="250" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,34,0,0" Grid.Column="1" Height="32"  Style="{DynamicResource CustomInputStyle}"/>
-            <Button Grid.Column="2" Command="{Binding SaveCommand}" Width="120" Height="30" Margin="0 20 10 0" Content="Save" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
-            <Button Grid.Column="3" Command="{Binding EditCommand}" Width="120" Height="30" Margin="0 20 10 0" Content="Edit" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
-            <Button Grid.Column="4" Command="{Binding DeleteCommand}" Width="120" Height="30" Margin="0 20 10 0"  Content="Delete" Style="{DynamicResource ButtonStyle}"  Grid.Row="1" ></Button>
+            <Button Grid.Column="2" Command="{Binding SaveSkill}" Width="120" Height="30" Margin="0 20 10 0" Content="Save" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
+            <Button Grid.Column="3" Command="{Binding EditSkill}" Width="120" Height="30" Margin="0 20 10 0" Content="Edit" Style="{DynamicResource ButtonStyle}" Grid.Row="1" ></Button>
+            <Button Grid.Column="4" Command="{Binding DeleteSkill}" Width="120" Height="30" Margin="0 20 10 0"  Content="Delete" Style="{DynamicResource ButtonStyle}"  Grid.Row="1" ></Button>
             <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedRow}" Height="auto" ItemsSource="{Binding SkillDataTable }" VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}"   Grid.Row="3" Grid.ColumnSpan="5" Margin="20 10 20 0"  Name="DataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" CanUserAddRows="False" SelectionMode="Single" HeadersVisibility="Column">
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="Id" Width=".3*" MaxWidth="300" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Skill" Width=".7*" Binding="{Binding Name}"/>
+                   <DataGridTextColumn Header="Skill" Width=".7*" Binding="{Binding Name}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

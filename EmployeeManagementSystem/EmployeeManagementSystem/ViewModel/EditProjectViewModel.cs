@@ -1,6 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Input;
@@ -155,25 +155,25 @@ namespace EmployeeManagementSystem.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ICommand saveCommand;
-        public ICommand SaveCommand
+        private ICommand updateProject;
+        public ICommand UpdateProject
         {
             get
             {
-                if (saveCommand == null)
+                if (updateProject == null)
                 {
-                    saveCommand = new RelayCommand(SaveExecute, CanSaveExecute, false);
+                    updateProject = new RelayCommand(ExecuteUpdateProject, CanUpdateProjectExecute, false);
                 }
-                return saveCommand;
+                return updateProject;
             }
         }
-        private bool CanSaveExecute(object arg)
+        private bool CanUpdateProjectExecute(object arg)
         {
             if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Code.Length > 10 || Name.Length > 40 || (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate)) return false;
             return true;
         }
 
-        private void SaveExecute(object obj)
+        private void ExecuteUpdateProject(object obj)
         {
             if (EndingDate != null)
             {

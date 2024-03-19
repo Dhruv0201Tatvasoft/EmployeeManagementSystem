@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace EmployeeManagementSystem.Models
+namespace EmployeeManagementSystem.Model
 {
-    public class ProjectModel:INotifyPropertyChanged
+    public class ProjectModel : INotifyPropertyChanged
     {
         private string code;
         public string Code
@@ -15,7 +15,7 @@ namespace EmployeeManagementSystem.Models
         public string Name
         {
             get { return name; }
-            set {  name = value; OnPropertyChanged("Name"); }
+            set { name = value; OnPropertyChanged("Name"); }
         }
 
         private DateTime startingDate;
@@ -50,10 +50,10 @@ namespace EmployeeManagementSystem.Models
                 OnPropertyChanged("AssociatedEmployees");
             }
         }
-        
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(String propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

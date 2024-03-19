@@ -6,9 +6,7 @@
              xmlns:viewmodel="clr-namespace:EmployeeManagementSystem.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" d:Background="White">
-    <UserControl.DataContext>
-        <viewmodel:LoginViewModel/>
-    </UserControl.DataContext>
+  
     <UserControl.Resources>
          
     </UserControl.Resources>
@@ -34,7 +32,7 @@
                 <CheckBox x:Name="ShowPasswordCharsCheckBox" Content="Show Password" Checked="ShowPasswordCharsCheckBox_Checked" Unchecked="ShowPasswordCharsCheckBox_Unchecked" />
             </StackPanel>
             <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center">
-            <Button  MaxWidth="100" Height="32" Content="Login" Command="{Binding LoginCommnad}" Style="{DynamicResource ButtonStyle}"/>
+            <Button  MaxWidth="100" Height="32" Content="Login" Command="{Binding Login}" Style="{DynamicResource ButtonStyle}"/>
                 <TextBlock Name="txtBlock" FontSize="15" VerticalAlignment="Center" Foreground="red" TextAlignment="Center"/>
             </StackPanel>
 

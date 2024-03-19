@@ -1,5 +1,5 @@
 ﻿using EmployeeManagementSystem.Database;
-using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.ViewModel;
 using System.Data;
 using System.Windows;
