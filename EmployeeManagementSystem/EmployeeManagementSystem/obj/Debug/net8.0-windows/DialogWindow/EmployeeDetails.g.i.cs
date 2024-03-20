@@ -108,7 +108,7 @@ namespace EmployeeManagementSystem.DialogWindow {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EmployeeManagementSystem;component/dialogwindow/employeedetails.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EmployeeManagementSystem;V1.0.0.0;component/dialogwindow/employeedetails.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\DialogWindow\EmployeeDetails.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
