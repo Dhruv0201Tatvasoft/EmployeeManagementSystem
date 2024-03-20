@@ -342,8 +342,8 @@ namespace EmployeeManagementSystem.ViewModel
             insertData = new InsertData();
             EmployeeDatatable = getData.GetEmployeeTable();
             projectNames = getData.GetProjectNames();
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
-            department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
+            designation = new ObservableCollection<string>{ "Developer", "Senior Developer", "Team Lead", "Manager" };
+            department = new ObservableCollection<string>{ "Dotnet", "Java", "PHP", "Mobile", "QA" };
             OnPropertyChanged("EmployeeDataTable");
         }
 

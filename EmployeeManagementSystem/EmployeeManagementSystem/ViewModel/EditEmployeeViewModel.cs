@@ -858,9 +858,9 @@ namespace EmployeeManagementSystem.ViewModel
 
         public EditEmployeeViewModel()
         {
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
-            department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
-            maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" });
+            designation = new ObservableCollection<string> { "Developer", "Senior Developer", "Team Lead", "Manager" };
+            department = new ObservableCollection<string>{ "Dotnet", "Java", "PHP", "Mobile", "QA" };
+            maritalstatus = new ObservableCollection<string>{ "Married", "Single" };
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();
@@ -887,9 +887,9 @@ namespace EmployeeManagementSystem.ViewModel
             this.PermanentAddress = employeeModel.PermanentAddress;
             this.EmployeeEducationList = employeeModel.EducationModels;
             this.employeeExperienceList = employeeModel.ExperienceModels;
-            designation = new ObservableCollection<string>(new List<string> { "Developer", "Senior Developer", "Team Lead", "Manager" });
-            department = new ObservableCollection<string>(new List<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" });
-            maritalstatus = new ObservableCollection<string>(new List<string> { "Married", "Single" }); 
+            designation = new ObservableCollection<string>{ "Developer", "Senior Developer", "Team Lead", "Manager" };
+            department = new ObservableCollection<string>{ "Dotnet", "Java", "PHP", "Mobile", "QA" };
+            maritalstatus = new ObservableCollection<string>{ "Married", "Single" }; 
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();
@@ -900,7 +900,6 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (decimal.TryParse(Ipercentage, out decimal Opercentage))
             {
-
                 return Opercentage >= 0 && Opercentage <= 100;
             }
 
