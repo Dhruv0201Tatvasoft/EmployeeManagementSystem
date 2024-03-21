@@ -7,24 +7,49 @@ namespace EmployeeManagementSystem.Database
     class DeleteData
     {
         private GetConnection connection = new GetConnection();
-        public bool ExecuteQuery(string query)
+        private bool ExecuteQuery(SqlCommand command)
         {
             try
             {
-
-                SqlConnection conn = connection.GenrateConnection();
-                conn.Open();
-                SqlCommand command = new SqlCommand(query, conn);
-                command.ExecuteNonQuery();
-                return true;
+                using (SqlConnection conn = connection.GenrateConnection())
+                {
+                    command.Connection = conn;
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    return true;
+                }
             }
             catch (SqlException ex)
             {
+                {
+                    MessageBox.Show("Error in deleting data from database");
+                    return false;
+                }
+            }
 
-                MessageBox.Show("Error in deleting data from database.", "Error");
+        }
+        public bool DoesExist(SqlCommand command)
+        {
+            try
+            {
+                using (SqlConnection conn = connection.GenrateConnection())
+                {
+                    command.Connection = conn;
+                    conn.Open();
+                    using (command)
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        return reader.HasRows;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong", "Error");
                 return false;
             }
         }
+
 
 
         public bool DeleteWarningMessage(string warning)
@@ -36,76 +61,109 @@ namespace EmployeeManagementSystem.Database
         public void DeleteProject(string code)
         {
 
-            if (this.DeleteWarningMessage("Delete Project With code " + code))
+            if (this.DeleteWarningMessage("Delete this project?"))
             {
-                string query = $"delete from EmsTblTechnologyForProject where ProjectCode = '{code}'";
-                this.ExecuteQuery(query);
-                query = $"delete from EmsTblProject where code = '{code}' ";
-                this.ExecuteQuery(query);
+
+                String query = "DELETE from EmsTblProject where Code LIKE @Code";
+                SqlCommand command = new SqlCommand(query);
+                command.CommandText = query;
+                command.Parameters.AddWithValue("@Code", code);
+                ExecuteQuery(command);
             }
         }
 
         public void RemoveEmployeeFromProject(String employeeCode, String projectCode)
         {
-            
-                string query = $"delete from EmsTblEmployeeAssociatedToProject where ProjectCode = '{projectCode} ' AND EmployeeCode = '{employeeCode}'";
-                this.ExecuteQuery(query);
-            
+            string query = "DELETE from EmsTblEmployeeAssociatedToProject where ProjectCode LIKE @ProjectCode AND EmployeeCode LIKE @EmployeeCode";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@ProjectCode", projectCode);
+            command.Parameters.AddWithValue("@EmployeeCode", employeeCode);
+            ExecuteQuery(command); ;
+
         }
 
         public void DeleteTechnology(String technologyName)
         {
 
-            if (this.DeleteWarningMessage("Remove " + technologyName + " From Data"))
+            if (this.DeleteWarningMessage("Delete this Technology?"))
             {
-                string query = $"delete From EmsTblTechnology where name like '{technologyName}'";
-                this.ExecuteQuery(query);
+                string query = "DELETE from EmsTblTechnology where Name LIKE @TechnologyName";
+                SqlCommand command = new SqlCommand(query);
+                command.Parameters.AddWithValue("@TechnologyName", technologyName);
+                ExecuteQuery(command);
             }
         }
         public void DeleteSkill(String skillName)
         {
 
-            if (this.DeleteWarningMessage("Remove " + skillName + " From Data"))
+            if (this.DeleteWarningMessage("Delete this Skill?"))
             {
-                string query = $"delete From EmsTblSkill where name like '{skillName}'";
-                this.ExecuteQuery(query);
+                string query = "DELETE from EmsTblSkill where Name LIKE @SkillName";
+                SqlCommand command = new SqlCommand(query);
+                command.Parameters.AddWithValue("@SkillName", skillName);
+                ExecuteQuery(command);
             }
         }
 
         public bool DeleteEducationRow(EmployeeEducationModel employeeEducationModel, String code)
         {
-            if (this.DeleteWarningMessage("Remove this education field form Data"))
+            if (this.DeleteWarningMessage("Remove this education field?"))
             {
-                string query = $"delete from EmsTblEmployeeEducation where employeeCode Like '{code}' and Qualification like " +
-                    $"'{employeeEducationModel.Qualification}' AND Board Like '{employeeEducationModel.BoardUniversity}' AND Institute like '{employeeEducationModel.InstituteName}' AND State Like '{employeeEducationModel.State}' AND " +
-                    $"PassingYear like '{employeeEducationModel.PassingYear}' AND Percentage like '{employeeEducationModel.Percentage}'";
-                this.ExecuteQuery(query);
+                string query = "DELETE from EmsTblEmployeeEducation where EmployeeCode LIKE @Code " +
+                      "AND Qualification LIKE @Qualification " +
+                      "AND Board LIKE @Board " +
+                      "AND Institute LIKE @Institute " +
+                      "AND State LIKE @State " +
+                      "AND PassingYear LIKE @PassingYear " +
+                      "AND Percentage LIKE @Percentage";
+
+                SqlCommand command = new SqlCommand(query);
+                command.Parameters.AddWithValue("@Code", code);
+                command.Parameters.AddWithValue("@Qualification", employeeEducationModel.Qualification);
+                command.Parameters.AddWithValue("@Board", employeeEducationModel.BoardUniversity);
+                command.Parameters.AddWithValue("@Institute", employeeEducationModel.InstituteName);
+                command.Parameters.AddWithValue("@State", employeeEducationModel.State);
+                command.Parameters.AddWithValue("@PassingYear", employeeEducationModel.PassingYear);
+                command.Parameters.AddWithValue("@Percentage", employeeEducationModel.Percentage);
+
+                ExecuteQuery(command);
                 return true;
             }
             return false;
         }
         public bool DeleteExperienceRow(EmployeeExperienceModel employeeExperienceModel, String code)
         {
-            if (this.DeleteWarningMessage("Remove this Experience field form Data"))
+            if (this.DeleteWarningMessage("Remove this Experience field?"))
             {
-                string query = $"Delete from EmsTblEmployeeExperience where employeeCode Like '{code}' and Organization like " +
-                    $"'{employeeExperienceModel.Organization}' AND FromDate = '{employeeExperienceModel.FromDate.Value.ToString("yyyy-MM-dd")}'" +
-                    $" AND ToDate = '{employeeExperienceModel.ToDate.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND Designation Like '{employeeExperienceModel.Designation}'";
-                this.ExecuteQuery(query);
+                string query = "DELETE from EmsTblEmployeeExperience where EmployeeCode LIKE @Code " +
+                          "AND Organization LIKE @Organization " +
+                          "AND FromDate = @FromDate " +
+                          "AND ToDate = @ToDate " +
+                          "AND Designation LIKE @Designation";
+
+                SqlCommand command = new SqlCommand(query);
+                command.Parameters.AddWithValue("@Code", code);
+                command.Parameters.AddWithValue("@Organization", employeeExperienceModel.Organization);
+                command.Parameters.AddWithValue("@FromDate", employeeExperienceModel.FromDate?.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@ToDate", employeeExperienceModel.ToDate?.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@Designation", employeeExperienceModel.Designation);
+
+                ExecuteQuery(command);
                 return true;
             }
             return false;
         }
-        public void DeleteEmployee(String code ,String name)
+        public void DeleteEmployee(String code, String name)
         {
-            if(this.DeleteWarningMessage($"Delete {name} From Data"))
+            if (this.DeleteWarningMessage($"Delete this employee?"))
             {
-                string query = $"delete From EmsTblEmployee where code like '{code}'";
-                this.ExecuteQuery(query);
+                string query = "DELETE from EmsTblEmployee where Code LIKE @Code";
+                SqlCommand command = new SqlCommand(query);
+                command.Parameters.AddWithValue("@Code", code);
+                ExecuteQuery(command);
             }
         }
 
-      
+
     }
 }

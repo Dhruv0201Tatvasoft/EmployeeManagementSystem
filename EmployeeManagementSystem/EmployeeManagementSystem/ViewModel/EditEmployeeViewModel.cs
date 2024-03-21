@@ -204,10 +204,10 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private string selectedmaritalStatus = string.Empty;
 
-        public string SelectedMaritialStatus
+        public string SelectedMaritalStatus
         {
             get { return selectedmaritalStatus; }
-            set { selectedmaritalStatus = value; OnPropertyChanged("SelectedMaritialStatus"); }
+            set { selectedmaritalStatus = value; OnPropertyChanged("SelectedMaritalStatus"); }
         }
         private bool isCheckBoxChecked;
 
@@ -238,6 +238,15 @@ namespace EmployeeManagementSystem.ViewModel
                 OnPropertyChanged("Designation");
             }
         }
+
+        private string combBoxText ="Select";
+
+        public string CombBoxText
+        {
+            get { return combBoxText ; }
+            set { combBoxText = value; OnPropertyChanged("comBoxText"); }
+        }
+
         private ObservableCollection<string> department;
 
         public ObservableCollection<string> Department
@@ -336,8 +345,8 @@ namespace EmployeeManagementSystem.ViewModel
                     case "SelectedDepartment":
                         if (String.IsNullOrEmpty(SelectedDepartment) || !Department.Contains(SelectedDepartment)) errors = "Plaease select valid department";
                         break;
-                    case "SelectedMaritialStatus":
-                        if (String.IsNullOrEmpty(SelectedMaritialStatus) || !MaritalStatus.Contains(SelectedMaritialStatus)) errors = "Please select valid marital status";
+                    case "SelectedMaritalStatus":
+                        if (String.IsNullOrEmpty(SelectedMaritalStatus) || !MaritalStatus.Contains(SelectedMaritalStatus)) errors = "Please select valid marital status";
                         break;
                     case "PresentAddress":
                         if (String.IsNullOrEmpty(PresentAddress)) errors = "Present Address cant be empty";
@@ -360,7 +369,7 @@ namespace EmployeeManagementSystem.ViewModel
         private ICommand updateEmployee;
         public ICommand UpdateEmployee
         {
-            get
+            get 
             {
                 if (updateEmployee == null)
                 {
@@ -378,15 +387,10 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteUpdateEmployee(object obj)
         {
             bool didsaved = false;
+            EmployeeModel employee;
             if (ReleaseDate != null)
             {
-                //MessageBoxResult result = MessageBox.Show($"You Are Updating Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-                //     $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-                //     $"Release Date: {ReleaseDate}\nBirth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-                //     $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-                //if (result == MessageBoxResult.OK)
-                //{
-                EmployeeModel employee = new EmployeeModel
+                employee = new EmployeeModel
                 {
                     Code = Code,
                     FirstName = FirstName,
@@ -400,22 +404,15 @@ namespace EmployeeManagementSystem.ViewModel
                     DOB = DOB,
                     ContactNumber = ContactNumber,
                     Gender = Gender,
-                    MaritalStauts = SelectedMaritialStatus,
+                    MaritalStauts = SelectedMaritalStatus,
                     PresentAddress = PresentAddress,
                     PermanentAddress = PermanentAddress
                 };
-                didsaved = updateData.UpdateEmployee(oldCode,employee);
-                //}
+              
             }
             else
             {
-                //MessageBoxResult result = MessageBox.Show($"You Are Updating Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-                //      $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-                //      $"Birth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-                //      $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Warning", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-                //if (result == MessageBoxResult.OK)
-                //{
-                EmployeeModel employee = new EmployeeModel
+                employee = new EmployeeModel
                 {
                     Code = Code,
                     FirstName = FirstName,
@@ -428,12 +425,12 @@ namespace EmployeeManagementSystem.ViewModel
                     DOB = DOB,
                     ContactNumber = ContactNumber,
                     Gender = Gender,
-                    MaritalStauts = SelectedMaritialStatus,
+                    MaritalStauts = SelectedMaritalStatus,
                     PresentAddress = PresentAddress,
                     PermanentAddress = PermanentAddress
                 };
-                didsaved = updateData.UpdateEmployeeWithoutReleaseDate(oldCode, employee);
             }
+            didsaved = updateData.UpdateEmployee(oldCode,employee, ReleaseDate != null);
             if (didsaved)
             {
                 OnEmployeeAddedEvent(EventArgs.Empty);
@@ -601,7 +598,7 @@ namespace EmployeeManagementSystem.ViewModel
                 MessageBox.Show("Please provide valid value for from and to date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if(!String.IsNullOrEmpty(selectedEmployeeExperienceModel.Organization) && (selectedEmployeeExperienceModel.Organization.Length > 15))
+            else if (!String.IsNullOrEmpty(selectedEmployeeExperienceModel.Organization) && (selectedEmployeeExperienceModel.Organization.Length > 15))
             {
                 MessageBox.Show("Maximum character limit reached from Organization  Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -822,6 +819,8 @@ namespace EmployeeManagementSystem.ViewModel
         {
             Code = FirstName = LastName = Email = Password = ConfirmPassword = String.Empty;
             SelectedDepartment = SelectedDesignation = null;
+            combBoxText = "Select";
+            OnPropertyChanged("CombBoxText");
             JoiningDate = DateTime.Now;
             ReleaseDate = null;
             OnPropertyChanged(nameof(ReleaseDate));
@@ -849,7 +848,9 @@ namespace EmployeeManagementSystem.ViewModel
             DOB = DateTime.Now;
             Gender = "Male";
             ContactNumber = PresentAddress = PermanentAddress = String.Empty;
-            SelectedMaritialStatus = null;
+            SelectedMaritalStatus = null;
+            combBoxText = "Select";
+            OnPropertyChanged("CombBoxText");
             IsCheckBoxChecked = false;
 
             OnPropertyChanged(nameof(ReleaseDate));
@@ -859,8 +860,8 @@ namespace EmployeeManagementSystem.ViewModel
         public EditEmployeeViewModel()
         {
             designation = new ObservableCollection<string> { "Developer", "Senior Developer", "Team Lead", "Manager" };
-            department = new ObservableCollection<string>{ "Dotnet", "Java", "PHP", "Mobile", "QA" };
-            maritalstatus = new ObservableCollection<string>{ "Married", "Single" };
+            department = new ObservableCollection<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" };
+            maritalstatus = new ObservableCollection<string> { "Married", "Single" };
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();
@@ -882,14 +883,14 @@ namespace EmployeeManagementSystem.ViewModel
             this.DOB = employeeModel.DOB;
             this.ContactNumber = employeeModel.ContactNumber;
             this.Gender = employeeModel.Gender;
-            this.SelectedMaritialStatus = employeeModel.MaritalStauts;
+            this.SelectedMaritalStatus = employeeModel.MaritalStauts;
             this.PresentAddress = employeeModel.PresentAddress;
             this.PermanentAddress = employeeModel.PermanentAddress;
             this.EmployeeEducationList = employeeModel.EducationModels;
             this.employeeExperienceList = employeeModel.ExperienceModels;
-            designation = new ObservableCollection<string>{ "Developer", "Senior Developer", "Team Lead", "Manager" };
-            department = new ObservableCollection<string>{ "Dotnet", "Java", "PHP", "Mobile", "QA" };
-            maritalstatus = new ObservableCollection<string>{ "Married", "Single" }; 
+            designation = new ObservableCollection<string> { "Developer", "Senior Developer", "Team Lead", "Manager" };
+            department = new ObservableCollection<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" };
+            maritalstatus = new ObservableCollection<string> { "Married", "Single" };
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();

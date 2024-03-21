@@ -33,7 +33,7 @@ namespace EmployeeManagementSystem.UserControls
             this.DateOfBirth.Text = employee.DOB.ToString("dd-MM-yyyy");
             this.ContactNumber.Text = employee.ContactNumber;
             this.Gender.Text = employee.Gender;
-            this.MaritialStatus.Text = employee.MaritalStauts;
+            this.MaritalStatus.Text = employee.MaritalStauts;
             this.PresentAddress.Text = employee.PresentAddress;
             this.PermanentAddress.Text = employee.PermanentAddress;
             this.Desigantion.Text = employee.Designation;

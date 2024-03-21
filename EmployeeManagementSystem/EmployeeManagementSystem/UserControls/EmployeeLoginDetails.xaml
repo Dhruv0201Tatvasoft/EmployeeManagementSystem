@@ -43,7 +43,7 @@
         <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Date Of Birth:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Contact Number:" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Gender:" Grid.Column="4" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Maritial Status:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Marital Status:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Present Address:" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Permanent Address:" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Desigantion:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
@@ -61,7 +61,7 @@
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="DateOfBirth" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="ContactNumber" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Gender" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="MaritialStatus" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="MaritalStatus" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="PresentAddress" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="PermanentAddress" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Desigantion" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>

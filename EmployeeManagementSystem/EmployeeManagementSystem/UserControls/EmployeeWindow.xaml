@@ -7,7 +7,7 @@
              xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
              xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="610" d:DesignWidth="835" Background="White">
+             d:DesignHeight="610" d:DesignWidth="835" d:Background="White">
     <UserControl.Resources>
         <Style x:Key="CircleButton" TargetType="Button">
             <Setter Property="Template">

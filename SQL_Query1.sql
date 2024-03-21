@@ -182,5 +182,4 @@ GROUP BY
 ORDER BY 
     (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
 
-select *  from EmsTblEmployee left join EmsTblEmployeeAssociatedToProject on Code = EmployeeCode where ProjectCode is null
-
+select * fro

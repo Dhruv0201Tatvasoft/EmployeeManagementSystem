@@ -156,17 +156,17 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteSaveProject(object obj)
         {
             bool didSaved = false;
+            ProjectModel project;
+
             if (EndingDate != null)
             {
-                ProjectModel project = new ProjectModel() { Code = Code, Name = Name, EndingDate = (DateTime)EndingDate,StartingDate=StartingDate,AssociatedTechnologies = SelectedTechnologyIds};
-                didSaved = insertData.InsertNewProject(project);
+                project = new ProjectModel() { Code = Code, Name = Name, EndingDate = (DateTime)EndingDate, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
             else
             {
-                ProjectModel project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
-
-                didSaved = insertData.InsertNewProjectWithOutEndingDate(project);
+                project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
+            didSaved = insertData.InsertNewProject(project, EndingDate != null);
             if (didSaved)
             {
                 OnChangeWindowEvent(EventArgs.Empty);

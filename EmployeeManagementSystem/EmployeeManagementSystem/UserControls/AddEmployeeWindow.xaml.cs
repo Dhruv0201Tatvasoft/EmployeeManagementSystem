@@ -24,9 +24,9 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.AddExperienceRowEvent += ViewModel_AddExperienceRowEvent;
             viewModel.EditExprienceRowEvent += ViewModel_EditExprienceRowEvent;
         }
-
+   
         private void ViewModel_EditExprienceRowEvent(object? sender, EventArgs e)
-        {
+        { 
             DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
             ShowCellsEditingTemplateExperience(row);
         }
@@ -57,7 +57,7 @@ namespace EmployeeManagementSystem.UserControls
             EmployeeDetailsTabItem.IsEnabled = false;
             PersonalDetailsTabItem.IsEnabled = false;
         }
-
+        
         private void ViewModel_AddExprienceButtonClickedEvent(object? sender, EventArgs e)
         {
             ExperienceDataGrid.SelectedItem = ExperienceDataGrid.Items[ExperienceDataGrid.Items.Count - 1];
@@ -176,7 +176,7 @@ namespace EmployeeManagementSystem.UserControls
                 cell.Content = c.CellTemplate.LoadContent();
             }
         }
-
+        
        
     }
 }

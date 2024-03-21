@@ -175,17 +175,19 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteUpdateProject(object obj)
         {
+            bool didSave = false;
+            ProjectModel project;
             if (EndingDate != null)
             {
-                ProjectModel project = new ProjectModel() {Code = Code, Name = Name, StartingDate = StartingDate, EndingDate = (DateTime)EndingDate,AssociatedTechnologies = SelectedTechnologyIds};
-                updateData.UpdateProject(OldCode,project);
+                 project = new ProjectModel() {Code = Code, Name = Name, StartingDate = StartingDate, EndingDate = (DateTime)EndingDate,AssociatedTechnologies = SelectedTechnologyIds};
             }
             else
             {
-                ProjectModel project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
-                updateData.UpdateProjectWithoutEndingDate(OldCode,project);
+                project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
-            OnChangeWindowEvent(EventArgs.Empty);
+            didSave = updateData.UpdateProject(OldCode, project, EndingDate != null);
+            if(didSave) OnChangeWindowEvent(EventArgs.Empty);
+
         }
 
     }

@@ -115,6 +115,13 @@ namespace EmployeeManagementSystem.ViewModel
             get { return selectedDesignation; }
             set { selectedDesignation = value; OnPropertyChanged("SelectedDesignation"); }
         }
+        private string combBoxText = "Select";
+
+        public string CombBoxText
+        {
+            get { return combBoxText ; }
+            set { combBoxText = value; OnPropertyChanged("CombBoxText"); }
+        }
 
         private DateTime joiningDate = DateTime.Now;
 
@@ -196,10 +203,10 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private string selectedmaritalStatus = string.Empty;
 
-        public string SelectedMaritialStatus
+        public string SelectedMaritalStatus
         {
             get { return selectedmaritalStatus; }
-            set { selectedmaritalStatus = value; OnPropertyChanged("SelectedMaritialStatus"); }
+            set { selectedmaritalStatus = value; OnPropertyChanged("SelectedMaritalStatus"); }
         }
         private bool isCheckBoxChecked;
 
@@ -328,8 +335,8 @@ namespace EmployeeManagementSystem.ViewModel
                     case "SelectedDepartment":
                         if (String.IsNullOrEmpty(SelectedDepartment) || !Department.Contains(SelectedDepartment)) errors = "Plaease select valid department";
                         break;
-                    case "SelectedMaritialStatus":
-                        if (String.IsNullOrEmpty(SelectedMaritialStatus) || !MaritalStatus.Contains(SelectedMaritialStatus)) errors = "Please select valid marital status";
+                    case "SelectedMaritalStatus":
+                        if (String.IsNullOrEmpty(SelectedMaritalStatus) || !MaritalStatus.Contains(SelectedMaritalStatus)) errors = "Please select valid marital status";
                         break;
                     case "PresentAddress":
                         if (String.IsNullOrEmpty(PresentAddress)) errors = "Present Address cant be empty";
@@ -371,15 +378,11 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteAddEmployee(object obj)
         {
             bool didsaved = false;
+            EmployeeModel employee;
             if (ReleaseDate != null)
             {
-                //MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-                //     $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-                //     $"Release Date: {ReleaseDate}\nBirth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-                //     $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-                //if (result == MessageBoxResult.OK)
-                //{
-                EmployeeModel employee = new EmployeeModel
+        
+                employee = new EmployeeModel
                 {
                     Code = Code,
                     FirstName = FirstName,
@@ -393,23 +396,14 @@ namespace EmployeeManagementSystem.ViewModel
                     DOB = DOB, 
                     ContactNumber = ContactNumber,
                     Gender = Gender,
-                    MaritalStauts = SelectedMaritialStatus,
+                    MaritalStauts = SelectedMaritalStatus,
                     PresentAddress = PresentAddress,
                     PermanentAddress = PermanentAddress
                 };
-                didsaved = insertData.InsertEmployee(employee);
-                //}
             }
             else
             {
-                //MessageBoxResult result = MessageBox.Show($"You Are Adding Employee With \nEmployyeCode: {Code}\nName: {FirstName} {LastName}\nEmail: {Email}\n" +
-                //      $"Password: {Password}\nDesignation: {SelectedDesignation}\nDepartment: {SelectedDepartment}\nJoinning Date: {JoiningDate.ToString("yyyy-MM-dd")}\n" +
-                //      $"Birth Date: {DOB.ToString("yyyy-MM-dd")}\nContact Number:{ContactNumber}\nGender:{Gender}\n" +
-                //      $"Maritial Status: {SelectedMaritialStatus}\nPresent Address: {PresentAddress}\nPermanent Address :{PermanentAddress} ", "Alert", MessageBoxButton.OKCancel, MessageBoxImage.None, MessageBoxResult.Cancel);
-                //if (result == MessageBoxResult.OK)
-                //{
-                //{
-                EmployeeModel employee = new EmployeeModel
+                employee = new EmployeeModel
                 {
                     Code = Code,
                     FirstName = FirstName,
@@ -422,13 +416,12 @@ namespace EmployeeManagementSystem.ViewModel
                     DOB = DOB,
                     ContactNumber = ContactNumber,
                     Gender = Gender,
-                    MaritalStauts = SelectedMaritialStatus,
+                    MaritalStauts = SelectedMaritalStatus,
                     PresentAddress = PresentAddress,
                     PermanentAddress = PermanentAddress
                 };
-                didsaved = insertData.InsertEmployeeWithoutReleaseDate(employee);
-                //}
             }
+            didsaved = insertData.InsertEmployee(employee, ReleaseDate != null);
             if (didsaved)
             {
                 OnEmployeeAddedEvent(EventArgs.Empty);
@@ -812,6 +805,8 @@ namespace EmployeeManagementSystem.ViewModel
             Code = FirstName = LastName = Email = Password = ConfirmPassword = String.Empty;
             SelectedDepartment = SelectedDesignation = null;
             JoiningDate = DateTime.Now;
+            combBoxText = "Select";
+            OnPropertyChanged("CombBoxText");
             ReleaseDate = null;
             OnPropertyChanged(nameof(ReleaseDate));
         }
@@ -838,7 +833,9 @@ namespace EmployeeManagementSystem.ViewModel
             DOB = DateTime.Now;
             Gender = "Male";
             ContactNumber = PresentAddress = PermanentAddress = String.Empty;
-            SelectedMaritialStatus = null;
+            combBoxText = "Select";
+            OnPropertyChanged("CombBoxText");
+            SelectedMaritalStatus = null;
             IsCheckBoxChecked = false;
 
             OnPropertyChanged(nameof(ReleaseDate));

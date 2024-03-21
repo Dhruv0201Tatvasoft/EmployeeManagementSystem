@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Model;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows;
 
 namespace EmployeeManagementSystem.Database
@@ -8,101 +9,101 @@ namespace EmployeeManagementSystem.Database
     class InsertData
     {
         private GetConnection connection = new GetConnection();
-        public bool ExecuteQuery(string query)
-        {
-            try
-            {
-                
-                SqlConnection conn = connection.GenrateConnection();
-                conn.Open();
-                SqlCommand command = new SqlCommand(query, conn);
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException ex)
-            {
-                {
-                    MessageBox.Show("Error in inserting data to database");
-                    return false;
-                }
-            }
-
-        }
-        public bool DoesExist(String query)
+        private bool ExecuteQuery(SqlCommand command)
         {
             try
             {
                 using (SqlConnection conn = connection.GenrateConnection())
                 {
+                    command.Connection = conn;
                     conn.Open();
-                    using (SqlCommand command = new SqlCommand(query, conn))
-                    {
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                {
+                    MessageBox.Show("Error in inserting data to database", "Error");
+                    return false;
+                }
+            }
 
+        }
+        private bool DoesExist(SqlCommand command)
+        {
+            try
+            {
+                using (SqlConnection conn = connection.GenrateConnection())
+                {
+                    command.Connection = conn;
+                    conn.Open();
+                    using (command)
+                    {
                         SqlDataReader reader = command.ExecuteReader();
                         return reader.HasRows;
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
+                MessageBox.Show("Something went wrong", "Error");
                 return false;
             }
         }
-
-        public bool InsertNewProject(ProjectModel project)
+        public bool InsertNewProject(ProjectModel project, bool endingDateHasValue = true)
         {
-            if (!this.DoesExist($"Select * from EmsTblProject where code = '{project.Code}'"))
+            string query = $"Select * from EmsTblProject where Code LIKE @Code";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@Code", project.Code);
+            if (!this.DoesExist(command))
             {
-                this.ExecuteQuery($"Insert into EmsTblProject (code,name,StartingDate,EndingDate) values ("
-                    + $"'{project.Code}',"
-                    + $"'{project.Name}',"
-                    + $"'{project.StartingDate.ToString("yyyy-MM-dd")}',"
-                    + $"'{project.EndingDate.Value.ToString("yyyy-MM-dd")}')");
+                query = "INSERT INTO EmsTblProject(Code, Name, StartingDate, EndingDate) " +
+                 "VALUES (@Code, @Name, @StartingDate, @EndingDate)";
+                command.CommandText = query;
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@Code", project.Code);
+                command.Parameters.AddWithValue("@Name", project.Name);
+                command.Parameters.AddWithValue("@StartingDate", project.StartingDate.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@EndingDate", endingDateHasValue ? project.EndingDate?.ToString("yyyy-MM-dd") : DBNull.Value);
+                bool didsave = ExecuteQuery(command);
+                if (didsave) InsertAssociatedTechnologies(project);
+                return didsave;
 
-                foreach (int i in project.AssociatedTechnologies)
-                {
-                    this.ExecuteQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{project.Code}','{i}')");
-                }
-                return true;
             }
             else
             {
-                MessageBox.Show($"Project with code {project.Code} already exist in database.","Error");
+                MessageBox.Show($"Project with code {project.Code} already exist in database.", "Error");
                 return false;
             }
-
-
         }
-
-        public bool InsertNewProjectWithOutEndingDate(ProjectModel project)
+        private void InsertAssociatedTechnologies(ProjectModel project)
         {
-            if (!this.DoesExist($"Select * from EmsTblProject where code = '{project.Code}' "))
+            string query = "INSERT INTO EmsTblTechnologyForProject(ProjectCode, TechnologyId) " +
+                           "VALUES (@Code, @TechnologyId)";
+            foreach (int technologyId in project.AssociatedTechnologies)
             {
-                string query = $"Insert into EmsTblProject (code,name,StartingDate,EndingDate) values (" +
-                $"'{project.Code}'," +
-                $"'{project.Name}'," +
-                $"'{project.StartingDate.ToString("yyyy-MM-dd")}'," +
-                $"NULL)";
-
-                this.ExecuteQuery(query);
-                foreach (int i in project.AssociatedTechnologies)
+                using (SqlCommand command = new SqlCommand(query))
                 {
-                    this.ExecuteQuery($"Insert into EmsTblTechnologyForProject (ProjectCode,TechnologyId) values ('{project.Code}','{i}')");
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@Code", project.Code);
+                    command.Parameters.AddWithValue("@TechnologyId", technologyId);
+                    ExecuteQuery(command);
                 }
-                return true;
-            }
-            else
-            {
-                MessageBox.Show($"Project with code {project.Code} already exist in database.","Error");
-                return false;
             }
         }
         public void InsertEmployeeToProject(String projectCode, String employeeCode, string employeeName)
         {
-            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{projectCode}' AND EmployeeCode ='{employeeCode}'"))
+            string query = "SELECT * FROM EmsTblEmployeeAssociatedToProject WHERE ProjectCode = @ProjectCode AND EmployeeCode = @EmployeeCode";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@ProjectCode", projectCode);
+            command.Parameters.AddWithValue("@EmployeeCode", employeeCode);
+
+            if (!DoesExist(command))
             {
-                string query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{employeeCode}','{projectCode}')";
-                this.ExecuteQuery(query);
+                query = "INSERT INTO EmsTblEmployeeAssociatedToProject (EmployeeCode, ProjectCode) VALUES (@EmployeeCode, @ProjectCode)";
+                command.CommandText = query;
+                ExecuteQuery(command);
             }
             else
             {
@@ -112,10 +113,14 @@ namespace EmployeeManagementSystem.Database
 
         public void InsertTechnology(String technologyName)
         {
-            if (!DoesExist($"select * from EmsTblTechnology where Name like '{technologyName}'"))
+            string query = "SELECT * FROM EmsTblTechnology WHERE Name LIKE @TechnologyName";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@TechnologyName", technologyName);
+            if (!DoesExist(command))
             {
-                string query = $"Insert into EmsTblTechnology (Name) Values ('{technologyName}')";
-                this.ExecuteQuery(query);
+                query = "INSERT INTO EmsTblTechnology (Name) VALUES (@TechnologyName)";
+                command.CommandText = query;
+                ExecuteQuery(command);
             }
             else
             {
@@ -124,47 +129,51 @@ namespace EmployeeManagementSystem.Database
         }
         public void InsertSkill(String skillName)
         {
-            if (!DoesExist($"select * from EmsTblSkill where Name like '{skillName}'"))
+            string query = "SELECT * FROM EmsTblSkill WHERE Name LIKE @SkillName";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@SkillName", skillName);
+            if (!DoesExist(command))
             {
-                string query = $"Insert into EmsTblSkill (Name) Values ('{skillName}')";
-                this.ExecuteQuery(query);
+                query = "INSERT INTO EmsTblSkill (Name) VALUES (@SkillName)";
+                command.CommandText = query;
+                ExecuteQuery(command);
             }
             else
             {
-                MessageBox.Show($"{skillName} already exist in data", "Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{skillName} already exist in data", "Error");
             }
         }
 
-        public bool InsertEmployee(EmployeeModel employee)
+        public bool InsertEmployee(EmployeeModel employee, bool realeaseDateHasValue = true)
         {
-            if (!DoesExist($"select * from EmsTblEmployee where Code like '{employee.Code}'"))
-            {
-                string query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, ContactNumber, Gender, " +
-                    $"MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
-                 $"('{employee.Code}','{employee.FirstName}','{employee.LastName}','{employee.Email}','{employee.Password}','{employee.Designation}','{employee.Department}','" +
-                 $"{employee.JoiningDate.ToString("yyyy-MM-dd")}','{employee.ReleaseDate?.ToString("yyyy-MM-dd")}','{employee.DOB.ToString("yyyy-MM-dd")}','{employee.ContactNumber}'," +
-                 $"'{employee.Gender}','{employee.MaritalStauts}','{employee.PresentAddress}','{employee.PermanentAddress}')";
-                this.ExecuteQuery(query);
-                return true;
+            string query = "SELECT * FROM EmsTblEmployee WHERE Code LIKE @EmployeeCode";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@EmployeeCode", employee.Code);
 
-            }
-            else
+            if (!DoesExist(command))
             {
-                MessageBox.Show($"Employee with code {employee.Code} already exist in database.", "Error");
-                return false;
-            }
-        }
-        public bool InsertEmployeeWithoutReleaseDate(EmployeeModel employee)
-        {
-            if (!DoesExist($"select * from EmsTblEmployee where Code like '{employee.Code}'"))
-            {
-                string query = $"INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, DOB, ContactNumber, Gender, " +
-                    $"MaritalStatus, PresentAddress, PermanentAdress) VALUES " +
-                 $"('{employee.Code}','{employee.FirstName}','{employee.LastName}','{employee.Email}','{employee.Password}','{employee.Designation}','{employee.Department}','" +
-                 $"{employee.JoiningDate.ToString("yyyy-MM-dd")}','{employee.ReleaseDate?.ToString("yyyy-MM-dd")}','{employee.ContactNumber}'," +
-                 $"'{employee.Gender}','{employee.MaritalStauts}','{employee.PresentAddress}','{employee.PermanentAddress}')";
-                this.ExecuteQuery(query);
-                return true;
+                query = "INSERT INTO EmsTblEmployee (Code, FirstName, LastName, Email, Password, [Designation], [Department], JoiningDate, ReleaseDate, DOB, " +
+                    "ContactNumber, Gender, MaritalStatus, PresentAddress, PermanentAddress) VALUES " +
+                    "(@Code, @FirstName, @LastName, @Email, @Password, @Designation, @Department, @JoiningDate, @ReleaseDate, @DOB, @ContactNumber, " +
+                    "@Gender, @MaritalStatus, @PresentAddress, @PermanentAddress)";
+                command.CommandText = query;
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@Code", employee.Code);
+                command.Parameters.AddWithValue("@FirstName", employee.FirstName);
+                command.Parameters.AddWithValue("@LastName", employee.LastName);
+                command.Parameters.AddWithValue("@Email", employee.Email);
+                command.Parameters.AddWithValue("@Password", employee.Password);
+                command.Parameters.AddWithValue("@Designation", employee.Designation);
+                command.Parameters.AddWithValue("@Department", employee.Department);
+                command.Parameters.AddWithValue("@JoiningDate", employee.JoiningDate.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@ReleaseDate", realeaseDateHasValue ? employee.ReleaseDate?.ToString("yyyy-MM-dd") : DBNull.Value);
+                command.Parameters.AddWithValue("@DOB", employee.DOB.ToString("yyyy-MM-dd"));
+                command.Parameters.AddWithValue("@ContactNumber", employee.ContactNumber);
+                command.Parameters.AddWithValue("@Gender", employee.Gender);
+                command.Parameters.AddWithValue("@MaritalStatus", employee.MaritalStauts);
+                command.Parameters.AddWithValue("@PresentAddress", employee.PresentAddress);
+                command.Parameters.AddWithValue("@PermanentAddress", employee.PermanentAddress);
+                return ExecuteQuery(command);
             }
             else
             {
@@ -175,28 +184,46 @@ namespace EmployeeManagementSystem.Database
 
         public bool InsertEducationDetails(EmployeeEducationModel educationModel, String code)
         {
-            string query = $"insert into EmsTblEmployeeEducation (EmployeeCode,Qualification,Board,Institute,State,PassingYear,Percentage) values " +
-                   $"('{code}','{educationModel.Qualification}','{educationModel.BoardUniversity}','{educationModel.InstituteName}'," +
-                   $"'{educationModel.State}','{educationModel.PassingYear}','{educationModel.Percentage}') ";
-            bool didExecute = this.ExecuteQuery(query);
-            return didExecute;
+            string query = "INSERT INTO EmsTblEmployeeEducation (EmployeeCode, Qualification, Board, Institute, State, PassingYear, Percentage) VALUES " +
+        "(@EmployeeCode, @Qualification, @Board, @Institute, @State, @PassingYear, @Percentage)";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@EmployeeCode", code);
+            command.Parameters.AddWithValue("@Qualification", educationModel.Qualification);
+            command.Parameters.AddWithValue("@Board", educationModel.BoardUniversity);
+            command.Parameters.AddWithValue("@Institute", educationModel.InstituteName);
+            command.Parameters.AddWithValue("@State", educationModel.State);
+            command.Parameters.AddWithValue("@PassingYear", educationModel.PassingYear);
+            command.Parameters.AddWithValue("@Percentage", educationModel.Percentage);
+            return ExecuteQuery(command);
         }
         public bool InsertExperienceDetails(EmployeeExperienceModel experienceModel, String code)
         {
-            string Query = $"insert into EmsTblEmployeeExperience (EmployeeCode,Organization,FromDate,ToDate,Designation) values " +
-                   $"('{code}','{experienceModel.Organization}','{experienceModel.FromDate.Value.ToString("yyyy-MM-dd")}','{experienceModel.ToDate.Value.ToString("yyyy-MM-dd")}'," +
-                   $"'{experienceModel.Designation}') ";
-            bool didExecute = this.ExecuteQuery(Query);
-            return didExecute;
+            string query = "INSERT INTO EmsTblEmployeeExperience (EmployeeCode, Organization, FromDate, ToDate, Designation) VALUES " +
+       "(@EmployeeCode, @Organization, @FromDate, @ToDate, @Designation)";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@EmployeeCode", code);
+            command.Parameters.AddWithValue("@Organization", experienceModel.Organization);
+            command.Parameters.AddWithValue("@FromDate", experienceModel.FromDate?.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@ToDate", experienceModel.ToDate?.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@Designation", experienceModel.Designation);
+            return ExecuteQuery(command);
 
         }
 
         public void InsertProjectToEmployee(string projectCode, string projectName, string employeeCode)
         {
-            if (!this.DoesExist($"select * from EmsTblEmployeeAssociatedToProject where ProjectCode ='{projectCode}' AND EmployeeCode ='{employeeCode}'"))
+            string query = "SELECT * FROM EmsTblEmployeeAssociatedToProject WHERE ProjectCode = @ProjectCode AND EmployeeCode = @EmployeeCode";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@ProjectCode", projectCode);
+            command.Parameters.AddWithValue("@EmployeeCode", employeeCode);
+
+            if (!DoesExist(command))
             {
-                string Query = $"Insert into EmsTblEmployeeAssociatedToProject (EmployeeCode,ProjectCode) Values ('{employeeCode}','{projectCode}')";
-                this.ExecuteQuery(Query);
+                query = "INSERT INTO EmsTblEmployeeAssociatedToProject (EmployeeCode, ProjectCode) VALUES (@EmployeeCode, @ProjectCode)";
+                command.CommandText = query;
+                ExecuteQuery(command);
             }
             else
             {
