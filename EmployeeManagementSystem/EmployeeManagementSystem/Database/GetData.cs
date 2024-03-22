@@ -1,6 +1,8 @@
 ﻿using EmployeeManagementSystem.Model;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Permissions;
 using System.Windows;
 
 namespace EmployeeManagementSystem.Database
@@ -9,7 +11,10 @@ namespace EmployeeManagementSystem.Database
     {
         protected GetConnection connection = new GetConnection();
 
-
+        /// <summary>
+        /// Gives Information of project stored in database.
+        /// </summary>
+        /// <returns>DataTable of projects stored</returns>
         public DataTable GetProjectData()
         {
             DataTable dt = new DataTable();
@@ -35,6 +40,14 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+        /// <summary>
+        /// Gives filtered dataTable of project based on input given by user.
+        /// </summary>
+        /// <param name="code">project code</param>
+        /// <param name="name">project name </param>
+        /// <param name="startingDate">project starting date</param>
+        /// <param name="endingDate">project ending date</param>
         public DataTable GetProjectSearchData(String code, String name, DateTime startingDate, DateTime endingDate)
         {
             DataTable dt = new DataTable();
@@ -96,7 +109,10 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
-
+        /// <summary>
+        /// Gives information of all technologies stored in database.
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetTechnologyData()
         {
             DataTable dt = new DataTable();
@@ -123,6 +139,11 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
+
+        /// <summary>
+        /// Searches in project table using project code and returns an object of ProjectModel class. 
+        /// </summary>
+        /// <param name="code">project code</param>
         public ProjectModel GetProjectFromCode(String code)
         {
             List<int> projectTechnologies = new List<int>();
@@ -170,6 +191,9 @@ namespace EmployeeManagementSystem.Database
             return project;
         }
 
+        /// <summary>
+        /// Returns list of all employees form Database
+        /// </summary>
         public List<String> AllEmployeeNames()
         {
 
@@ -196,6 +220,11 @@ namespace EmployeeManagementSystem.Database
             }
             return result;
         }
+
+        /// <summary>
+        /// Gives DataTable of Employees which are associated to a project.
+        /// </summary>
+        /// <param name="projectCode">code of project</param>
         public DataTable GetAssociatedEmployeesToProject(string projectCode)
         {
             string query = "SELECT CONCAT(Firstname, ' ', Lastname) AS FullName, EmsTblEmployee.code " +
@@ -221,11 +250,15 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
+        /// <summary>
+        /// Gives DataTable of Projects which are assigned to an employee.
+        /// </summary>
+        /// <param name="employeeCode"> code of an employee </param>
         public DataTable GetAssociatedProjectForEmployees(string employeeCode)
         {
             string query = "SELECT Name, ProjectCode " +
                            "from EmsTblEmployeeAssociatedToProject " +
-                           "INNER JOIN EmsTblProject ON EmsTblEmployeeAssociatedToProject.ProjectCode = ProjectCode.Code " +
+                           "INNER JOIN EmsTblProject ON EmsTblEmployeeAssociatedToProject.ProjectCode = EmsTblProject.Code " +
                            "where EmsTblEmployeeAssociatedToProject.EmployeeCode LIKE @EmployeeCode";
 
             DataTable dt = new DataTable();
@@ -247,7 +280,9 @@ namespace EmployeeManagementSystem.Database
 
 
 
-
+        /// <summary>
+        /// Gives DataTable of all the technologies stored in database.
+        /// </summary>
         public DataTable GetTechnologyTable()
         {
             string query = "SELECT * from EmsTblTechnology";
@@ -265,6 +300,11 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+
+        /// <summary>
+        /// Gives DataTable of all the skills stored in database.
+        /// </summary>
         public DataTable GetSkillTable()
         {
             string query = "SELECT * from EmsTblSkill";
@@ -283,6 +323,9 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
+        /// <summary>
+        /// Gives DataTable of all the Employees stored in database.
+        /// </summary>
         public DataTable GetEmployeeTable()
         {
             DataTable dt = new DataTable();
@@ -300,6 +343,14 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
+
+        /// <summary>
+        /// Gives filtered employee DataTable based on email name department and designation.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="department"></param>
+        /// <param name="designation"></param>
         public DataTable GetEmployeeSearchData(String email, String name, String department, String designation)
         {
             DataTable dt = new DataTable();
@@ -359,14 +410,17 @@ namespace EmployeeManagementSystem.Database
             return dt;
         }
 
-        public EmployeeModel GetEmployeeModelFromCode(String code)
+
+        /// <summary>
+        /// Searches in employee table using employee code and returns an object of EmployeeModel class. 
+        /// </summary>
+        /// <param name="code">Employee code</param>
+        public EmployeeModel GetEmployeeFromCode(String code)
         {
             EmployeeModel employee = new EmployeeModel();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
             {
                 conn.Open();
-
-
                 string query = $"SELECT * from EmsTblEmployee where Code LIKE @Code";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
@@ -398,7 +452,59 @@ namespace EmployeeManagementSystem.Database
                         }
                     }
                 }
-                query = $"SELECT * from  EmsTblEmployeeEducation where EmployeeCode like @Code";
+                employee.EducationModels = GetEmployeeEducationModels(code);
+                employee.ExperienceModels = GetEmployeeExperienceModels(code);
+            }
+            return employee;
+        }
+
+        /// <summary>
+        /// Gives Collection of ExperienceModel of an employee from experience table 
+        /// </summary>
+        /// <param name="code">Code of employee whose ExperienceModel models we want to find</param>
+        private ObservableCollection<EmployeeExperienceModel> GetEmployeeExperienceModels(string code)
+        {
+            ObservableCollection<EmployeeExperienceModel> employeeExperienceModels = new ObservableCollection<EmployeeExperienceModel>();
+            string query = $"SELECT * from  EmsTblEmployeeExperience where EmployeeCode like @Code";
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@Code", code);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        int count = reader.FieldCount;
+                        while (reader.Read())
+                        {
+                            EmployeeExperienceModel employeeExperienceModel = new EmployeeExperienceModel
+                            {
+                                Organization = reader["Organization"].ToString(),
+                                FromDate = (DateTime)reader["FromDate"],
+                                ToDate = (DateTime)reader["ToDate"],
+                                Designation = reader["designation"].ToString(),
+
+                            };
+                            employeeExperienceModels.Add(employeeExperienceModel);
+                        }
+                    }
+                }
+                return employeeExperienceModels;
+            }
+        }
+
+
+        /// <summary>
+        /// Gives Collection EducationModel of an employee from Education table. 
+        /// </summary>
+        /// <param name="code">Code of employee whose EducationModels models we want to find</param>
+        private ObservableCollection<EmployeeEducationModel> GetEmployeeEducationModels(string code)
+        {
+            ObservableCollection<EmployeeEducationModel> educationModels = new ObservableCollection<EmployeeEducationModel>();
+            string query = $"SELECT * from  EmsTblEmployeeEducation where EmployeeCode like @Code";
+            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            {
+                conn.Open();
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@Code", code);
@@ -416,36 +522,19 @@ namespace EmployeeManagementSystem.Database
                                 PassingYear = reader["PassingYear"].ToString(),
                                 Percentage = reader["Percentage"].ToString(),
                             };
-                            employee.EducationModels.Add(employeeEducation);
+                            educationModels.Add(employeeEducation);
                         }
                     }
                 }
-                query = $"SELECT * from  EmsTblEmployeeExperience where EmployeeCode like @Code";
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    command.Parameters.AddWithValue("@Code", code);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        int count = reader.FieldCount;
-                        while (reader.Read())
-                        {
-                            EmployeeExperienceModel employeeExperienceModel = new EmployeeExperienceModel
-                            {
-                                Organization = reader["Organization"].ToString(),
-                                FromDate = (DateTime)reader["FromDate"],
-                                ToDate = (DateTime)reader["ToDate"],
-                                Designation = reader["designation"].ToString(),
-
-                            };
-                            employee.ExperienceModels.Add(employeeExperienceModel);
-                        }
-                    }
-                }
-
             }
-            return employee;
+            return educationModels;
         }
-        public DataTable DesignationWiseEmployeeCount()
+
+
+        /// <summary>
+        /// Gives count of employee filtered by Designation.
+        /// </summary>
+        public DataTable DesignationWiseEmployee()
         {
             string query = $"SELECT COUNT(*) as Count, Designation from EmsTblEmployee GROUP BY Designation";
             DataTable dt = new DataTable();
@@ -461,24 +550,9 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
-        public DataTable TechnologyWiseEmployeeCount()
-        {
-            string query = $"SELECT Name as Technology,count(*) as Count from EmsTblSkillForEmployee INNER JOIN" +
-                $" EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id INNER JOIN EmsTblEmployee ON " +
-                $"EmsTblSkillForEmployee.EmployeeCode = EmsTblEmployee.Code GROUP BY Name";
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
-            {
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(dt);
-                    }
-                }
-            }
-            return dt;
-        }
+        /// <summary>
+        /// Gives List of  names of all projects from DataBase.
+        /// </summary>
         public List<string> GetProjectNames()
         {
             string query = $"SELECT Code,Name from EmsTblProject";
@@ -502,6 +576,10 @@ namespace EmployeeManagementSystem.Database
             }
             return result;
         }
+
+        /// <summary>
+        /// Gives information of employees who joined in past six months.
+        /// </summary>
         public DataTable GetPastSixMonthJoinedEmployee()
         {
             string query = "SELECT " +
@@ -537,6 +615,10 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+        /// <summary>
+        /// Gives information of employees who released  in past six months.
+        /// </summary>
         public DataTable GetPastSixMonthReleasedEmployee()
         {
             string query = "SELECT " +

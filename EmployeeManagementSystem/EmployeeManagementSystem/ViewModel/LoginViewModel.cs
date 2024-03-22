@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.EventArg;
 using EmployeeManagementSystem.Model;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -51,7 +52,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (login == null)
                 {
-                    login = new RelayCommand(ExecuteLogin, CanLoginExecute);
+                    login = new RelayCommand(ExecuteLogin, CanLoginExecute, false);
                 }
                 return login;
             }
@@ -71,7 +72,7 @@ namespace EmployeeManagementSystem.ViewModel
 
                 if (!String.IsNullOrEmpty(code))
                 {
-                    EmployeeModel emp = getData.GetEmployeeModelFromCode(code);
+                    EmployeeModel emp = getData.GetEmployeeFromCode(code);
                     OnCorrectLoginEvent(emp);
                 }
                 else
@@ -93,12 +94,5 @@ namespace EmployeeManagementSystem.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    public class EmployeeEventArgs : EventArgs
-    {
-        public EmployeeModel emp { get; }
-        public EmployeeEventArgs(EmployeeModel emp)
-        {
-            this.emp = emp;
-        }
-    }
+
 }

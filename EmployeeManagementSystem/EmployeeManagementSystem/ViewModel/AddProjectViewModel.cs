@@ -137,7 +137,8 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (saveProject == null)
                 {
-                    saveProject = new RelayCommand(ExecuteSaveProject, CanSaveProjectExecute);
+                    saveProject = new RelayCommand(ExecuteSaveProject, CanSaveProjectExecute, false);
+
                 }
                 return saveProject;
             }

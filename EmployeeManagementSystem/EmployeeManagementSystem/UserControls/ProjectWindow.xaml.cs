@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.EventArg;
 using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.ViewModel;
 using System.Data;
@@ -37,7 +38,7 @@ namespace EmployeeManagementSystem.UserControls
       
 
    
-        private void ViewModel_EditEvent(object? sender, EventArgs e)
+        private void ViewModel_EditEvent(object? sender, ProjectEventArgs e)
         {            
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
 
@@ -45,8 +46,7 @@ namespace EmployeeManagementSystem.UserControls
             {
                 if (mainWindow.mainContent != null)
                 {
-                    ProjectModel pm = getData.GetProjectFromCode((string)((ProjectViewModel)sender!).SelectedRow?.Row.ItemArray[0]!);
-                    mainWindow.mainContent.Content = new EditProjectWindow(pm);
+                    mainWindow.mainContent.Content = new EditProjectWindow(e.project);
                 }
             }
         }

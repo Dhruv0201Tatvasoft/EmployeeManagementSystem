@@ -61,7 +61,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (saveTechnology == null)
                 {
-                    saveTechnology = new RelayCommand(ExecuteSaveTechnology, CanSaveTechnologyExecute);
+                    saveTechnology = new RelayCommand(ExecuteSaveTechnology, CanSaveTechnologyExecute, false);
                 }
                 return saveTechnology;
             }
@@ -99,7 +99,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (deleteTechnology == null)
                 {
-                    deleteTechnology = new RelayCommand(ExecuteDeleteTechnology, CanDeleteTechnologyExecute);
+                    deleteTechnology = new RelayCommand(ExecuteDeleteTechnology, CanDeleteTechnologyExecute, false);
                 }
                 return deleteTechnology;
             }
@@ -127,7 +127,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (editTechnology == null)
                 {
-                    editTechnology = new RelayCommand(ExecuteEditTechnology, CanEditTechnologyExecute);
+                    editTechnology = new RelayCommand(ExecuteEditTechnology, CanEditTechnologyExecute, false);
                 }
                 return editTechnology;
             }

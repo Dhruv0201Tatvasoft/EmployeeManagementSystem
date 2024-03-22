@@ -84,7 +84,7 @@ namespace EmployeeManagementSystem.ViewModel
         public DashboardViewModel()
         {
             getData = new GetData();
-            designationWiseEmployee = getData.DesignationWiseEmployeeCount();
+            designationWiseEmployee = getData.DesignationWiseEmployee();
             pastSixMonthReleaseDataTable = getData.GetPastSixMonthReleasedEmployee();
             pastSixMonthJoinedEmployee =getData.GetPastSixMonthJoinedEmployee();
             technologyNames = getData.GetTechnologyTable();

@@ -1,6 +1,7 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.DialogWindow;
+using EmployeeManagementSystem.EventArg;
 using EmployeeManagementSystem.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -33,6 +34,12 @@ namespace EmployeeManagementSystem.ViewModel
         {
             get { return selectedProjectRow; }
             set { selectedProjectRow = value; OnPropertyChanged("SelectedProjectRow"); }
+        }
+        public event EventHandler<EmployeeEventArgs>? EditEvent;
+        public void OnEditEvent(EmployeeModel employee)
+        {
+            var e = new EmployeeEventArgs(employee);
+            EditEvent?.Invoke(this, e);
         }
 
 
@@ -180,7 +187,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (clearFields == null)
                 {
-                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute);
+                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute, false);
                 }
                 return clearFields;
             }
@@ -207,7 +214,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (searchEmployee == null)
                 {
-                    searchEmployee = new RelayCommand(ExecuteSearchEmployee, CanSearchEmployeeExecute);
+                    searchEmployee = new RelayCommand(ExecuteSearchEmployee, CanSearchEmployeeExecute, false);
                 }
                 return searchEmployee;
             }
@@ -230,7 +237,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (deleteEmployee == null)
                 {
-                    deleteEmployee = new RelayCommand(ExecuteDeleteEmployee, CanDeleteEmployeeExecute);
+                    deleteEmployee = new RelayCommand(ExecuteDeleteEmployee, CanDeleteEmployeeExecute, false);
                 }
                 return deleteEmployee;
             }
@@ -258,7 +265,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (addEmployeeToProject == null)
                 {
-                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute );
+                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute, false);
 
                 }
                 return addEmployeeToProject;
@@ -283,6 +290,33 @@ namespace EmployeeManagementSystem.ViewModel
             OnAddProjectEvent(EventArgs.Empty);
         }
 
+        private ICommand? editEmployee;
+        public ICommand EditEmployee
+        {
+            get
+            {
+                if (editEmployee == null)
+                {
+                    editEmployee = new RelayCommand(ExecuteEditEmployee, CanEditEmployeeExecute, false);
+                }
+                return editEmployee;
+            }
+        }
+
+        private bool CanEditEmployeeExecute(object arg)
+        {
+            return true;
+        }
+
+        private void ExecuteEditEmployee(object obj)
+        {
+            if (selectedEmployee != null)
+            {
+               EmployeeModel employee = getData.GetEmployeeFromCode(selectedEmployee.Row[0].ToString()!);
+                OnEditEvent(employee);
+            }
+        }
+
         private ICommand? removeEmployeeFromProject;
         public ICommand RemoveEmployeeFromProject
         {
@@ -290,7 +324,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (removeEmployeeFromProject == null)
                 {
-                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute);
+                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute, false);
                 }
                 return removeEmployeeFromProject;
             }
@@ -317,7 +351,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (viewEmployeeDetails == null)
                 {
-                    viewEmployeeDetails = new RelayCommand(ExecuteViewEmployeeDetails, CanViewEmployeeDetailsExecute);
+                    viewEmployeeDetails = new RelayCommand(ExecuteViewEmployeeDetails, CanViewEmployeeDetailsExecute, false);
                 }
                 return viewEmployeeDetails;
             }
@@ -333,7 +367,7 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteViewEmployeeDetails(object obj)
         {
             string EmployeeCode = (string)selectedEmployee?.Row.ItemArray[0]!;
-            EmployeeModel employee = getData.GetEmployeeModelFromCode(EmployeeCode);
+            EmployeeModel employee = getData.GetEmployeeFromCode(EmployeeCode);
             EmployeeDetails employeeDetails = new EmployeeDetails(employee);
             employeeDetails.ShowDialog();
         }

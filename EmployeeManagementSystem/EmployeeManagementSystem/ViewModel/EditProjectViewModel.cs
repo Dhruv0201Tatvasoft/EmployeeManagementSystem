@@ -161,7 +161,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (updateProject == null)
                 {
-                    updateProject = new RelayCommand(ExecuteUpdateProject, CanUpdateProjectExecute);
+                    updateProject = new RelayCommand(ExecuteUpdateProject, CanUpdateProjectExecute, false);
                 }
                 return updateProject;
             }

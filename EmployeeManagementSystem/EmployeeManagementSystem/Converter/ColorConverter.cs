@@ -27,8 +27,7 @@ namespace EmployeeManagementSystem.Converter
         {
             if (value is int i)
             {
-               
-                return colors[i%colors.Length];
+                return colors[colors.Length%i];
             }
             else if(value is string s)
             {

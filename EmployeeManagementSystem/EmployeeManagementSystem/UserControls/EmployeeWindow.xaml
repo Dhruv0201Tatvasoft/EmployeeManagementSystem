@@ -111,7 +111,7 @@
                                 <Button Command="{Binding DataContext.ViewEmployeeDetails ,ElementName=DataGrid}"  MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
                                     <Image Source="/Icons/EmployeeIcon.png" Width="25" Height="25" />
                                 </Button>
-                                <Button Click="EditEmployeeBtnClick" MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
+                                <Button Command="{Binding  DataContext.EditEmployee ,ElementName=DataGrid }" MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
                                     <Image Source="/Icons/EditIcon.png" Width="25" Height="25"/>
                                 </Button>
                                 <Button  Command="{Binding DataContext.DeleteEmployee ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">

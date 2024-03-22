@@ -1,5 +1,7 @@
 ﻿using EmployeeManagementSystem.Commands;
 using EmployeeManagementSystem.Database;
+using EmployeeManagementSystem.EventArg;
+using EmployeeManagementSystem.Model;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Input;
@@ -17,9 +19,10 @@ namespace EmployeeManagementSystem.ViewModel
             AddEmployeeEvent?.Invoke(this, e);
         }
 
-        public event EventHandler? EditEvent;
-        public void OnEditEvent(EventArgs e)
+        public event EventHandler<ProjectEventArgs> EditEvent;
+        public void OnEditEvent(ProjectModel project)
         {
+            var e = new ProjectEventArgs(project);
             EditEvent?.Invoke(this, e);
         }
         private DataRowView? selectedRow;
@@ -110,6 +113,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+
         private ICommand? searchProject;
         public ICommand SearchProject
         {
@@ -117,12 +121,11 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (searchProject == null)
                 {
-                    searchProject = new RelayCommand(ExecuteSearchProject, CanSearchProjectExecute);
+                    searchProject = new RelayCommand(ExecuteSearchProject, CanSearchProjectExecute, false);
                 }
                 return searchProject;
             }
         }
-
         private void ExecuteSearchProject(object parameter)
         {
 
@@ -132,7 +135,6 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private bool CanSearchProjectExecute(object parameter)
         {
-
             return true;
         }
 
@@ -143,8 +145,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (clearFields == null)
                 {
-                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute);
-
+                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute, false);
                 }
                 return clearFields;
             }
@@ -171,7 +172,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (deleteProject == null)
                 {
-                    deleteProject = new RelayCommand(ExecuteDeleteProject, CanDeleteProjectExecute);
+                    deleteProject = new RelayCommand(ExecuteDeleteProject, CanDeleteProjectExecute, false);
                 }
                 return deleteProject;
             }
@@ -197,7 +198,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (editProject == null)
                 {
-                    editProject = new RelayCommand(ExecuteEditProject, CanEditProjectExecute);
+                    editProject = new RelayCommand(ExecuteEditProject, CanEditProjectExecute, false);
                 }
                 return editProject;
             }
@@ -210,7 +211,13 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteEditProject(object obj)
         {
-            OnEditEvent(EventArgs.Empty);
+            if (selectedRow != null)
+            {
+                ProjectModel project = getData.GetProjectFromCode(selectedRow.Row[0].ToString()!);
+                
+                OnEditEvent(project);
+            }
+
         }
 
 
@@ -221,7 +228,8 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (addEmployeeToProject == null)
                 {
-                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute);
+                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute, false);
+
 
                 }
                 return addEmployeeToProject;
@@ -257,7 +265,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (removeEmployeeFromProject == null)
                 {
-                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute);
+                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute, false);
                 }
                 return removeEmployeeFromProject;
             }

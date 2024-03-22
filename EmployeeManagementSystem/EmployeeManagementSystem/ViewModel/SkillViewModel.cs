@@ -62,7 +62,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (saveSkill == null)
                 {
-                    saveSkill = new RelayCommand(ExecuteSaveSkill, CanSaveSkillExecute);
+                    saveSkill = new RelayCommand(ExecuteSaveSkill, CanSaveSkillExecute, false);
                 }
                 return saveSkill;
             }
@@ -102,7 +102,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (deleteSkill == null)
                 {
-                    deleteSkill = new RelayCommand(ExecuteDeleteSkill, CanDeleteSkillExecute);
+                    deleteSkill = new RelayCommand(ExecuteDeleteSkill, CanDeleteSkillExecute, false);
                 }
                 return deleteSkill;
             }
@@ -130,7 +130,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (editSkill == null)
                 {
-                    editSkill = new RelayCommand(ExecuteEditSkill, CanEditSkillExecute);
+                    editSkill = new RelayCommand(ExecuteEditSkill, CanEditSkillExecute, false);
                 }
                 return editSkill;
             }

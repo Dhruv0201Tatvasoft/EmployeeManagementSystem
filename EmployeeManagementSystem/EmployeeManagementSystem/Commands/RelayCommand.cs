@@ -7,12 +7,14 @@ namespace EmployeeManagementSystem.Commands
     {
         Action<object> execute;
         Func<object, bool> canExecute;
+        bool canExecuteCache;
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute, bool canExecuteCache)
 
         {
             this.execute = execute;
             this.canExecute = canExecute;
+            this.canExecuteCache = canExecuteCache;
         }
 
         public event EventHandler? CanExecuteChanged
@@ -39,20 +41,14 @@ namespace EmployeeManagementSystem.Commands
             }
             else
             {
-                if (parameter != null)
-                {
-                    return canExecute(parameter);
-                }
-                return false;
+                return canExecute(parameter);
             }
         }
 
         public void Execute(object? parameter)
         {
-            if (parameter != null)
-            {
-                execute(parameter);
-            }
+            execute(parameter);
         }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.DialogWindow;
+using EmployeeManagementSystem.EventArg;
 using EmployeeManagementSystem.Model;
 using EmployeeManagementSystem.ViewModel;
 using System.Data;
@@ -20,6 +21,7 @@ namespace EmployeeManagementSystem.UserControls
             EmployeeViewModel viewModel = new EmployeeViewModel();
             this.DataContext = viewModel;
             viewModel.AddProjectEvent += RefreshEmployeeDatagrid;
+            viewModel.EditEvent += EditEmployee;
             getData = new GetData();
         }
 
@@ -32,14 +34,12 @@ namespace EmployeeManagementSystem.UserControls
             }
         }
 
-        private void EditEmployeeBtnClick(object sender, RoutedEventArgs e)
+        private void EditEmployee(object? sender, EmployeeEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             if (mainWindow != null)
             {
-                EmployeeModel employeeModel = getData.GetEmployeeModelFromCode((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]!);
-                mainWindow.mainContent.Content = new EditEmployeeWindow(employeeModel);
-
+                mainWindow.mainContent.Content = new EditEmployeeWindow(e.emp);
             }
         }
 
