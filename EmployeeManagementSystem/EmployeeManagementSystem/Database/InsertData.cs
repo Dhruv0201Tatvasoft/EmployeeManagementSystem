@@ -1,6 +1,5 @@
 ﻿using EmployeeManagementSystem.Model;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Windows;
 
 namespace EmployeeManagementSystem.Database
@@ -21,7 +20,7 @@ namespace EmployeeManagementSystem.Database
                     return true;
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 {
                     MessageBox.Show("Error in inserting data to database", "Error");
@@ -81,7 +80,7 @@ namespace EmployeeManagementSystem.Database
         {
             string query = "INSERT INTO EmsTblTechnologyForProject(ProjectCode, TechnologyId) " +
                            "VALUES (@Code, @TechnologyId)";
-            foreach (int technologyId in project.AssociatedTechnologies)
+            foreach (int technologyId in project.AssociatedTechnologies!)
             {
                 using (SqlCommand command = new SqlCommand(query))
                 {

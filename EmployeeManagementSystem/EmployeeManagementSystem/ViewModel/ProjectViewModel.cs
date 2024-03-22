@@ -8,27 +8,28 @@ namespace EmployeeManagementSystem.ViewModel
 {
     internal class ProjectViewModel : INotifyPropertyChanged
     {
-        public event EventHandler AddEmployeeEvent;
+        private GetData getData;
+        private DeleteData deleteData;
+        private InsertData insertData;
+        public event EventHandler? AddEmployeeEvent;
         public void OnAddEmployeeEvent(EventArgs e)
         {
             AddEmployeeEvent?.Invoke(this, e);
         }
-       
-        public event EventHandler EditEvent;
+
+        public event EventHandler? EditEvent;
         public void OnEditEvent(EventArgs e)
         {
             EditEvent?.Invoke(this, e);
         }
-        private DeleteData deleteData;
-        private DataRowView selectedRow;
-        private InsertData insertData;
-        public DataRowView SelectedRow
+        private DataRowView? selectedRow;
+        public DataRowView? SelectedRow
         {
             get { return selectedRow; }
             set { selectedRow = value; OnPropertyChanged("SelectedRow"); }
         }
-        private DataRowView selectedEmployeeRow;
-        public DataRowView SelectedEmployeeRow
+        private DataRowView? selectedEmployeeRow;
+        public DataRowView? SelectedEmployeeRow
         {
             get
             {
@@ -47,17 +48,16 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
-    
-        private GetData getData;
-        private string code;
-        public string Code
+
+        private string? code;
+        public string? Code
         {
             get { return code; }
             set { code = value; OnPropertyChanged("Code"); }
         }
 
-        private string name;
-        public string Name
+        private string? name;
+        public string? Name
         {
             get { return name; }
             set { name = value; OnPropertyChanged("Name"); }
@@ -73,13 +73,13 @@ namespace EmployeeManagementSystem.ViewModel
                 startingDate = value; OnPropertyChanged("StartingDate");
             }
         }
-        private DateTime? endingDate ;
+        private DateTime? endingDate;
         public DateTime? EndingDate
         {
             get { return endingDate; }
             set
             {
-                
+
 
                 endingDate = value; OnPropertyChanged("EndingDate");
             }
@@ -99,8 +99,8 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private string employeeName;
-        public string EmployeeName
+        private string? employeeName;
+        public string? EmployeeName
         {
             get { return employeeName; }
             set
@@ -110,14 +110,14 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private ICommand searchProject;
+        private ICommand? searchProject;
         public ICommand SearchProject
         {
             get
             {
                 if (searchProject == null)
                 {
-                    searchProject = new RelayCommand(ExecuteSearchProject, CanSearchProjectExecute, false);
+                    searchProject = new RelayCommand(ExecuteSearchProject, CanSearchProjectExecute);
                 }
                 return searchProject;
             }
@@ -125,8 +125,9 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSearchProject(object parameter)
         {
-            if(!StartingDate.HasValue) startingDate = DateTime.MinValue; if (!EndingDate.HasValue) endingDate = DateTime.MinValue;
-            dataTable = getData.GetProjectSearchData(Code, Name, StartingDate.Value, EndingDate.Value);
+
+            if (!startingDate.HasValue) startingDate = DateTime.MinValue; if (!endingDate.HasValue) endingDate = DateTime.MinValue;
+            dataTable = getData.GetProjectSearchData(code!, name!, startingDate.Value, endingDate.Value);
             OnPropertyChanged("DataTable");
         }
         private bool CanSearchProjectExecute(object parameter)
@@ -135,14 +136,14 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private ICommand clearFields;
+        private ICommand? clearFields;
         public ICommand ClearFields
         {
             get
             {
                 if (clearFields == null)
                 {
-                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute, false);
+                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute);
 
                 }
                 return clearFields;
@@ -163,14 +164,14 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("dataTable");
         }
 
-        private ICommand deleteProject;
+        private ICommand? deleteProject;
         public ICommand DeleteProject
         {
             get
             {
                 if (deleteProject == null)
                 {
-                    deleteProject = new RelayCommand(ExecuteDeleteProject, CanDeleteProjectExecute, false);
+                    deleteProject = new RelayCommand(ExecuteDeleteProject, CanDeleteProjectExecute);
                 }
                 return deleteProject;
             }
@@ -183,18 +184,20 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteProject(object obj)
         {
-            deleteData.DeleteProject((string)(SelectedRow.Row.ItemArray[0]));
-            ExecuteClearFields(obj);
+            if (selectedRow != null)
+            {
+                deleteData.DeleteProject((string)selectedRow.Row.ItemArray[0]!);
+            }
         }
 
-        private ICommand editProject;
+        private ICommand? editProject;
         public ICommand EditProject
         {
             get
             {
                 if (editProject == null)
                 {
-                    editProject = new RelayCommand(ExecuteEditProject, CanEditProjectExecute, true);
+                    editProject = new RelayCommand(ExecuteEditProject, CanEditProjectExecute);
                 }
                 return editProject;
             }
@@ -211,14 +214,14 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-        private ICommand addEmployeeToProject;
+        private ICommand? addEmployeeToProject;
         public ICommand AddEmployeeToProject
         {
             get
             {
                 if (addEmployeeToProject == null)
                 {
-                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute, false);
+                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute);
 
                 }
                 return addEmployeeToProject;
@@ -233,22 +236,28 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteAddEmployeeToProject(object obj)
         {
-            string ProjectCode = (String)SelectedRow.Row.ItemArray[0];
-            string EmployeeCode = employeeName.Split('-')[0];
-            string EmployeeName = employeeName.Split('-')[1];
-            insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode,EmployeeName);
-            OnAddEmployeeEvent(EventArgs.Empty);
-           
+            if (selectedRow != null)
+            {
+                if (selectedRow != null && employeeName != null)
+                {
+                    string ProjectCode = (String)selectedRow.Row.ItemArray[0]!;
+                    string EmployeeCode = employeeName.Split('-')[0];
+                    string EmployeeName = employeeName.Split('-')[1];
+                    insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode, EmployeeName);
+                    OnAddEmployeeEvent(EventArgs.Empty);
+                }
+            }
+
         }
 
-        private ICommand removeEmployeeFromProject;
+        private ICommand? removeEmployeeFromProject;
         public ICommand RemoveEmployeeFromProject
         {
             get
             {
-                if(removeEmployeeFromProject == null)
+                if (removeEmployeeFromProject == null)
                 {
-                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute, false);
+                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute);
                 }
                 return removeEmployeeFromProject;
             }
@@ -256,20 +265,22 @@ namespace EmployeeManagementSystem.ViewModel
 
         private bool CanRemoveEmployeeFromProjectExecute(object arg)
         {
-            if(selectedEmployeeRow==null)return false;
+            if (selectedEmployeeRow == null) return false;
             return true;
-            
+
         }
 
         private void ExecuteRemoveEmployeeFromProject(object obj)
         {
-          string projectcode = (String)SelectedRow.Row.ItemArray[0];
-          string employeecode = (String)SelectedEmployeeRow.Row.ItemArray[1];
-          string employeename = (String)SelectedEmployeeRow.Row.ItemArray[0];
-          deleteData.RemoveEmployeeFromProject(employeecode,projectcode);
-          OnAddEmployeeEvent(EventArgs.Empty);
+            if (selectedRow != null)
+            {
+                string projectcode = (String)selectedRow.Row.ItemArray[0]!;
+                string employeecode = (String)SelectedEmployeeRow?.Row.ItemArray[1]!;
+                deleteData.RemoveEmployeeFromProject(employeecode, projectcode);
+                OnAddEmployeeEvent(EventArgs.Empty);
+            }
         }
-     
+
 
         public ProjectViewModel()
         {
@@ -284,7 +295,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
-      
+
 
 
 

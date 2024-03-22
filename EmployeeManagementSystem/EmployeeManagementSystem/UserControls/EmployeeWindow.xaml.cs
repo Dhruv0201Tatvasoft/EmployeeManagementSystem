@@ -37,7 +37,7 @@ namespace EmployeeManagementSystem.UserControls
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             if (mainWindow != null)
             {
-                EmployeeModel employeeModel = getData.GetEmployeeModelFromCode((string)((System.Data.DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]);
+                EmployeeModel employeeModel = getData.GetEmployeeModelFromCode((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]!);
                 mainWindow.mainContent.Content = new EditEmployeeWindow(employeeModel);
 
             }
@@ -49,8 +49,8 @@ namespace EmployeeManagementSystem.UserControls
             SystemParameters.FullPrimaryScreenWidth,
             SystemParameters.FullPrimaryScreenHeight));
             MyPopup.IsOpen = true;
-            string EmployeeCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0];
-            EmployeeNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1];
+            string EmployeeCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!;
+            EmployeeNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!;
             PopUpDataGird.ItemsSource = getData.GetAssociatedProjectForEmployees(EmployeeCode).DefaultView;
 
         }
@@ -63,7 +63,7 @@ namespace EmployeeManagementSystem.UserControls
         private void RefreshEmployeeDatagrid(object? sender, EventArgs e)
         {
             PopUpDataGird.ItemsSource = null;
-            PopUpDataGird.ItemsSource = getData.GetAssociatedProjectForEmployees((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]).DefaultView;
+            PopUpDataGird.ItemsSource = getData.GetAssociatedProjectForEmployees((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]!).DefaultView;
             Autocompletebox.SelectedItem = "";
 
         }

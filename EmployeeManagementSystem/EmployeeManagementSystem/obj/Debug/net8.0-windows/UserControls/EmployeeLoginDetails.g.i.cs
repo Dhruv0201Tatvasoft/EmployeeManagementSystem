@@ -180,7 +180,8 @@ namespace EmployeeManagementSystem.UserControls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/EmployeeManagementSystem;component/usercontrols/employeelogindetails.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/EmployeeManagementSystem;V1.0.0.0;component/usercontrols/employeelogindetails.xa" +
+                    "ml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UserControls\EmployeeLoginDetails.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

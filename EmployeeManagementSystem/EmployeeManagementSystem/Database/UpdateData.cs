@@ -86,7 +86,7 @@ namespace EmployeeManagementSystem.Database
         {
             string query = "INSERT INTO EmsTblTechnologyForProject(ProjectCode, TechnologyId) " +
                            "VALUES (@Code, @TechnologyId)";
-            foreach (int technologyId in project.AssociatedTechnologies)
+            foreach (int technologyId in project.AssociatedTechnologies!)
             {
                 using (SqlCommand command = new SqlCommand(query))
                 {

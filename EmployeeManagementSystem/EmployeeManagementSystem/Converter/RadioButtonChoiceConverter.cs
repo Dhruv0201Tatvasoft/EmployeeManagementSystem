@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace EmployeeManagementSystem.Converter
@@ -12,7 +13,7 @@ namespace EmployeeManagementSystem.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? parameter : null;
+            return (bool)value ? parameter : DependencyProperty.UnsetValue;
         }
     }
 }

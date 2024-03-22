@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Database;
 using System.ComponentModel;
 using System.Data;
+using System.IdentityModel.Tokens;
 using System.Windows.Input;
 
 namespace EmployeeManagementSystem.ViewModel
@@ -12,21 +13,21 @@ namespace EmployeeManagementSystem.ViewModel
         private InsertData insertData;
         private UpdateData updateData;
         private DeleteData deleteData;
-        private DataTable technologyDataTable;
-        public DataTable TechnologyDataTable
+        private DataTable? technologyDataTable;
+        public DataTable? TechnologyDataTable
         {
             get { return technologyDataTable; }
             set { technologyDataTable = value; }
         }
-        private string oldTechnologyName;
+        private string? oldTechnologyName;
 
-        public string OldTecnologyName
+        public string? OldTecnologyName
         {
             get { return oldTechnologyName; }
             set { oldTechnologyName = value; OnPropertyChanged("OldTecnologyName"); }
         }
-        private string technologyName;
-        public string TechnologyName
+        private string? technologyName;
+        public string? TechnologyName
         {
             get { return technologyName; }
             set
@@ -36,8 +37,8 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private DataRowView selectedRow;
-        public DataRowView SelectedRow
+        private DataRowView? selectedRow;
+        public DataRowView? SelectedRow
         {
             get
             {
@@ -53,14 +54,14 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-        private ICommand saveTechnology;
+        private ICommand? saveTechnology;
         public ICommand SaveTechnology
         {
             get
             {
                 if (saveTechnology == null)
                 {
-                    saveTechnology = new RelayCommand(ExecuteSaveTechnology, CanSaveTechnologyExecute, false);
+                    saveTechnology = new RelayCommand(ExecuteSaveTechnology, CanSaveTechnologyExecute);
                 }
                 return saveTechnology;
             }
@@ -76,12 +77,13 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSaveTechnology(object obj)
         {
-            if (selectedRow != null && !String.IsNullOrEmpty(OldTecnologyName))
+            if (selectedRow != null && !String.IsNullOrEmpty(oldTechnologyName) && !String.IsNullOrEmpty(technologyName))
             {
                 updateData.UpdateTechnologyName(technologyName, oldTechnologyName);
             }
             else
             {
+                if(technologyName != null) 
                 insertData.InsertTechnology(technologyName);
             }
             selectedRow = null;
@@ -90,14 +92,14 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("TechnologyDataTable");
         }
 
-        private ICommand deleteTechnology;
+        private ICommand? deleteTechnology;
         public ICommand DeleteTechnology
         {
             get
             {
                 if (deleteTechnology == null)
                 {
-                    deleteTechnology = new RelayCommand(ExecuteDeleteTechnology, CanDeleteTechnologyExecute, false);
+                    deleteTechnology = new RelayCommand(ExecuteDeleteTechnology, CanDeleteTechnologyExecute);
                 }
                 return deleteTechnology;
             }
@@ -105,7 +107,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteTechnology(object obj)
         {
-            deleteData.DeleteTechnology((string)selectedRow.Row.ItemArray[0]);
+            deleteData.DeleteTechnology((string)selectedRow?.Row.ItemArray[0]!);
             TechnologyName = String.Empty;
             technologyDataTable = getData.GetTechnologyData();
             OnPropertyChanged("TechnologyDataTable");
@@ -118,14 +120,14 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private ICommand editTechnology;
+        private ICommand? editTechnology;
         public ICommand EditTechnology
         {
             get
             {
                 if (editTechnology == null)
                 {
-                    editTechnology = new RelayCommand(ExecuteEditTechnology, CanEditTechnologyExecute, false);
+                    editTechnology = new RelayCommand(ExecuteEditTechnology, CanEditTechnologyExecute);
                 }
                 return editTechnology;
             }
@@ -140,8 +142,11 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteEditTechnology(object obj)
         {
-            oldTechnologyName = technologyName = (string)selectedRow.Row[0];
-            OnPropertyChanged("TechnologyName");
+            if (selectedRow != null)
+            {
+                oldTechnologyName = technologyName = (string)selectedRow.Row[0];
+                OnPropertyChanged("TechnologyName");
+            }
         }
 
         public TechnologyViewModel()

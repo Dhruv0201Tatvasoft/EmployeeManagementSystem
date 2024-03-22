@@ -22,11 +22,12 @@ namespace EmployeeManagementSystem
 
 
 
-        private MenuItem selectedMenuItem;
+        private MenuItem? selectedMenuItem;
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click(object? sender, RoutedEventArgs e)
         {
-            MenuItem menuItem = sender as MenuItem;
+            
+            MenuItem? menuItem = sender as MenuItem;
 
 
             if (selectedMenuItem != null)
@@ -35,35 +36,39 @@ namespace EmployeeManagementSystem
                 selectedMenuItem.ClearValue(Control.BackgroundProperty);
             }
 
-            switch (menuItem.Header.ToString())
+            if (menuItem != null)
             {
-                case "Dashboard":
-                    mainContent.Content = new DashboardWindow();
-                    selectedMenuItem = menuItem;
-                    break;
+                switch (menuItem.Header.ToString())
+                {
+                    case "Dashboard":
+                        mainContent.Content = new DashboardWindow();
+                        selectedMenuItem = menuItem;
+                        break;
 
-                case "Project":
-                    mainContent.Content = new ProjectWindow();
-                    selectedMenuItem = menuItem;
-                    break;
+                    case "Project":
+                        mainContent.Content = new ProjectWindow();
+                        selectedMenuItem = menuItem;
+                        break;
 
-                case "Employee":
-                    mainContent.Content = new EmployeeWindow();
-                    selectedMenuItem = menuItem;
-                    break;
-                case "Technology":
-                    mainContent.Content = new TechnologyWindow();
-                    selectedMenuItem = Master;
-                    break;
-                case "Skill":
-                    mainContent.Content = new SkillWindow();
-                    selectedMenuItem = Master;
-                    break;
+                    case "Employee":
+                        mainContent.Content = new EmployeeWindow();
+                        selectedMenuItem = menuItem;
+                        break;
+                    case "Technology":
+                        mainContent.Content = new TechnologyWindow();
+                        selectedMenuItem = Master;
+                        break;
+                    case "Skill":
+                        mainContent.Content = new SkillWindow();
+                        selectedMenuItem = Master;
+                        break;
 
 
+                }
             }
 
-            selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
+            if(selectedMenuItem!= null)
+                selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
         }
 
         private void InfoButtonClicked(object sender, RoutedEventArgs e)
@@ -78,7 +83,8 @@ namespace EmployeeManagementSystem
         private void login_Click(object sender, RoutedEventArgs e)
         {
             mainContent.Content = new LoginWindow();
-            selectedMenuItem.ClearValue(Control.BackgroundProperty);
+            if(selectedMenuItem!=null)
+                selectedMenuItem.ClearValue(BackgroundProperty);
         }
     }
 }

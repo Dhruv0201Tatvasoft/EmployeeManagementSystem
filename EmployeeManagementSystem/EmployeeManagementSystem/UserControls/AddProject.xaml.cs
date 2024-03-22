@@ -16,7 +16,7 @@ namespace EmployeeManagementSystem.UserControls
             DataContext = viewModel;
             viewModel.ChangeWindowEvent += ChangeWindow;
         }
-        public void ChangeWindow(object sender, EventArgs e)
+        public void ChangeWindow(object? sender, EventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);

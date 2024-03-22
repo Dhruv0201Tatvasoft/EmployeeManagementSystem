@@ -5,45 +5,45 @@ namespace EmployeeManagementSystem.Model
     public class EmployeeEducationModel : INotifyPropertyChanged
     {
 
-        private string qualification = string.Empty;
+        private string? qualification ;
 
-        public string Qualification
+        public string? Qualification
         {
             get { return qualification; }
             set { qualification = value; OnPropertyChanged("Qualification"); }
         }
-        private string boardUniversity = string.Empty;
+        private string? boardUniversity;
 
-        public string BoardUniversity
+        public string? BoardUniversity
         {
             get { return boardUniversity; }
             set { boardUniversity = value; OnPropertyChanged("BoardUniversity"); }
         }
-        private string instituteName = string.Empty;
+        private string? instituteName ;
 
-        public string InstituteName
+        public string? InstituteName
         {
             get { return instituteName; }
             set { instituteName = value; OnPropertyChanged("InstituteName"); }
         }
-        private string state = string.Empty;
+        private string? state ;
 
-        public string State
+        public string? State
         {
             get { return state; }
             set { state = value; OnPropertyChanged("State"); }
         }
-        private string passingYear = string.Empty;
+        private string? passingYear ;
 
-        public string PassingYear
+        public string? PassingYear
         {
             get { return passingYear; }
             set { passingYear = value; OnPropertyChanged("PassingYear"); }
         }
-        private string percentage = string.Empty;
+        private string? percentage ;
 
 
-        public string Percentage
+        public string? Percentage
         {
             get { return percentage; }
             set { percentage = value; OnPropertyChanged("Percentage"); }

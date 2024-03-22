@@ -14,30 +14,30 @@ namespace EmployeeManagementSystem.ViewModel
         private GetData getData;
         private DeleteData deleteData;
         private InsertData insertData;
-        private DataRowView selectedEmployee;
 
-        public event EventHandler AddProjectEvent;
+        public event EventHandler? AddProjectEvent;
         private void OnAddProjectEvent(EventArgs empty)
         {
             AddProjectEvent?.Invoke(this, empty);
         }
-        public DataRowView SelectedEmployee
+        private DataRowView? selectedEmployee;
+        public DataRowView? SelectedEmployee
         {
             get { return selectedEmployee; }
             set { selectedEmployee = value; OnPropertyChanged("SelectedEmployee"); }
         }
 
-        private DataRowView selectedProjectRow;
+        private DataRowView? selectedProjectRow;
 
-        public DataRowView SelectedProjectRow
+        public DataRowView? SelectedProjectRow
         {
             get { return selectedProjectRow; }
             set { selectedProjectRow = value; OnPropertyChanged("SelectedProjectRow"); }
         }
 
 
-        private DataTable employeeDataTable;
-        public DataTable EmployeeDatatable
+        private DataTable? employeeDataTable;
+        public DataTable? EmployeeDatatable
         {
             get
             {
@@ -72,8 +72,8 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private string name;
-        public string Name
+        private string? name;
+        public string? Name
         {
             get
             {
@@ -86,8 +86,8 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private string email;
-        public string Email
+        private string? email;
+        public string? Email
         {
             get
             {
@@ -108,8 +108,8 @@ namespace EmployeeManagementSystem.ViewModel
             set { combTextDesignation = value; OnPropertyChanged("CombTextDesignation"); }
         }
 
-        private string selectedDesignation;
-        public string SelectedDesignation
+        private string? selectedDesignation;
+        public string? SelectedDesignation
         {
             get
             {
@@ -134,8 +134,8 @@ namespace EmployeeManagementSystem.ViewModel
                 OnPropertyChanged("CombTextDepartment");
             }
         }
-        private string selectedDepartment;
-        public string SelectedDepartment
+        private string? selectedDepartment;
+        public string? SelectedDepartment
         {
             get
             {
@@ -148,9 +148,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private List<String> projectNames;
+        private List<String>? projectNames;
 
-        public List<String> ProjectNames
+        public List<String>? ProjectNames
         {
             get { return projectNames; }
             set
@@ -160,9 +160,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private String projectName;
+        private String? projectName;
 
-        public String ProjectName
+        public String? ProjectName
         {
             get { return projectName; }
             set
@@ -173,14 +173,14 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-        private ICommand clearFields;
+        private ICommand? clearFields;
         public ICommand ClearFields
         {
             get
             {
                 if (clearFields == null)
                 {
-                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute, false);
+                    clearFields = new RelayCommand(ExecuteClearFields, CanClearFieldsExecute);
                 }
                 return clearFields;
             }
@@ -195,26 +195,26 @@ namespace EmployeeManagementSystem.ViewModel
         {
             email = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
             CombTextDepartment = "Select Department";
-            CombTextDesignation= "Select Designation";
+            CombTextDesignation = "Select Designation";
             employeeDataTable = getData.GetEmployeeTable();
             OnPropertyChanged("EmployeeDataTable");
         }
 
-        private ICommand searchEmployee;
+        private ICommand? searchEmployee;
         public ICommand SearchEmployee
         {
             get
             {
                 if (searchEmployee == null)
                 {
-                    searchEmployee = new RelayCommand(ExecuteSearchEmployee, CanSearchEmployeeExecute, false);
+                    searchEmployee = new RelayCommand(ExecuteSearchEmployee, CanSearchEmployeeExecute);
                 }
                 return searchEmployee;
             }
         }
         private void ExecuteSearchEmployee(object obj)
         {
-            employeeDataTable = getData.GetEmployeeSearchData(Email, Name, selectedDepartment, selectedDesignation);
+            employeeDataTable = getData.GetEmployeeSearchData(Email!, Name!, selectedDepartment!, selectedDesignation!);
             OnPropertyChanged("EmployeeDataTable");
         }
 
@@ -223,14 +223,14 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private ICommand deleteEmployee;
+        private ICommand? deleteEmployee;
         public ICommand DeleteEmployee
         {
             get
             {
                 if (deleteEmployee == null)
                 {
-                    deleteEmployee = new RelayCommand(ExecuteDeleteEmployee, CanDeleteEmployeeExecute, false);
+                    deleteEmployee = new RelayCommand(ExecuteDeleteEmployee, CanDeleteEmployeeExecute);
                 }
                 return deleteEmployee;
             }
@@ -243,22 +243,22 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteEmployee(object obj)
         {
-            string EmployeeCode = selectedEmployee[0].ToString();
-            string Name = selectedEmployee[1].ToString();
+            string EmployeeCode = selectedEmployee?[0].ToString()!;
+            string Name = selectedEmployee?[1].ToString()!;
             deleteData.DeleteEmployee(EmployeeCode, Name);
             employeeDataTable = getData.GetEmployeeTable();
             OnPropertyChanged("EmployeeDataTable");
         }
 
-        
-        private ICommand addEmployeeToProject;
+
+        private ICommand? addEmployeeToProject;
         public ICommand AddEmployeeToProject
         {
             get
             {
                 if (addEmployeeToProject == null)
                 {
-                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute, false);
+                    addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute );
 
                 }
                 return addEmployeeToProject;
@@ -273,21 +273,24 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteAddEmployeeToProject(object obj)
         {
-            string EmployeeCode = (String)selectedEmployee.Row.ItemArray[0];
-            string ProjectCode = projectName.Split('-')[0];
-            string ProjectName = projectName.Split('-')[1];
-            insertData.InsertProjectToEmployee(ProjectCode, ProjectName, EmployeeCode);
+            string EmployeeCode = (String)selectedEmployee?.Row.ItemArray[0]!;
+            if (projectName != null)
+            {
+                string ProjectCode = projectName.Split('-')[0];
+                string ProjectName = projectName.Split('-')[1];
+                insertData.InsertProjectToEmployee(ProjectCode, ProjectName, EmployeeCode);
+            }
             OnAddProjectEvent(EventArgs.Empty);
         }
 
-        private ICommand removeEmployeeFromProject;
+        private ICommand? removeEmployeeFromProject;
         public ICommand RemoveEmployeeFromProject
         {
             get
             {
                 if (removeEmployeeFromProject == null)
                 {
-                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute, false);
+                    removeEmployeeFromProject = new RelayCommand(ExecuteRemoveEmployeeFromProject, CanRemoveEmployeeFromProjectExecute);
                 }
                 return removeEmployeeFromProject;
             }
@@ -302,19 +305,19 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveEmployeeFromProject(object obj)
         {
-            string EmployeeCode = (String)selectedEmployee.Row.ItemArray[0];
-            string ProjectCode = (String)selectedProjectRow.Row.ItemArray[1];
+            string EmployeeCode = (String)selectedEmployee?.Row.ItemArray[0]!;
+            string ProjectCode = (String)selectedProjectRow?.Row.ItemArray[1]!;
             deleteData.RemoveEmployeeFromProject(EmployeeCode, ProjectCode);
             OnAddProjectEvent(EventArgs.Empty);
         }
-        private ICommand viewEmployeeDetails;
+        private ICommand? viewEmployeeDetails;
         public ICommand ViewEmployeeDetails
         {
             get
             {
                 if (viewEmployeeDetails == null)
                 {
-                    viewEmployeeDetails = new RelayCommand(ExecuteViewEmployeeDetails, CanViewEmployeeDetailsExecute, false);
+                    viewEmployeeDetails = new RelayCommand(ExecuteViewEmployeeDetails, CanViewEmployeeDetailsExecute);
                 }
                 return viewEmployeeDetails;
             }
@@ -329,7 +332,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteViewEmployeeDetails(object obj)
         {
-            string EmployeeCode = (string)selectedEmployee.Row.ItemArray[0];
+            string EmployeeCode = (string)selectedEmployee?.Row.ItemArray[0]!;
             EmployeeModel employee = getData.GetEmployeeModelFromCode(EmployeeCode);
             EmployeeDetails employeeDetails = new EmployeeDetails(employee);
             employeeDetails.ShowDialog();
@@ -342,8 +345,8 @@ namespace EmployeeManagementSystem.ViewModel
             insertData = new InsertData();
             EmployeeDatatable = getData.GetEmployeeTable();
             projectNames = getData.GetProjectNames();
-            designation = new ObservableCollection<string>{ "Developer", "Senior Developer", "Team Lead", "Manager" };
-            department = new ObservableCollection<string>{ "Dotnet", "Java", "PHP", "Mobile", "QA" };
+            designation = new ObservableCollection<string> { "Developer", "Senior Developer", "Team Lead", "Manager" };
+            department = new ObservableCollection<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" };
             OnPropertyChanged("EmployeeDataTable");
         }
 

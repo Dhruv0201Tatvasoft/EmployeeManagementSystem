@@ -51,7 +51,7 @@ namespace EmployeeManagementSystem.Converter
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return Binding.DoNothing;
         }
     }
 }

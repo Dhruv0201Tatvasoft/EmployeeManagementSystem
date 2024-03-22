@@ -12,10 +12,11 @@ namespace EmployeeManagementSystem.UserControls
     /// </summary>
     public partial class EditProjectWindow : UserControl
     {
-        private GetData GetData;
+        private GetData getData;
         public EditProjectWindow()
         {
             InitializeComponent();
+            getData = new GetData();
             EditProjectViewModel viewModel = new EditProjectViewModel();
             this.DataContext = viewModel;
            
@@ -26,21 +27,21 @@ namespace EmployeeManagementSystem.UserControls
             InitializeComponent();
             EditProjectViewModel viewModel = new EditProjectViewModel();
             this.DataContext = viewModel;
-            GetData = new GetData();
+            getData = new GetData();
             viewModel.OldCode = project.Code;
-            viewModel.SelectedTechnologyIds = project.AssociatedTechnologies;
-            viewModel.Code = project.Code;
-            viewModel.Name = project.Name;
+            viewModel.SelectedTechnologyIds = project.AssociatedTechnologies!;
+            viewModel.Code = project.Code!;
+            viewModel.Name = project.Name!;
             viewModel.StartingDate = project.StartingDate;
             viewModel.EndingDate = project.EndingDate;
-            DataTable dt = GetData.GetTechnologyData();
+            DataTable dt = getData.GetTechnologyData();
             myListBox.ItemsSource = dt.DefaultView;
     
                 foreach (DataRowView row in myListBox.Items)
                 {
                     int id = Convert.ToInt32(row.Row.ItemArray[1]);
 
-                    if (project.AssociatedTechnologies.Contains(id))
+                    if (project.AssociatedTechnologies!=null &&  project.AssociatedTechnologies.Contains(id))
                     {
                         myListBox.SelectedItems.Add(row);
 
@@ -51,7 +52,7 @@ namespace EmployeeManagementSystem.UserControls
             
         }
      
-        public void ChangeWindow(object sender, EventArgs e)
+        public void ChangeWindow(object? sender, EventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);

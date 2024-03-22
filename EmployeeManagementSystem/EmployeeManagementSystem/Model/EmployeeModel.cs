@@ -5,50 +5,50 @@ namespace EmployeeManagementSystem.Model
 {
     public class EmployeeModel : INotifyPropertyChanged
     {
-        private string code;
-        public string Code
+        private string? code;
+        public string? Code
         {
             get { return code; }
             set { code = value; OnPropertyChanged("Code"); }
         }
 
-        private string firstName;
-        public string FirstName
+        private string? firstName;
+        public string? FirstName
         {
             get { return firstName; }
             set { firstName = value; OnPropertyChanged("FirstName"); }
         }
 
-        private string lastName;
-        public string LastName
+        private string? lastName;
+        public string? LastName
         {
             get { return lastName; }
             set { lastName = value; OnPropertyChanged("LastName"); }
         }
 
-        private string email;
-        public string Email
+        private string? email;
+        public string? Email
         {
             get { return email; }
             set { email = value; OnPropertyChanged("Email"); }
         }
 
-        private string password;
-        public string Password
+        private string? password;
+        public string? Password
         {
             get { return password; }
             set { password = value; OnPropertyChanged("Password"); }
         }
 
-        private string designation;
-        public string Designation
+        private string? designation;
+        public string? Designation
         {
             get { return designation; }
             set { designation = value; OnPropertyChanged("Designation"); }
         }
 
-        private string department;
-        public string Department
+        private string? department;
+        public string? Department
         {
             get { return department; }
             set { department = value; OnPropertyChanged("Department"); }
@@ -75,8 +75,8 @@ namespace EmployeeManagementSystem.Model
         }
 
 
-        private string contactNumber;
-        public string ContactNumber
+        private string? contactNumber;
+        public string? ContactNumber
         {
             get { return contactNumber; }
             set
@@ -86,8 +86,8 @@ namespace EmployeeManagementSystem.Model
             }
         }
 
-        private string gender;
-        public string Gender
+        private string? gender;
+        public string? Gender
         {
             get { return gender; }
             set
@@ -97,22 +97,22 @@ namespace EmployeeManagementSystem.Model
             }
         }
 
-        private string maritalStauts;
-        public string MaritalStauts
+        private string? maritalStauts;
+        public string? MaritalStauts
         {
             get { return maritalStauts; }
             set { maritalStauts = value; OnPropertyChanged("MaritalStatus"); }
         }
 
-        private string presentAddress;
-        public string PresentAddress
+        private string? presentAddress;
+        public string? PresentAddress
         {
             get { return presentAddress; }
             set { presentAddress = value; OnPropertyChanged("PresentAddress"); }
         }
 
-        private string permenentAddress;
-        public string PermanentAddress
+        private string? permenentAddress;
+        public string? PermanentAddress
         {
             get { return permenentAddress; }
             set { permenentAddress = value; OnPropertyChanged("PermanentAddress"); }

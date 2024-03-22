@@ -630,7 +630,7 @@ namespace EmployeeManagementSystem.Database
         public String ExecuteLogin(string username, string password)
         {
             string query = $"SELECT Code from EmsTblEmployee where Email LIKE @Email COLLATE Latin1_General_CS_AS AND Password LIKE @Password COLLATE Latin1_General_CS_AS ";
-            string? code = string.Empty;
+            string code = String.Empty;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
@@ -644,12 +644,12 @@ namespace EmployeeManagementSystem.Database
                         {
                             if (reader.Read())
                             {
-                                code = reader.IsDBNull(0) ? null : reader.GetString(0);
+                                code = reader.IsDBNull(0) ? string.Empty : reader.GetString(0);
                             }
                         }
                     }
                 }
-                return code;
+                return code!;
             }
             catch (Exception)
             {

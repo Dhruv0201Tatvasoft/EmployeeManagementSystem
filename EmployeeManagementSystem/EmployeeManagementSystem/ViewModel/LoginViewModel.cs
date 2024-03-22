@@ -8,21 +8,21 @@ namespace EmployeeManagementSystem.ViewModel
 {
     class LoginViewModel : INotifyPropertyChanged
     {
-        public event EventHandler IncorrectLoginEvent;
+        public event EventHandler? IncorrectLoginEvent;
         private void OnIncorrectLoginEvent(EventArgs empty)
         {
             IncorrectLoginEvent?.Invoke(this, empty);
         }
-        public event EventHandler<EmployeeEventArgs> CorrectLoginEvent;
+        public event EventHandler<EmployeeEventArgs>? CorrectLoginEvent;
         private void OnCorrectLoginEvent(EmployeeModel employee)
         {
             var eventArgs = new EmployeeEventArgs(employee);
             CorrectLoginEvent?.Invoke(this, eventArgs);
         }
         private GetData getData;
-        private string username;
+        private string? username;
 
-        public string UserName
+        public string? UserName
         {
             get { return username; }
             set
@@ -32,9 +32,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private String password;
+        private String? password;
 
-        public String Password
+        public String? Password
         {
             get { return password; }
             set
@@ -44,14 +44,14 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private ICommand login;
+        private ICommand? login;
         public ICommand Login
         {
             get
             {
                 if (login == null)
                 {
-                    login = new RelayCommand(ExecuteLogin, CanLoginExecute, false);
+                    login = new RelayCommand(ExecuteLogin, CanLoginExecute);
                 }
                 return login;
             }
@@ -65,15 +65,19 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteLogin(object obj)
         {
-            string code = getData.ExecuteLogin(UserName, Password);
-            if (!String.IsNullOrEmpty(code))
+            if (username != null && password != null)
             {
-                EmployeeModel emp = getData.GetEmployeeModelFromCode(code);
-                OnCorrectLoginEvent(emp);
-            }
-            else
-            {
-                OnIncorrectLoginEvent(EventArgs.Empty);
+                string code = getData.ExecuteLogin(username, password);
+
+                if (!String.IsNullOrEmpty(code))
+                {
+                    EmployeeModel emp = getData.GetEmployeeModelFromCode(code);
+                    OnCorrectLoginEvent(emp);
+                }
+                else
+                {
+                    OnIncorrectLoginEvent(EventArgs.Empty);
+                }
             }
 
         }

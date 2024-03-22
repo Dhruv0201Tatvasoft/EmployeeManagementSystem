@@ -19,7 +19,7 @@ namespace EmployeeManagementSystem.Database
                     return true;
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 {
                     MessageBox.Show("Error in deleting data from database");

@@ -10,9 +10,9 @@ namespace EmployeeManagementSystem.Model
     public class EmployeeExperienceModel : INotifyPropertyChanged
     {
 
-        private String organization;
+        private String? organization;
 
-        public String Organization
+        public String? Organization
         {
             get { return organization; }
             set { organization = value; OnPropertyChanged("Organization"); }
@@ -44,9 +44,9 @@ namespace EmployeeManagementSystem.Model
                 OnPropertyChanged("Duration");
             }
         }
-        private string designation;
+        private string? designation;
 
-        public string Designation
+        public string? Designation
         {
             get { return designation; }
             set { designation = value; OnPropertyChanged("Designation"); }

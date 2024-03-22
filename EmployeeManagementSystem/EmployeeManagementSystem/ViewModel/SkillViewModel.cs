@@ -12,23 +12,23 @@ namespace EmployeeManagementSystem.ViewModel
         private InsertData insertData;
         private UpdateData updateData;
         private DeleteData deleteData;
-        private DataTable skillDataTable;
-        public DataTable SkillDataTable
+        private DataTable? skillDataTable;
+        public DataTable? SkillDataTable
         {
             get { return skillDataTable; }
             set { skillDataTable = value; }
         }
 
-        private string oldSkillName;
+        private string? oldSkillName;
 
-        public string OldSKillName
+        public string? OldSKillName
         {
             get { return oldSkillName; }
             set { oldSkillName = value; OnPropertyChanged("OldSKillName"); }
         }
 
-        private string skillName;
-        public string SkillName
+        private string? skillName;
+        public string? SkillName
         {
             get { return skillName; }
             set
@@ -38,8 +38,8 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private DataRowView selectedRow;
-        public DataRowView SelectedRow
+        private DataRowView? selectedRow;
+        public DataRowView? SelectedRow
         {
             get
             {
@@ -55,14 +55,14 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-        private ICommand saveSkill;
+        private ICommand? saveSkill;
         public ICommand SaveSkill
         {
             get
             {
                 if (saveSkill == null)
                 {
-                    saveSkill = new RelayCommand(ExecuteSaveSkill, CanSaveSkillExecute, false);
+                    saveSkill = new RelayCommand(ExecuteSaveSkill, CanSaveSkillExecute);
                 }
                 return saveSkill;
             }
@@ -78,13 +78,16 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSaveSkill(object obj)
         {
-            if (selectedRow != null && !String.IsNullOrEmpty(oldSkillName))
+            if (selectedRow != null && !String.IsNullOrEmpty(oldSkillName) && !String.IsNullOrEmpty(skillName))
             {
-                updateData.UpdateSkillName(skillName, OldSKillName);
+                updateData.UpdateSkillName(skillName, oldSkillName);
             }
             else
             {
-                insertData.InsertSkill(skillName);
+                if (skillName != null)
+                {
+                    insertData.InsertSkill(skillName);
+                }
             }
             selectedRow = null;
             SkillName = String.Empty;
@@ -92,14 +95,14 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("SkillDataTable");
         }
 
-        private ICommand deleteSkill;
+        private ICommand? deleteSkill;
         public ICommand DeleteSkill
         {
             get
             {
                 if (deleteSkill == null)
                 {
-                    deleteSkill = new RelayCommand(ExecuteDeleteSkill, CanDeleteSkillExecute, false);
+                    deleteSkill = new RelayCommand(ExecuteDeleteSkill, CanDeleteSkillExecute);
                 }
                 return deleteSkill;
             }
@@ -107,7 +110,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteSkill(object obj)
         {
-            deleteData.DeleteSkill((string)selectedRow.Row.ItemArray[0]);
+            deleteData.DeleteSkill((string)selectedRow?.Row.ItemArray[0]!);
             SkillName = String.Empty;
             skillDataTable = getData.GetSkillTable();
             OnPropertyChanged("SkillDataTable");
@@ -120,14 +123,14 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-        private ICommand editSkill;
+        private ICommand? editSkill;
         public ICommand EditSkill
         {
             get
             {
                 if (editSkill == null)
                 {
-                    editSkill = new RelayCommand(ExecuteEditSkill, CanEditSkillExecute, false);
+                    editSkill = new RelayCommand(ExecuteEditSkill, CanEditSkillExecute);
                 }
                 return editSkill;
             }
@@ -142,8 +145,11 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteEditSkill(object obj)
         {
-            oldSkillName = skillName = (string)selectedRow.Row[0];
-            OnPropertyChanged("SkillName");
+            if (selectedRow != null)
+            {
+                oldSkillName = skillName = (string)selectedRow.Row[0];
+                OnPropertyChanged("SkillName");
+            }
         }
 
         public SkillViewModel()

@@ -124,9 +124,9 @@ VALUES
 
 
 exec sp_rename 'dbo.EmsTblEmployeeEducation.Degree' ,'Qualification','COLUMN'
+exec sp_rename 'dbo.EmsTblEmployee.PermanentAdress','PermanentAddress','COLUMN'
 
-
-
+select * from EmsTblEmployee
 alter table EmsTblEmployeeEducation Drop FOREIGN key EmployeeCode
 ALTER TABLE EmsTblEmployeeEducation
 ADD CONSTRAINT FK_EmployeeCode
@@ -164,7 +164,7 @@ ADD CONSTRAINT FK_TechnologyId
 FOREIGN KEY (TechnologyId)
 REFERENCES EmsTblTechnology(Id)
 ON UPDATE CASCADE
-ON DELETE CASCADE;0
+ON DELETE CASCADE;
 
 
 
@@ -181,5 +181,3 @@ GROUP BY
     MONTH(JoiningDate), DATENAME(month, JoiningDate)
 ORDER BY 
     (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
-
-select * fro

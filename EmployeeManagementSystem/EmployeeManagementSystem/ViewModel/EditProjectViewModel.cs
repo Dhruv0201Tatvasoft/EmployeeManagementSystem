@@ -10,21 +10,20 @@ namespace EmployeeManagementSystem.ViewModel
     internal class EditProjectViewModel:IDataErrorInfo, INotifyPropertyChanged
     {
 
+        private GetData getData;
+        private UpdateData updateData;
         private DataTable dataTable;
+        public event EventHandler? ChangeWindowEvent;
+        protected virtual void OnChangeWindowEvent(EventArgs e)
+        {
+            ChangeWindowEvent?.Invoke(this, e);
+        }
         public DataTable DataTable
         {
             get { return dataTable; }
             set { dataTable = value; OnPropertyChanged("dataTable"); }
 
         }
-        
-        private GetData getData;
-        public event EventHandler ChangeWindowEvent;
-        protected virtual void OnChangeWindowEvent(EventArgs e)
-        {
-            ChangeWindowEvent?.Invoke(this, e);
-        }
-        private UpdateData updateData;
 
         private List<int> selectedtechnlogyIds = new List<int>();
         public List<int> SelectedTechnologyIds
@@ -32,8 +31,8 @@ namespace EmployeeManagementSystem.ViewModel
             get { return selectedtechnlogyIds; }
             set { selectedtechnlogyIds = value; }
         }
-        private DataRowView selectedTechnologyRow;
-        public DataRowView SelectedTechnologyRow
+        private DataRowView? selectedTechnologyRow;
+        public DataRowView? SelectedTechnologyRow
         {
             get { return selectedTechnologyRow; }
             set
@@ -41,26 +40,26 @@ namespace EmployeeManagementSystem.ViewModel
                 selectedTechnologyRow = value;
                 if (selectedTechnologyRow != null)
                 {
-                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]))
+                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]!))
                     {
-                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]);
+                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                     else
                     {
-                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]);
+                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                 }
             }
         }
 
-        private string oldCode;
-        public string OldCode
+        private string? oldCode;
+        public string? OldCode
         {
             get { return oldCode; }
             set { oldCode = value;
             }
         }
-        private string code;
+        private string code = string.Empty;
         public string Code
         {
             get { return code; }
@@ -70,7 +69,7 @@ namespace EmployeeManagementSystem.ViewModel
                 OnPropertyChanged("Code");
             }
         }
-        private string name;
+        private string name = string.Empty;
         public string Name
         {
             get { return name; }
@@ -104,7 +103,7 @@ namespace EmployeeManagementSystem.ViewModel
 
             }
         }
-        public string Error => null;
+        public string Error => null!;
 
         public string this[string PropertyName]
         {
@@ -155,14 +154,14 @@ namespace EmployeeManagementSystem.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ICommand updateProject;
+        private ICommand? updateProject;
         public ICommand UpdateProject
         {
             get
             {
                 if (updateProject == null)
                 {
-                    updateProject = new RelayCommand(ExecuteUpdateProject, CanUpdateProjectExecute, false);
+                    updateProject = new RelayCommand(ExecuteUpdateProject, CanUpdateProjectExecute);
                 }
                 return updateProject;
             }
@@ -185,7 +184,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
-            didSave = updateData.UpdateProject(OldCode, project, EndingDate != null);
+            didSave = updateData.UpdateProject(OldCode!, project, EndingDate != null);
             if(didSave) OnChangeWindowEvent(EventArgs.Empty);
 
         }

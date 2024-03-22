@@ -9,31 +9,27 @@ namespace EmployeeManagementSystem.ViewModel
     internal class AddProjectViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
 
-        private DataTable dataTable;
-        public DataTable DataTable
-        {
-            get { return dataTable; }
-            set { dataTable = value; OnPropertyChanged("dataTable"); }
-
-        }
-        private List<DataRowView> list;
-        public List<DataRowView> List { get { return list; } set { list = value; } }
         private GetData getData;
-        public event EventHandler ChangeWindowEvent;
+        private InsertData insertData;
+        public event EventHandler? ChangeWindowEvent;
         protected virtual void OnChangeWindowEvent(EventArgs e)
         {
             ChangeWindowEvent?.Invoke(this, e);
         }
-        private InsertData insertData;
-
+        private DataTable dataTable;
+        public DataTable DataTable
+        {
+            get { return dataTable; }
+            set { dataTable = value; OnPropertyChanged("DataTable"); }
+        }
         private List<int> selectedtechnlogyIds = new List<int>();
         public List<int> SelectedTechnologyIds
         {
             get { return selectedtechnlogyIds; }
-            set { selectedtechnlogyIds = value; }
+            set { selectedtechnlogyIds = value; OnPropertyChanged("SelectedTechnologyIds"); }
         }
-        private DataRowView selectedTechnologyRow;
-        public DataRowView SelectedTechnologyRow
+        private DataRowView? selectedTechnologyRow;
+        public DataRowView? SelectedTechnologyRow
         {
             get { return selectedTechnologyRow; }
             set
@@ -41,15 +37,17 @@ namespace EmployeeManagementSystem.ViewModel
                 selectedTechnologyRow = value;
                 if (selectedTechnologyRow != null)
                 {
-                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]))
+                    
+                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]!))
                     {
-                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]);
+                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                     else
                     {
-                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]);
+                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                 }
+                OnPropertyChanged("SelectedTechnologyRow");
             }
         }
 
@@ -100,7 +98,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        public string Error => null;
+        public string Error => null!;
 
         public string this[string PropertyName]
         {
@@ -132,14 +130,14 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-        private ICommand saveProject;
+        private ICommand? saveProject;
         public ICommand SaveProject
         {
             get
             {
                 if (saveProject == null)
                 {
-                    saveProject = new RelayCommand(ExecuteSaveProject, CanSaveProjectExecute, false);
+                    saveProject = new RelayCommand(ExecuteSaveProject, CanSaveProjectExecute);
                 }
                 return saveProject;
             }

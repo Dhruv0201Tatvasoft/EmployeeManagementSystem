@@ -4,15 +4,15 @@ namespace EmployeeManagementSystem.Model
 {
     public class ProjectModel : INotifyPropertyChanged
     {
-        private string code;
-        public string Code
+        private string? code;
+        public string? Code
         {
             get { return code; }
             set { code = value; OnPropertyChanged("Code"); }
         }
 
-        private string name;
-        public string Name
+        private string? name;
+        public string? Name
         {
             get { return name; }
             set { name = value; OnPropertyChanged("Name"); }
@@ -31,14 +31,14 @@ namespace EmployeeManagementSystem.Model
             get { return endingDate; }
             set { endingDate = value; OnPropertyChanged("EndingDate"); }
         }
-        private List<int> associatedTechnologies;
-        public List<int> AssociatedTechnologies
+        private List<int>? associatedTechnologies;
+        public List<int>? AssociatedTechnologies
         {
             get { return associatedTechnologies; }
             set { associatedTechnologies = value; OnPropertyChanged("AssociatedTechnologies"); }
         }
-        private List<EmployeeModel> associatedEmployees;
-        public List<EmployeeModel> AssociatedEmployees
+        private List<EmployeeModel>? associatedEmployees;
+        public List<EmployeeModel>? AssociatedEmployees
         {
             get
             {

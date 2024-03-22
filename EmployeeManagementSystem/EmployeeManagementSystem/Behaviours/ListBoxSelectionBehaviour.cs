@@ -32,12 +32,12 @@ namespace EmployeeManagementSystem.Behaviours
         {
             if (e.AddedItems.Count > 0)
             {
-                SelectedItem = (DataRowView)e.AddedItems[0];
+                SelectedItem = (DataRowView)e.AddedItems[0]!;
             }
 
             if(e.RemovedItems.Count > 0)
             {
-                SelectedItem = (DataRowView)e.RemovedItems[0];
+                SelectedItem = (DataRowView)e.RemovedItems[0]!;
             }
 
         }
