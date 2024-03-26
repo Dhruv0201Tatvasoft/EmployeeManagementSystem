@@ -41,7 +41,7 @@ namespace EmployeeManagementSystem.UserControls
                 {
                     int id = Convert.ToInt32(row.Row.ItemArray[1]);
 
-                    if (project.AssociatedTechnologies!=null &&  project.AssociatedTechnologies.Contains(id))
+                    if (project.AssociatedTechnologies!=null &&  project.AssociatedTechnologies.Contains(id)) /// select's technologies that are associated to the project
                     {
                         myListBox.SelectedItems.Add(row);
 
@@ -51,7 +51,10 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.ChangeWindowEvent += ChangeWindow;
             
         }
-     
+
+        /// <summary>
+        /// Changes MainWindow's content to projectWindow, called after saving project
+        /// </summary>
         public void ChangeWindow(object? sender, EventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
@@ -68,6 +71,9 @@ namespace EmployeeManagementSystem.UserControls
 
         }
 
+        /// <summary>
+        /// Changes MainWindow's content to projectWindow, called after clicking cancel button.
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();

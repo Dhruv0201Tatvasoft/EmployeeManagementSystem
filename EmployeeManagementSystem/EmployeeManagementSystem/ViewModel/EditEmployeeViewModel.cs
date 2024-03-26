@@ -15,20 +15,20 @@ namespace EmployeeManagementSystem.ViewModel
         private DeleteData deleteData;
         private UpdateData updateData;
         public event EventHandler? AddEducationButtonClickedEvent;
-        public event EventHandler? AddExprienceButtonClickedEvent;
+        public event EventHandler? AddExperienceButtonClickedEvent;
         public event EventHandler? EmployeeUpdatedEvent;
         public event EventHandler? AddEducationRowEvent;
         public event EventHandler? AddExperienceRowEvent;
         public event EventHandler? EditEducationRowEvent;
-        public event EventHandler? EditExprienceRowEvent;
+        public event EventHandler? EditExperienceRowEvent;
 
         public void OnAddEducationButtonClicked(EventArgs e)
         {
             AddEducationButtonClickedEvent?.Invoke(this, e);
         }
-        public void OnAddExprienceButtonClicked(EventArgs e)
+        public void OnAddExperienceButtonClicked(EventArgs e)
         {
-            AddExprienceButtonClickedEvent?.Invoke(this, e);
+            AddExperienceButtonClickedEvent?.Invoke(this, e);
         }
         public void OnEmployeeAddedEvent(EventArgs e)
         {
@@ -48,7 +48,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
         public void OnEditExperienceRowEvent(EventArgs e)
         {
-            EditExprienceRowEvent?.Invoke(this, e);
+            EditExperienceRowEvent?.Invoke(this, e);
         }
 
         private string oldCode = string.Empty;
@@ -202,12 +202,12 @@ namespace EmployeeManagementSystem.ViewModel
 
 
         }
-        private string? selectedmaritalStatus = string.Empty;
+        private string? selectedMaritalStatus = string.Empty;
 
         public string? SelectedMaritalStatus
         {
-            get { return selectedmaritalStatus; }
-            set { selectedmaritalStatus = value; OnPropertyChanged("SelectedMaritalStatus"); }
+            get { return selectedMaritalStatus; }
+            set { selectedMaritalStatus = value; OnPropertyChanged("SelectedMaritalStatus"); }
         }
         private bool isCheckBoxChecked = false;
 
@@ -259,11 +259,11 @@ namespace EmployeeManagementSystem.ViewModel
                 OnPropertyChanged("Department");
             }
         }
-        private ObservableCollection<string> maritalstatus;
+        private ObservableCollection<string> maritalStatus;
         public ObservableCollection<string> MaritalStatus
         {
-            get { return maritalstatus; }
-            set { maritalstatus = value; OnPropertyChanged("MaritalStatus"); }
+            get { return maritalStatus; }
+            set { maritalStatus = value; OnPropertyChanged("MaritalStatus"); }
 
         }
         private EmployeeEducationModel? selectedEmployeeEducationModel;
@@ -289,12 +289,12 @@ namespace EmployeeManagementSystem.ViewModel
             set { selectedEmployeeExperienceModel = value; }
         }
 
-        private EmployeeExperienceModel? selectedOldEmployeeExprienceModel;
+        private EmployeeExperienceModel? selectedOldEmployeeExperienceModel;
 
-        public EmployeeExperienceModel? SelectedOldEmployeeExprienceModel
+        public EmployeeExperienceModel? SelectedOldEmployeeExperienceModel
         {
-            get { return selectedOldEmployeeExprienceModel; }
-            set { selectedOldEmployeeExprienceModel = value; }
+            get { return selectedOldEmployeeExperienceModel; }
+            set { selectedOldEmployeeExperienceModel = value; }
         }
 
 
@@ -366,6 +366,10 @@ namespace EmployeeManagementSystem.ViewModel
                 return errors;
             }
         }
+
+        /// <summary>
+        /// To update employee to database.
+        /// </summary>
         private ICommand? updateEmployee;
         public ICommand UpdateEmployee
         {
@@ -385,7 +389,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteUpdateEmployee(object obj)
         {
-            bool didsaved = false;
+            bool didSave = false;
             EmployeeModel employee;
             if (ReleaseDate != null)
             {
@@ -429,12 +433,16 @@ namespace EmployeeManagementSystem.ViewModel
                     PermanentAddress = PermanentAddress
                 };
             }
-            didsaved = updateData.UpdateEmployee(oldCode, employee, ReleaseDate != null);
-            if (didsaved)
+            didSave = updateData.UpdateEmployee(oldCode, employee, ReleaseDate != null);
+            if (didSave)
             {
                 OnEmployeeAddedEvent(EventArgs.Empty);
             }
         }
+
+        /// <summary>
+        /// To add blank row to education list.
+        /// </summary>
         private ICommand? addBlankRowEducation;
         public ICommand AddBlankRowEducation
         {
@@ -459,7 +467,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
-
+        /// <summary>
+        /// To add blank row to experience list
+        /// </summary>
         private ICommand? addBlankRowExperience;
         public ICommand AddBlankRowExperience
         {
@@ -476,7 +486,7 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteAddRowExperience(object obj)
         {
             EmployeeExperienceList.Add(new EmployeeExperienceModel());
-            OnAddExprienceButtonClicked(EventArgs.Empty);
+            OnAddExperienceButtonClicked(EventArgs.Empty);
             OnPropertyChanged("EmployeeExperienceList");
         }
 
@@ -484,6 +494,10 @@ namespace EmployeeManagementSystem.ViewModel
         {
             return true;
         }
+
+        /// <summary>
+        /// To save education field to database.
+        /// </summary>
         private ICommand? saveEducationRow;
         public ICommand SaveEducationRow
         {
@@ -504,41 +518,42 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSaveEducationRow(object obj)
         {
-            if (string.IsNullOrEmpty(selectedEmployeeEducationModel?.BoardUniversity) ||
+
+            if (selectedEmployeeEducationModel != null && (string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) ||
            string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) ||
            string.IsNullOrEmpty(selectedEmployeeEducationModel.State) ||
            string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) ||
-           string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName))
+           string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName)))  ///to validate field before inserting
             {
                 MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) && !IsValidPercentage(selectedEmployeeEducationModel.Percentage))
+            else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) && !IsValidPercentage(selectedEmployeeEducationModel.Percentage)))/// to validate percentage field.
             {
-                MessageBox.Show("Please provide valid vlue for percentage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please provide valid value for percentage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear))
+            else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear)))/// to validate passing year field.
             {
-                MessageBox.Show("Please provide valid vlue for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please provide valid value for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName) && (selectedEmployeeEducationModel.InstituteName.Length > 35))
+            else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName) && (selectedEmployeeEducationModel.InstituteName.Length > 35))) /// to validate institute name field.
             {
                 MessageBox.Show("Maximum character limit reached from Institute Name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) && (selectedEmployeeEducationModel.Qualification.Length > 10))
+            else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) && (selectedEmployeeEducationModel.Qualification.Length > 10))) /// to validate qualification field.
             {
                 MessageBox.Show("Maximum character limit reached from Qualification Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) && (selectedEmployeeEducationModel.BoardUniversity.Length > 30))
+            else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) && (selectedEmployeeEducationModel.BoardUniversity.Length > 30))) /// to validate Board/University field.
             {
-                MessageBox.Show("Maximum character limit reached from Board/Universtiy Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached from Board/University Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!string.IsNullOrEmpty(selectedEmployeeEducationModel.State) && (selectedEmployeeEducationModel.State.Length > 15))
+            else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.State) && (selectedEmployeeEducationModel.State.Length > 15))) /// to validate state field.
             {
                 MessageBox.Show("Maximum character limit reached from State Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -546,13 +561,14 @@ namespace EmployeeManagementSystem.ViewModel
             else
             {
                 bool didSave = false;
-                if (selectedOldEmployeeEducationModel == null)
+                if (selectedOldEmployeeEducationModel == null && selectedEmployeeEducationModel != null) /// if selectedOldEmployeeEducationModel == null that means we are adding new record. other wise we are updating old record.
                 {
                     didSave = insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
                 }
                 else
                 {
-                    didSave = updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, selectedOldEmployeeEducationModel, code);
+                    if (selectedEmployeeEducationModel != null && selectedOldEmployeeEducationModel != null)
+                        didSave = updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, selectedOldEmployeeEducationModel, code);
                 }
                 if (didSave)
                 {
@@ -563,6 +579,10 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("SelectedEmployeeEducationField");
         }
 
+
+        /// <summary>
+        ///  to save experience field to database.
+        /// </summary>
         private ICommand? saveExperienceRow;
         public ICommand SaveExperienceRow
         {
@@ -584,46 +604,48 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteSaveExperienceRow(object obj)
         {
-            if (string.IsNullOrEmpty(selectedEmployeeExperienceModel?.Organization) ||
+
+            if (selectedEmployeeExperienceModel != null && (string.IsNullOrEmpty(selectedEmployeeExperienceModel.Organization) ||
                 string.IsNullOrEmpty(selectedEmployeeExperienceModel.Designation) ||
                 selectedEmployeeExperienceModel.FromDate == null ||
-                selectedEmployeeExperienceModel.ToDate == null)
+                selectedEmployeeExperienceModel.ToDate == null)) /// to validate all the fields.
             {
                 MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (selectedEmployeeExperienceModel.Duration < 0)
+            else if (selectedEmployeeExperienceModel != null && selectedEmployeeExperienceModel.Duration < 0) /// to validate duration field.
             {
                 MessageBox.Show("Please provide valid value for from and to date.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!String.IsNullOrEmpty(selectedEmployeeExperienceModel.Organization) && (selectedEmployeeExperienceModel.Organization.Length > 15))
-            {
-                MessageBox.Show("Maximum character limit reached from Organization  Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             else
             {
                 bool didSave = false;
-                if (selectedOldEmployeeExprienceModel == null)
+                if (selectedOldEmployeeExperienceModel == null && selectedEmployeeExperienceModel != null) /// if selectedOldEmployeeExperienceModel == null that means we are adding new record otherwise we are updating the old record.
                 {
                     didSave = insertData.InsertExperienceDetails(selectedEmployeeExperienceModel, Code);
                 }
                 else
                 {
-                    didSave = updateData.UpdateEmployeeExperience(selectedEmployeeExperienceModel, selectedOldEmployeeExprienceModel, code);
+                    if (selectedEmployeeExperienceModel != null && selectedOldEmployeeExperienceModel != null)
+                    {
+                        didSave = updateData.UpdateEmployeeExperience(selectedEmployeeExperienceModel, selectedOldEmployeeExperienceModel, code);
+                    }
                 }
                 if (didSave)
                 {
-                    selectedOldEmployeeExprienceModel = null;
+                    selectedOldEmployeeExperienceModel = null;
                     OnAddExperienceRowEvent(EventArgs.Empty);
-
                 }
             }
             OnPropertyChanged("SelectedEmployeeEducationField");
         }
 
+
+
+        /// <summary>
+        /// Command triggers on click of edit education row button and sets selectedOldEmployeeEducationModel using selectedEmployeeEducationModel.
+        /// </summary>
         private ICommand? editEducationRow;
         public ICommand EditEducationRow
         {
@@ -660,6 +682,9 @@ namespace EmployeeManagementSystem.ViewModel
             OnEditEducationRowEvent(EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Command triggers on click of edit experience row button and sets selectedOldEmployeeExperienceModel using selectedEmployeeExperienceModel.
+        /// </summary>
         private ICommand? editExperience;
         public ICommand EditExperience
         {
@@ -676,7 +701,7 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteEditExperience(object obj)
         {
             if (selectedEmployeeExperienceModel != null)
-                selectedOldEmployeeExprienceModel = new EmployeeExperienceModel
+                selectedOldEmployeeExperienceModel = new EmployeeExperienceModel
                 {
                     Organization = selectedEmployeeExperienceModel.Organization,
                     Duration = selectedEmployeeExperienceModel.Duration,
@@ -692,6 +717,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// To remove a row from education List. this does not delete the education field from database.
+        /// </summary>
         private ICommand? removeEducationFromList;
         public ICommand RemoveEducationFromList
         {
@@ -719,6 +747,9 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeEducationList");
         }
 
+        /// <summary>
+        /// To remove a row from experience List. this does not delete the experience field from database.
+        /// </summary>
         private ICommand? removeExperienceFromList;
         public ICommand RemoveExperienceFromList
         {
@@ -744,6 +775,9 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeExperienceList");
         }
 
+        /// <summary>
+        /// To remove education field of an employee from database. 
+        /// </summary>
         private ICommand? removeEducationFromDataBase;
         public ICommand RemoveEducationFromDataBase
         {
@@ -765,17 +799,22 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveEducationFromDataBase(object obj)
         {
-            bool didDelete = false;
             if (selectedEmployeeEducationModel != null)
-                didDelete = deleteData.DeleteEducationRow(selectedEmployeeEducationModel, Code);
-            if (didDelete)
             {
-                if (selectedEmployeeEducationModel != null)
-                    employeeEducationList.Remove(selectedEmployeeEducationModel);
+                bool didDelete = false;
+                didDelete = deleteData.DeleteEducationRow(selectedEmployeeEducationModel, Code);
+                if (didDelete)
+                {
+                    employeeEducationList.Remove(selectedEmployeeEducationModel); /// if didDelete = true means the education field is deleted from database so we also have to delete it from the education list to show changes to UI
+
+                }
+                OnPropertyChanged("employeeEducationList");
             }
-            OnPropertyChanged("employeeEducationList");
         }
 
+        /// <summary>
+        /// To remove experience field of an employee from database. 
+        /// </summary
         private ICommand? removeExperienceFromDataBase;
         public ICommand RemoveExperienceFromDataBase
         {
@@ -791,15 +830,16 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveExperienceFromDataBase(object obj)
         {
-            bool didDelete = false;
             if (selectedEmployeeExperienceModel != null)
-                didDelete = deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
-            if (didDelete)
             {
-                if (selectedEmployeeExperienceModel != null)
-                    EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);
+                bool didDelete = false;
+                didDelete = deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel, Code);
+                if (didDelete)
+                {
+                    EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);///if didDelete = true means the experience field is deleted from database so we also have to delete it from the experience list to show changes to UI
+                }
+                OnPropertyChanged("EmployeeExperienceList");
             }
-            OnPropertyChanged("EmployeeExperienceList");
         }
 
         private bool CanRemoveExperienceFromDataBaseExecute(object arg)
@@ -807,6 +847,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// To clear all the details user has put in the input fields. 
+        /// </summary>
         private ICommand? clearEmployeeDetails;
         public ICommand ClearEmployeeDetails
         {
@@ -835,25 +878,29 @@ namespace EmployeeManagementSystem.ViewModel
             ReleaseDate = null;
             OnPropertyChanged(nameof(ReleaseDate));
         }
-        private ICommand? clearPersonalDetalis;
-        public ICommand ClearPersonalDetalis
+
+        /// <summary>
+        /// to clear all the personal details user has put in the input fields.
+        /// </summary>
+        private ICommand? clearPersonalDetails;
+        public ICommand ClearPersonalDetails
         {
             get
             {
-                if (clearPersonalDetalis == null)
+                if (clearPersonalDetails == null)
                 {
-                    clearPersonalDetalis = new RelayCommand(ExecuteClearPersonalDetalis, CanClearPersonalDetalisExecute, false);
+                    clearPersonalDetails = new RelayCommand(ExecuteClearPersonalDetails, CanClearPersonalDetailsExecute, false);
                 }
-                return clearPersonalDetalis;
+                return clearPersonalDetails;
             }
         }
 
-        private bool CanClearPersonalDetalisExecute(object arg)
+        private bool CanClearPersonalDetailsExecute(object arg)
         {
             return true;
         }
 
-        private void ExecuteClearPersonalDetalis(object obj)
+        private void ExecuteClearPersonalDetails(object obj)
         {
             DOB = DateTime.Now;
             Gender = "Male";
@@ -871,7 +918,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             designation = new ObservableCollection<string> { "Developer", "Senior Developer", "Team Lead", "Manager" };
             department = new ObservableCollection<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" };
-            maritalstatus = new ObservableCollection<string> { "Married", "Single" };
+            maritalStatus = new ObservableCollection<string> { "Married", "Single" };
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();
@@ -901,49 +948,73 @@ namespace EmployeeManagementSystem.ViewModel
             this.employeeExperienceList = employeeModel.ExperienceModels;
             designation = new ObservableCollection<string> { "Developer", "Senior Developer", "Team Lead", "Manager" };
             department = new ObservableCollection<string> { "Dotnet", "Java", "PHP", "Mobile", "QA" };
-            maritalstatus = new ObservableCollection<string> { "Married", "Single" };
+            maritalStatus = new ObservableCollection<string> { "Married", "Single" };
             insertData = new InsertData();
             deleteData = new DeleteData();
             updateData = new UpdateData();
             GetData getData = new GetData();
 
         }
-        private bool IsValidPercentage(string Ipercentage)
+
+
+        /// <summary>
+        /// To check if user has put the valid percentage in the percentage input field.
+        /// </summary>
+        /// <param name="inputPercentage">percentage added by user.</param>
+        /// <returns>true if user has added valid (i.e. Decimal and between 0 and 100) percentage otherwise false.</returns>
+        private bool IsValidPercentage(string inputPercentage)
         {
-            if (decimal.TryParse(Ipercentage, out decimal Opercentage))
+            if (decimal.TryParse(inputPercentage, out decimal outputPercentage))
             {
-                return Opercentage >= 0 && Opercentage <= 100;
+                return outputPercentage >= 0 && outputPercentage <= 100;
             }
 
             return false;
         }
-        private bool IsValidYear(string InputYear)
+
+        /// <summary>
+        /// To check if user has put valid year in year input field.
+        /// </summary>
+        /// <param name="inputYear">year value added by user.</param>
+        /// <returns>true if input value is valid(i.e. integer and between 1900 and 3000) otherwise false.</returns>
+        private bool IsValidYear(string inputYear)
         {
-            if (int.TryParse(InputYear, out int OutputYear))
+            if (int.TryParse(inputYear, out int outputYear))
             {
 
-                return OutputYear >= 1900 && OutputYear <= 3000;
+                return outputYear >= 1900 && outputYear <= 3000;
             }
 
             return false;
         }
-        private bool IsValidContactNumber(string ContactNumber)
+
+        /// <summary>
+        /// To check if user has provided valid phone number in phone number input field.
+        /// </summary>
+        /// <param name="contactNumber">contact number added by user</param>
+        /// <returns>true if value is valid (checks using Regex) otherwise false.</returns>
+        private bool IsValidContactNumber(string contactNumber)
         {
-            string regexPattern = @"^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
-            return Regex.IsMatch(ContactNumber, regexPattern);
+            string regexPattern = @"^(\+\d{1,2}\s?)?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$";
+            return Regex.IsMatch(contactNumber, regexPattern);
         }
 
-        private bool IsValidEmailAddress(string EmailAddress)
+        /// <summary>
+        /// To check if user has provided valid email address in email address input field.
+        /// </summary>
+        /// <param name="EmailAddress">email address provided by user</param>
+        /// <returns></returns>
+        private bool IsValidEmailAddress(string emailAddress)
         {
             string regexPattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-            return Regex.IsMatch(EmailAddress, regexPattern);
+            return Regex.IsMatch(emailAddress, regexPattern);
         }
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(String propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

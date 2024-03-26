@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-             xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="610" d:DesignWidth="835" d:Background="White">
     <UserControl.Resources>
@@ -23,7 +22,6 @@
         <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
-        <converter:ProjectWindowResponsive x:Key="ProjectWindowConverter"/>
         <vm:EmployeeViewModel x:Key="ViewModel"/>
     </UserControl.Resources>
     <Grid VerticalAlignment="Top">
@@ -50,36 +48,31 @@
             <Button Grid.Row="1" Content="ADD" Click="AddEmployee" HorizontalAlignment="Left"  Height="32" Width="70" Margin="20 10 0 0" Style="{DynamicResource ButtonStyle}"/>
         </Grid>
         <Separator HorizontalAlignment="Stretch" VerticalAlignment="top" Grid.Column="0" Grid.Row="1" Margin="20 30 20 30"/>
-        <StackPanel Grid.Row="2" Margin="20 10 0 0" Orientation="Vertical">
-            <StackPanel Margin="0 10 0 0 "  Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter} }" HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Name:"  TextAlignment="Left" />
-                    <TextBox  Tag="employee name" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Email:"  TextAlignment="Left"/>
-                    <TextBox Tag="email"  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Email,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel x:Name="StackPanel1"  Margin="0 0 0 10" Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter}}">
-
-
-                <StackPanel  Orientation="Horizontal">
-                    <TextBlock  VerticalAlignment="Center" Width="100" Text="Department:"  TextAlignment="Left"  Margin="0 0 0 20"/>
-                    <ComboBox Text="{Binding CombTextDepartment,Mode=TwoWay}" ItemsSource="{Binding Department}" SelectedItem="{Binding SelectedDepartment,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Delay=1}"  VerticalAlignment="Center"   IsEditable="True" IsReadOnly="True" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  Style="{DynamicResource CustomComboBoxStyle}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-
-                    <TextBlock  Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Designation:"  TextAlignment="Left"/>
-                    <ComboBox Text="{Binding CombTextDesignation,Mode=TwoWay}"  SelectedItem="{Binding SelectedDesignation,Mode=TwoWay,Delay=1,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Designation}"   Width="250"  IsEditable="True" IsReadOnly="True"  Margin="0 0 0 20"  Height="32" Style="{DynamicResource CustomComboBoxStyle}"/>
-                </StackPanel>
-                <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">
-                    <Button Command="{Binding SearchEmployee}" x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left"  Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
-
-                    <Button Command="{Binding ClearFields}" Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Width="140"  Style="{DynamicResource ButtonStyle}"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
+        <Grid  VerticalAlignment="Center" Grid.Row="2" Margin="20 0 0 20">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.45*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.45*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" Margin=" 0 0 5 10" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Margin="0 0 0 10"  Tag="employee name" Grid.Row="0" Grid.Column="1" MaxWidth="250" Width="auto" Height="32" VerticalAlignment="Center"  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Email:" Margin="20 0 5 10 "  HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+            <TextBox Margin="0 0 0 10" Tag="email" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Width="auto" MaxWidth="250" Text="{Binding Email,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Width="auto" Margin="0 0 5 0"   Text="Department:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox Text="{Binding CombTextDepartment,Mode=TwoWay}" ItemsSource="{Binding Department}" SelectedItem="{Binding SelectedDepartment,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,Delay=1}"  VerticalAlignment="Center"   IsEditable="True" IsReadOnly="True" Grid.Row="2" Grid.Column="1" MinWidth="150" MaxWidth="250" Height="32"  Style="{DynamicResource CustomComboBoxStyle}"/>
+            <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="2" Width="auto" Text="Designation:" Margin="20 0 05 0 "  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ComboBox Grid.Row="1" MinWidth="150" Grid.Column="3" Text="{Binding CombTextDesignation,Mode=TwoWay}"  SelectedItem="{Binding SelectedDesignation,Mode=TwoWay,Delay=1,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Designation}" Width="auto"   MaxWidth="250"  IsEditable="True" IsReadOnly="True"  Height="32" Style="{DynamicResource CustomComboBoxStyle}"/>
+            <Grid Grid.RowSpan="2"  Grid.Row="1" Grid.Column="4" >
+                <Button Content="Search" VerticalAlignment="Bottom" Margin="0 0 160 0" HorizontalAlignment="Right"  Command="{Binding SearchEmployee}" Height="32" Width="120" Style="{DynamicResource ButtonStyle}"/>
+                <Button Content="Clear" Margin="0 0 20 0" VerticalAlignment="Bottom" Height="32" Command="{Binding ClearFields}" Width="120" Style="{DynamicResource ButtonStyle}" HorizontalAlignment="Right"/>
+            </Grid>
+        </Grid>
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <DataGrid  IsReadOnly="True"  ItemsSource="{Binding EmployeeDatatable}"  VerticalAlignment="Top" Name="DataGrid"   AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
             HorizontalAlignment="Stretch"

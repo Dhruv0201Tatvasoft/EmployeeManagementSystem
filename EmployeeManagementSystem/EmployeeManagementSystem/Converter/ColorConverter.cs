@@ -4,6 +4,9 @@ using System.Windows.Media;
 
 namespace EmployeeManagementSystem.Converter
 {
+    /// <summary>
+    /// Gives a color using the id of an object or value of an object
+    /// </summary>
     class ColorConverter : IValueConverter
     {
         private readonly SolidColorBrush[] colors = new[]

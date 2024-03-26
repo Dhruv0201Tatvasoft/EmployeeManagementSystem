@@ -53,7 +53,9 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-
+        /// <summary>
+        /// To insert new technology to Database.
+        /// </summary>
         private ICommand? saveTechnology;
         public ICommand SaveTechnology
         {
@@ -79,7 +81,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedRow != null && !String.IsNullOrEmpty(oldTechnologyName) && !String.IsNullOrEmpty(technologyName))
             {
-                updateData.UpdateTechnologyName(technologyName, oldTechnologyName);
+                updateData.UpdateTechnologyName(technologyName, oldTechnologyName); /// if selectedRow and  oldTechnologyName are not null means we are updating already existing technology.
             }
             else
             {
@@ -92,6 +94,9 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("TechnologyDataTable");
         }
 
+        /// <summary>
+        /// To delete selected Technology from Database.
+        /// </summary>
         private ICommand? deleteTechnology;
         public ICommand DeleteTechnology
         {
@@ -107,7 +112,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteTechnology(object obj)
         {
-            deleteData.DeleteTechnology((string)selectedRow?.Row.ItemArray[0]!);
+            deleteData.DeleteTechnology((string)selectedRow?.Row.ItemArray[0]!); /// first row of selectedRow contains technology name.
             TechnologyName = String.Empty;
             technologyDataTable = getData.GetTechnologyData();
             OnPropertyChanged("TechnologyDataTable");
@@ -120,6 +125,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// To edit already existing technology in the Database.
+        /// </summary>
         private ICommand? editTechnology;
         public ICommand EditTechnology
         {

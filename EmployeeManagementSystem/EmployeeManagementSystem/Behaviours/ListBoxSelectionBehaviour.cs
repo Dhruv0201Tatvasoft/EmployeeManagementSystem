@@ -28,6 +28,11 @@ namespace EmployeeManagementSystem.Behaviours
             AssociatedObject.SelectionChanged -= ListBox_SelectionChanged;
         }
 
+        /// <summary>
+        /// Whenever ListBox's selection is changed it sets selected Item to newly selected Item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)

@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:EmployeeManagementSystem.ViewModel"
              xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
-             xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              mc:Ignorable="d" 
              
                 Background="White" d:DesignHeight="840" d:DesignWidth="1565"
@@ -28,7 +27,7 @@
         <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
-        <converter:ProjectWindowResponsive x:Key="ProjectWindowConverter"/>
+  
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Top">
@@ -55,61 +54,32 @@
             <Button Grid.Row="1" Content="ADD" HorizontalAlignment="Left" Click="Button_Click" Height="32" Width="70" Margin="20 10 0 0" Style="{DynamicResource ButtonStyle}"/>
         </Grid>
         <Separator HorizontalAlignment="Stretch" VerticalAlignment="top" Grid.Column="0" Grid.Row="1" Margin="20 30 20 30"/>
-        <!--<Grid  VerticalAlignment="Center" Grid.Row="2" Margin="20 20 0 0">
+        <Grid  VerticalAlignment="Center" Grid.Row="2" Margin="20 0 0 20">
                 <Grid.RowDefinitions >
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Code:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Width="250" Height="32" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Name:" HorizontalAlignment="Left" Margin="50 0 0 0" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="3"  Width="250" Text="{Binding Name}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
-                <TextBlock Grid.Row="1" Grid.Column="0"   Text="Start Date:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <DatePicker Grid.Row="2" Grid.Column="1" Width="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1990" DisplayDateEnd="{x:Static sys:DateTime.Now}" Text="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged}"   Style="{DynamicResource CustomDatePickerStyle}"/>
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="End Date:"   HorizontalAlignment="Left" Margin="50 0 0 0" VerticalAlignment="Center"/>
-                <DatePicker Grid.Row="1" Grid.Column="3" Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/2001" DisplayDateEnd="{x:Static sys:DateTime.Now}"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}" Height="32"  Style="{DynamicResource CustomDatePickerStyle}" />
-                <Button Content="Search" HorizontalAlignment="Center" Command="{Binding SearchProject}" Height="32" Width="80" Grid.Row="1" Grid.Column="4" Style="{DynamicResource ButtonStyle}"/>
-                <Button Content="Clear" HorizontalAlignment="Center" Height="32" Command="{Binding ClearFields}" Width="80" Grid.Row="1" Grid.Column="5" Style="{DynamicResource ButtonStyle}"/>
-            </Grid>-->
-        <StackPanel Grid.Row="2" Margin="20 10 0 0" Orientation="Vertical">
-            <StackPanel Margin="0 10 0 0 "  Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter} }" HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="Code:"  TextAlignment="Left" />
-
-                    <TextBox Tag="project code" Width="250" Height="32" VerticalAlignment="Center" Margin="0 0 20 20" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0 0 0 20" VerticalAlignment="Center"  Width="100" Text="Name:"  TextAlignment="Left"/>
-                    <TextBox Tag="project name"  Margin="0 0 0 20" VerticalAlignment="Center" Width="250" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel x:Name="StackPanel1"  Margin="0 0 0 10" Orientation="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource ProjectWindowConverter}}">
-                <!---->
-
-                <StackPanel  Orientation="Horizontal">
-                    <TextBlock  VerticalAlignment="Center" Width="100" Text="Start Date:"  TextAlignment="Left"  Margin="0 0 0 20"/>
-                    <DatePicker  VerticalAlignment="Center" Grid.Row="2" Margin="0 0 20 20" Grid.Column="1" Width="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  SelectedDate="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=False}"  Style="{DynamicResource CustomDatePickerStyle}"  />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-
-                    <TextBlock  Margin="0 0 0 20" VerticalAlignment="Center" Width="100" Text="End Date:"  TextAlignment="Left"/>
-                    <DatePicker  Width="250" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31" Margin="0 0 0 20"  SelectedDate="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy,ValidatesOnDataErrors=False}" Height="32"  Style="{DynamicResource CustomDatePickerStyle}" />
-                </StackPanel>
-                <StackPanel  Orientation="Horizontal"  Margin="20 0 0 0 ">
-                    <Button x:Name="searchbutton" Content="Search"  VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SearchProject}" Height="32" Width="140" Margin="20 0 0 0" Style="{DynamicResource ButtonStyle}"/>
-
-                    <Button Content="Clear" Margin="20 0 0 0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="32"  Command="{Binding ClearFields}" Width="140"  Style="{DynamicResource ButtonStyle}"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
+                <TextBlock Margin="0 0 0 10" Grid.Row="0" Grid.Column="0" Text="Code:" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Margin="0 0 0 10" Tag="project code"  Grid.Row="0" Grid.Column="1" Width="auto" MaxWidth="250" Height="32" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBlock    Grid.Row="0" Grid.Column="2" Text="Name:" Margin="20 0 0 10 "  HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+            <TextBox  Margin="0 0 0 10" Tag="project name" Grid.Row="0" Grid.Column="3" Width="auto"  MaxWidth="250" Text="{Binding Name}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBlock  TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Width="auto"   Text="Start Date:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <DatePicker  VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Width="auto" MaxWidth="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  SelectedDate="{Binding StartingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=False}"  Style="{DynamicResource CustomDatePickerStyle}"  />
+            <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="2" Width="auto" Text="End Date:" Margin="20 0 0 0 "  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <DatePicker  VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Width="auto" MaxWidth="250" Height="32"  SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  SelectedDate="{Binding EndingDate,  Mode=TwoWay, StringFormat=dd/MM/yyyy,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=False}"  Style="{DynamicResource CustomDatePickerStyle}"  />
+            <Grid Grid.RowSpan="2"  Grid.Row="1" Grid.Column="4" >
+                <Button Content="Search" VerticalAlignment="Bottom" Margin="0 0 160 0" HorizontalAlignment="Right" Command="{Binding SearchProject}" Height="32" Width="120" Style="{DynamicResource ButtonStyle}"/>
+                <Button Content="Clear" Margin="0 0 20 0" VerticalAlignment="Bottom" Height="32" Command="{Binding ClearFields}" Width="120" Style="{DynamicResource ButtonStyle}" HorizontalAlignment="Right"/>
+            </Grid>
+            </Grid>
+        
 
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <DataGrid   IsReadOnly="True" SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" x:Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"

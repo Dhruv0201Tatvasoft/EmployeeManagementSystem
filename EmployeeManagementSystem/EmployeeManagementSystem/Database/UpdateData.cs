@@ -8,11 +8,17 @@ namespace EmployeeManagementSystem.Database
     internal class UpdateData
     {
         private GetConnection connection = new GetConnection();
+
+        /// <summary>
+        /// Performs/Executes queries on database.
+        /// </summary>
+        /// <param name="command">SqlCommand to be executed.</param>
+        /// <returns>true if query has successfully executed otherwise false.</returns>
         private bool ExecuteQuery(SqlCommand command)
         {
             try
             {
-                using (SqlConnection conn = connection.GenrateConnection())
+                using (SqlConnection conn = connection.GenerateConnection())
                 {
                     command.Connection = conn;
                     conn.Open();
@@ -30,11 +36,17 @@ namespace EmployeeManagementSystem.Database
             }
 
         }
+
+        /// <summary>
+        /// Checks if the result exists in database.
+        /// </summary>
+        /// <param name="command">SqlCommand to check if result exists in database.</param>
+        /// <returns>true if result exists in database false otherwise.</returns>
         private bool DoesExist(SqlCommand command)
         {
             try
             {
-                using (SqlConnection conn = connection.GenrateConnection())
+                using (SqlConnection conn = connection.GenerateConnection())
                 {
                     command.Connection = conn;
                     conn.Open();
@@ -52,6 +64,13 @@ namespace EmployeeManagementSystem.Database
             }
         }
         
+        /// <summary>
+        /// To update project that exist in database.
+        /// </summary>
+        /// <param name="oldCode">old code of project which is being updated.</param>
+        /// <param name="project">new object of class ProjectModel which will replace the old model. </param>
+        /// <param name="endingDateHasValue">to check if project's endingDate has value.</param>
+        /// <returns>true if project gets updated successfully otherwise false.</returns>
         public bool UpdateProject(String oldCode, ProjectModel project, bool endingDateHasValue = true)
         {
             string query = $"Select * from EmsTblProject where Code LIKE @Code";
@@ -70,7 +89,7 @@ namespace EmployeeManagementSystem.Database
                 command.Parameters.AddWithValue("@Code", project.Code);
                 command.Parameters.AddWithValue("@Name", project.Name);
                 command.Parameters.AddWithValue("@StartingDate", project.StartingDate.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@EndingDate", endingDateHasValue ? project.EndingDate?.ToString("yyyy-MM-dd") : DBNull.Value);
+                command.Parameters.AddWithValue("@EndingDate", endingDateHasValue ? project.EndingDate?.ToString("yyyy-MM-dd") : DBNull.Value); ///if endingDateHasValue == true then add Project.EndingDate otherwise null;
                 command.Parameters.AddWithValue("@OldCode", oldCode);
                 bool didSave = ExecuteQuery(command);
                 if (didSave) InsertAssociatedTechnologies(project);
@@ -82,6 +101,11 @@ namespace EmployeeManagementSystem.Database
                 return false;
             }
         }
+
+        /// <summary>
+        /// Insert technologies that are associated with the project.
+        /// </summary>
+        /// <param name="project">object of class ProjectModel to which technologies are associated.</param>
         private void InsertAssociatedTechnologies(ProjectModel project)
         {
             string query = "INSERT INTO EmsTblTechnologyForProject(ProjectCode, TechnologyId) " +
@@ -97,6 +121,12 @@ namespace EmployeeManagementSystem.Database
                 }
             }
         }
+
+        /// <summary>
+        /// To update technology name that is already exist in database.
+        /// </summary>
+        /// <param name="newTechnologyName">new technology name to update the old technology.</param>
+        /// <param name="oldTechnologyName">technology name that is to be updated.</param>
         public void UpdateTechnologyName(string newTechnologyName, string oldTechnologyName)
         {
             string query = "SELECT * FROM EmsTblTechnology WHERE Name LIKE @TechnologyName";
@@ -117,6 +147,12 @@ namespace EmployeeManagementSystem.Database
 
             }
         }
+
+        /// <summary>
+        ///  To update skill name that is already exist in database.
+        /// </summary>
+        /// <param name="newSkillName">new skill name to update the old skill.</param>
+        /// <param name="oldSkillName">skill name that is being updated.</param>
         public void UpdateSkillName(string newSkillName, string oldSkillName)
         {
             string query = "SELECT * FROM EmsTblSkill WHERE Name LIKE @SkillName";
@@ -137,6 +173,14 @@ namespace EmployeeManagementSystem.Database
 
             }
         }
+
+        /// <summary>
+        /// To update education field of an employee.
+        /// </summary>
+        /// <param name="newModel">new EmployeeEducationModel to update the old EmployeeEducationModel.</param>
+        /// <param name="oldModel">old EmployeeEducationModel that is being updated.</param>
+        /// <param name="code">code of employee whose EmployeeEducationModel is being updated.</param>
+        /// <returns>true if it successfully updates EmployeeEducationModel otherwise false.</returns>
         public bool UpdateEmployeeEducation(EmployeeEducationModel newModel, EmployeeEducationModel oldModel, String code)
         {
             string query = "UPDATE EmsTblEmployeeEducation SET " +
@@ -171,6 +215,14 @@ namespace EmployeeManagementSystem.Database
 
             return ExecuteQuery(command);
         }
+
+        /// <summary>
+        /// To update experience field of an employee
+        /// </summary>
+        /// <param name="newModel">new EmployeeExperienceModel to update the old EmployeeExperienceModel</param>
+        /// <param name="oldModel">old EmployeeExperienceModel that is being updated.</param>
+        /// <param name="code">code of employee whose EmployeeExperienceModel is being updated.</param>
+        /// <returns>true if it successfully updates EmployeeExperienceModel otherwise false.</returns>
         public bool UpdateEmployeeExperience(EmployeeExperienceModel newModel, EmployeeExperienceModel oldModel, String code)
         {
             string query = "UPDATE EmsTblEmployeeExperience SET " +
@@ -198,6 +250,13 @@ namespace EmployeeManagementSystem.Database
             return ExecuteQuery(command);
         }
 
+        /// <summary>
+        /// To update an employee.
+        /// </summary>
+        /// <param name="oldCode">old code of employee who is being updated.</param>
+        /// <param name="employee">object of class EmployeeModel which will replace the old employee.</param>
+        /// <param name="releaseDateHasValue">to check if employee's releaseDate has value.</param>
+        /// <returns>true if it successfully updates employee otherwise false.</returns>
         public bool UpdateEmployee(string oldCode, EmployeeModel employee, bool releaseDateHasValue = true)
         {
             string query = "SELECT * FROM EmsTblEmployee WHERE Code LIKE @EmployeeCode";
@@ -245,7 +304,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"There is aleady an employee with Employee Code {employee.Code}", "Error");
+                MessageBox.Show($"There is already an employee with Employee Code {employee.Code}", "Error");
                 return false;
             }
         }

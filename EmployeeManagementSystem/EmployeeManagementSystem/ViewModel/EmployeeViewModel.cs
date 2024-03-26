@@ -180,6 +180,10 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
+
+        /// <summary>
+        /// To clear values of input fields.
+        /// </summary>
         private ICommand? clearFields;
         public ICommand ClearFields
         {
@@ -207,6 +211,10 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeDataTable");
         }
 
+
+        /// <summary>
+        /// To search Employee from DataTable using Email,Name,JoiningDate or ReleaseDate.
+        /// </summary>
         private ICommand? searchEmployee;
         public ICommand SearchEmployee
         {
@@ -230,6 +238,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// To delete employee from Database.
+        /// </summary>
         private ICommand? deleteEmployee;
         public ICommand DeleteEmployee
         {
@@ -250,14 +261,17 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteEmployee(object obj)
         {
-            string EmployeeCode = selectedEmployee?[0].ToString()!;
-            string Name = selectedEmployee?[1].ToString()!;
+            string EmployeeCode = selectedEmployee?[0].ToString()!; /// first row contains code of an employee.
+            string Name = selectedEmployee?[1].ToString()!; /// second row contains name of an employee.
             deleteData.DeleteEmployee(EmployeeCode, Name);
-            employeeDataTable = getData.GetEmployeeTable();
+            employeeDataTable = getData.GetEmployeeTable(); /// to refresh DataTable.
             OnPropertyChanged("EmployeeDataTable");
         }
 
 
+        /// <summary>
+        /// To assign project to an Employee.
+        /// </summary>
         private ICommand? addEmployeeToProject;
         public ICommand AddEmployeeToProject
         {
@@ -280,16 +294,19 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteAddEmployeeToProject(object obj)
         {
-            string EmployeeCode = (String)selectedEmployee?.Row.ItemArray[0]!;
+            string EmployeeCode = (String)selectedEmployee?.Row.ItemArray[0]!; /// first row of selectedEmployee contains code.
             if (projectName != null)
             {
                 string ProjectCode = projectName.Split('-')[0];
                 string ProjectName = projectName.Split('-')[1];
-                insertData.InsertProjectToEmployee(ProjectCode, ProjectName, EmployeeCode);
+                insertData.AssignProjectToEmployee(ProjectCode, ProjectName, EmployeeCode);
             }
             OnAddProjectEvent(EventArgs.Empty);
         }
 
+        /// <summary>
+        /// To edit employee and Open edit employee window.
+        /// </summary>
         private ICommand? editEmployee;
         public ICommand EditEmployee
         {
@@ -317,6 +334,10 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// To remove Employee from project.
+        /// </summary>
         private ICommand? removeEmployeeFromProject;
         public ICommand RemoveEmployeeFromProject
         {
@@ -339,11 +360,15 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveEmployeeFromProject(object obj)
         {
-            string EmployeeCode = (String)selectedEmployee?.Row.ItemArray[0]!;
-            string ProjectCode = (String)selectedProjectRow?.Row.ItemArray[1]!;
+            string EmployeeCode = (String)selectedEmployee?.Row.ItemArray[0]!; /// first row of selectedEmployee contains code.
+            string ProjectCode = (String)selectedProjectRow?.Row.ItemArray[1]!; /// second row of selectedProjectRow contains project code.
             deleteData.RemoveEmployeeFromProject(EmployeeCode, ProjectCode);
             OnAddProjectEvent(EventArgs.Empty);
         }
+
+        /// <summary>
+        /// To view details of selected employee.
+        /// </summary>
         private ICommand? viewEmployeeDetails;
         public ICommand ViewEmployeeDetails
         {
@@ -366,8 +391,8 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteViewEmployeeDetails(object obj)
         {
-            string EmployeeCode = (string)selectedEmployee?.Row.ItemArray[0]!;
-            EmployeeModel employee = getData.GetEmployeeFromCode(EmployeeCode);
+            string EmployeeCode = (string)selectedEmployee?.Row.ItemArray[0]!; ///first row of selectedEmployee contains code.
+            EmployeeModel employee = getData.GetEmployeeFromCode(EmployeeCode); 
             EmployeeDetails employeeDetails = new EmployeeDetails(employee);
             employeeDetails.ShowDialog();
         }

@@ -22,11 +22,11 @@ namespace EmployeeManagementSystem.ViewModel
             get { return dataTable; }
             set { dataTable = value; OnPropertyChanged("DataTable"); }
         }
-        private List<int> selectedtechnlogyIds = new List<int>();
+        private List<int> selectedTechnologyIds = new List<int>();
         public List<int> SelectedTechnologyIds
         {
-            get { return selectedtechnlogyIds; }
-            set { selectedtechnlogyIds = value; OnPropertyChanged("SelectedTechnologyIds"); }
+            get { return selectedTechnologyIds; }
+            set { selectedTechnologyIds = value; OnPropertyChanged("SelectedTechnologyIds"); }
         }
         private DataRowView? selectedTechnologyRow;
         public DataRowView? SelectedTechnologyRow
@@ -38,13 +38,13 @@ namespace EmployeeManagementSystem.ViewModel
                 if (selectedTechnologyRow != null)
                 {
                     
-                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]!))
+                    if (!selectedTechnologyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]!))
                     {
-                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]!);
+                        selectedTechnologyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                     else
                     {
-                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]!);
+                        selectedTechnologyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                 }
                 OnPropertyChanged("SelectedTechnologyRow");
@@ -129,7 +129,9 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-
+        /// <summary>
+        /// To add new project to database.
+        /// </summary>
         private ICommand? saveProject;
         public ICommand SaveProject
         {
@@ -149,24 +151,25 @@ namespace EmployeeManagementSystem.ViewModel
 
         private bool CanSaveProjectExecute(object arg)
         {
+            if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Code.Length > 10 || Name.Length > 40 || (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate)) return false;
             return true;
         }
 
         private void ExecuteSaveProject(object obj)
         {
-            bool didSaved = false;
+            bool didSave = false;
             ProjectModel project;
 
             if (EndingDate != null)
             {
-                project = new ProjectModel() { Code = Code, Name = Name, EndingDate = (DateTime)EndingDate, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
+                project = new ProjectModel() { Code = Code, Name = Name, EndingDate = EndingDate, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
             else
             {
                 project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
-            didSaved = insertData.InsertNewProject(project, EndingDate != null);
-            if (didSaved)
+            didSave = insertData.InsertNewProject(project, EndingDate != null);
+            if (didSave)
             {
                 OnChangeWindowEvent(EventArgs.Empty);
             }

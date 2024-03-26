@@ -3,8 +3,13 @@ using System.Windows.Data;
 
 namespace EmployeeManagementSystem.Converter
 {
+
+    /// <summary>
+    /// Used to make button enable or disable based on conditions.
+    /// </summary>
     internal class ButtonDisbaleConverter : IMultiValueConverter
     {
+     
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.LongLength > 0)

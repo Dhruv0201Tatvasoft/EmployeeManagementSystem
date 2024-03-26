@@ -89,11 +89,6 @@
 
 
                     <Grid Grid.Row="6" Grid.ColumnSpan="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
                         <Button Width="120" Height="32" Click="EmployeeDetailsNextBtn_Click" x:Name="EmployeeDetailsNextBtn" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5">
                             <Button.IsEnabled>
                                 <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay">
@@ -190,7 +185,7 @@
                             </Button.IsEnabled>
                         </Button>
 
-                        <Button Command="{Binding ClearPersonalDetalis}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
+                        <Button Command="{Binding ClearPersonalDetails}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
                     </Grid>
 
                 </Grid>

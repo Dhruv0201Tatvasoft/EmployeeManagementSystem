@@ -28,16 +28,22 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.AddEmployeeEvent += RefreshEmployeeDatagrid;
         }
 
+        /// <summary>
+        /// Refreshes EmployeeDataGird and sets Autocompletebox selected item to empty 
+        /// </summary>
         private void RefreshEmployeeDatagrid(object? sender, EventArgs e)
         {
             PopUpDataGird.ItemsSource = null;
             PopUpDataGird.ItemsSource = getData.GetAssociatedEmployeesToProject((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]!).DefaultView;
-            Autocompletebox.SelectedItem ="";
+            Autocompletebox.SelectedItem =string.Empty;
         }
 
-      
 
-   
+        /// <summary>
+        /// Changes MainWindow's content to EditProjectWindow with selected project.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">ProjectEventArgs, contains selected project which is being edited.</param>
         private void ViewModel_EditEvent(object? sender, ProjectEventArgs e)
         {            
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
@@ -51,11 +57,15 @@ namespace EmployeeManagementSystem.UserControls
             }
         }
 
-        
 
+        /// <summary>
+        /// Changes MainWindow's content to AddProject.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddProject addEditProject = new AddProject();
+            AddProject addProject = new AddProject();
 
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
 
@@ -63,11 +73,17 @@ namespace EmployeeManagementSystem.UserControls
             {
                 if (mainWindow.mainContent != null)
                 {
-                    mainWindow.mainContent.Content = addEditProject;
+                    mainWindow.mainContent.Content = addProject;
                 }
             }
         }
 
+
+        /// <summary>
+        /// Opens popup to map employee to project, sets ProjectNameTextBox with selected project's name and sets PopUpDataGird's item source.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenEmployeeMapingPopupMethod(object sender, RoutedEventArgs e)
         {
             
@@ -81,6 +97,9 @@ namespace EmployeeManagementSystem.UserControls
 
         }    
         
+        /// <summary>
+        /// Closes Popup.
+        /// </summary>
         private void ClosePopUpClick(object sender, RoutedEventArgs e) { 
             MyPopup.IsOpen=false;
         }

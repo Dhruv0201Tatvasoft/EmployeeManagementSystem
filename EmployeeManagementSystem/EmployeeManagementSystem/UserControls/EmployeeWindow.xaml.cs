@@ -25,6 +25,9 @@ namespace EmployeeManagementSystem.UserControls
             getData = new GetData();
         }
 
+        /// <summary>
+        /// Changes content to AddEmployeeWindow
+        /// </summary>
         private void AddEmployee(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
@@ -34,6 +37,11 @@ namespace EmployeeManagementSystem.UserControls
             }
         }
 
+        /// <summary>
+        /// Changes content to EditEmployeeWindow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">EmployeeEventAargs, contains employee which is being updated.</param>
         private void EditEmployee(object? sender, EmployeeEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
@@ -43,6 +51,9 @@ namespace EmployeeManagementSystem.UserControls
             }
         }
 
+        /// <summary>
+        /// Opens Popup ,sets EmployeeNameTextBox to Name fo employee and DataGrid ItemSource.
+        /// </summary>
         private void OpenProjectMappingPopup(object sender, RoutedEventArgs e)
         {
             MyPopup.PlacementRectangle = new Rect(new Size(
@@ -54,24 +65,25 @@ namespace EmployeeManagementSystem.UserControls
             PopUpDataGird.ItemsSource = getData.GetAssociatedProjectForEmployees(EmployeeCode).DefaultView;
 
         }
+
+        /// <summary>
+        /// Closes popup.
+        /// </summary>
         private void ClosePopUpClick(object sender, RoutedEventArgs e)
         {
             MyPopup.IsOpen = false;
             
         }
 
+        /// <summary>
+        /// Refreshes PopUpDataGird and clears AutocompleteBox
+        /// </summary>
         private void RefreshEmployeeDatagrid(object? sender, EventArgs e)
         {
             PopUpDataGird.ItemsSource = null;
             PopUpDataGird.ItemsSource = getData.GetAssociatedProjectForEmployees((string)((DataRowView)DataGrid.SelectedItem).Row.ItemArray[0]!).DefaultView;
-            Autocompletebox.SelectedItem = "";
+            Autocompletebox.SelectedItem = string.Empty;
 
-        }
-
-        private void ViewEmployee(object sender, RoutedEventArgs e)
-        {
-            EmployeeDetails employee = new EmployeeDetails();
-            employee.Show();
         }
     }
 }

@@ -6,9 +6,10 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:vm="clr-namespace:EmployeeManagementSystem.ViewModel"
              mc:Ignorable="d" 
+             xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              xmlns:b="clr-namespace:EmployeeManagementSystem.Behaviours"
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
-  
+
     <UserControl.Resources>
         <vm:EditProjectViewModel x:Key="ViewModel"/>
         <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
@@ -21,7 +22,7 @@
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
-                            
+
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter TargetName="Border" Property="Background" Value="#60943C"/>
                             </Trigger>
@@ -36,6 +37,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <converter:ButtonDisbaleConverter x:Key="ButtonDisableConverter"/>
+
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="20 20 0 0">
@@ -82,6 +85,14 @@
             </Grid>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="90,60,10,90">
                 <Button Style="{DynamicResource ButtonStyle}" VerticalAlignment="Top" Command="{Binding UpdateProject}" Margin="10 0 30 0" Width="70" Height="32" Content="Save">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay"  >
+                            <Binding ElementName="Code" Path="(Validation.HasError)" />
+                            <Binding ElementName="Name" Path="(Validation.HasError)" />
+                            <Binding ElementName="StartingDate" Path="(Validation.HasError)" />
+                            <Binding ElementName="EndingDate" Path="(Validation.HasError)" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
                 </Button>
                 <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" VerticalAlignment="Top" Content="Cancel" Click="Button_Click"/>
             </StackPanel>

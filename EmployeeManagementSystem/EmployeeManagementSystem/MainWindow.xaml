@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:converters="clr-namespace:EmployeeManagementSystem.Converter"
         mc:Ignorable="d"
         Title="EMS" Height="450" Width="1000"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         MinWidth="800">
     <Window.Resources>
-        <converters:ProjectWindowResponsive x:Key="ProjectWindowResponsive"/>
+       
 
         <SolidColorBrush x:Key="NormalBackGroundColor" Color="#FAFAFA"/>
         <SolidColorBrush x:Key="HoverBackGroundColor" Color="#669E40"/>
@@ -87,7 +86,7 @@
         <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
             <Grid>
                 <Border x:Name="PART_ContentHost" Focusable="False" Background="{StaticResource NormalBackGroundColor}"/>
-                <TextBlock x:Name="Placeholder"  Foreground="LightGray" Margin="3,3,23,3" Visibility="Collapsed"/>
+                <TextBlock x:Name="Placeholder" Width="auto"  Foreground="LightGray" Margin="3,3,23,3" Visibility="Collapsed"/>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="False">

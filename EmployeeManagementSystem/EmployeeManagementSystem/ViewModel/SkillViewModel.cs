@@ -54,7 +54,9 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-
+        /// <summary>
+        /// To insert new skill in Database.
+        /// </summary>
         private ICommand? saveSkill;
         public ICommand SaveSkill
         {
@@ -80,7 +82,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedRow != null && !String.IsNullOrEmpty(oldSkillName) && !String.IsNullOrEmpty(skillName))
             {
-                updateData.UpdateSkillName(skillName, oldSkillName);
+                updateData.UpdateSkillName(skillName, oldSkillName); ///  if oldSkill name is not null that means we are updating the already existing skill.
             }
             else
             {
@@ -95,6 +97,10 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("SkillDataTable");
         }
 
+
+        /// <summary>
+        /// To remove skill from Database.
+        /// </summary>
         private ICommand? deleteSkill;
         public ICommand DeleteSkill
         {
@@ -123,6 +129,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// To edit selected skill.
+        /// </summary>
         private ICommand? editSkill;
         public ICommand EditSkill
         {
@@ -147,7 +156,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedRow != null)
             {
-                oldSkillName = skillName = (string)selectedRow.Row[0];
+                oldSkillName = skillName = (string)selectedRow.Row[0]; ///first row of selectedRow contains skill name.
                 OnPropertyChanged("SkillName");
             }
         }

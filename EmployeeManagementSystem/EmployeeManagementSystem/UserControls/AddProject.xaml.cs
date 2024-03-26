@@ -16,6 +16,10 @@ namespace EmployeeManagementSystem.UserControls
             DataContext = viewModel;
             viewModel.ChangeWindowEvent += ChangeWindow;
         }
+
+        /// <summary>
+        /// Changes MainWindow's content to projectWindow, called after saving project
+        /// </summary>
         public void ChangeWindow(object? sender, EventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
@@ -31,7 +35,9 @@ namespace EmployeeManagementSystem.UserControls
 
         }
 
-
+        /// <summary>
+        /// Changes MainWindow's content to projectWindow, called after clicking cancel button.
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();

@@ -140,20 +140,9 @@ namespace EmployeeManagementSystem.ViewModel
       
 
 
-        public EditProjectViewModel()
-        {
-            getData = new GetData();
-            dataTable = new DataTable();
-            dataTable = getData.GetTechnologyData();
-            updateData = new UpdateData();
-            OnPropertyChanged("dataTable");
-        }
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(String propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        /// <summary>
+        /// To update the existing project.
+        /// </summary>
         private ICommand? updateProject;
         public ICommand UpdateProject
         {
@@ -168,7 +157,6 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private bool CanUpdateProjectExecute(object arg)
         {
-            if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Code.Length > 10 || Name.Length > 40 || (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate)) return false;
             return true;
         }
 
@@ -187,6 +175,20 @@ namespace EmployeeManagementSystem.ViewModel
             didSave = updateData.UpdateProject(OldCode!, project, EndingDate != null);
             if(didSave) OnChangeWindowEvent(EventArgs.Empty);
 
+        }
+
+        public EditProjectViewModel()
+        {
+            getData = new GetData();
+            dataTable = new DataTable();
+            dataTable = getData.GetTechnologyData();
+            updateData = new UpdateData();
+            OnPropertyChanged("dataTable");
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged(String propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

@@ -654,6 +654,10 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+        /// <summary>
+        /// Gives count of project group by technologies.
+        /// </summary>
         public DataTable GetTechnologyWiseProject()
         {
             string query = "SELECT Id,COUNT(projectCode)as Count,Name from EmsTblTechnology " +
@@ -682,6 +686,11 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+        /// <summary>
+        /// Gives Employee count group by Skills.
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetSkillWiseEmployeeCount()
         {
             string query = "SELECT COUNT(*) as Count,SkillId,Name from" +
@@ -709,6 +718,13 @@ namespace EmployeeManagementSystem.Database
             }
             return dt;
         }
+
+        /// <summary>
+        /// Checks if user has entered the correct username and password.
+        /// </summary>
+        /// <param name="username">email id of user.</param>
+        /// <param name="password">password of user.</param>
+        /// <returns>Employee code of employee.</returns>
         public String ExecuteLogin(string username, string password)
         {
             string query = $"SELECT Code from EmsTblEmployee where Email LIKE @Email COLLATE Latin1_General_CS_AS AND Password LIKE @Password COLLATE Latin1_General_CS_AS ";

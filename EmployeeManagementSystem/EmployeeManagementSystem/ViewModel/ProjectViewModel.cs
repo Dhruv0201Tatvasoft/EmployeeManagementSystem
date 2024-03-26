@@ -19,7 +19,7 @@ namespace EmployeeManagementSystem.ViewModel
             AddEmployeeEvent?.Invoke(this, e);
         }
 
-        public event EventHandler<ProjectEventArgs> EditEvent;
+        public event EventHandler<ProjectEventArgs>? EditEvent;
         public void OnEditEvent(ProjectModel project)
         {
             var e = new ProjectEventArgs(project);
@@ -113,7 +113,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// To search command on basis of code,name,starting date and ending date.
+        /// </summary>
         private ICommand? searchProject;
         public ICommand SearchProject
         {
@@ -138,6 +140,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// To clear value of input fields. and to reset DataTable.
+        /// </summary>
         private ICommand? clearFields;
         public ICommand ClearFields
         {
@@ -165,6 +170,9 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("dataTable");
         }
 
+        /// <summary>
+        /// To delete project from database.
+        /// </summary>
         private ICommand? deleteProject;
         public ICommand DeleteProject
         {
@@ -187,10 +195,13 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedRow != null)
             {
-                deleteData.DeleteProject((string)selectedRow.Row.ItemArray[0]!);
+                deleteData.DeleteProject((string)selectedRow.Row.ItemArray[0]!);/// first row of selectedRow contains project code.
             }
         }
 
+        /// <summary>
+        /// To edit selected project and opens edit project window.
+        /// </summary>
         private ICommand? editProject;
         public ICommand EditProject
         {
@@ -221,6 +232,9 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
+        /// <summary>
+        /// To assign project to an employee.
+        /// </summary>
         private ICommand? addEmployeeToProject;
         public ICommand AddEmployeeToProject
         {
@@ -248,7 +262,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (selectedRow != null && employeeName != null)
                 {
-                    string ProjectCode = (String)selectedRow.Row.ItemArray[0]!;
+                    string ProjectCode = (String)selectedRow.Row.ItemArray[0]!;///first row of selectedRow contains project code.
                     string EmployeeCode = employeeName.Split('-')[0];
                     string EmployeeName = employeeName.Split('-')[1];
                     insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode, EmployeeName);
@@ -258,6 +272,9 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
+        /// <summary>
+        /// To remove existing employee from Project.
+        /// </summary>
         private ICommand? removeEmployeeFromProject;
         public ICommand RemoveEmployeeFromProject
         {
@@ -282,9 +299,9 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedRow != null)
             {
-                string projectcode = (String)selectedRow.Row.ItemArray[0]!;
-                string employeecode = (String)SelectedEmployeeRow?.Row.ItemArray[1]!;
-                deleteData.RemoveEmployeeFromProject(employeecode, projectcode);
+                string projectCode = (String)selectedRow.Row.ItemArray[0]!; /// first row of selectedRow contains project code
+                string employeeCode = (String)selectedEmployeeRow?.Row.ItemArray[1]!; /// second row of SelectedEmployeeRow contains employee code.
+                deleteData.RemoveEmployeeFromProject(employeeCode, projectCode);
                 OnAddEmployeeEvent(EventArgs.Empty);
             }
         }
@@ -302,10 +319,6 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("dataTable");
 
         }
-
-
-
-
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -190,7 +190,7 @@
                             </Button.IsEnabled>
                         </Button>
 
-                        <Button Command="{Binding ClearPersonalDetalis}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
+                        <Button Command="{Binding ClearPersonalDetails}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
                     </Grid>
 
                 </Grid>

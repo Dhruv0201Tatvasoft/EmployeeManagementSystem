@@ -45,6 +45,10 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// This command is to perform login.
+        /// </summary>
         private ICommand? login;
         public ICommand Login
         {

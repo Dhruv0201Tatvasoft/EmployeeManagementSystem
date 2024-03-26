@@ -41,13 +41,14 @@ namespace EmployeeManagementSystem.Commands
             }
             else
             {
-                return canExecute(parameter);
+                
+                return canExecute(parameter!);
             }
         }
 
         public void Execute(object? parameter)
         {
-            execute(parameter);
+            execute(parameter!);
         }
 
     }

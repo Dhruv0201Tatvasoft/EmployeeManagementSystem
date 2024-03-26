@@ -7,11 +7,17 @@ namespace EmployeeManagementSystem.Database
     class DeleteData
     {
         private GetConnection connection = new GetConnection();
+
+        /// <summary>
+        /// Performs/Executes queries on database.
+        /// </summary>
+        /// <param name="command">SqlCommand to be executed.</param>
+        /// <returns>true if query has successfully executed otherwise false.</returns>
         private bool ExecuteQuery(SqlCommand command)
         {
             try
             {
-                using (SqlConnection conn = connection.GenrateConnection())
+                using (SqlConnection conn = connection.GenerateConnection())
                 {
                     command.Connection = conn;
                     conn.Open();
@@ -28,11 +34,17 @@ namespace EmployeeManagementSystem.Database
             }
 
         }
+
+        /// <summary>
+        /// Checks if the result exists in database.
+        /// </summary>
+        /// <param name="command">SqlCommand to check if result exists in database.</param>
+        /// <returns>true if result exists in database false otherwise.</returns>
         public bool DoesExist(SqlCommand command)
         {
             try
             {
-                using (SqlConnection conn = connection.GenrateConnection())
+                using (SqlConnection conn = connection.GenerateConnection())
                 {
                     command.Connection = conn;
                     conn.Open();
@@ -51,13 +63,22 @@ namespace EmployeeManagementSystem.Database
         }
 
 
-
+         /// <summary>
+         /// Shows MessageBox of warning before deleting the entry form database.
+         /// </summary>
+         /// <param name="warning">Warning to show to user.</param>
+         /// <returns>True if user presses yes (i.e. gives permission to delete the entry) otherwise false.</returns>
         public bool DeleteWarningMessage(string warning)
         {
             MessageBoxResult result = MessageBox.Show("Are You Sure you want to  " + warning, "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation, MessageBoxResult.Cancel, MessageBoxOptions.DefaultDesktopOnly);
             return result == MessageBoxResult.Yes;
         }
 
+
+        /// <summary>
+        /// Deletes project from database.
+        /// </summary>
+        /// <param name="code">code of project to be deleted.</param>
         public void DeleteProject(string code)
         {
 
@@ -72,6 +93,11 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
+        /// <summary>
+        /// Removes employee form certain project.
+        /// </summary>
+        /// <param name="employeeCode">code of employee to be removed.</param>
+        /// <param name="projectCode">code of project from which employee is being removed.</param>
         public void RemoveEmployeeFromProject(String employeeCode, String projectCode)
         {
             string query = "DELETE from EmsTblEmployeeAssociatedToProject where ProjectCode LIKE @ProjectCode AND EmployeeCode LIKE @EmployeeCode";
@@ -82,6 +108,10 @@ namespace EmployeeManagementSystem.Database
 
         }
 
+        /// <summary>
+        /// Deletes technology from database.
+        /// </summary>
+        /// <param name="technologyName">name of technology to be deleted.</param>
         public void DeleteTechnology(String technologyName)
         {
 
@@ -93,6 +123,11 @@ namespace EmployeeManagementSystem.Database
                 ExecuteQuery(command);
             }
         }
+
+        /// <summary>
+        /// Deletes skill from database.
+        /// </summary>
+        /// <param name="skillName">name of skill to be deleted.</param>
         public void DeleteSkill(String skillName)
         {
 
@@ -105,6 +140,12 @@ namespace EmployeeManagementSystem.Database
             }
         }
 
+        /// <summary>
+        /// Delete employee's education field from database. 
+        /// </summary>
+        /// <param name="employeeEducationModel">object of employeeEducationModel that needs to be deleted from database.</param>
+        /// <param name="code">code of employee whose education field is being removed.</param>
+        /// <returns>True if delete query executes successfully otherwise false.</returns>
         public bool DeleteEducationRow(EmployeeEducationModel employeeEducationModel, String code)
         {
             if (this.DeleteWarningMessage("Remove this education field?"))
@@ -131,6 +172,13 @@ namespace EmployeeManagementSystem.Database
             }
             return false;
         }
+
+        /// <summary>
+        /// Delete employee's experience field form database.
+        /// </summary>
+        /// <param name="employeeExperienceModel">code of employee whose experience field to be removed.</param>
+        /// <param name="code">code of employee whose experience to be removed.</param>
+        /// <returns>True if delete query executes successfully otherwise false.</returns>
         public bool DeleteExperienceRow(EmployeeExperienceModel employeeExperienceModel, String code)
         {
             if (this.DeleteWarningMessage("Remove this Experience field?"))
@@ -153,6 +201,11 @@ namespace EmployeeManagementSystem.Database
             }
             return false;
         }
+        /// <summary>
+        /// Delete employee from database.
+        /// </summary>
+        /// <param name="code">code of employee who needs to be deleted.</param>
+        /// <param name="name">name of employee to be deleted.</param>
         public void DeleteEmployee(String code, String name)
         {
             if (this.DeleteWarningMessage($"Delete this employee?"))
