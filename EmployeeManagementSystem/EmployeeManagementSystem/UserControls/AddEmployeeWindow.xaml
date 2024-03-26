@@ -36,6 +36,9 @@
         </DockPanel>
         <Separator Grid.Row="1"  Margin="20 10 20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <TabControl x:Name="TabControl" BorderBrush="#507E32" BorderThickness="0.5" Margin="20 0 20 20" Grid.Row="2" >
+
+
+            <!--#region EmployeeDetails -->
             <TabItem Name="EmployeeDetailsTabItem" Header="Employee Details" Style="{DynamicResource TabItemStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -110,7 +113,9 @@
 
                 </Grid>
             </TabItem>
+            <!--#endregion-->
 
+            <!--#region PersonalDetails -->
             <TabItem Name="PersonalDetailsTabItem" Header="Personal Details" Style="{DynamicResource TabItemStyle}">
                 <TabItem.IsEnabled>
                     <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay">
@@ -190,7 +195,9 @@
 
                 </Grid>
             </TabItem>
+            <!--#endregion-->
 
+            <!--#region EducationDetails -->
             <TabItem Header="Education Details" IsEnabled="False" Name="EducationDetailsTabItem" Style="{DynamicResource TabItemStyle}" >
 
                 <Grid >
@@ -316,6 +323,9 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            <!--#endregion-->
+
+            <!--#region ExperienceDetails -->
             <TabItem Header="Experience Details" Name="ExperienceDetailsTabItem" IsEnabled="False" Style="{DynamicResource TabItemStyle}">
 
                 <Grid >
@@ -379,7 +389,7 @@
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Designation}"/>
                                     </DataTemplate>
-                               </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <ComboBox  Style="{DynamicResource CustomComboBoxStyle}"  ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
@@ -420,6 +430,8 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            <!--#endregion-->
+            
         </TabControl>
 
     </Grid>
