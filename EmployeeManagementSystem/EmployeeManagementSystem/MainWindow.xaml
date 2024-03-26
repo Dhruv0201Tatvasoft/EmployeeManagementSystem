@@ -9,8 +9,9 @@
         WindowStartupLocation="CenterScreen"
         MinWidth="800">
     <Window.Resources>
-       
 
+
+        <!--#region SolidColours -->
         <SolidColorBrush x:Key="NormalBackGroundColor" Color="#FAFAFA"/>
         <SolidColorBrush x:Key="HoverBackGroundColor" Color="#669E40"/>
         <SolidColorBrush x:Key="PressedBackGroundColor" Color="#60943C"/>
@@ -18,12 +19,17 @@
         <SolidColorBrush x:Key="BorderColor" Color="#507E32"/>
         <SolidColorBrush x:Key="ForeGroundColor" Color="#99000000"/>
         <SolidColorBrush x:Key="DisabledForeGroundColor" Color="#AFABAB"/>
+        <!--#endregion-->
+        
+        <!--#region WindowFontStyle -->
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Regular"/>
             <Setter Property="FontFamily" Value="Calibri"/>
         </Style>
+        <!--#endregion-->
 
+        <!--#region TextBlockStyleForCompulsoryInputField -->
         <Style x:Key="CompulsoryInputTextBlock" TargetType="{x:Type ContentControl}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -45,6 +51,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
+
+        <!--#region ButtonStyle -->
         <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -71,6 +80,11 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
+
+        <!--#region ComboBoxStyle -->
+        <!--ComboBoxToggleButtonTemplate-->
+        
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -83,6 +97,7 @@
             </Grid>
         </ControlTemplate>
 
+        <!--ComboBoxTextBoxTemplate-->
         <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
             <Grid>
                 <Border x:Name="PART_ContentHost" Focusable="False" Background="{StaticResource NormalBackGroundColor}"/>
@@ -97,6 +112,8 @@
                 </DataTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+        <!--ComboBoxTemplate-->
 
         <Style x:Key="CustomComboBoxStyle" TargetType="{x:Type ComboBox}">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -185,6 +202,8 @@
             </Style.Triggers>
         </Style>
 
+        <!--ComboBoxItemTemplate-->
+
         <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -210,6 +229,10 @@
             </Setter>
             <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         </Style>
+        
+        <!--#endregion-->
+
+        <!--#region RadioButtonStyle -->
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -289,6 +312,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
+
+        <!--#region CheckBoxStyle -->
         <Style TargetType="CheckBox" x:Key="CustomCheckBoxStyle">
             <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
@@ -318,7 +344,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
 
+        <!--#region TextBoxStyle -->
         <Style x:Key="CustomInputStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
             <Setter Property="BorderBrush" Value="#FF7D8683" />
@@ -368,6 +396,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
+
+        <!--#region DatePicketStyle -->
         <Style x:Key="CustomDatePickerStyle" TargetType="{x:Type DatePicker}">
             <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
             <Setter Property="BorderBrush" Value="#FF7D8683" />
@@ -390,6 +421,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
+
+        <!--#region DataGridStyle -->
         <Style x:Key="DataGridStyle" TargetType="DataGrid">
             <Setter Property="AlternatingRowBackground" Value="#EBF1E9" />
             <Setter Property="Foreground" Value="#000000" />
@@ -446,7 +480,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
 
+        <!--#region MenuItemStyle -->
         <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
@@ -490,6 +526,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
+
+        <!--#region TabItemStyle -->
         <Style x:Key="TabItemStyle" TargetType="TabItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -514,6 +553,8 @@
             </Setter>
 
         </Style>
+        <!--#endregion-->
+        
     </Window.Resources>
 
     <ScrollViewer>
@@ -579,8 +620,6 @@
                                 <TextBlock Text="Version: 1.0.0.0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 <TextBlock Text="Copyright @2022" FontWeight="Bold" FontSize="16" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                             </Grid>
-
-
                         </Grid>
                     </Border>
                 </Grid>
