@@ -148,46 +148,53 @@ namespace EmployeeManagementSystem.Database
         {
             List<int> projectTechnologies = new List<int>();
             ProjectModel project = new ProjectModel();
-
-
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                conn.Open();
-                string query = $"SELECT TechnologyId from EmsTblTechnologyForProject where ProjectCode like @Code";
-                using (SqlCommand command = new SqlCommand(query, conn))
+
+
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    command.Parameters.AddWithValue("@Code", code);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    string query = $"SELECT TechnologyId from EmsTblTechnologyForProject where ProjectCode like @Code";
+                    conn.Open();
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@Code", code);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            int value = reader.GetInt32(0);
-                            projectTechnologies.Add(value);
-                        }
-                    }
-                }
-                query = $"SELECT * from EmsTblProject where code like @Code";
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    command.Parameters.AddWithValue("@Code", code);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        int count = reader.FieldCount;
-                        while (reader.Read())
-                        {
-                            project.Code = reader.GetString(0);
-                            project.Name = reader.GetString(1);
-                            project.StartingDate = reader.GetDateTime(2);
-                            if (reader.IsDBNull(3))
+                            while (reader.Read())
                             {
-                                project.EndingDate = null;
+                                int value = reader.GetInt32(0);
+                                projectTechnologies.Add(value);
                             }
-                            else project.EndingDate = reader.GetDateTime(3);
+                        }
+                    }
+                    query = $"SELECT * from EmsTblProject where code like @Code";
+                    using (SqlCommand command = new SqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@Code", code);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            int count = reader.FieldCount;
+                            while (reader.Read())
+                            {
+                                project.Code = reader.GetString(0);
+                                project.Name = reader.GetString(1);
+                                project.StartingDate = reader.GetDateTime(2);
+                                if (reader.IsDBNull(3))
+                                {
+                                    project.EndingDate = null;
+                                }
+                                else project.EndingDate = reader.GetDateTime(3);
+                            }
                         }
                     }
                 }
+                project.AssociatedTechnologies = projectTechnologies;
             }
-            project.AssociatedTechnologies = projectTechnologies;
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
+            }
             return project;
         }
 
@@ -197,26 +204,33 @@ namespace EmployeeManagementSystem.Database
         public List<String> AllEmployeeNames()
         {
 
-            string query = $"SELECT Code,Firstname, Lastname from EmsTblEmployee";
             List<string> result = new List<string>();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    string name = string.Empty;
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    conn.Open();
+                    string query = $"SELECT Code,Firstname, Lastname from EmsTblEmployee";
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        name = reader.GetString(0);
-                        name += "-";
-                        name += reader.GetString(1);
-                        name += " ";
-                        name += reader.GetString(2);
-                        result.Add(name);
-                        name = string.Empty;
+                        string name = string.Empty;
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            name = reader.GetString(0);
+                            name += "-";
+                            name += reader.GetString(1);
+                            name += " ";
+                            name += reader.GetString(2);
+                            result.Add(name);
+                            name = string.Empty;
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
             }
             return result;
         }
@@ -227,25 +241,30 @@ namespace EmployeeManagementSystem.Database
         /// <param name="projectCode">code of project</param>
         public DataTable GetAssociatedEmployeesToProject(string projectCode)
         {
-            string query = "SELECT CONCAT(Firstname, ' ', Lastname) AS FullName, EmsTblEmployee.code " +
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+                {
+                    conn.Open();
+                    string query = "SELECT CONCAT(Firstname, ' ', Lastname) AS FullName, EmsTblEmployee.code " +
                            "from EmsTblEmployeeAssociatedToProject " +
                            "INNER JOIN EmsTblEmployee ON EmsTblEmployeeAssociatedToProject.EmployeeCode = EmsTblEmployee.Code " +
                            "where EmsTblEmployeeAssociatedToProject.ProjectCode = @ProjectCode";
-            DataTable dt = new DataTable();
-
-
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
-            {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    command.Parameters.AddWithValue("@ProjectCode", projectCode);
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        adapter.Fill(dt);
+                        command.Parameters.AddWithValue("@ProjectCode", projectCode);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
             }
             return dt;
         }
@@ -256,25 +275,33 @@ namespace EmployeeManagementSystem.Database
         /// <param name="employeeCode"> code of an employee </param>
         public DataTable GetAssociatedProjectForEmployees(string employeeCode)
         {
-            string query = "SELECT Name, ProjectCode " +
-                           "from EmsTblEmployeeAssociatedToProject " +
-                           "INNER JOIN EmsTblProject ON EmsTblEmployeeAssociatedToProject.ProjectCode = EmsTblProject.Code " +
-                           "where EmsTblEmployeeAssociatedToProject.EmployeeCode LIKE @EmployeeCode";
 
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
-            {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(query, conn))
+                try
                 {
-                    command.Parameters.AddWithValue("@EmployeeCode", employeeCode);
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
-                        adapter.Fill(dt);
+                        conn.Open();
+                        string query = "SELECT Name, ProjectCode " +
+                          "from EmsTblEmployeeAssociatedToProject " +
+                          "INNER JOIN EmsTblProject ON EmsTblEmployeeAssociatedToProject.ProjectCode = EmsTblProject.Code " +
+                          "where EmsTblEmployeeAssociatedToProject.EmployeeCode LIKE @EmployeeCode";
+
+                        using (SqlCommand command = new SqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@EmployeeCode", employeeCode);
+
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                adapter.Fill(dt);
+                            }
+                        }
                     }
                 }
-            }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error in Fetching data from database");
+                }
             return dt;
         }
 
@@ -285,18 +312,25 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public DataTable GetTechnologyTable()
         {
-            string query = "SELECT * from EmsTblTechnology";
             DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    string query = "SELECT * from EmsTblTechnology";
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        adapter.Fill(dt);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
             }
             return dt;
         }
@@ -307,18 +341,25 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public DataTable GetSkillTable()
         {
-            string query = "SELECT * from EmsTblSkill";
             DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    string query = "SELECT * from EmsTblSkill";
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        adapter.Fill(dt);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
             }
             return dt;
         }
@@ -329,16 +370,23 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetEmployeeTable()
         {
             DataTable dt = new DataTable();
-            string query = "SELECT Code,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name,Email,Designation,Department,JoiningDate,ReleaseDate from EmsTblEmployee";
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    string query = "SELECT Code,CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) AS Name,Email,Designation,Department,JoiningDate,ReleaseDate from EmsTblEmployee";
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        adapter.Fill(dt);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in Fetching data from database");
             }
             return dt;
         }
@@ -418,42 +466,49 @@ namespace EmployeeManagementSystem.Database
         public EmployeeModel GetEmployeeFromCode(String code)
         {
             EmployeeModel employee = new EmployeeModel();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                conn.Open();
-                string query = $"SELECT * from EmsTblEmployee where Code LIKE @Code";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    command.Parameters.AddWithValue("@Code", code);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    conn.Open();
+                    string query = $"SELECT * from EmsTblEmployee where Code LIKE @Code";
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        int count = reader.FieldCount;
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@Code", code);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            employee.Code = reader.GetString(0);
-                            employee.FirstName = reader.GetString(1);
-                            employee.LastName = reader.GetString(2);
-                            employee.Email = reader.GetString(3);
-                            employee.Password = reader.GetString(4);
-                            employee.JoiningDate = reader.GetDateTime(5);
-                            if (reader.IsDBNull(6))
+                            int count = reader.FieldCount;
+                            while (reader.Read())
                             {
-                                employee.ReleaseDate = null;
+                                employee.Code = reader.GetString(0);
+                                employee.FirstName = reader.GetString(1);
+                                employee.LastName = reader.GetString(2);
+                                employee.Email = reader.GetString(3);
+                                employee.Password = reader.GetString(4);
+                                employee.JoiningDate = reader.GetDateTime(5);
+                                if (reader.IsDBNull(6))
+                                {
+                                    employee.ReleaseDate = null;
+                                }
+                                else employee.ReleaseDate = reader.GetDateTime(6);
+                                employee.DOB = reader.GetDateTime(7);
+                                employee.ContactNumber = reader.GetString(8);
+                                employee.Gender = reader.GetString(9);
+                                employee.MaritalStauts = reader.GetString(10);
+                                employee.PresentAddress = reader.GetString(11);
+                                employee.PermanentAddress = reader.GetString(12);
+                                employee.Designation = reader.GetString(13);
+                                employee.Department = reader.GetString(14);
                             }
-                            else employee.ReleaseDate = reader.GetDateTime(6);
-                            employee.DOB = reader.GetDateTime(7);
-                            employee.ContactNumber = reader.GetString(8);
-                            employee.Gender = reader.GetString(9);
-                            employee.MaritalStauts = reader.GetString(10);
-                            employee.PresentAddress = reader.GetString(11);
-                            employee.PermanentAddress = reader.GetString(12);
-                            employee.Designation = reader.GetString(13);
-                            employee.Department = reader.GetString(14);
                         }
                     }
+                    employee.EducationModels = GetEmployeeEducationModels(code);
+                    employee.ExperienceModels = GetEmployeeExperienceModels(code);
                 }
-                employee.EducationModels = GetEmployeeEducationModels(code);
-                employee.ExperienceModels = GetEmployeeExperienceModels(code);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in fetching data from database");
             }
             return employee;
         }
@@ -465,32 +520,39 @@ namespace EmployeeManagementSystem.Database
         private ObservableCollection<EmployeeExperienceModel> GetEmployeeExperienceModels(string code)
         {
             ObservableCollection<EmployeeExperienceModel> employeeExperienceModels = new ObservableCollection<EmployeeExperienceModel>();
-            string query = $"SELECT * from  EmsTblEmployeeExperience where EmployeeCode like @Code";
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    command.Parameters.AddWithValue("@Code", code);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    string query = $"SELECT * from  EmsTblEmployeeExperience where EmployeeCode like @Code";
+                    conn.Open();
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        int count = reader.FieldCount;
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@Code", code);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            EmployeeExperienceModel employeeExperienceModel = new EmployeeExperienceModel
+                            int count = reader.FieldCount;
+                            while (reader.Read())
                             {
-                                Organization = reader["Organization"].ToString(),
-                                FromDate = (DateTime)reader["FromDate"],
-                                ToDate = (DateTime)reader["ToDate"],
-                                Designation = reader["designation"].ToString(),
+                                EmployeeExperienceModel employeeExperienceModel = new EmployeeExperienceModel
+                                {
+                                    Organization = reader["Organization"].ToString(),
+                                    FromDate = (DateTime)reader["FromDate"],
+                                    ToDate = (DateTime)reader["ToDate"],
+                                    Designation = reader["designation"].ToString(),
 
-                            };
-                            employeeExperienceModels.Add(employeeExperienceModel);
+                                };
+                                employeeExperienceModels.Add(employeeExperienceModel);
+                            }
                         }
                     }
                 }
-                return employeeExperienceModels;
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in fetching data from database");
+            }
+            return employeeExperienceModels;
         }
 
 
@@ -501,31 +563,41 @@ namespace EmployeeManagementSystem.Database
         private ObservableCollection<EmployeeEducationModel> GetEmployeeEducationModels(string code)
         {
             ObservableCollection<EmployeeEducationModel> educationModels = new ObservableCollection<EmployeeEducationModel>();
-            string query = $"SELECT * from  EmsTblEmployeeEducation where EmployeeCode like @Code";
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    command.Parameters.AddWithValue("@Code", code);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    string query = $"SELECT * from  EmsTblEmployeeEducation where EmployeeCode like @Code";
+                    conn.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        int count = reader.FieldCount;
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@Code", code);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            EmployeeEducationModel employeeEducation = new EmployeeEducationModel
+                            int count = reader.FieldCount;
+                            while (reader.Read())
                             {
-                                Qualification = reader["Qualification"].ToString(),
-                                BoardUniversity = reader["Board"].ToString(),
-                                InstituteName = reader["Institute"].ToString(),
-                                State = reader["State"].ToString(),
-                                PassingYear = reader["PassingYear"].ToString(),
-                                Percentage = reader["Percentage"].ToString(),
-                            };
-                            educationModels.Add(employeeEducation);
+                                EmployeeEducationModel employeeEducation = new EmployeeEducationModel
+                                {
+                                    Qualification = reader["Qualification"].ToString(),
+                                    BoardUniversity = reader["Board"].ToString(),
+                                    InstituteName = reader["Institute"].ToString(),
+                                    State = reader["State"].ToString(),
+                                    PassingYear = reader["PassingYear"].ToString(),
+                                    Percentage = reader["Percentage"].ToString(),
+                                };
+                                educationModels.Add(employeeEducation);
+                            }
                         }
                     }
+
+
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in fetching data from database");
             }
             return educationModels;
         }
@@ -536,17 +608,24 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public DataTable DesignationWiseEmployee()
         {
-            string query = $"SELECT COUNT(*) as Count, Designation from EmsTblEmployee GROUP BY Designation";
             DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    string query = $"SELECT COUNT(*) as Count, Designation from EmsTblEmployee GROUP BY Designation";
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        adapter.Fill(dt);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(dt);
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in fetching data from database");
             }
             return dt;
         }
@@ -555,24 +634,31 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public List<string> GetProjectNames()
         {
-            string query = $"SELECT Code,Name from EmsTblProject";
             List<string> result = new List<string>();
-            using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
+            try
             {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    string name = string.Empty;
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    string query = $"SELECT Code,Name from EmsTblProject";
+                    conn.Open();
+                    using (SqlCommand command = new SqlCommand(query, conn))
                     {
-                        name = reader.GetString(0);
-                        name += "-";
-                        name += reader.GetString(1);
-                        result.Add(name);
-                        name = string.Empty;
+                        string name = string.Empty;
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            name = reader.GetString(0);
+                            name += "-";
+                            name += reader.GetString(1);
+                            result.Add(name);
+                            name = string.Empty;
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error in fetching data from database");
             }
             return result;
         }
@@ -662,7 +748,7 @@ namespace EmployeeManagementSystem.Database
         {
             string query = "SELECT Id,COUNT(projectCode)as Count,Name from EmsTblTechnology " +
                 "LEFT JOIN EmsTblTechnologyForProject ON " +
-                "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,Id;";
+                "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,EmsTblTechnology.Id;";
             DataTable dt = new DataTable();
             try
             {
@@ -694,7 +780,7 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetSkillWiseEmployeeCount()
         {
             string query = "SELECT COUNT(*) as Count,SkillId,Name from" +
-                " EmsTblSkillForEmployee INNER  JOIN EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by SkillId ,Name";
+                " EmsTblSkillForEmployee INNER  JOIN EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name";
             DataTable dt = new DataTable();
             try
             {

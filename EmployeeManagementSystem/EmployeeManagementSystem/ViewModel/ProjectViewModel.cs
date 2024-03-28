@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Database;
 using EmployeeManagementSystem.EventArg;
 using EmployeeManagementSystem.Model;
+using Microsoft.Win32;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Input;
@@ -131,7 +132,7 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteSearchProject(object parameter)
         {
 
-            if (!startingDate.HasValue) startingDate = DateTime.MinValue; if (!endingDate.HasValue) endingDate = DateTime.MinValue;
+            if (!startingDate.HasValue) startingDate = DateTime.MinValue; if (!endingDate.HasValue) endingDate = DateTime.MinValue;/// to convert null DateTime to a Date.
             dataTable = getData.GetProjectSearchData(code!, name!, startingDate.Value, endingDate.Value);
             OnPropertyChanged("DataTable");
         }
@@ -166,7 +167,7 @@ namespace EmployeeManagementSystem.ViewModel
             Name = String.Empty;
             StartingDate = null;
             EndingDate = null;
-            dataTable = getData.GetProjectData();
+            dataTable = getData.GetProjectData();///refresh project datatable
             OnPropertyChanged("dataTable");
         }
 
@@ -187,8 +188,8 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private bool CanDeleteProjectExecute(object arg)
         {
-            if (selectedRow != null) return true;
-            return false;
+            
+            return true;
         }
 
         private void ExecuteDeleteProject(object obj)
@@ -263,8 +264,8 @@ namespace EmployeeManagementSystem.ViewModel
                 if (selectedRow != null && employeeName != null)
                 {
                     string ProjectCode = (String)selectedRow.Row.ItemArray[0]!;///first row of selectedRow contains project code.
-                    string EmployeeCode = employeeName.Split('-')[0];
-                    string EmployeeName = employeeName.Split('-')[1];
+                    string EmployeeCode = employeeName.Split('-')[0]; /// employeeName is set as 'employeeCode - employeeName ' so by splitting it will convert it to an array and first element of array will be employeeCode.
+                    string EmployeeName = employeeName.Split('-')[1]; /// and second will be employeeName.
                     insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode, EmployeeName);
                     OnAddEmployeeEvent(EventArgs.Empty);
                 }
@@ -290,9 +291,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private bool CanRemoveEmployeeFromProjectExecute(object arg)
         {
-            if (selectedEmployeeRow == null) return false;
             return true;
-
         }
 
         private void ExecuteRemoveEmployeeFromProject(object obj)

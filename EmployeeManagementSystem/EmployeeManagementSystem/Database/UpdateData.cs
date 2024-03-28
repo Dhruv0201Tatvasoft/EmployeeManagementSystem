@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Automation.Peers;
+using System.Windows.Input;
 
 namespace EmployeeManagementSystem.Database
 {
@@ -246,7 +247,6 @@ namespace EmployeeManagementSystem.Database
             command.Parameters.AddWithValue("@OldFromDate", oldModel.FromDate?.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@OldToDate", oldModel.ToDate?.ToString("yyyy-MM-dd"));
             command.Parameters.AddWithValue("@OldDesignation", oldModel.Designation);
-
             return ExecuteQuery(command);
         }
 

@@ -22,8 +22,62 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--#region TextBoxTopAlignedTextStyle -->
+        <Style x:Key="TextBoxTopAlignedTextStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Background" Value="{DynamicResource NormalBackGroundColor}" />
+            <Setter Property="BorderBrush" Value="#FF7D8683" />
+            <Setter Property="Foreground" Value="#99000000" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox VerticalContentAlignment="Top" Text="{Binding Path=Text,
+                                          RelativeSource={RelativeSource TemplatedParent}, 
+                                          Mode=TwoWay,
+                                          UpdateSourceTrigger=PropertyChanged}"
+                           x:Name="textSource" 
+                           Background="Transparent" 
+                           Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="{DynamicResource ForeGroundColor}"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                                                <Setter Property="BorderBrush" Value="{DynamicResource NormalBackGroundColor}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)/ErrorContent}" />
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F3F3F3" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#FFFFFF" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#33000000"/>
+                    <Setter Property="Foreground" Value="#66000000" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
     </UserControl.Resources>
-   
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -39,7 +93,9 @@
 
             <!--#region EmployeeDetails -->
             <TabItem Name="EmployeeDetailsTabItem" Header="Employee Details" Style="{DynamicResource TabItemStyle}">
-                <Grid>
+                <Border>
+                    <AdornerDecorator>
+                        <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".2*" MaxWidth="200"/>
                         <ColumnDefinition Width=".3*" MaxWidth="300"/>
@@ -60,7 +116,7 @@
                     </Grid.RowDefinitions>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Code:" Margin="20 20 0 0" Height="20" Width="auto" />
-                    <TextBox Text="{Binding Code, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Code" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="code" Text="{Binding TempCode, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="Code" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"  Height="32" MaxWidth="250" Style="{DynamicResource CustomInputStyle}" Width="auto" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" Content="First Name:" Margin="20 20 0 0" Height="20" Width="auto"   />
                     <TextBox Tag="Name" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="FirstName" MaxWidth="250" Height="32" Style="{DynamicResource CustomInputStyle}" Width="auto" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
@@ -116,6 +172,8 @@
                     </Grid>
 
                 </Grid>
+                    </AdornerDecorator>
+                </Border>
             </TabItem>
             <!--#endregion-->
 
@@ -136,6 +194,8 @@
 
                     </MultiBinding>
                 </TabItem.IsEnabled>
+                <Border>
+        <AdornerDecorator>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".2*" MaxWidth="200"/>
@@ -164,50 +224,57 @@
                         <RadioButton Content="Female" IsChecked="{Binding Gender , Converter={StaticResource radiobuttonconverter},ConverterParameter=Female}"   Margin="10 0 0 0" Style="{DynamicResource RadioButtonStyle}" />
                     </StackPanel>
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Content="Marital Status:" Margin="20 20 0 0" Height="20" />
-                    <ComboBox Text="{Binding CombBoxText ,Mode=OneWay}" IsEditable="True" IsReadOnly="True" Name="MaritalStatus" ItemsSource="{Binding MaritalStatus}" SelectedItem="{Binding SelectedMaritalStatus, Mode=TwoWay,ValidatesOnDataErrors=True}" MaxWidth="250" Grid.Row="1" Grid.Column="3" Height="32" Width="auto" Style="{DynamicResource CustomComboBoxStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></ComboBox>
+                            <ComboBox Text="{Binding MaritalStatusCombBoxText ,Mode=OneWay}" IsEditable="True" IsReadOnly="True" Name="MaritalStatus" ItemsSource="{Binding MaritalStatus}" SelectedItem="{Binding SelectedMaritalStatus, Mode=TwoWay,ValidatesOnDataErrors=True}" MaxWidth="250" Grid.Row="1" Grid.Column="3" Height="32" Width="auto" Style="{DynamicResource CustomComboBoxStyle}" VerticalAlignment="Top" Margin="0,20,0,0"></ComboBox>
 
 
                     <ContentControl Style="{DynamicResource CompulsoryInputTextBlock}" MaxWidth="120" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Content="Present Address:" Margin="20 20 0 0" Height="auto" />
-                    <TextBox  Name="PresentAddress" Text="{Binding PresentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                    <TextBox Tag="present address" VerticalContentAlignment="Bottom" Name="PresentAddress" Text="{Binding PresentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{StaticResource TextBoxTopAlignedTextStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
 
                     <TextBlock TextWrapping="Wrap" MaxWidth="120" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" Text="Permanent Address:" Margin="20 20 0 0" Height="auto" TextAlignment="Left" />
                     <StackPanel Margin="0 20 0 0" Grid.Row="2" Grid.Column="3" VerticalAlignment="top" Height="auto"  Orientation="Vertical">
                         <CheckBox IsChecked="{Binding IsCheckBoxChecked,Mode=TwoWay}" MaxWidth="250" Height="auto" Width="auto" VerticalAlignment="Top" Style="{DynamicResource CustomCheckBoxStyle}"  Content="Same as Peresent"/>
-                        <TextBox x:Name="PermanentAddress"  Text="{Binding PermanentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{DynamicResource CustomInputStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
+                        <TextBox Tag="permanent addres"  x:Name="PermanentAddress"  Text="{Binding PermanentAddress,Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" MaxWidth="250" MaxLines="20" MinHeight="80" Grid.Row="2" Grid.Column="1" Height="auto" Style="{StaticResource TextBoxTopAlignedTextStyle}" Width="auto"  VerticalAlignment="Top" Margin="0,20,0,0"></TextBox>
                     </StackPanel>
-                    <Grid Grid.Row="4" Grid.ColumnSpan="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="4" Grid.ColumnSpan="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                        <Button x:Name="PersonalDetailsNextBtn" Command="{Binding UpdateEmployee}"  Width="120" Height="32" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5"
+                                <Button x:Name="PersonalDetailsNextBtn" Command="{Binding UpdateEmployee}"  Width="120" Height="32" Content="Next" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,150,5"
                             >
-                            <Button.IsEnabled>
-                                <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay">
-                                    <Binding ElementName="DOB" Path="(Validation.HasError)"/>
-                                    <Binding ElementName="ContactNumber" Path="(Validation.HasError)"/>
-                                    <Binding ElementName="MaritalStatus" Path="(Validation.HasError)"/>
-                                    <Binding ElementName="PresentAddress" Path="(Validation.HasError)"/>
-                                    <Binding ElementName="PermanentAddress" Path="(Validation.HasError)"/>
-                                </MultiBinding>
-                            </Button.IsEnabled>
-                        </Button>
+                                    <Button.IsEnabled>
 
-                        <Button Command="{Binding ClearPersonalDetails}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
-                    </Grid>
+                                        <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay">
+                                            <Binding ElementName="Code" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="FirstName" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="LastName" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="Email" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="Password" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="ConfirmPassword" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="Department" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="Designation" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="JoiningDate" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="ReleaseDate" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="DOB" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="ContactNumber" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="MaritalStatus" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="PresentAddress" Path="(Validation.HasError)"/>
+                                            <Binding ElementName="PermanentAddress" Path="(Validation.HasError)"/>
+                                        </MultiBinding>
+                                    </Button.IsEnabled>
+                                </Button>
 
-                </Grid>
+                                <Button Command="{Binding ClearPersonalDetails}" Width="120" Height="32"  Content="Clear" Style="{DynamicResource ButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5"/>
+                            </Grid>
+                        </Grid>
+                    </AdornerDecorator>
+                </Border>
             </TabItem>
             <!--#endregion-->
 
             <!--#region EducationDetails -->
             <TabItem Name="EducationDetailsTabItem"  Header="Education Details" Style="{DynamicResource TabItemStyle}"  >
-                <TabItem.IsEnabled>
-                    <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay" >
-                        <Binding ElementName="Code" Path="(Validation.HasError)"/>
-                    </MultiBinding>
-                </TabItem.IsEnabled>
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
@@ -303,10 +370,10 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate>
                                         <StackPanel Width="100" Orientation="Horizontal">
-                                            <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button ToolTip="Edit" Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="\Icons\EditIcon.png" />
                                             </Button>
-                                            <Button Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.RemoveEducationFromDataBase, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button ToolTip="Delete" Margin="10 0 10 0"  Width="30" Height="30" Style="{StaticResource CircleButton}"  Command="{Binding DataContext.RemoveEducationFromDataBase, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image  Source="\Icons\CircleCrossIcon.png"/>
                                             </Button>
                                         </StackPanel>
@@ -318,7 +385,7 @@
                                             <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
 
                                             </Button>
-                                            <Button Style="{StaticResource CircleButton}" Margin="10 0 10 0" Width="30" Height="30" Command="{Binding DataContext.RemoveEducationFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button ToolTip="Remove" Style="{StaticResource CircleButton}" Margin="10 0 10 0" Width="30" Height="30" Command="{Binding DataContext.RemoveEducationFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>
@@ -335,17 +402,17 @@
 
             <!--#region ExperienceDetails -->
             <TabItem Name="ExperienceDetailsTabItem"  Header="Experience Details" Style="{DynamicResource TabItemStyle}">
-                <TabItem.IsEnabled>
-                    <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay" >
-                        <Binding ElementName="Code" Path="(Validation.HasError)"/>
-                    </MultiBinding>
-                </TabItem.IsEnabled>
+
                 <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="394*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Button Command="{Binding AddBlankRowExperience}" Grid.Row="0" Width="120" Height="32"  Margin="0 0 20 0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}">
+                    <Button Command="{Binding AddBlankRowExperience}" Grid.Row="0" Width="120" Height="32"  Margin="648,34,0,34" HorizontalAlignment="Left" Style="{DynamicResource ButtonStyle}" Grid.Column="1">
                         <Button.Content>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -357,7 +424,7 @@
                             </Grid>
                         </Button.Content>
                     </Button>
-                    <DataGrid  Name="ExperienceDataGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedEmployeeExperienceModel}" IsReadOnly="True" VerticalAlignment="Top" ItemsSource="{Binding EmployeeExperienceList}" AutoGenerateColumns="False" CanUserAddRows="False" >
+                    <DataGrid  Name="ExperienceDataGrid" Grid.Row="1" Style="{DynamicResource DataGridStyle}" SelectedItem="{Binding SelectedEmployeeExperienceModel}" IsReadOnly="True" VerticalAlignment="Top" ItemsSource="{Binding EmployeeExperienceList}" AutoGenerateColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Organization" Width=".1*">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -391,7 +458,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <DatePicker  Style="{DynamicResource CustomDatePickerStyle}"  DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <DatePicker   Style="{DynamicResource CustomDatePickerStyle}"  DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" SelectedDate="{Binding ToDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
@@ -404,7 +471,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <ComboBox Style="{DynamicResource CustomComboBoxStyle}" ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
+                                        <ComboBox   Style="{DynamicResource CustomComboBoxStyle}"   ItemsSource="{Binding DataContext.Designation, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" SelectedItem="{Binding Designation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="auto" MinWidth="150"   Height="32" BorderBrush="Black" BorderThickness="1" >
                                         </ComboBox>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
@@ -413,10 +480,10 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate>
                                         <StackPanel Width="100" Orientation="Horizontal">
-                                            <Button  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditExperience, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
+                                            <Button ToolTip="Edit"  Margin="10 0 10 0"  Width="30" Height="30"  Command="{Binding DataContext.EditExperience, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                                 <Image Source="\Icons\EditIcon.png"/>
                                             </Button>
-                                            <Button Command="{Binding DataContext.RemoveExperienceFromDataBase, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
+                                            <Button ToolTip="Delete" Style="{StaticResource CircleButton}" Command="{Binding DataContext.RemoveExperienceFromDataBase, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  Margin="10 0 10 0"  Width="30" Height="30" >
                                                 <Image  Source="\Icons\CircleCrossIcon.png" />
                                             </Button>
                                         </StackPanel>
@@ -427,7 +494,7 @@
                                         <StackPanel Orientation="Horizontal" Width="100">
                                             <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveExperienceRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                             </Button>
-                                            <Button Margin="10 0 10 0" Width="30" Height="30"  Command="{Binding DataContext.RemoveExperienceFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <Button ToolTip="Remove" Margin="10 0 10 0" Width="30" Height="30" Style="{StaticResource CircleButton}" Command="{Binding DataContext.RemoveExperienceFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                                 <Image Source="\Icons\CircleCrossIcon.png"  />
                                             </Button>
                                         </StackPanel>
@@ -441,7 +508,7 @@
                 </Grid>
             </TabItem>
             <!--#endregion-->
-            
+
         </TabControl>
     </Grid>
 </UserControl>

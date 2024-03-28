@@ -86,10 +86,6 @@ namespace EmployeeManagementSystem.UserControls
         /// <param name="e"></param>
         private void OpenEmployeeMapingPopupMethod(object sender, RoutedEventArgs e)
         {
-            
-            MyPopup.PlacementRectangle = new Rect(new Size(
-            SystemParameters.FullPrimaryScreenWidth,
-            SystemParameters.FullPrimaryScreenHeight));
             MyPopup.IsOpen = true;
             string projectCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!;
             ProjectNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!;

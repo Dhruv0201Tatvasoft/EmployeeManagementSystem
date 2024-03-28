@@ -97,7 +97,7 @@
             <TextBlock Text="Joining Date:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5"/>
             <TextBlock  Text="Experience:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="6"/>
             <TextBlock x:Name="Code" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-            <TextBlock x:Name="Name" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+            <TextBlock x:Name="EmployeeName" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
             <TextBlock x:Name="Email" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
             <TextBlock x:Name="Department" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3"/>
             <TextBlock x:Name="Designation" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>

@@ -67,7 +67,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Margin="0 0 0 10" Grid.Row="0" Grid.Column="0" Text="Code:" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox Margin="0 0 0 10" Tag="project code"  Grid.Row="0" Grid.Column="1" Width="auto" MaxWidth="250" Height="32" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBox Margin="0 0 0 10" Tag="project code"  Grid.Row="0" Grid.Column="1" Width="auto" MaxWidth="250" Height="32"   Text="{Binding Code,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource CustomInputStyle}"/>
             <TextBlock    Grid.Row="0" Grid.Column="2" Text="Name:" Margin="20 0 0 10 "  HorizontalAlignment="Left"  VerticalAlignment="Center"/>
             <TextBox  Margin="0 0 0 10" Tag="project name" Grid.Row="0" Grid.Column="3" Width="auto"  MaxWidth="250" Text="{Binding Name}" Height="32" Style="{DynamicResource CustomInputStyle}"/>
             <TextBlock  TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Width="auto"   Text="Start Date:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -104,47 +104,48 @@
                                     <ColumnDefinition  Width="0.33*"/>
                                     <ColumnDefinition  Width="0.33*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" HorizontalAlignment="Right"  Width="40"  MaxHeight="40" Command= "{Binding DataContext.EditProject , ElementName=DataGrid}" Background="White">
+                                <Button ToolTip="Edit project" Grid.Column="0" HorizontalAlignment="Right"  Width="40"  MaxHeight="40" Command= "{Binding DataContext.EditProject , ElementName=DataGrid}" Background="White">
                                     <Image HorizontalAlignment="Center" Source="\Icons\EditIcon.png" Width="25" Height="25"  />
                                 </Button>
-                                <Button Command="{Binding DataContext.DeleteProject , ElementName=DataGrid}" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="1">
-                                    <Image Source="\Icons\DeleteIcon.png" Width="40" Height="40"/>
+                                <Button ToolTip="Delete project" Grid.Column="1" HorizontalAlignment="Center"  Width="40"  MaxHeight="40" Command= "{Binding DataContext.DeleteProject , ElementName=DataGrid}" Background="White">
+                                    <Image HorizontalAlignment="Center" Source="\Icons\DeleteIcon.png" Width="25" Height="25"  />
                                 </Button>
-                                <Button HorizontalAlignment="Left"  Width="40"   Click="OpenEmployeeMapingPopupMethod" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="2">
+                                <Button ToolTip="Map employee" HorizontalAlignment="Left"  Width="40"   Click="OpenEmployeeMapingPopupMethod" Background="White" MaxHeight="40" MaxWidth="40" Grid.Column="2">
                                     <Image Source="\Icons\ViewEmployee.jpg" HorizontalAlignment="Center" Width="40" Height="40"/>
-
                                 </Button>
-
-
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True">
+        <Popup PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True">
 
             <Grid>
                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="600" Height="650">
                     <Grid Background="White" Width="600" Height="650">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height=".1*"/>
-                            <RowDefinition Height=".1*"/>
+                            <RowDefinition Height=".07*"/>
+                            <RowDefinition Height=".05*"/>
                             <RowDefinition Height=".5*"/>
                         </Grid.RowDefinitions>
                         <DockPanel  Grid.Row="0">
-                            <TextBlock VerticalAlignment="Center" Margin="20 10 0 0" Text="Employee Mapping -" Height="auto" DockPanel.Dock="Left" FontSize="26" />
+                            <TextBlock VerticalAlignment="Center" Margin="20 10 0 0" Text="Employee Mapping - " Height="auto" DockPanel.Dock="Left" FontSize="26" />
                             <TextBlock x:Name="ProjectNameTextBox" TextWrapping="Wrap" Margin="0 10 0 0"  Height="auto" FontSize="26" Width="250" VerticalAlignment="Center"/>
                             <Button Click="ClosePopUpClick"  Background="Transparent" BorderBrush="Transparent" Margin="15 10 10 0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
-
                                 <Image Source="\Icons\CancelIcon.png"/>
                             </Button>
                         </DockPanel>
                         <Separator Margin="10 0 10 0" Grid.Row="1"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="top" Height="auto" Grid.Row="2">
                             <TextBlock Height="18"  Width="auto" VerticalAlignment="Center" Text="Employee:" Margin="10 0 0 0" TextAlignment="Center"/>
-                            <input:AutoCompleteBox Placeholder="select employee" SelectedItem="{Binding EmployeeName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0" ItemsSource="{Binding EmployeeNames}" FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32">
+                            <input:AutoCompleteBox Padding="5" Placeholder="Select employee" FontStyle="Normal" FontFamily="Calibri" SelectedItem="{Binding EmployeeName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0" ItemsSource="{Binding EmployeeNames}" FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32">
+                                <input:AutoCompleteBox.PlaceholderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" FontStyle="Normal" FontFamily="Calibri" Text="{Binding}" Foreground="Gray"/>
+                                    </DataTemplate>
+                                </input:AutoCompleteBox.PlaceholderTemplate>
                             </input:AutoCompleteBox>
                             <Button VerticalAlignment="Center" Margin=" 0 0 10 0" Command="{Binding AddEmployeeToProject}" Content="ADD" Width="90" Height="30" Style="{DynamicResource ButtonStyle}"/>
                         </StackPanel>
@@ -159,7 +160,7 @@
                                 <DataGridTemplateColumn Header="Actions" Width=".2*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button  Command="{Binding DataContext.RemoveEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
+                                            <Button ToolTip="Remove" Command="{Binding DataContext.RemoveEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
                                                 
                                                     <Image Source="\Icons\CircleCrossIcon.png" />
                                                

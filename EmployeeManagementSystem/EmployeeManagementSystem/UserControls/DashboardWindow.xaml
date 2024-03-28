@@ -60,10 +60,10 @@
                                         </vsm:VisualState>
                                     </vsm:VisualStateGroup>
                                 </vsm:VisualStateManager.VisualStateGroups>
-                                <Path Name="Slice" Data="{TemplateBinding b:PieDataPoint.TextedGeometry}" Fill="{TemplateBinding Control.Background}"                                    Stroke="{TemplateBinding Control.BorderBrush}"  StrokeMiterLimit="1">
+                                <Path Name="Slice" Data="{TemplateBinding b:PieDataPoint.TextedGeometry}" Fill="{TemplateBinding Control.Background}" Stroke="{TemplateBinding Control.BorderBrush}"  StrokeMiterLimit="1">
                                     <ToolTipService.ToolTip>
                                         <StackPanel>
-                                            <ContentControl Content="{Binding IndependentValue, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            <ContentControl FontWeight="Bold" Foreground="Green" Content="{Binding IndependentValue, RelativeSource={RelativeSource TemplatedParent}}" />
                                             <ContentControl Content="{Binding DependentValue, RelativeSource={RelativeSource TemplatedParent}}" />
                                         </StackPanel>
                                     </ToolTipService.ToolTip>
@@ -97,7 +97,6 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
         <!--#region DesignationWiseEmployee -->
         <chart:Chart Grid.Column="0" Grid.Row="0" x:Name="DesignationWiseEmployee" Title="Designation-wise Employee" Margin="10">
             <chart:Chart.Template>
@@ -193,7 +192,7 @@
                                         <Grid>
                                             <Rectangle  Fill="{StaticResource GraphColor1}" >
                                                 <Rectangle.ToolTip>
-                                                    <TextBlock FontFamily="Calibri" Text="{Binding Month}"/>
+                                                    <TextBlock FontWeight="Bold" FontFamily="Calibri"  Text="{Binding Month}"/>
                                                 </Rectangle.ToolTip>
                                             </Rectangle>
                                             <TextBlock FontFamily="Calibri" Text="{Binding Count}" Margin="0 5 0 0" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="top"/>
@@ -216,7 +215,7 @@
                                         <Grid>
                                             <Rectangle  Fill="{StaticResource GraphColor2}" >
                                                 <Rectangle.ToolTip>
-                                                    <TextBlock FontFamily="Calibri" Text="{Binding Month}"/>
+                                                    <TextBlock FontWeight="Bold" FontFamily="Calibri" Text="{Binding Month}"/>
                                                 </Rectangle.ToolTip>
                                             </Rectangle>
                                             <TextBlock FontFamily="Calibri" Text="{Binding Count}" Foreground="White" FontWeight="Bold" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -336,7 +335,7 @@
                                         <Grid>
                                             <Rectangle Fill="{Binding SkillId, Converter={StaticResource colorConverter}}"  >
                                                 <Rectangle.ToolTip>
-                                                    <TextBlock FontFamily="Calibri" Text="{Binding Name}"/>
+                                                    <TextBlock FontWeight="Bold" FontFamily="Calibri" Text="{Binding Name}"/>
                                                 </Rectangle.ToolTip>
                                             </Rectangle>
                                             <TextBlock FontFamily="Calibri" Text="{Binding Count}" Foreground="White" Margin="0 5 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="top"/>

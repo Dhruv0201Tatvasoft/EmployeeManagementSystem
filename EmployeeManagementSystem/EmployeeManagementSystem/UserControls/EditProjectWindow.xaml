@@ -18,7 +18,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Name="Border" Padding="7" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <Border Name="Border" Padding="7" SnapsToDevicePixels="True"  Background="{TemplateBinding Background}">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -27,7 +27,7 @@
                                 <Setter TargetName="Border" Property="Background" Value="#60943C"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#C5E0B4"/>
+                                <Setter TargetName="Border" Property="Background" Value="#669E40"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Foreground" Value="Green"/>
@@ -61,13 +61,13 @@
                 <ContentControl  Style="{DynamicResource CompulsoryInputTextBlock}"  HorizontalAlignment="Left" VerticalAlignment="Center" Content="Code:" Grid.Column="0" Grid.Row="0" ></ContentControl>
                 <TextBox x:Name="Code" Text="{Binding Code,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <ContentControl  HorizontalAlignment="Left" Style="{DynamicResource CompulsoryInputTextBlock}"  VerticalAlignment="Center" Content="Name:" Grid.Column="0" Grid.Row="1" ></ContentControl>
-                <TextBox x:Name="Name" Text="{Binding Name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+                <TextBox x:Name="ProjectName" Text="{Binding Name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
                 <ContentControl  Style="{DynamicResource CompulsoryInputTextBlock}"  VerticalAlignment="Center" Content="Start Date:" Grid.Column="0" Grid.Row="2" ></ContentControl>
                 <DatePicker  x:Name="StartingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Text="{Binding StartingDate,TargetNullValue='',ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="2" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left"  Style="{DynamicResource CustomDatePickerStyle}" />
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
                 <DatePicker x:Name="EndingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left"  Style="{DynamicResource CustomDatePickerStyle}" />
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
-                <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}"   Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
+                <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}" BorderBrush="#507E32"    Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem"  BasedOn="{StaticResource ListBoxItemStyle}"/>
 
@@ -88,7 +88,7 @@
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource ButtonDisableConverter}" Mode="TwoWay"  >
                             <Binding ElementName="Code" Path="(Validation.HasError)" />
-                            <Binding ElementName="Name" Path="(Validation.HasError)" />
+                            <Binding ElementName="ProjectName" Path="(Validation.HasError)" />
                             <Binding ElementName="StartingDate" Path="(Validation.HasError)" />
                             <Binding ElementName="EndingDate" Path="(Validation.HasError)" />
                         </MultiBinding>

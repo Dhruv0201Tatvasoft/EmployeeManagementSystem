@@ -154,7 +154,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { contactNumber = value; OnPropertyChanged("ContactNumber"); }
         }
 
-        private string gender = "Male";
+        private string gender = "Male"; ///by default Male's radio button will be checked
 
         public string Gender
         {
@@ -207,6 +207,14 @@ namespace EmployeeManagementSystem.ViewModel
         {
             get { return selectedMaritalStatus; }
             set { selectedMaritalStatus = value; OnPropertyChanged("SelectedMaritalStatus"); }
+        }
+
+        private string maritalStatusCombBoxText = "Select";
+
+        public string MaritalStatusCombBoxText
+        {
+            get { return combBoxText; }
+            set { combBoxText = value; OnPropertyChanged("comBoxText"); }
         }
         private bool isCheckBoxChecked = false;
 
@@ -296,7 +304,7 @@ namespace EmployeeManagementSystem.ViewModel
         public ObservableCollection<EmployeeExperienceModel> EmployeeExperienceList
         { get { return employeeExperienceList; } set { employeeExperienceList = value; } }
 
-        public string Error => null!;
+        public string Error => string.Empty;
 
         public string this[string PropertyName]
         {
@@ -306,50 +314,50 @@ namespace EmployeeManagementSystem.ViewModel
                 switch (PropertyName)
                 {
                     case "Code":
-                        if (string.IsNullOrEmpty(Code)) errors = "Code cant be empty";
-                        if (Code.Length > 10) errors = "Code cant be more than 10 characters";
+                        if (string.IsNullOrEmpty(Code)) errors = "code can not be empty";
+                        if (Code.Length > 10) errors = "code can not be more than 10 characters";
                         break;
                     case "FirstName":
-                        if (string.IsNullOrEmpty(FirstName)) errors = "FirstName cant be empty";
-                        if (FirstName.Length > 20) errors = "FirstName cant be more than 20 characters";
+                        if (string.IsNullOrEmpty(FirstName)) errors = "firstname can not be empty";
+                        if (FirstName.Length > 20) errors = "firstName can not be more than 20 characters";
                         break;
                     case "LastName":
-                        if (String.IsNullOrEmpty(LastName)) errors = "Last Name cant be Empty";
-                        if (LastName.Length > 20) errors = "LastName cant be more than 20 characters";
+                        if (String.IsNullOrEmpty(LastName)) errors = "lastname can not be Empty";
+                        if (LastName.Length > 20) errors = "lastName can not be more than 20 characters";
                         break;
                     case "Email":
-                        if (string.IsNullOrEmpty(Email)) errors = "Email cant be Empty";
-                        if (!IsValidEmailAddress(Email)) errors = "Not a valid email address";
+                        if (string.IsNullOrEmpty(Email)) errors = "email can not be Empty";
+                        if (!IsValidEmailAddress(Email)) errors = "not a valid email address";
                         break;
                     case "Password":
-                        if (String.IsNullOrEmpty(Password)) errors = "Password cant be empty";
-                        if (Password.Length < 8) errors = "Password must be longer than 8 characters";
-                        if (password.Length > 20) errors = "Password maximum Limit";
+                        if (String.IsNullOrEmpty(Password)) errors = "password can not be empty";
+                        if (Password.Length < 8) errors = "password must be longer than 8 characters";
+                        if (password.Length > 20) errors = "password maximum limit reaced";
                         break;
                     case "ConfirmPassword":
-                        if (!ConfirmPassword.Equals(Password)) errors = "Does not match with your password";
+                        if (!ConfirmPassword.Equals(Password)) errors = "does not match with your password";
                         break;
                     case "SelectedDesignation":
-                        if (String.IsNullOrEmpty(SelectedDesignation) || !Designation.Contains(SelectedDesignation)) errors = "Please select a valid designation";
+                        if (String.IsNullOrEmpty(SelectedDesignation) || !Designation.Contains(SelectedDesignation)) errors = "please select a valid designation";
                         break;
                     case "SelectedDepartment":
-                        if (String.IsNullOrEmpty(SelectedDepartment) || !Department.Contains(SelectedDepartment)) errors = "Plaease select valid department";
+                        if (String.IsNullOrEmpty(SelectedDepartment) || !Department.Contains(SelectedDepartment)) errors = "plaease select a valid department";
                         break;
                     case "SelectedMaritalStatus":
-                        if (String.IsNullOrEmpty(SelectedMaritalStatus) || !MaritalStatus.Contains(SelectedMaritalStatus)) errors = "Please select valid marital status";
+                        if (String.IsNullOrEmpty(SelectedMaritalStatus) || !MaritalStatus.Contains(SelectedMaritalStatus)) errors = "please select a valid marital status";
                         break;
                     case "PresentAddress":
-                        if (String.IsNullOrEmpty(PresentAddress)) errors = "Present Address cant be empty";
+                        if (String.IsNullOrEmpty(PresentAddress)) errors = "present address can not be empty";
                         break;
                     case "ContactNumber":
-                        if (String.IsNullOrEmpty(ContactNumber)) errors = "Contact number cant be empty";
-                        if (!IsValidContactNumber(ContactNumber)) errors = "Provide valid contact number";
+                        if (String.IsNullOrEmpty(ContactNumber)) errors = "contact number can not be empty";
+                        if (!IsValidContactNumber(ContactNumber)) errors = "provide a valid contact number";
                         break;
                     case "JoiningDate":
-                        if (!string.IsNullOrEmpty(ReleaseDate.ToString()) && JoiningDate > ReleaseDate) errors = "Joining Date cant be greater than Release date ";
+                        if (!string.IsNullOrEmpty(ReleaseDate.ToString()) && JoiningDate > ReleaseDate) errors = "joining date can not be greater than release date ";
                         break;
                     case "ReleaseDate":
-                        if (!string.IsNullOrEmpty(ReleaseDate.ToString()) && JoiningDate > ReleaseDate) errors = "Release Date cant be less than ending date ";
+                        if (!string.IsNullOrEmpty(ReleaseDate.ToString()) && JoiningDate > ReleaseDate) errors = "release date can not be less than joining date ";
                         break;
                 }
 
@@ -448,7 +456,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private void ExecuteAddRowEducation(object obj)
         {
-            EmployeeEducationList.Add(new EmployeeEducationModel());
+            EmployeeEducationList.Add(new EmployeeEducationModel());///adding new blank model will add blank row.
             OnAddEducationButtonClicked(EventArgs.Empty);
             OnPropertyChanged("EmployeeEducationList");
         }
@@ -476,7 +484,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteAddRowExperience(object obj)
         {
-            EmployeeExperienceList.Add(new EmployeeExperienceModel());
+            EmployeeExperienceList.Add(new EmployeeExperienceModel());///adding new blank model will add blank row.
             OnAddExperienceButtonClicked(EventArgs.Empty);
             OnPropertyChanged("EmployeeExperienceList");
         }
@@ -531,22 +539,22 @@ namespace EmployeeManagementSystem.ViewModel
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName) && (selectedEmployeeEducationModel.InstituteName.Length > 35))) /// to validate institute name field.
             {
-                MessageBox.Show("Maximum character limit reached from Institute Name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for Institute Name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) && (selectedEmployeeEducationModel.Qualification.Length > 10))) /// to validate qualification field.
             {
-                MessageBox.Show("Maximum character limit reached from Qualification Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for Qualification Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) && (selectedEmployeeEducationModel.BoardUniversity.Length > 30))) /// to validate Board/University field.
             {
-                MessageBox.Show("Maximum character limit reached from Board/University Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for Board/University Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.State) && (selectedEmployeeEducationModel.State.Length > 15))) /// to validate state field.
             {
-                MessageBox.Show("Maximum character limit reached from State Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for State Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
@@ -740,7 +748,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedEmployeeEducationModel != null)
             {
-                EmployeeEducationList.Remove(selectedEmployeeEducationModel);
+                EmployeeEducationList.Remove(selectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
                 OnPropertyChanged("EmployeeEducationList");
             }
         }
@@ -770,7 +778,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedEmployeeExperienceModel != null)
             {
-                EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);
+                EmployeeExperienceList.Remove(selectedEmployeeExperienceModel); ;///this will only remove model from EmployeeEducationList and not from the database.
                 OnPropertyChanged("EmployeeExperienceList");
             }
         }
@@ -906,8 +914,8 @@ namespace EmployeeManagementSystem.ViewModel
             DOB = DateTime.Now;
             Gender = "Male";
             ContactNumber = PresentAddress = PermanentAddress = String.Empty;
-            combBoxText = "Select";
-            OnPropertyChanged("CombBoxText");
+            maritalStatusCombBoxText = "Select";
+            OnPropertyChanged("MaritalStatusCombBoxText");
             SelectedMaritalStatus = null;
             IsCheckBoxChecked = false;
 

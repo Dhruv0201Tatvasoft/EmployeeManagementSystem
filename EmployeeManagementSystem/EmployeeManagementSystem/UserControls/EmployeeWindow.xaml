@@ -101,17 +101,17 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Button Command="{Binding DataContext.ViewEmployeeDetails ,ElementName=DataGrid}"  MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
+                                <Button ToolTip="View details" Command="{Binding DataContext.ViewEmployeeDetails ,ElementName=DataGrid}"  MaxWidth="40" MaxHeight="40" Grid.Column="0" Background="White" >
                                     <Image Source="/Icons/EmployeeIcon.png" Width="25" Height="25" />
                                 </Button>
-                                <Button Command="{Binding  DataContext.EditEmployee ,ElementName=DataGrid }" MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
+                                <Button ToolTip="Edit employee" Command="{Binding  DataContext.EditEmployee ,ElementName=DataGrid }" MaxWidth="40" MaxHeight="40" Grid.Column="1" Background="White">
                                     <Image Source="/Icons/EditIcon.png" Width="25" Height="25"/>
                                 </Button>
-                                <Button  Command="{Binding DataContext.DeleteEmployee ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
+                                <Button ToolTip="Delete employee" Command="{Binding DataContext.DeleteEmployee ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
                                     <Image Source="/Icons/DeleteIcon.png"
                                            Width="40" Height="40"/>
                                 </Button>
-                                <Button  Click="OpenProjectMappingPopup" MaxWidth="40" MaxHeight="40" Grid.Column="3">
+                                <Button ToolTip="Map project"  Click="OpenProjectMappingPopup" MaxWidth="40" MaxHeight="40" Grid.Column="3">
                                     <Image Source="/Icons/FilesIcon.png" Width="25" Height="25"/>
                                 </Button>
                             </Grid>
@@ -120,19 +120,19 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True" >
+        <Popup  PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True" >
 
             <Grid>
                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="600" Height="650">
                     <Grid Background="White" Width="600" Height="650">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height=".1*"/>
-                            <RowDefinition Height=".1*"/>
+                            <RowDefinition Height=".07*"/>
+                            <RowDefinition Height=".05*"/>
                             <RowDefinition Height=".5*"/>
                         </Grid.RowDefinitions>
                         <DockPanel  Grid.Row="0">
-                            <TextBlock VerticalAlignment="Center" Margin="20 10 0 0" Text="Project Mapping -" Height="auto" DockPanel.Dock="Left" FontSize="26" />
+                            <TextBlock VerticalAlignment="Center" Margin="20 10 0 0" Text="Project Mapping - " Height="auto" DockPanel.Dock="Left" FontSize="26" />
                             <TextBlock x:Name="EmployeeNameTextBox" TextWrapping="Wrap" Margin="0 10 0 0"  Height="auto" FontSize="26" Width="250" VerticalAlignment="Center"/>
                             <Button Click="ClosePopUpClick"  Background="Transparent" BorderBrush="Transparent" Margin="15 10 10 0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top">
 
@@ -142,7 +142,13 @@
                         <Separator Margin="10 0 10 0" Grid.Row="1"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="top" Height="auto" Grid.Row="2">
                             <TextBlock Height="18"  Width="auto" VerticalAlignment="Center" Text="Project:" Margin="10 0 0 0" TextAlignment="Center"/>
-                            <input:AutoCompleteBox Placeholder="Select project" SelectedItem="{Binding ProjectName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0"  FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32" ItemsSource="{Binding ProjectNames}"/>
+                            <input:AutoCompleteBox Padding="5" Placeholder="Select project" SelectedItem="{Binding ProjectName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10 0 20 0"  FilterMode="Contains" x:Name="Autocompletebox" Width="400" Height="32" ItemsSource="{Binding ProjectNames}">
+                                <input:AutoCompleteBox.PlaceholderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="8 0 0 0" VerticalAlignment="Center" FontStyle="Normal" FontFamily="Calibri" Text="{Binding}" Foreground="Gray"/>
+                                    </DataTemplate>
+                                </input:AutoCompleteBox.PlaceholderTemplate>
+                            </input:AutoCompleteBox>
                             <Button Command="{Binding AddEmployeeToProject}" VerticalAlignment="Center" Margin=" 0 0 10 0" Content="ADD" Width="90" Height="30" Style="{DynamicResource ButtonStyle}"/>
                         </StackPanel>
                         <DataGrid Background="Transparent" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}" Grid.Row="3"  Margin="10 0 10 10" IsReadOnly="True" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
@@ -157,7 +163,7 @@
                                 <DataGridTemplateColumn Header="Actions" Width=".2*" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Command="{Binding DataContext.RemoveEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
+                                            <Button  ToolTip="Remove" Command="{Binding DataContext.RemoveEmployeeFromProject , ElementName=DataGrid}" Style="{StaticResource CircleButton}" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Center" Width="30" Height="30">
 
                                                 <Image Source="C:\Users\pca89\Desktop\Employee Management System\EmployeeManagementSystem\EmployeeManagementSystem\Icons\CircleCrossIcon.png" />
 

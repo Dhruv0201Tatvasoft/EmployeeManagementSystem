@@ -38,8 +38,8 @@ namespace EmployeeManagementSystem.Database
         /// <summary>
         /// Checks if the result exists in database.
         /// </summary>
-        /// <param name="command">SqlCommand to check if result exists in database.</param>
-        /// <returns>true if result exists in database false otherwise.</returns>
+        /// <param name="command">sqlCommand to check if result exists in database.</param>
+        /// <returns>true if result exists in database otherwise false.</returns>
         public bool DoesExist(SqlCommand command)
         {
             try
@@ -67,10 +67,10 @@ namespace EmployeeManagementSystem.Database
          /// Shows MessageBox of warning before deleting the entry form database.
          /// </summary>
          /// <param name="warning">Warning to show to user.</param>
-         /// <returns>True if user presses yes (i.e. gives permission to delete the entry) otherwise false.</returns>
+         /// <returns>true if user presses yes (i.e. gives permission to delete the entry) otherwise false.</returns>
         public bool DeleteWarningMessage(string warning)
         {
-            MessageBoxResult result = MessageBox.Show("Are You Sure you want to  " + warning, "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation, MessageBoxResult.Cancel, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to  " + warning, "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation, MessageBoxResult.Cancel, MessageBoxOptions.DefaultDesktopOnly);
             return result == MessageBoxResult.Yes;
         }
 
@@ -82,7 +82,7 @@ namespace EmployeeManagementSystem.Database
         public void DeleteProject(string code)
         {
 
-            if (this.DeleteWarningMessage("Delete this project?"))
+            if (this.DeleteWarningMessage("delete this project?"))
             {
 
                 String query = "DELETE from EmsTblProject where Code LIKE @Code";
@@ -115,7 +115,7 @@ namespace EmployeeManagementSystem.Database
         public void DeleteTechnology(String technologyName)
         {
 
-            if (this.DeleteWarningMessage("Delete this Technology?"))
+            if (this.DeleteWarningMessage("delete this technology?"))
             {
                 string query = "DELETE from EmsTblTechnology where Name LIKE @TechnologyName";
                 SqlCommand command = new SqlCommand(query);
@@ -131,7 +131,7 @@ namespace EmployeeManagementSystem.Database
         public void DeleteSkill(String skillName)
         {
 
-            if (this.DeleteWarningMessage("Delete this Skill?"))
+            if (this.DeleteWarningMessage("delete this skill?"))
             {
                 string query = "DELETE from EmsTblSkill where Name LIKE @SkillName";
                 SqlCommand command = new SqlCommand(query);
@@ -148,7 +148,7 @@ namespace EmployeeManagementSystem.Database
         /// <returns>True if delete query executes successfully otherwise false.</returns>
         public bool DeleteEducationRow(EmployeeEducationModel employeeEducationModel, String code)
         {
-            if (this.DeleteWarningMessage("Remove this education field?"))
+            if (this.DeleteWarningMessage("remove this education field?"))
             {
                 string query = "DELETE from EmsTblEmployeeEducation where EmployeeCode LIKE @Code " +
                       "AND Qualification LIKE @Qualification " +
@@ -181,7 +181,7 @@ namespace EmployeeManagementSystem.Database
         /// <returns>True if delete query executes successfully otherwise false.</returns>
         public bool DeleteExperienceRow(EmployeeExperienceModel employeeExperienceModel, String code)
         {
-            if (this.DeleteWarningMessage("Remove this Experience field?"))
+            if (this.DeleteWarningMessage("remove this experience field?"))
             {
                 string query = "DELETE from EmsTblEmployeeExperience where EmployeeCode LIKE @Code " +
                           "AND Organization LIKE @Organization " +
@@ -208,7 +208,7 @@ namespace EmployeeManagementSystem.Database
         /// <param name="name">name of employee to be deleted.</param>
         public void DeleteEmployee(String code, String name)
         {
-            if (this.DeleteWarningMessage($"Delete this employee?"))
+            if (this.DeleteWarningMessage($"delete this employee?"))
             {
                 string query = "DELETE from EmsTblEmployee where Code LIKE @Code";
                 SqlCommand command = new SqlCommand(query);

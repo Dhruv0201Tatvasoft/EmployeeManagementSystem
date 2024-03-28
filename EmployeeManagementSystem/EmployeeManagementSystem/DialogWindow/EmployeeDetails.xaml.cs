@@ -16,7 +16,7 @@ namespace EmployeeManagementSystem.DialogWindow
         {
             InitializeComponent();
             Code.Text = employee.Code;
-            Name.Text = employee.FirstName + " " + employee.LastName;
+            EmployeeName.Text = employee.FirstName + " " + employee.LastName;
             Email.Text = employee.Email;
             JoiningDate.Text = employee.JoiningDate.ToString("dd-MM-yyyy");
             Department.Text = employee.Department;

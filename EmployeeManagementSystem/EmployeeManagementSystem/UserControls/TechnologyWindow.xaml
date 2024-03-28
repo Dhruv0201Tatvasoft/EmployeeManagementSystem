@@ -20,9 +20,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="5*" MinWidth="250"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="3*" MaxWidth="150"/>
+            <ColumnDefinition Width="3*" MaxWidth="150"/>
+            <ColumnDefinition Width="3*" MaxWidth="150"/>
 
         </Grid.ColumnDefinitions>
 

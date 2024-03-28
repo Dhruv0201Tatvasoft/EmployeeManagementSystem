@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="EMS" Height="450" Width="1000"
+        Title="EMS" Height="750" Width="1000"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
-        MinWidth="800">
+        MinWidth="800" Icon="\Icons\Icon.ico" >
     <Window.Resources>
 
 
@@ -348,6 +348,7 @@
 
         <!--#region TextBoxStyle -->
         <Style x:Key="CustomInputStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="OverridesDefaultStyle" Value="False"/>
             <Setter Property="Background" Value="{StaticResource NormalBackGroundColor}" />
             <Setter Property="BorderBrush" Value="#FF7D8683" />
             <Setter Property="Foreground" Value="#99000000" />
@@ -355,7 +356,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Grid>
-                            <TextBox Text="{Binding Path=Text,
+                            <TextBox VerticalContentAlignment="Center" Text="{Binding Path=Text,
                                                 RelativeSource={RelativeSource TemplatedParent}, 
                                                 Mode=TwoWay,
                                                 UpdateSourceTrigger=PropertyChanged}"
@@ -369,6 +370,8 @@
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
                                                 <Setter Property="Foreground" Value="{StaticResource ForeGroundColor}"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                <Setter Property="BorderBrush" Value="{StaticResource NormalBackGroundColor}"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -534,7 +537,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TabItem">
                         <Border  Name="Border" TextBlock.TextAlignment="Center" Margin="2 0 2 0"  BorderThickness="0.5" BorderBrush="#507E32" Background="{TemplateBinding Background}" >
-                            <ContentPresenter Height="20" ContentSource="Header" Width="120"  />
+                            <ContentPresenter Height="30" Margin="0 5 0 0" ContentSource="Header" Width="120"  />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
@@ -584,7 +587,7 @@
                     </Menu>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Button x:Name="login" Click="login_Click"  Content="Login" Width="70"  Margin="0 0 20 0" Style="{StaticResource ButtonStyle}"/>
-                        <Button Click="InfoButtonClicked"  Height="auto" Width="39">
+                        <Button  ToolTip="About" Click="InfoButtonClicked"  Height="auto" Width="39">
                             <Image Source="\Icons\AboutIcon.png" Width="auto" Height="auto"/>
                         </Button>
                     </StackPanel>
@@ -593,7 +596,7 @@
             <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Name="mainContent">
 
             </ContentControl>
-            <Popup  Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True" >
+            <Popup PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Placement="Center"  x:Name="MyPopup" IsOpen="False" Width="600" Height="650" StaysOpen="True" >
 
                 <Grid>
                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="600" Height="650">

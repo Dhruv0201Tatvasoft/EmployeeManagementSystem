@@ -18,6 +18,8 @@
     <None Remove="Icons\EditIcon.png" />
     <None Remove="Icons\EmployeeIcon.png" />
     <None Remove="Icons\FilesIcon.png" />
+    <None Remove="Icons\Icon.ico" />
+    <None Remove="Icons\Icon.png" />
     <None Remove="Icons\SaveIcon.png" />
     <None Remove="Icons\ViewEmployee.jpg" />
   </ItemGroup>
@@ -41,6 +43,7 @@
     <Resource Include="Icons\EditIcon.png" />
     <Resource Include="Icons\EmployeeIcon.png" />
     <Resource Include="Icons\FilesIcon.png" />
+    <Resource Include="Icons\Icon.ico" />
     <Resource Include="Icons\SaveIcon.png" />
     <Resource Include="Icons\ViewEmployee.jpg" />
   </ItemGroup>

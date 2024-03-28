@@ -24,10 +24,10 @@
             </Grid.RowDefinitions>
             <TextBlock Margin="20"  Grid.Row="0" FontSize="35" Grid.Column="0" HorizontalAlignment="Center" Text="Login" Grid.ColumnSpan="2"/>
             <TextBlock Margin="20 0 0 0" VerticalAlignment="Center" Text="Username" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" FontSize="16"/>
-            <TextBox Name="username" Height="32" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
+            <TextBox Name="username" Tag="email address"  Height="32" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}"/>
             <TextBlock Margin="20 0 0 0" Text="Password" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" FontSize="16"/>
             <StackPanel  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
-                <PasswordBox x:Name="passwordBox" PasswordChar="●"   PasswordChanged="passwordBox_PasswordChanged" HorizontalAlignment="Left" Height="32" Width="300" />
+                <PasswordBox x:Name="passwordBox" PasswordChar="●" VerticalContentAlignment="Center"  PasswordChanged="passwordBox_PasswordChanged" HorizontalAlignment="Left" Height="32" Width="300" />
                 <TextBox HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}" Height="32" Width="300" x:Name="textBox" Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"/>
                 <CheckBox x:Name="ShowPasswordCharsCheckBox" Content="Show Password" Checked="ShowPasswordCharsCheckBox_Checked" Unchecked="ShowPasswordCharsCheckBox_Unchecked" />
             </StackPanel>

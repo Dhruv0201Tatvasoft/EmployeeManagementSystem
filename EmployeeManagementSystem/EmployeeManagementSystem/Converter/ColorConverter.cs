@@ -21,7 +21,7 @@ namespace EmployeeManagementSystem.Converter
             new SolidColorBrush(Color.FromRgb(58, 90, 64)),
             new SolidColorBrush(Color.FromRgb(88, 129, 87)),
             new SolidColorBrush(Color.FromRgb(163, 177, 138)),
-            new SolidColorBrush(Color.FromRgb(135, 152, 106))
+            new SolidColorBrush(Color.FromRgb(115, 212, 91))
         };
 
 
@@ -30,7 +30,7 @@ namespace EmployeeManagementSystem.Converter
         {
             if (value is int i)
             {
-                return colors[colors.Length%i];
+                return colors[i%colors.Length];
             }
             else if(value is string s)
             {

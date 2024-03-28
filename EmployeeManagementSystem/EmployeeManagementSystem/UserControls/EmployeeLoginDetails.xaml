@@ -52,20 +52,20 @@
         <TextBlock TextWrapping="Wrap" FontWeight="Bold" Margin="0 20 0 0" HorizontalAlignment="Left"  Text="Experience Details:" Grid.Column="0" Grid.Row="6" VerticalAlignment="top"/>
         
                                                                   <!--Employee Details-->
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="EmployeeCode" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Name" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Email" Grid.Column="5" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Password" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="JoiningDate" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="ReleaseDate" Grid.Column="5" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="DateOfBirth" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="ContactNumber" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Gender" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="MaritalStatus" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="PresentAddress" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="PermanentAddress" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Desigantion" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Name="Department" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="EmployeeCode" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="EmployeeName" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Email" Grid.Column="5" Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Password" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="JoiningDate" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="ReleaseDate" Grid.Column="5" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="DateOfBirth" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="ContactNumber" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Gender" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="MaritalStatus" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PresentAddress" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PermanentAddress" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Desigantion" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Department" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"/>
                 <DataGrid x:Name="Education" Grid.Row="5" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" SelectionMode="Single" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn  Width=".2*"  ElementStyle="{StaticResource WrapText}" Header="Qulification" Binding="{Binding Qualification}"/>

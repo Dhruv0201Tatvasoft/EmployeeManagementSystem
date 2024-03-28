@@ -28,7 +28,7 @@ namespace EmployeeManagementSystem.UserControls
             EditProjectViewModel viewModel = new EditProjectViewModel();
             this.DataContext = viewModel;
             getData = new GetData();
-            viewModel.OldCode = project.Code;
+            viewModel.OldCode = project.Code!;
             viewModel.SelectedTechnologyIds = project.AssociatedTechnologies!;
             viewModel.Code = project.Code!;
             viewModel.Name = project.Name!;

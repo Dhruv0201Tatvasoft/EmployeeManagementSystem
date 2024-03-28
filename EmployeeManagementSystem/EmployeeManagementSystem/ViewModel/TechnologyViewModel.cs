@@ -152,7 +152,7 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (selectedRow != null)
             {
-                oldTechnologyName = technologyName = (string)selectedRow.Row[0];
+                oldTechnologyName = technologyName = (string)selectedRow.Row[0];///first row of selectedRow is skill name.
                 OnPropertyChanged("TechnologyName");
             }
         }

@@ -56,9 +56,7 @@ namespace EmployeeManagementSystem.UserControls
         /// </summary>
         private void OpenProjectMappingPopup(object sender, RoutedEventArgs e)
         {
-            MyPopup.PlacementRectangle = new Rect(new Size(
-            SystemParameters.FullPrimaryScreenWidth,
-            SystemParameters.FullPrimaryScreenHeight));
+            
             MyPopup.IsOpen = true;
             string EmployeeCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!;
             EmployeeNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!;
@@ -72,7 +70,7 @@ namespace EmployeeManagementSystem.UserControls
         private void ClosePopUpClick(object sender, RoutedEventArgs e)
         {
             MyPopup.IsOpen = false;
-            
+
         }
 
         /// <summary>

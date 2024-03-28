@@ -108,18 +108,18 @@ namespace EmployeeManagementSystem.ViewModel
                 switch (PropertyName)
                 {
                     case "Code":
-                        if (string.IsNullOrEmpty(Code)) errors = "Code cant be empty";
-                        if (Code.Length > 10) errors = "Code cant be more than 10 characters";
+                        if (string.IsNullOrEmpty(Code)) errors = "code can not be empty";
+                        if (Code.Length > 10) errors = "code can not be more than 10 characters";
                         break;
                     case "Name":
-                        if (string.IsNullOrEmpty(Name)) errors = "Name cant be empty";
-                        if (Name.Length > 40) errors = "Name cant be more than 40 characters";
+                        if (string.IsNullOrEmpty(Name)) errors = "name can not be empty";
+                        if (Name.Length > 40) errors = "name can not be more than 40 characters";
                         break;
                     case "StartingDate":
-                        if (!string.IsNullOrEmpty(EndingDate.ToString()) && StartingDate > EndingDate) errors = "Starting Date cant be greater than ending date ";
+                        if (!string.IsNullOrEmpty(EndingDate.ToString()) && StartingDate > EndingDate) errors = "starting date can not be greater than ending date ";
                         break;
                     case "EndingDate":
-                        if (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate) errors = "Ending Date cant be less than ending date ";
+                        if (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate) errors = "ending Date can not be less than ending date ";
                         break;
                 }
 
@@ -151,7 +151,6 @@ namespace EmployeeManagementSystem.ViewModel
 
         private bool CanSaveProjectExecute(object arg)
         {
-            if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Code.Length > 10 || Name.Length > 40 || (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate)) return false;
             return true;
         }
 

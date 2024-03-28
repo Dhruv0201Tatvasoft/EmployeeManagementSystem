@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Model;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows;
 
 namespace EmployeeManagementSystem.Database
@@ -106,13 +107,12 @@ namespace EmployeeManagementSystem.Database
                            "VALUES (@Code, @TechnologyId)";
             foreach (int technologyId in project.AssociatedTechnologies!)
             {
-                using (SqlCommand command = new SqlCommand(query))
-                {
-                    command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@Code", project.Code);
-                    command.Parameters.AddWithValue("@TechnologyId", technologyId);
-                    ExecuteQuery(command);
-                }
+                SqlCommand command = new SqlCommand(query);
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@Code", project.Code);
+                command.Parameters.AddWithValue("@TechnologyId", technologyId);
+                ExecuteQuery(command);
+
             }
         }
 
@@ -147,6 +147,11 @@ namespace EmployeeManagementSystem.Database
         /// <param name="technologyName">name of technology which is being inserted to database.</param>
         public void InsertTechnology(String technologyName)
         {
+            if (technologyName.Length > 20)
+            {
+                MessageBox.Show("Maximum character limit reached for technology name", "Error");
+                return;
+            }
             string query = "SELECT * FROM EmsTblTechnology WHERE Name LIKE @TechnologyName";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@TechnologyName", technologyName);
@@ -154,6 +159,8 @@ namespace EmployeeManagementSystem.Database
             {
                 query = "INSERT INTO EmsTblTechnology (Name) VALUES (@TechnologyName)";
                 command.CommandText = query;
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@TechnologyName", technologyName);
                 ExecuteQuery(command);
             }
             else
@@ -168,6 +175,11 @@ namespace EmployeeManagementSystem.Database
         /// <param name="skillName">name of skill which is being inserted to database.</param>
         public void InsertSkill(String skillName)
         {
+            if (skillName.Length > 20)
+            {
+                MessageBox.Show("Maximum character limit reached for skill name", "Error");
+                return;
+            }
             string query = "SELECT * FROM EmsTblSkill WHERE Name LIKE @SkillName";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@SkillName", skillName);
@@ -175,6 +187,8 @@ namespace EmployeeManagementSystem.Database
             {
                 query = "INSERT INTO EmsTblSkill (Name) VALUES (@SkillName)";
                 command.CommandText = query;
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@SkillName", skillName);
                 ExecuteQuery(command);
             }
             else

@@ -18,7 +18,7 @@ namespace EmployeeManagementSystem.UserControls
         {
             InitializeComponent();
             this.EmployeeCode.Text = employee.Code;
-            this.Name.Text = employee.FirstName + " " + employee.LastName;
+            this.EmployeeName.Text = employee.FirstName + " " + employee.LastName;
             this.Email.Text = employee.Email;
             this.Password.Text = employee.Password;
             this.JoiningDate.Text = employee.JoiningDate.ToString("dd-MM-yyyy");

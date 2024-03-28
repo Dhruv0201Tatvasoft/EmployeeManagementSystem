@@ -74,7 +74,7 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 string code = getData.ExecuteLogin(username, password);
 
-                if (!String.IsNullOrEmpty(code))
+                if (!String.IsNullOrEmpty(code))///credentials are right.
                 {
                     EmployeeModel emp = getData.GetEmployeeFromCode(code);
                     OnCorrectLoginEvent(emp);

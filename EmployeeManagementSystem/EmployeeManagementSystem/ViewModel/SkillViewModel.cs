@@ -116,7 +116,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteDeleteSkill(object obj)
         {
-            deleteData.DeleteSkill((string)selectedRow?.Row.ItemArray[0]!);
+            deleteData.DeleteSkill((string)selectedRow?.Row.ItemArray[0]!);///first row of selectedRow is skillname.
             SkillName = String.Empty;
             skillDataTable = getData.GetSkillTable();
             OnPropertyChanged("SkillDataTable");
