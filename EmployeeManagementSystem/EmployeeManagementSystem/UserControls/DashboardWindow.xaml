@@ -137,7 +137,7 @@
                     </Border>
                 </ControlTemplate>
             </chart:Chart.Template>
-            <b:PieSeries   ItemsSource="{Binding DesignationWiseEmpmloyee}"
+            <b:PieSeries   ItemsSource="{Binding DesignationWiseEmployee}"
 				IndependentValuePath="Designation"
 				DependentValuePath="Count"
                 HorizontalAlignment="Stretch">

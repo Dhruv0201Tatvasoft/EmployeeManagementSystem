@@ -121,6 +121,9 @@ namespace EmployeeManagementSystem.ViewModel
                     case "EndingDate":
                         if (!string.IsNullOrEmpty(EndingDate.ToString()) && EndingDate < StartingDate) errors = "ending Date can not be less than ending date ";
                         break;
+                    default:
+                        errors = string.Empty;
+                        break;
                 }
 
                 return errors;

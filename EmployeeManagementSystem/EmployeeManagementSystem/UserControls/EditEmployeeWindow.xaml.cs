@@ -25,7 +25,7 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.EditExperienceRowEvent += ViewModel_EditExperienceRowEvent;
         }
 
-    
+
         public EditEmployeeWindow(EmployeeModel employeeModel)
         {
             InitializeComponent();
@@ -164,13 +164,6 @@ namespace EmployeeManagementSystem.UserControls
 
                 DataGridCell cell = ((DataGridCell)parent);
                 DataGridTemplateColumn c = (DataGridTemplateColumn)col;
-                if (col.DisplayIndex != 6)/// 6th row does not contain any textbox.
-                {
-                    if (canCommit == true)
-                        ((TextBox)cell.Content).GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                    else
-                        ((TextBox)cell.Content).GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-                }
                 cell.Content = c.CellTemplate.LoadContent();
             }
         }
@@ -212,27 +205,6 @@ namespace EmployeeManagementSystem.UserControls
 
                 DataGridCell cell = ((DataGridCell)parent);
                 DataGridTemplateColumn c = (DataGridTemplateColumn)col;
-                if (col.DisplayIndex == 4) ///this row contains ComboBox
-                {
-                    if (canCommit == true)
-                        ((ComboBox)cell.Content).GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
-                    else
-                        ((ComboBox)cell.Content).GetBindingExpression(ComboBox.SelectedItemProperty).UpdateTarget();
-                }
-                if (col.DisplayIndex == 1 || col.DisplayIndex == 2) ///These rows contains DatePicker
-                {
-                    if (canCommit == true)
-                        ((DatePicker)cell.Content).GetBindingExpression(DatePicker.SelectedDateProperty).UpdateSource();
-                    else
-                        ((DatePicker)cell.Content).GetBindingExpression(DatePicker.SelectedDateProperty).UpdateTarget();
-                }
-                if (col.DisplayIndex != 5 && col.DisplayIndex != 1 && col.DisplayIndex != 2 && col.DisplayIndex != 3 && col.DisplayIndex!=4)  /// For Rows which contains Textbox
-                {
-                    if (canCommit == true)
-                        ((TextBox)cell.Content).GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                    else
-                        ((TextBox)cell.Content).GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-                }
                 cell.Content = c.CellTemplate.LoadContent();
             }
         }

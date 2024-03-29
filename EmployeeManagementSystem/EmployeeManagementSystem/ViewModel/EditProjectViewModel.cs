@@ -25,11 +25,11 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
-        private List<int> selectedtechnlogyIds = new List<int>();
+        private List<int> selectedTechnologyIds = new List<int>();
         public List<int> SelectedTechnologyIds
         {
-            get { return selectedtechnlogyIds; }
-            set { selectedtechnlogyIds = value; }
+            get { return selectedTechnologyIds; }
+            set { selectedTechnologyIds = value; }
         }
         private DataRowView? selectedTechnologyRow;
         public DataRowView? SelectedTechnologyRow
@@ -40,13 +40,13 @@ namespace EmployeeManagementSystem.ViewModel
                 selectedTechnologyRow = value;
                 if (selectedTechnologyRow != null)
                 {
-                    if (!selectedtechnlogyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]!))
+                    if (!selectedTechnologyIds.Contains((int)selectedTechnologyRow.Row.ItemArray[1]!))
                     {
-                        selectedtechnlogyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]!);
+                        selectedTechnologyIds.Add((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                     else
                     {
-                        selectedtechnlogyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]!);
+                        selectedTechnologyIds.Remove((int)selectedTechnologyRow.Row.ItemArray[1]!);
                     }
                 }
             }
@@ -129,8 +129,9 @@ namespace EmployeeManagementSystem.ViewModel
                         {
                             errors = "starting date can not be greater than ending date";
                         }
-                        
-
+                        break;
+                    default:
+                        errors = string.Empty;
                         break;
                 }
 

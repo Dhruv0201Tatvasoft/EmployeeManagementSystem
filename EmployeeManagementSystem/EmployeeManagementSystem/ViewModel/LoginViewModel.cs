@@ -70,11 +70,11 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteLogin(object obj)
         {
-            if (username != null && password != null)
+            if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
             {
                 string code = getData.ExecuteLogin(username, password);
 
-                if (!String.IsNullOrEmpty(code))///credentials are right.
+                if (!String.IsNullOrEmpty(code))///There's an user exist with this username and password.
                 {
                     EmployeeModel emp = getData.GetEmployeeFromCode(code);
                     OnCorrectLoginEvent(emp);

@@ -21,10 +21,10 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private string? oldTechnologyName;
 
-        public string? OldTecnologyName
+        public string? OldTechnologyName
         {
             get { return oldTechnologyName; }
-            set { oldTechnologyName = value; OnPropertyChanged("OldTecnologyName"); }
+            set { oldTechnologyName = value; OnPropertyChanged("OldTechnologyName"); }
         }
         private string? technologyName;
         public string? TechnologyName

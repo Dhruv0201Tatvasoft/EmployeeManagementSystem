@@ -46,7 +46,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private DataTable designationWiseEmployee;
             
-        public DataTable DesignationWiseEmpmloyee
+        public DataTable DesignationWiseEmployee
         {
             get
             {
@@ -55,7 +55,7 @@ namespace EmployeeManagementSystem.ViewModel
             set
             {
                 designationWiseEmployee = value;
-                OnPropertyChanged("DesignationWiseEmpmloyee");
+                OnPropertyChanged("DesignationWiseEmployee");
             }
         }
         private DataTable technologyWiseProject;

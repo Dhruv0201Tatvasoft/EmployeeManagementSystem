@@ -21,7 +21,6 @@ namespace EmployeeManagementSystem.ViewModel
         public event EventHandler? AddExperienceRowEvent;
         public event EventHandler? EditEducationRowEvent;
         public event EventHandler? EditExperienceRowEvent;
-
         public void OnAddEducationButtonClicked(EventArgs e)
         {
             AddEducationButtonClickedEvent?.Invoke(this, e);
@@ -51,6 +50,7 @@ namespace EmployeeManagementSystem.ViewModel
             EditExperienceRowEvent?.Invoke(this, e);
         }
 
+
         private string oldCode = string.Empty;
 
         public string OldCode
@@ -59,7 +59,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { oldCode = value; OnPropertyChanged("OldCode"); }
         }
 
-        private string tempCode = string.Empty;
+        private string tempCode = string.Empty; /// to store temporary changed value of code.
         public string TempCode
         {
             get { return tempCode; }
@@ -69,8 +69,12 @@ namespace EmployeeManagementSystem.ViewModel
                 OnPropertyChanged("tempCode");
             }
         }
-        
-        
+
+        public bool IsEducationAddEditEnabled = true; /// to stop simultaneously adding or editing more than one education field.
+        public bool CanEducationDeleteFromDB = true; /// to delete education field from database after user hit edit button
+        public bool IsExperienceAddEditEnabled = true; /// to stop simultaneously adding or editing more than one experience field.
+        public bool CanExperienceDeleteFromDB = true; /// to delete experience field from database after user hit edit button
+       
         private string code = string.Empty;
 
         public string Code
@@ -222,7 +226,7 @@ namespace EmployeeManagementSystem.ViewModel
             set { selectedMaritalStatus = value; OnPropertyChanged("SelectedMaritalStatus"); }
         }
 
-       
+
         private bool isCheckBoxChecked = false;
 
         public bool IsCheckBoxChecked
@@ -253,7 +257,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private string combBoxText = "Select";
+        private string combBoxText = "Select"; /// to show placeholder value of comboBox.
 
         public string CombBoxText
         {
@@ -268,7 +272,6 @@ namespace EmployeeManagementSystem.ViewModel
             get { return department; }
             set
             {
-
                 department = value;
                 OnPropertyChanged("Department");
             }
@@ -280,12 +283,12 @@ namespace EmployeeManagementSystem.ViewModel
             set { maritalStatus = value; OnPropertyChanged("MaritalStatus"); }
 
         }
-        private string? maritalStatusCombBoxText = "Select";
+        private string maritalStatusCombBoxText = "Select"; /// to show placeholder value of comboBox.
 
         public string MaritalStatusCombBoxText
         {
-            get { return combBoxText; }
-            set { combBoxText = value; OnPropertyChanged("comBoxText"); }
+            get { return maritalStatusCombBoxText; }
+            set { maritalStatusCombBoxText = value; OnPropertyChanged("maritalStatusCombBoxText"); }
         }
         private EmployeeEducationModel? selectedEmployeeEducationModel;
 
@@ -294,6 +297,7 @@ namespace EmployeeManagementSystem.ViewModel
             get { return selectedEmployeeEducationModel; }
             set { selectedEmployeeEducationModel = value; }
         }
+
         private EmployeeEducationModel? selectedOldEmployeeEducationModel;
 
         public EmployeeEducationModel? SelectedOldEmployeeEducationModel
@@ -364,7 +368,7 @@ namespace EmployeeManagementSystem.ViewModel
                         if (String.IsNullOrEmpty(SelectedDesignation) || !Designation.Contains(SelectedDesignation)) errors = "please select a valid designation";
                         break;
                     case "SelectedDepartment":
-                        if (String.IsNullOrEmpty(SelectedDepartment) || !Department.Contains(SelectedDepartment)) errors = "plaease select a valid department";
+                        if (String.IsNullOrEmpty(SelectedDepartment) || !Department.Contains(SelectedDepartment)) errors = "please select a valid department";
                         break;
                     case "SelectedMaritalStatus":
                         if (String.IsNullOrEmpty(SelectedMaritalStatus) || !MaritalStatus.Contains(SelectedMaritalStatus)) errors = "please a select valid marital status";
@@ -381,6 +385,9 @@ namespace EmployeeManagementSystem.ViewModel
                         break;
                     case "ReleaseDate":
                         if (!string.IsNullOrEmpty(ReleaseDate.ToString()) && JoiningDate > ReleaseDate) errors = "release date can not be less than joining date";
+                        break;
+                    default:
+                        errors = string.Empty;
                         break;
                 }
 
@@ -458,7 +465,7 @@ namespace EmployeeManagementSystem.ViewModel
             if (didSave)
             {
                 OnEmployeeAddedEvent(EventArgs.Empty);
-                code = tempCode;
+                code = tempCode;///if didSave means Employee's code has changed in database.
             }
         }
 
@@ -472,20 +479,23 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (addBlankRowEducation == null)
                 {
-                    addBlankRowEducation = new RelayCommand(ExecuteAddRowEducation, CanAddRowEducationExecute, false);
+                    addBlankRowEducation = new RelayCommand(ExecuteAddBlankRowEducation, CanAddBlankRowEducationExecute, false);
                 }
                 return addBlankRowEducation;
             }
         }
-        private void ExecuteAddRowEducation(object obj)
+        private void ExecuteAddBlankRowEducation(object obj)
         {
             EmployeeEducationList.Add(new EmployeeEducationModel());///adding new blank model will add blank row.
+            IsEducationAddEditEnabled = false; /// making IsEducationAddEditEnabled false will disable add blank row and edit education field button
+            CanEducationDeleteFromDB = false; /// making CanEducationDeleteFromDB false means newly added row is to be deleted from Education EmployeeEducationList and not from database.
             OnAddEducationButtonClicked(EventArgs.Empty);
             OnPropertyChanged("EmployeeEducationList");
         }
 
-        private bool CanAddRowEducationExecute(object arg)
+        private bool CanAddBlankRowEducationExecute(object arg)
         {
+            if (!IsEducationAddEditEnabled) return false; /// means one education row is already being edited in dataGrid.
             return true;
         }
 
@@ -499,21 +509,24 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 if (addBlankRowExperience == null)
                 {
-                    addBlankRowExperience = new RelayCommand(ExecuteAddRowExperience, CanAddRowExperienceExecute, false);
+                    addBlankRowExperience = new RelayCommand(ExecuteAddBlankRowExperience, CanAddBlankRowExperienceExecute, false);
                 }
                 return addBlankRowExperience;
             }
         }
 
-        private void ExecuteAddRowExperience(object obj)
+        private void ExecuteAddBlankRowExperience(object obj)
         {
             EmployeeExperienceList.Add(new EmployeeExperienceModel());///adding new blank model will add blank row.
+            IsExperienceAddEditEnabled = false; /// making IsExperienceAddEditEnabled false will disable add blank row and edit experience field button
+            CanExperienceDeleteFromDB = false; /// making CanExperienceDeleteFromDB false means newly added row is to be deleted from Education EmployeeEducationList and not from database.
             OnAddExperienceButtonClicked(EventArgs.Empty);
             OnPropertyChanged("EmployeeExperienceList");
         }
 
-        private bool CanAddRowExperienceExecute(object arg)
+        private bool CanAddBlankRowExperienceExecute(object arg)
         {
+            if (!IsExperienceAddEditEnabled) return false; /// means one experience row is already being edited in dataGrid.
             return true;
         }
 
@@ -552,37 +565,38 @@ namespace EmployeeManagementSystem.ViewModel
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Percentage) && !IsValidPercentage(selectedEmployeeEducationModel.Percentage)))/// to validate percentage field.
             {
-                MessageBox.Show("Please provide valid value for percentage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please provide valid value for percentage.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.PassingYear) && !IsValidYear(selectedEmployeeEducationModel.PassingYear)))/// to validate passing year field.
             {
-                MessageBox.Show("Please provide valid value for Passing Year", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please provide valid value for passing year.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.InstituteName) && (selectedEmployeeEducationModel.InstituteName.Length > 35))) /// to validate institute name field.
             {
-                MessageBox.Show("Maximum character limit reached for Institute Name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for institute name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.Qualification) && (selectedEmployeeEducationModel.Qualification.Length > 10))) /// to validate qualification field.
             {
-                MessageBox.Show("Maximum character limit reached for Qualification Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for qualification field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.BoardUniversity) && (selectedEmployeeEducationModel.BoardUniversity.Length > 30))) /// to validate Board/University field.
             {
-                MessageBox.Show("Maximum character limit reached for Board/University Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached for board/university field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else if (selectedEmployeeEducationModel != null && (!string.IsNullOrEmpty(selectedEmployeeEducationModel.State) && (selectedEmployeeEducationModel.State.Length > 15))) /// to validate state field.
             {
-                MessageBox.Show("Maximum character limit reached from State Field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Maximum character limit reached from state field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
             {
                 bool didSave = false;
+
                 if (selectedOldEmployeeEducationModel == null && selectedEmployeeEducationModel != null) /// if selectedOldEmployeeEducationModel == null that means we are adding new record. other wise we are updating old record.
                 {
                     didSave = insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
@@ -595,6 +609,7 @@ namespace EmployeeManagementSystem.ViewModel
                 if (didSave)
                 {
                     selectedOldEmployeeEducationModel = null;
+                    IsEducationAddEditEnabled = true; /// mean education row is added to DB and now we have to enable add and edit button to add new row or to edit existing.
                     OnAddEducationRowEvent(EventArgs.Empty);
                 }
             }
@@ -652,11 +667,12 @@ namespace EmployeeManagementSystem.ViewModel
                     if (selectedEmployeeExperienceModel != null && selectedOldEmployeeExperienceModel != null)
                     {
                         didSave = updateData.UpdateEmployeeExperience(selectedEmployeeExperienceModel, selectedOldEmployeeExperienceModel, code);
-                        if(didSave) { selectedOldEmployeeExperienceModel = null; }
                     }
                 }
                 if (didSave)
                 {
+                    selectedOldEmployeeExperienceModel = null;
+                    IsExperienceAddEditEnabled = true; /// means experience row is added to DB and now we have to enable add and edit button to add new row or to edit existing.
                     OnAddExperienceRowEvent(EventArgs.Empty);
                 }
             }
@@ -685,6 +701,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private bool CanEditEducationRowExecute(object arg)
         {
+            if (!IsEducationAddEditEnabled) return false; /// means one education row is already being added or edited.
             return true;
 
         }
@@ -701,6 +718,8 @@ namespace EmployeeManagementSystem.ViewModel
                     PassingYear = SelectedEmployeeEducationModel.PassingYear,
                     Qualification = SelectedEmployeeEducationModel.Qualification
                 };
+            IsEducationAddEditEnabled = false; /// this education row will now go for editing so we have to disable add and edit buttons/
+            CanEducationDeleteFromDB = true; /// means we are editing education row which's data is already available in database.
             OnEditEducationRowEvent(EventArgs.Empty);
         }
 
@@ -719,7 +738,11 @@ namespace EmployeeManagementSystem.ViewModel
                 return editExperience;
             }
         }
-
+        private bool CanEditExperienceExecute(object arg)
+        {
+            if (!IsExperienceAddEditEnabled) return false; /// means one experience row is already being added or edited.
+            return true;
+        }
         private void ExecuteEditExperience(object obj)
         {
             if (selectedEmployeeExperienceModel != null)
@@ -731,13 +754,12 @@ namespace EmployeeManagementSystem.ViewModel
                     ToDate = selectedEmployeeExperienceModel.ToDate,
                     FromDate = selectedEmployeeExperienceModel.FromDate
                 };
+            IsExperienceAddEditEnabled = false; /// this experience row will now go for editing so we have to disable add and edit buttons.
+            CanExperienceDeleteFromDB = true; /// means we are editing  row which's data is already available in database.
             OnEditExperienceRowEvent(EventArgs.Empty);
         }
 
-        private bool CanEditExperienceExecute(object arg)
-        {
-            return true;
-        }
+      
 
         /// <summary>
         /// To remove a row from education List. this does not delete the education field from database.
@@ -756,7 +778,6 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-
         private bool CanRemoveEducationFromListExecute(object arg)
         {
             return true;
@@ -765,7 +786,24 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteRemoveEducationFromList(object obj)
         {
             if (SelectedEmployeeEducationModel != null)
-                EmployeeEducationList.Remove(SelectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
+            {
+                if (CanEducationDeleteFromDB) /// to check if user is trying to remove already existing education row or he is removing a newly added education row that has not been added to database.
+                {
+
+                    if (deleteData.DeleteEducationRow(selectedEmployeeEducationModel!, code))
+                    {
+                        EmployeeEducationList.Remove(SelectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
+                        IsEducationAddEditEnabled = true; /// if delete operation complete means we now can add or edit education row
+                    }
+                }
+                else
+                {
+                    EmployeeEducationList.Remove(SelectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
+                    IsEducationAddEditEnabled = true; /// if delete operation complete means we now can add or edit education row
+
+                }
+
+            }
             OnPropertyChanged("EmployeeEducationList");
         }
 
@@ -793,9 +831,26 @@ namespace EmployeeManagementSystem.ViewModel
         private void ExecuteRemoveExperienceFromList(object obj)
         {
             if (selectedEmployeeExperienceModel != null)
-                EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);///this will only remove model from EmployeeEducationList and not from the database.
+                if (CanExperienceDeleteFromDB) /// to check if user is trying to remove already existing experience row or he is removing a newly added experience row that has not been added to database.
+                {
+
+                    if (deleteData.DeleteExperienceRow(selectedEmployeeExperienceModel!, code))
+                    {
+                        EmployeeExperienceList.Remove(selectedEmployeeExperienceModel!);///this will only remove model from EmployeeExperienceList and not from the database.
+                        IsExperienceAddEditEnabled = true; /// if delete operation complete means we now can add or edit experience row
+                    }
+                }
+                else
+                {
+                    EmployeeExperienceList.Remove(selectedEmployeeExperienceModel);///this will only remove model from EmployeeExperienceList and not from the database.
+                    IsExperienceAddEditEnabled = true; /// if delete operation complete means we now can add or edit experience row
+
+                }
+
             OnPropertyChanged("EmployeeExperienceList");
         }
+
+
 
         /// <summary>
         /// To remove education field of an employee from database. 
@@ -828,7 +883,6 @@ namespace EmployeeManagementSystem.ViewModel
                 if (didDelete)
                 {
                     employeeEducationList.Remove(selectedEmployeeEducationModel); /// if didDelete = true means the education field is deleted from database so we also have to delete it from the education list to show changes to UI
-
                 }
                 OnPropertyChanged("employeeEducationList");
             }
@@ -1005,7 +1059,6 @@ namespace EmployeeManagementSystem.ViewModel
         {
             if (int.TryParse(inputYear, out int outputYear))
             {
-
                 return outputYear >= 1900 && outputYear <= 3000;
             }
 

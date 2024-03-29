@@ -68,9 +68,9 @@ namespace EmployeeManagementSystem.Database
          /// </summary>
          /// <param name="warning">Warning to show to user.</param>
          /// <returns>true if user presses yes (i.e. gives permission to delete the entry) otherwise false.</returns>
-        public bool DeleteWarningMessage(string warning)
+        private bool DeleteWarningMessage(string warning)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to  " + warning, "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation, MessageBoxResult.Cancel, MessageBoxOptions.DefaultDesktopOnly);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to " + warning, "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation, MessageBoxResult.Cancel, MessageBoxOptions.DefaultDesktopOnly);
             return result == MessageBoxResult.Yes;
         }
 

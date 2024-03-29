@@ -109,7 +109,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
 
         }
-        private string combTextDesignation = "Select Designation";
+        private string combTextDesignation = "Select Designation"; /// to show placeholder value of comboBox.
 
         public string CombTextDesignation
         {
@@ -131,7 +131,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        private string combTextDepartment = "Select Department";
+        private string combTextDepartment = "Select Department"; /// to show placeholder value of comboBox.
 
         public string CombTextDepartment
         {

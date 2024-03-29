@@ -160,4 +160,4 @@ GROUP BY
 ORDER BY 
     (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
 
-select DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE()))
+	select * from EmsTblEmployee order by MaritalStatus

@@ -167,7 +167,7 @@ namespace EmployeeManagementSystem.ViewModel
             Name = String.Empty;
             StartingDate = null;
             EndingDate = null;
-            dataTable = getData.GetProjectData();///refresh project datatable
+            dataTable = getData.GetProjectData();///refresh project dataTable
             OnPropertyChanged("dataTable");
         }
 
@@ -188,7 +188,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private bool CanDeleteProjectExecute(object arg)
         {
-            
+
             return true;
         }
 
@@ -197,6 +197,8 @@ namespace EmployeeManagementSystem.ViewModel
             if (selectedRow != null)
             {
                 deleteData.DeleteProject((string)selectedRow.Row.ItemArray[0]!);/// first row of selectedRow contains project code.
+                DataTable = getData.GetProjectData();
+                OnPropertyChanged("DataTable");
             }
         }
 
@@ -226,7 +228,6 @@ namespace EmployeeManagementSystem.ViewModel
             if (selectedRow != null)
             {
                 ProjectModel project = getData.GetProjectFromCode(selectedRow.Row[0].ToString()!);
-                
                 OnEditEvent(project);
             }
 
@@ -244,8 +245,6 @@ namespace EmployeeManagementSystem.ViewModel
                 if (addEmployeeToProject == null)
                 {
                     addEmployeeToProject = new RelayCommand(ExecuteAddEmployeeToProject, CanAddEmployeeToProjectExecute, false);
-
-
                 }
                 return addEmployeeToProject;
             }
@@ -259,16 +258,15 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteAddEmployeeToProject(object obj)
         {
-            if (selectedRow != null)
+            if (selectedRow != null && employeeName != null)
             {
-                if (selectedRow != null && employeeName != null)
-                {
-                    string ProjectCode = (String)selectedRow.Row.ItemArray[0]!;///first row of selectedRow contains project code.
-                    string EmployeeCode = employeeName.Split('-')[0]; /// employeeName is set as 'employeeCode - employeeName ' so by splitting it will convert it to an array and first element of array will be employeeCode.
-                    string EmployeeName = employeeName.Split('-')[1]; /// and second will be employeeName.
-                    insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode, EmployeeName);
-                    OnAddEmployeeEvent(EventArgs.Empty);
-                }
+
+                string ProjectCode = (String)selectedRow.Row.ItemArray[0]!;///first row of selectedRow contains project code.
+                string EmployeeCode = employeeName.Split('-')[0]; /// employeeName is set as 'employeeCode - employeeName ' so by splitting it will convert it to an array and first element of array will be employeeCode.
+                string EmployeeName = employeeName.Split('-')[1]; /// and second will be employeeName.
+                insertData.InsertEmployeeToProject(ProjectCode, EmployeeCode, EmployeeName);
+                OnAddEmployeeEvent(EventArgs.Empty);
+
             }
 
         }
@@ -296,7 +294,7 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveEmployeeFromProject(object obj)
         {
-            if (selectedRow != null)
+            if (selectedRow != null && selectedEmployeeRow != null)
             {
                 string projectCode = (String)selectedRow.Row.ItemArray[0]!; /// first row of selectedRow contains project code
                 string employeeCode = (String)selectedEmployeeRow?.Row.ItemArray[1]!; /// second row of SelectedEmployeeRow contains employee code.
