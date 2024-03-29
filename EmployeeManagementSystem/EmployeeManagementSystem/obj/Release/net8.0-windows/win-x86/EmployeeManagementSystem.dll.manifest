@@ -131,7 +131,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>JVZYuKMCK0dkuUIb248dbmOK9k0fydnRMZVYUXr+kNI=</dsig:DigestValue>
+      <dsig:DigestValue>5adhjNsZxRJk0rRYM9Tb4J0yGaKhoQCixaRdwtJrEiw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="EmployeeManagementSystem.exe" size="109056">
@@ -140,7 +140,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>UZaWgQrBa/2gAaOub+rFCUCt3rY7ojoEX5jTEl9auPw=</dsig:DigestValue>
+      <dsig:DigestValue>aUd9j1yZC7uwb3tz0arWDWG3RzKs0rIInq4bGL6xYQo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="EmployeeManagementSystem.runtimeconfig.json" size="458">

@@ -404,15 +404,11 @@
             <TabItem Name="ExperienceDetailsTabItem"  Header="Experience Details" Style="{DynamicResource TabItemStyle}">
 
                 <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="29*"/>
-                        <ColumnDefinition Width="394*"/>
-                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Button  Command="{Binding AddBlankRowExperience}" Grid.Row="0" Width="120" Height="32"  Margin="648,34,0,34" HorizontalAlignment="Left" Style="{DynamicResource ButtonStyle}" Grid.Column="1">
+                    <Button  Command="{Binding AddBlankRowExperience}" Grid.Row="0"  Margin="0 0 20 0" Width="120" Height="32"   HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}" Grid.Column="1">
                         <Button.Content>
                             <Grid>
                                 <Grid.ColumnDefinitions>
