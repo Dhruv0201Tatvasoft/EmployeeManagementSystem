@@ -570,7 +570,7 @@ namespace EmployeeManagementSystem.ViewModel
             else
             {
                 bool didSave = false;
-                if (selectedOldEmployeeEducationModel == null && selectedEmployeeEducationModel != null) /// if selectedOldEmployeeEducationModel == null that means we are adding new record. other wise we are updating old record.
+                if (selectedOldEmployeeEducationModel == null && selectedEmployeeEducationModel != null) /// if selectedOldEmployeeEducationModel == null that means we are adding new record. other wise we are updating old record. 
                 {
                     didSave = insertData.InsertEducationDetails(selectedEmployeeEducationModel, Code);
                 }
@@ -998,7 +998,7 @@ namespace EmployeeManagementSystem.ViewModel
         /// To check if user has put valid year in year input field.
         /// </summary>
         /// <param name="inputYear">year value added by user.</param>
-        /// <returns>true if input value is valid(i.e. integer and between 1900 and 3000) otherwise false.</returns>
+        /// <returns>true if input value is valid(i.e. integer and between 1900 and 3000) otherwise false.</returns> 
         private bool IsValidYear(string inputYear)
         {
             if (int.TryParse(inputYear, out int outputYear))

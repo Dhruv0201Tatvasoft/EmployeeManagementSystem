@@ -613,7 +613,7 @@ namespace EmployeeManagementSystem.Database
             {
                 using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    string query = $"SELECT COUNT(*) as Count, Designation from EmsTblEmployee GROUP BY Designation";
+                    string query = $"exec sp_DesignationWiseEmployee";
                     using (SqlCommand command = new SqlCommand(query, conn))
                     {
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -746,9 +746,7 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public DataTable GetTechnologyWiseProject()
         {
-            string query = "SELECT Id,COUNT(projectCode)as Count,Name from EmsTblTechnology " +
-                "LEFT JOIN EmsTblTechnologyForProject ON " +
-                "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,EmsTblTechnology.Id;";
+            string query = "exec sp_TechnologyWiseProject";
             DataTable dt = new DataTable();
             try
             {
@@ -779,8 +777,7 @@ namespace EmployeeManagementSystem.Database
         /// <returns></returns>
         public DataTable GetSkillWiseEmployeeCount()
         {
-            string query = "SELECT COUNT(*) as Count,SkillId,Name from" +
-                " EmsTblSkillForEmployee INNER  JOIN EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name";
+            string query = "exec sp_SkillWiseEmployee";
             DataTable dt = new DataTable();
             try
             {

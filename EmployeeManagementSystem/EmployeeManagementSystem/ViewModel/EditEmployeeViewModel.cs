@@ -423,21 +423,21 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 employee = new EmployeeModel
                 {
-                    Code = TempCode,
-                    FirstName = FirstName,
-                    LastName = LastName,
-                    Email = Email,
-                    Password = Password,
-                    Designation = SelectedDesignation,
-                    Department = SelectedDepartment,
-                    JoiningDate = JoiningDate,
-                    ReleaseDate = ReleaseDate,
-                    DOB = DOB,
-                    ContactNumber = ContactNumber,
-                    Gender = Gender,
-                    MaritalStauts = SelectedMaritalStatus,
-                    PresentAddress = PresentAddress,
-                    PermanentAddress = PermanentAddress
+                    Code = tempCode,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    Password = password,
+                    Designation = selectedDesignation,
+                    Department = selectedDepartment,
+                    JoiningDate = joiningDate,
+                    ReleaseDate = releaseDate,
+                    DOB = dob,
+                    ContactNumber = contactNumber,
+                    Gender = gender,
+                    MaritalStauts = selectedMaritalStatus,
+                    PresentAddress = presentAddress,
+                    PermanentAddress = permanentAddress
                 };
 
             }
@@ -445,23 +445,23 @@ namespace EmployeeManagementSystem.ViewModel
             {
                 employee = new EmployeeModel
                 {
-                    Code = TempCode,
-                    FirstName = FirstName,
-                    LastName = LastName,
-                    Email = Email,
-                    Password = Password,
-                    Designation = SelectedDesignation,
-                    Department = SelectedDepartment,
-                    JoiningDate = JoiningDate,
-                    DOB = DOB,
-                    ContactNumber = ContactNumber,
-                    Gender = Gender,
-                    MaritalStauts = SelectedMaritalStatus,
-                    PresentAddress = PresentAddress,
-                    PermanentAddress = PermanentAddress
+                    Code = tempCode,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    Password = password,
+                    Designation = selectedDesignation,
+                    Department = selectedDepartment,
+                    JoiningDate = joiningDate,
+                    DOB = dob,
+                    ContactNumber = contactNumber,
+                    Gender = gender,
+                    MaritalStauts = selectedMaritalStatus,
+                    PresentAddress = presentAddress,
+                    PermanentAddress = permanentAddress
                 };
             }
-            didSave = updateData.UpdateEmployee(oldCode, employee, ReleaseDate != null);
+            didSave = updateData.UpdateEmployee(oldCode, employee, releaseDate != null);
             if (didSave)
             {
                 OnEmployeeAddedEvent(EventArgs.Empty);
@@ -785,20 +785,20 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteRemoveEducationFromList(object obj)
         {
-            if (SelectedEmployeeEducationModel != null)
+            if (selectedEmployeeEducationModel != null)
             {
                 if (CanEducationDeleteFromDB) /// to check if user is trying to remove already existing education row or he is removing a newly added education row that has not been added to database.
                 {
 
                     if (deleteData.DeleteEducationRow(selectedEmployeeEducationModel!, code))
                     {
-                        EmployeeEducationList.Remove(SelectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
+                        EmployeeEducationList.Remove(selectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
                         IsEducationAddEditEnabled = true; /// if delete operation complete means we now can add or edit education row
                     }
                 }
                 else
                 {
-                    EmployeeEducationList.Remove(SelectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
+                    EmployeeEducationList.Remove(selectedEmployeeEducationModel);///this will only remove model from EmployeeEducationList and not from the database.
                     IsEducationAddEditEnabled = true; /// if delete operation complete means we now can add or edit education row
 
                 }

@@ -206,9 +206,9 @@ namespace EmployeeManagementSystem.ViewModel
 
         private void ExecuteClearFields(object obj)
         {
-            email = String.Empty; Name = String.Empty; SelectedDepartment = null; SelectedDesignation = null;
-            CombTextDepartment = "Select Department";
-            CombTextDesignation = "Select Designation";
+            email = String.Empty; name = String.Empty; selectedDepartment = null; selectedDesignation = null;
+            combTextDepartment = "Select Department";
+            combTextDesignation = "Select Designation";
             employeeDataTable = getData.GetEmployeeTable();
             OnPropertyChanged("EmployeeDataTable");
         }
@@ -231,7 +231,7 @@ namespace EmployeeManagementSystem.ViewModel
         }
         private void ExecuteSearchEmployee(object obj)
         {
-            employeeDataTable = getData.GetEmployeeSearchData(Email!, Name!, selectedDepartment!, selectedDesignation!);
+            employeeDataTable = getData.GetEmployeeSearchData(email!, name!, selectedDepartment!, selectedDesignation!);
             OnPropertyChanged("EmployeeDataTable");
 
         }

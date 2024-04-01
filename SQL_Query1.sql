@@ -144,9 +144,10 @@ REFERENCES EmsTblTechnology(Id)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
 
-
-
-SELECT 
+Select * from EmsTblProject
+EXEC sp_PastSixMonthJoinedEmployee
+CREATE PROCEDURE sp_PastSixMonthJoinedEmployee
+AS
     COUNT(*) AS count,
     MONTH(JoiningDate) AS MonthNumber,
     DATENAME(month, JoiningDate) AS Month
@@ -160,4 +161,53 @@ GROUP BY
 ORDER BY 
     (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
 
-	select * from EmsTblEmployee order by MaritalStatus
+CREATE PROCEDURE sp_PastSixMonthReleasedEmployee
+AS
+SELECT 
+    COUNT(*) AS count,
+    MONTH(ReleaseDate) AS MonthNumber,
+    DATENAME(month, ReleaseDate) AS Month
+FROM 
+    EmsTblEmployee 
+WHERE 
+ ReleaseDate between DATEADD(month,-6, DATEADD(day,-DAY(GETDATE())+1,GETDATE())) AND EOMONTH(GETDATE(),-1)
+	  
+GROUP BY 
+    MONTH(ReleaseDate), DATENAME(month, ReleaseDate)
+ORDER BY 
+    (MONTH(GETDATE()) - MONTH(ReleaseDate) + 12) % 12;
+
+
+
+CREATE PROCEDURE sp_TechnologyWiseProject
+AS
+SELECT 
+	Id,COUNT(projectCode)as Count,Name
+from 
+	EmsTblTechnology
+LEFT JOIN 
+	EmsTblTechnologyForProject ON EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID
+GROUP BY 
+	EmsTblTechnology.Name,EmsTblTechnology.Id;
+
+CREATE PROCEDURE sp_SkillWiseEmployee
+AS
+SELECT
+	COUNT(*) as Count,SkillId,Name 
+from
+	EmsTblSkillForEmployee 
+INNER JOIN 
+	EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id
+group by 
+	EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name
+
+CREATE PROCEDURE sp_DesignationWiseEmployee
+AS
+SELECT 
+	COUNT(*) as Count, Designation 
+from
+	EmsTblEmployee 
+GROUP BY 
+	Designation   
+select * from EmsTblEmployee
+exec dbo.sp_PastSixMonthJoinedEmployee
