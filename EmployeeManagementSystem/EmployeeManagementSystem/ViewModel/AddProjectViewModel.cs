@@ -171,7 +171,7 @@ namespace EmployeeManagementSystem.ViewModel
                 project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
             didSave = insertData.InsertNewProject(project, EndingDate != null);
-            if (didSave)
+            if (didSave) /// if project is saved to database only after that we change the window.
             {
                 OnChangeWindowEvent(EventArgs.Empty);
             }

@@ -19,7 +19,8 @@ namespace EmployeeManagementSystem.UserControls
             getData = new GetData();
             EditProjectViewModel viewModel = new EditProjectViewModel();
             this.DataContext = viewModel;
-           
+            viewModel.ChangeWindowEvent += ChangeWindow;
+
         }
 
         public EditProjectWindow(ProjectModel project)
@@ -39,9 +40,9 @@ namespace EmployeeManagementSystem.UserControls
     
                 foreach (DataRowView row in myListBox.Items)
                 {
-                    int id = Convert.ToInt32(row.Row.ItemArray[1]);
+                    int id = Convert.ToInt32(row.Row.ItemArray[1]); /// to get id of the technology.
 
-                    if (project.AssociatedTechnologies!=null &&  project.AssociatedTechnologies.Contains(id)) /// select's technologies that are associated to the project
+                    if (project.AssociatedTechnologies!=null &&  project.AssociatedTechnologies.Contains(id)) /// selects technologies that are associated to the project
                     {
                         myListBox.SelectedItems.Add(row);
 
@@ -74,7 +75,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Changes MainWindow's content to projectWindow, called after clicking cancel button.
         /// </summary>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);

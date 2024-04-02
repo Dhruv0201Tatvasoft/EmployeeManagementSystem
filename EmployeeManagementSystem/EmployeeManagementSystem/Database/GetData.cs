@@ -746,7 +746,9 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public DataTable GetTechnologyWiseProject()
         {
-            string query = "exec sp_TechnologyWiseProject";
+            string query = "SELECT Id,COUNT(projectCode)as Count,Name from EmsTblTechnology " +
+                "LEFT JOIN EmsTblTechnologyForProject ON " +
+                "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,EmsTblTechnology.Id;";
             DataTable dt = new DataTable();
             try
             {
@@ -777,7 +779,8 @@ namespace EmployeeManagementSystem.Database
         /// <returns></returns>
         public DataTable GetSkillWiseEmployeeCount()
         {
-            string query = "exec sp_SkillWiseEmployee";
+            string query = "SELECT COUNT(*) as Count,SkillId,Name from" +
+                " EmsTblSkillForEmployee INNER  JOIN EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name";
             DataTable dt = new DataTable();
             try
             {

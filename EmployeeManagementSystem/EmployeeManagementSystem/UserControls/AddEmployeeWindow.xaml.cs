@@ -70,8 +70,7 @@ namespace EmployeeManagementSystem.UserControls
             TabControl.SelectedIndex = 2;
             EducationDetailsTabItem.IsEnabled = true;
             ExperienceDetailsTabItem.IsEnabled = true;
-            EmployeeDetailsTabItem.IsEnabled = false;
-            PersonalDetailsTabItem.IsEnabled = false;
+            
         }
 
         /// <summary>

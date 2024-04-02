@@ -29,7 +29,7 @@ namespace EmployeeManagementSystem.UserControls
         }
 
         /// <summary>
-        /// Refreshes EmployeeDataGird and sets Autocompletebox selected item to empty 
+        /// Refreshes EmployeeDataGird and sets Autocompletebox selected item to empty,called after employee is added to the project.
         /// </summary>
         private void RefreshEmployeeDatagrid(object? sender, EventArgs e)
         {
@@ -63,7 +63,7 @@ namespace EmployeeManagementSystem.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddButtonClick(object sender, RoutedEventArgs e)
         {
             AddProject addProject = new AddProject();
 
@@ -87,8 +87,8 @@ namespace EmployeeManagementSystem.UserControls
         private void OpenEmployeeMapingPopupMethod(object sender, RoutedEventArgs e)
         {
             MyPopup.IsOpen = true;
-            string projectCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!;
-            ProjectNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!;
+            string projectCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!; /// to get project code of the selected project
+            ProjectNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!; /// sets the textblock with the project name.
             PopUpDataGird.ItemsSource=getData.GetAssociatedEmployeesToProject(projectCode).DefaultView;
 
         }    

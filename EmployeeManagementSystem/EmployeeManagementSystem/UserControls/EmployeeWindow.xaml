@@ -109,7 +109,7 @@
                                 </Button>
                                 <Button ToolTip="Delete employee" Command="{Binding DataContext.DeleteEmployee ,ElementName=DataGrid}" MaxWidth="40" MaxHeight="40" Grid.Column="2">
                                     <Image Source="/Icons/DeleteIcon.png"
-                                           Width="40" Height="40"/>
+                                           Width="25" Height="40"/>
                                 </Button>
                                 <Button ToolTip="Map project"  Click="OpenProjectMappingPopup" MaxWidth="40" MaxHeight="40" Grid.Column="3">
                                     <Image Source="/Icons/FilesIcon.png" Width="25" Height="25"/>

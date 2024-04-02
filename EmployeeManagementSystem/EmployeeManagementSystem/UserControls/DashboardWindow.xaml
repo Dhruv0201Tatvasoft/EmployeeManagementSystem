@@ -97,6 +97,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
         <!--#region DesignationWiseEmployee -->
         <chart:Chart Grid.Column="0" Grid.Row="0" x:Name="DesignationWiseEmployee" Title="Designation-wise Employee" Margin="10">
             <chart:Chart.Template>

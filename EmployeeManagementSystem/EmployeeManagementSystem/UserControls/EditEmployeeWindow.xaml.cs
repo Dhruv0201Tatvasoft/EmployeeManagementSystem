@@ -63,7 +63,7 @@ namespace EmployeeManagementSystem.UserControls
         private void ViewModel_EditEducationRowEvent(object? sender, EventArgs e)
         {
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
-            ShowCellsEditingTemplate(row);
+            ShowCellsEditingTemplateEducation(row);
         }
 
 
@@ -106,7 +106,7 @@ namespace EmployeeManagementSystem.UserControls
             DGrid.SelectedItem = DGrid.Items[DGrid.Items.Count - 1];
             DGrid.UpdateLayout();
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.SelectedItem);
-            ShowCellsEditingTemplate(row);
+            ShowCellsEditingTemplateEducation(row);
 
         }
 
@@ -133,7 +133,7 @@ namespace EmployeeManagementSystem.UserControls
         /// Converts cells of Education DataGrid from Normal template to editing template.
         /// </summary>
         /// <param name="row">Row who is being converted to editing template from normal template.</param>
-        private void ShowCellsEditingTemplate(DataGridRow row)
+        private void ShowCellsEditingTemplateEducation(DataGridRow row)
         {
             foreach (DataGridColumn col in DGrid.Columns)
             {

@@ -14,9 +14,9 @@ namespace EmployeeManagementSystem
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
-            mainContent.Content =new DashboardWindow();
-            selectedMenuItem = DashboardMenuItem;
-            selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
+            mainContent.Content =new DashboardWindow(); 
+            selectedMenuItem = DashboardMenuItem; /// to always start with Dashboard window.
+            selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor"); /// sets background color for Dashboard menuitem to show it is selected
         }
 
 
@@ -32,8 +32,7 @@ namespace EmployeeManagementSystem
 
             if (selectedMenuItem != null)
             {
-
-                selectedMenuItem.ClearValue(Control.BackgroundProperty);
+                selectedMenuItem.ClearValue(Control.BackgroundProperty); ///to clear background color.
             }
 
             if (menuItem != null)
@@ -68,7 +67,7 @@ namespace EmployeeManagementSystem
             }
 
             if(selectedMenuItem!= null)
-                selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor");
+                selectedMenuItem.Background = (SolidColorBrush)FindResource("PressedBackGroundColor"); /// to set background color of selected menuitem.
         }
 
         private void InfoButtonClicked(object sender, RoutedEventArgs e)
@@ -84,7 +83,7 @@ namespace EmployeeManagementSystem
         {
             mainContent.Content = new LoginWindow();
             if(selectedMenuItem!=null)
-                selectedMenuItem.ClearValue(BackgroundProperty);
+                selectedMenuItem.ClearValue(BackgroundProperty); /// to clear background of selected menu item.
         }
     }
 }

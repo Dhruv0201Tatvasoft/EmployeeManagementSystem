@@ -209,5 +209,13 @@ from
 	EmsTblEmployee 
 GROUP BY 
 	Designation   
-select * from EmsTblEmployee
-exec dbo.sp_PastSixMonthJoinedEmployee
+
+select * from EmsTblProject
+select * from EmsTblTechnologyForProject
+select * from EmsTblEmployeeAssociatedToProject
+select * from EmsTblEmployeeEducation
+select * from EmsTblEmployeeExperience
+select * from EmsTblSkill
+select * from EmsTblTechnology
+select * from EmsTblEmployee  
+exec sp_PastSixMonthJoinedEmployee

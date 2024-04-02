@@ -1079,7 +1079,7 @@ namespace EmployeeManagementSystem.ViewModel
         /// <summary>
         /// To check if user has provided valid email address in email address input field.
         /// </summary>
-        /// <param name="EmailAddress">email address provided by user</param>
+        /// <param name="emailAddress">email address provided by user</param>
         /// <returns></returns>
         private bool IsValidEmailAddress(string emailAddress)
         {
