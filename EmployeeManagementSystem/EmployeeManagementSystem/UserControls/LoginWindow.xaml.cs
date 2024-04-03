@@ -62,6 +62,7 @@ namespace EmployeeManagementSystem.UserControls
         {
             passwordBox.Visibility = Visibility.Collapsed;
             textBox.Visibility = Visibility.Visible;
+            
         }
 
         /// <summary>
@@ -71,6 +72,7 @@ namespace EmployeeManagementSystem.UserControls
         {
             passwordBox.Visibility = Visibility.Visible;
             textBox.Visibility = Visibility.Collapsed;
+            passwordBox.Password = textBox.Text;
         }
 
         /// <summary>
@@ -79,8 +81,9 @@ namespace EmployeeManagementSystem.UserControls
         private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             ((dynamic)this.DataContext).Password = passwordBox.Password;
+           
         }
 
-
+     
     }
 }

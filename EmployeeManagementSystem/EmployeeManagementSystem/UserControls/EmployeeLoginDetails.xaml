@@ -4,87 +4,87 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" d:Background="White" >
+             d:DesignHeight="580" d:DesignWidth="945" d:Background="White" >
     <UserControl.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </UserControl.Resources>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Button Content="Log Out" Click="Button_Click" Style="{DynamicResource ButtonStyle}" Width="60" Height="32" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 0"/>
-            <Grid Margin="30" Grid.Row="1">
-        <Grid.ColumnDefinitions>
-        <ColumnDefinition Width=".2*" MinWidth="100" />
-        <ColumnDefinition Width=".6*"/>
-         <ColumnDefinition Width=".2*" MinWidth="100"  />
-         <ColumnDefinition Width=".6*" />
-        <ColumnDefinition Width=".2*" MinWidth="100"  />
-        <ColumnDefinition Width=".6*" />
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
-            <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
-            <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
-            <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
-            <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
-            <RowDefinition Height=".3*"  />
-            <RowDefinition  Height=".2*" />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Name:" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Employee Code:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Email:" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Password:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Joining Date:" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Release Date:" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Date Of Birth:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Contact Number:" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Gender:" Grid.Column="4" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Marital Status:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Present Address:" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Permanent Address:" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Desigantion:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Department:" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Margin="0 20 0 0"  HorizontalAlignment="Left"  Text="Education Details:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Top"/>
-        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Margin="0 20 0 0" HorizontalAlignment="Left"  Text="Experience Details:" Grid.Column="0" Grid.Row="6" VerticalAlignment="top"/>
-        
-                                                                  <!--Employee Details-->
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="EmployeeCode" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="EmployeeName" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Email" Grid.Column="5" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Password" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="JoiningDate" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="ReleaseDate" Grid.Column="5" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="DateOfBirth" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="ContactNumber" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Gender" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="MaritalStatus" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PresentAddress" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PermanentAddress" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Desigantion" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Department" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"/>
-                <DataGrid x:Name="Education" Grid.Row="5" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" SelectionMode="Single" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column">
-            <DataGrid.Columns>
-                <DataGridTextColumn  Width=".2*"  ElementStyle="{StaticResource WrapText}" Header="Qulification" Binding="{Binding Qualification}"/>
-                <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Board" Binding="{Binding BoardUniversity}"/>
-                <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Institute" Binding="{Binding InstituteName}"/>
-                <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="State" Binding="{Binding State}"/>
-                <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Passing Year" Binding="{Binding PassingYear}"/>
-                <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Percentage" Binding="{Binding Percentage,StringFormat={}{0}%}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-                <DataGrid x:Name="Experience" Grid.Row="6" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" VerticalScrollBarVisibility="Auto" SelectionMode="Single" HeadersVisibility="Column">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width=".2*"  ElementStyle="{StaticResource WrapText}"  Header="Organization" Binding="{Binding Organization}"/>
-                        <DataGridTextColumn Width=".2*"  ElementStyle="{StaticResource WrapText}"   Header="From" Binding="{Binding FromDate, StringFormat=dd/MM/yyyy}"/>
-                        <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="To" Binding="{Binding ToDate, StringFormat=dd/MM/yyyy}"/>
-                        <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Duration" Binding="{Binding Duration}"/>
-                        <DataGridTextColumn Width=".3*" ElementStyle="{StaticResource WrapText}" Header="Designation" Binding="{Binding Designation}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-   </Grid>
+        <Button Content="Log Out" Click="Button_Click" Style="{DynamicResource ButtonStyle}" Width="60" Height="32" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 0"/>
+        <Grid Margin="30" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*" MinWidth="100" />
+                <ColumnDefinition Width=".6*"/>
+                <ColumnDefinition Width=".2*" MinWidth="100"  />
+                <ColumnDefinition Width=".6*" />
+                <ColumnDefinition Width=".2*" MinWidth="100"  />
+                <ColumnDefinition Width=".6*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
+                <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
+                <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
+                <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
+                <RowDefinition MinHeight="30" Height=".2*" MaxHeight="50" />
+                <RowDefinition Height=".3*"  />
+                <RowDefinition  Height=".2*" />
+            </Grid.RowDefinitions>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Name:" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Employee Code:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Email:" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Password:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Joining Date:" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Release Date:" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Date Of Birth:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Contact Number:" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Gender:" Grid.Column="4" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Marital Status:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Present Address:" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Permanent Address:" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Desigantion:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold"  HorizontalAlignment="Left"  Text="Department:" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" Margin="0 20 0 0"  HorizontalAlignment="Left"  Text="Education Details:" Grid.Column="0" Grid.Row="5" VerticalAlignment="Top"/>
+            <TextBlock TextWrapping="Wrap" FontWeight="Bold" Margin="0 20 0 0" HorizontalAlignment="Left"  Text="Experience Details:" Grid.Column="0" Grid.Row="6" VerticalAlignment="top"/>
+
+            <!--Employee Details-->
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="EmployeeCode" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="EmployeeName" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Email" Grid.Column="5" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Password" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="JoiningDate" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="ReleaseDate" Grid.Column="5" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="DateOfBirth" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="ContactNumber" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Gender" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="MaritalStatus" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PresentAddress" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PermanentAddress" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Desigantion" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Department" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <DataGrid x:Name="Education" Grid.Row="5" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" SelectionMode="Single" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Width=".2*"  ElementStyle="{StaticResource WrapText}" Header="Qulification" Binding="{Binding Qualification}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Board" Binding="{Binding BoardUniversity}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Institute" Binding="{Binding InstituteName}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="State" Binding="{Binding State}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Passing Year" Binding="{Binding PassingYear}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Percentage" Binding="{Binding Percentage,StringFormat={}{0}%}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="Experience" Grid.Row="6" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" VerticalScrollBarVisibility="Auto" SelectionMode="Single" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width=".2*"  ElementStyle="{StaticResource WrapText}"  Header="Organization" Binding="{Binding Organization}"/>
+                    <DataGridTextColumn Width=".2*"  ElementStyle="{StaticResource WrapText}"   Header="From" Binding="{Binding FromDate, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="To" Binding="{Binding ToDate, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Duration(months)" Binding="{Binding Duration}"/>
+                    <DataGridTextColumn Width=".3*" ElementStyle="{StaticResource WrapText}" Header="Designation" Binding="{Binding Designation}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
 </UserControl>

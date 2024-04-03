@@ -72,7 +72,7 @@ namespace EmployeeManagementSystem.Database
         /// <param name="project">new object of class ProjectModel which will replace the old model. </param>
         /// <param name="endingDateHasValue">to check if project's endingDate has value.</param>
         /// <returns>true if project gets updated successfully otherwise false.</returns>
-        public bool UpdateProject(String oldCode, ProjectModel project, bool endingDateHasValue = true)
+        public bool UpdateProject(String oldCode, ProjectModel project, bool endingDateHasValue)
         {
             string query = $"Select * from EmsTblProject where Code LIKE @Code";
             SqlCommand command = new SqlCommand(query);
@@ -257,7 +257,7 @@ namespace EmployeeManagementSystem.Database
         /// <param name="employee">object of class EmployeeModel which will replace the old employee.</param>
         /// <param name="releaseDateHasValue">to check if employee's releaseDate has value.</param>
         /// <returns>true if it successfully updates employee otherwise false.</returns>
-        public bool UpdateEmployee(string oldCode, EmployeeModel employee, bool releaseDateHasValue = true)
+        public bool UpdateEmployee(string oldCode, EmployeeModel employee, bool releaseDateHasValue)
         {
             string query = "SELECT * FROM EmsTblEmployee WHERE Code LIKE @EmployeeCode";
             SqlCommand command = new SqlCommand(query);

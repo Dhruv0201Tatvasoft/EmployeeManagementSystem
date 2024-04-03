@@ -385,6 +385,10 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the AddEmployee  can be executed.
+        /// </summary>
+        /// <returns>Always return true indicating AddEmployee can be executed .</returns>
         private bool CanAddEmployeeExecute(object arg)
         {
             return true;
@@ -437,7 +441,7 @@ namespace EmployeeManagementSystem.ViewModel
                 };
             }
             didSave = insertData.InsertEmployee(employee, ReleaseDate != null);
-            if (didSave)
+            if (didSave) /// if project is saved to database than only we raise this event.
             {
                 OnEmployeeAddedEvent(EventArgs.Empty);
             }
@@ -458,6 +462,10 @@ namespace EmployeeManagementSystem.ViewModel
                 return addBlankRowEducation;
             }
         }
+
+        /// <summary>
+        /// Adds a new blank row to the list of employee education lsit.
+        /// </summary>
         private void ExecuteAddBlankRowEducation(object obj)
         {
             EmployeeEducationList.Add(new EmployeeEducationModel());///adding new blank model will add blank row.
@@ -467,6 +475,11 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeEducationList");
         }
 
+
+        /// <summary>
+        /// Determines whether a new blank row of education can be added.
+        /// </summary>
+        /// <returns>True if a new blank row of education can be added; otherwise, false.</returns>
         private bool CanAddBlankRowEducationExecute(object arg)
         {
             if (!IsEducationAddEditEnabled) return false; /// means one education row is already being edited in dataGrid.
@@ -489,6 +502,10 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// Adds a new blank row of experience to the employee experience list.
+        /// </summary>
         private void ExecuteAddRowExperience(object obj)
         {
             EmployeeExperienceList.Add(new EmployeeExperienceModel());///adding new blank model will add blank row.
@@ -498,6 +515,10 @@ namespace EmployeeManagementSystem.ViewModel
             OnPropertyChanged("EmployeeExperienceList");
         }
 
+        /// <summary>
+        /// Determines whether a new row of experience can be added to the employee experience list.
+        /// </summary>
+        /// <returns>True if a new row of experience can be added; otherwise, false.</returns>
         private bool CanAddRowExperienceExecute(object arg)
         {
             if (!IsExperienceAddEditEnabled) return false; /// means one experience row is already being edited in dataGrid.
@@ -520,11 +541,18 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the current education row can be saved.
+        /// </summary>
+        /// <returns>Always returns true indicating education row can always be added.</returns>
         private bool CanSaveEducationRowExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the saving of the selected employee education row.
+        /// </summary>
         private void ExecuteSaveEducationRow(object obj)
         {
 
@@ -579,7 +607,7 @@ namespace EmployeeManagementSystem.ViewModel
                     if (selectedEmployeeEducationModel != null && selectedOldEmployeeEducationModel != null)
                         didSave = updateData.UpdateEmployeeEducation(selectedEmployeeEducationModel, selectedOldEmployeeEducationModel, code);
                 }
-                if (didSave)
+                if (didSave) /// only if education row is saved to database we perform this opetations
                 {
                     selectedOldEmployeeEducationModel = null;
                     IsEducationAddEditEnabled = true; /// mean education row is added to DB and now we have to enable add and edit button to add new row or to edit existing.
@@ -605,12 +633,18 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the current experience row can be saved.
+        /// </summary>
+        /// <returns>Always returns true indicating experience row can always be added.</returns>
         private bool CanSaveExperienceExecute(object arg)
         {
             return true;
         }
 
-
+        /// <summary>
+        /// Executes the saving of the selected employee experience row.
+        /// </summaryexperience
         private void ExecuteSaveExperienceRow(object obj)
         {
 
@@ -641,7 +675,7 @@ namespace EmployeeManagementSystem.ViewModel
                         didSave = updateData.UpdateEmployeeExperience(selectedEmployeeExperienceModel, selectedOldEmployeeExperienceModel, code);
                     }
                 }
-                if (didSave)
+                if (didSave) /// only after saving experience row to database we perform the following operations.
                 {
                     selectedOldEmployeeExperienceModel = null;
                     IsExperienceAddEditEnabled = true; /// means experience row is added to DB and now we have to enable add and edit button to add new row or to edit existing.
@@ -669,12 +703,20 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
+
+        /// <summary>
+        /// Determines whether editing an education row is currently enabled.
+        /// </summary>
+        /// <returns>True if editing an education row is enabled; otherwise, false.</returns>
         private bool CanEditEducationRowExecute(object arg)
         {
             if (!IsEducationAddEditEnabled) return false; /// means one education row is already being added or edited.
             return true;
         }
 
+        /// <summary>
+        /// Executes the editing of the selected education row.
+        /// </summary>
         private void ExecuteEditEducationRow(object obj)
         {
             if (selectedEmployeeEducationModel != null)
@@ -711,12 +753,19 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the user can edit an experience row.
+        /// </summary>
+        /// <returns>True if the user can edit an experience row; otherwise, false.</returns>
         private bool CanEditExperienceExecute(object arg)
         {
             if (!IsExperienceAddEditEnabled) return false; /// means one experience row is already being added or edited.
             return true;
         }
 
+        /// <summary>
+        /// Executes the editing of an experience row.
+        /// </summary>
         private void ExecuteEditExperience(object obj)
         {
             if (selectedEmployeeExperienceModel != null)
@@ -755,12 +804,18 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
-
+        /// <summary>
+        /// Determines whether an education row can be removed from the EmployeeEducationList.
+        /// </summary>
+        /// <returns>Always return true indicating education row can be removed from the EmployeeEducationList</returns>
         private bool CanRemoveEducationFromListExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the removal of an education row from the list.
+        /// </summary>
         private void ExecuteRemoveEducationFromList(object obj)
         {
             if (SelectedEmployeeEducationModel != null)
@@ -801,6 +856,10 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether an experience row can be removed from the EmployeeExperienceList.
+        /// </summary>
+        /// <returns>Always return true indicating experience row can be removed from the EmployeeExperienceList</returns>
         private bool CanRemoveExperienceFromListExecute(object arg)
         {
             return true;
@@ -843,12 +902,19 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the education row can be removed from database.
+        /// </summary>
+        /// <returns>Always returns true indicating education row can be removed form database.</returns>
         private bool CanRemoveEducationFromDataBaseExecute(object arg)
         {
             return true;
 
         }
 
+        /// <summary>
+        /// Executes the removal of the selected employee education row from the database.
+        /// </summary>
         private void ExecuteRemoveEducationFromDataBase(object obj)
         {
             if (selectedEmployeeEducationModel != null)
@@ -880,11 +946,19 @@ namespace EmployeeManagementSystem.ViewModel
                 return removeExperienceFromDataBase;
             }
         }
+        /// <summary>
+        /// Determines whether the removal of the selected employee experience from the database can be executed.
+        /// </summary>
+        /// <returns>Always returns true indicating  selected employee experience can be removed from database. </returns>
         private bool CanRemoveExperienceFromDataBaseExecute(object arg)
         {
             return true;
         }
 
+
+        /// <summary>
+        /// Executes the removal of the selected employee experience from the database.
+        /// </summary>
         private void ExecuteRemoveExperienceFromDataBase(object obj)
         {
             if (selectedEmployeeExperienceModel != null)
@@ -917,11 +991,18 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the employee details can be cleared.
+        /// </summary>
+        /// <returns>Always return true indicating employee details can be cleared</returns>
         private bool CanClearEmployeeDetailsExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Clears the employee details to predefined properties.
+        /// </summary>
         private void ExecuteClearEmployeeDetails(object obj)
         {
             Code = FirstName = LastName = Email = Password = ConfirmPassword = String.Empty;
@@ -950,11 +1031,19 @@ namespace EmployeeManagementSystem.ViewModel
         }
 
 
+        /// <summary>
+        /// Determines whether the personal details can be cleared.
+        /// </summary>
+        /// <returns>Always return true indicating employee details can be cleard</returns>
+
         private bool CanClearPersonalDetailsExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Clears the employee personal details to predefined properties.
+        /// </summary>
         private void ExecuteClearPersonalDetails(object obj)
         {
             DOB = DateTime.Now;

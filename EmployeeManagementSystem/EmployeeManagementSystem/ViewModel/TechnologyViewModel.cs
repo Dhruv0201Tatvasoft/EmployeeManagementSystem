@@ -68,6 +68,13 @@ namespace EmployeeManagementSystem.ViewModel
                 return saveTechnology;
             }
         }
+
+        /// <summary>
+        /// Determines whether saving a technology can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if the technology name is not null or empty; otherwise, false.
+        /// </returns>
         private bool CanSaveTechnologyExecute(object arg)
         {
             if (String.IsNullOrEmpty(TechnologyName))
@@ -77,6 +84,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to save a technology.
+        /// </summary>
         private void ExecuteSaveTechnology(object obj)
         {
             if (selectedRow != null && !String.IsNullOrEmpty(oldTechnologyName) && !String.IsNullOrEmpty(technologyName))
@@ -90,6 +100,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
             selectedRow = null;
             TechnologyName = String.Empty;
+            OldTechnologyName = null;
             technologyDataTable = getData.GetTechnologyData();
             OnPropertyChanged("TechnologyDataTable");
         }
@@ -110,6 +121,9 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Executes the deletion of a technology.
+        /// </summary>
         private void ExecuteDeleteTechnology(object obj)
         {
             deleteData.DeleteTechnology((string)selectedRow?.Row.ItemArray[0]!); /// first row of selectedRow contains technology name.
@@ -119,6 +133,12 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
+        /// <summary>
+        /// Determines whether the deletion of a technology can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if a row is selected; otherwise, false.
+        /// </returns
         private bool CanDeleteTechnologyExecute(object arg)
         {
             if (selectedRow == null) return false;
@@ -141,6 +161,12 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether editing a technology can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if a row is selected; otherwise, false.
+        /// </returns>
         private bool CanEditTechnologyExecute(object arg)
         {
             if (selectedRow == null) return false;
@@ -148,6 +174,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to edit a technology.
+        /// </summary>
         private void ExecuteEditTechnology(object obj)
         {
             if (selectedRow != null)

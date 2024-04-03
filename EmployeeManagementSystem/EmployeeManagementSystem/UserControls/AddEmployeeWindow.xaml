@@ -368,7 +368,7 @@
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Width="100">
-                                            <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <Button Style="{DynamicResource ButtonStyle}"  Content="Save"   Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveEducationRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
 
                                             </Button>
                                             <Button Style="{StaticResource CircleButton}" ToolTip="Remove" Margin="10 0 10 0" Width="30" Height="30" Command="{Binding DataContext.RemoveEducationFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
@@ -476,7 +476,7 @@
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Width="100">
-                                            <Button Content="Save"  Background="White" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveExperienceRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <Button Style="{DynamicResource ButtonStyle}" Content="Save" Margin="10 0 10 0" Width="40" Height="30"  Command="{Binding DataContext.SaveExperienceRow, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                             </Button>
                                             <Button ToolTip="Remove" Margin="10 0 10 0" Width="30" Height="30" Style="{StaticResource CircleButton}"  Command="{Binding DataContext.RemoveExperienceFromList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                                 <Image Source="\Icons\CircleCrossIcon.png"  />

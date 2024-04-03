@@ -69,6 +69,13 @@ namespace EmployeeManagementSystem.ViewModel
                 return saveSkill;
             }
         }
+
+        /// <summary>
+        /// Determines whether saving a skill can be executed.
+        /// </summary
+        /// <returns>
+        /// True if the skill name is not null or empty; otherwise, false.
+        /// </returns>
         private bool CanSaveSkillExecute(object arg)
         {
             if (String.IsNullOrEmpty(SkillName))
@@ -78,6 +85,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to save a skill.
+        /// </summary>
         private void ExecuteSaveSkill(object obj)
         {
             if (selectedRow != null && !String.IsNullOrEmpty(oldSkillName) && !String.IsNullOrEmpty(skillName))
@@ -93,6 +103,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
             selectedRow = null;
             SkillName = String.Empty;
+            OldSKillName = null;
             skillDataTable = getData.GetSkillTable();
             OnPropertyChanged("SkillDataTable");
         }
@@ -114,15 +125,24 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Executes the deletion of a skill.
+        /// </summary>
         private void ExecuteDeleteSkill(object obj)
         {
             deleteData.DeleteSkill((string)selectedRow?.Row.ItemArray[0]!);///first row of selectedRow is skill name.
-            SkillName = String.Empty;
+            SkillName = String.Empty; 
             skillDataTable = getData.GetSkillTable();
             OnPropertyChanged("SkillDataTable");
 
         }
 
+        /// <summary>
+        /// Determines whether the deletion of a skill can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if a row is selected; otherwise, false.
+        /// </returns>
         private bool CanDeleteSkillExecute(object arg)
         {
             if (selectedRow == null) return false;
@@ -145,6 +165,12 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether editing a skill can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if a row is selected; otherwise, false.
+        /// </returns>
         private bool CanEditSkillExecute(object arg)
         {
             if (selectedRow == null) return false;
@@ -152,6 +178,9 @@ namespace EmployeeManagementSystem.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to edit a skill.
+        /// </summary>
         private void ExecuteEditSkill(object obj)
         {
             if (selectedRow != null)

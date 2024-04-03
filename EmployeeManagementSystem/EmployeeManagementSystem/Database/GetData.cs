@@ -102,9 +102,9 @@ namespace EmployeeManagementSystem.Database
                 }
                 return dt;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database: " + ex.Message);
+                MessageBox.Show("Error in Fetching data from database: ");
                 return new DataTable();
             }
         }
@@ -433,7 +433,7 @@ namespace EmployeeManagementSystem.Database
                         }
                         if (!String.IsNullOrEmpty(name))
                         {
-                            command.Parameters.AddWithValue("@Name", $"%{name}%");
+                            command.Parameters.AddWithValue("@Name", $"{name}%");
                         }
                         if (!String.IsNullOrEmpty(department))
                         {
@@ -746,7 +746,7 @@ namespace EmployeeManagementSystem.Database
         /// </summary>
         public DataTable GetTechnologyWiseProject()
         {
-            string query = "SELECT Id,COUNT(projectCode)as Count,Name from EmsTblTechnology " +
+            string query = "SELECT EmsTblTechnology.Id,COUNT(projectCode)as Count,EmsTblTechnology.Name from EmsTblTechnology " +
                 "LEFT JOIN EmsTblTechnologyForProject ON " +
                 "EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,EmsTblTechnology.Id;";
             DataTable dt = new DataTable();
@@ -780,7 +780,7 @@ namespace EmployeeManagementSystem.Database
         public DataTable GetSkillWiseEmployeeCount()
         {
             string query = "SELECT COUNT(*) as Count,SkillId,Name from" +
-                " EmsTblSkillForEmployee INNER  JOIN EmsTblSkill On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name";
+                " EmsTblSkill LEFT  JOIN EmsTblSkillForEmployee  On EmsTblSkillForEmployee.SkillId = EmsTblSkill.Id group by EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name";
             DataTable dt = new DataTable();
             try
             {

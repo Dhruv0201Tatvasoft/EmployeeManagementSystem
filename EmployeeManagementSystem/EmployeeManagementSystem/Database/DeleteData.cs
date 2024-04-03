@@ -79,7 +79,7 @@ namespace EmployeeManagementSystem.Database
         /// Deletes project from database.
         /// </summary>
         /// <param name="code">code of project to be deleted.</param>
-        public void DeleteProject(string code)
+        public bool DeleteProject(string code)
         {
 
             if (this.DeleteWarningMessage("delete this project?"))
@@ -87,10 +87,10 @@ namespace EmployeeManagementSystem.Database
 
                 String query = "DELETE from EmsTblProject where Code LIKE @Code";
                 SqlCommand command = new SqlCommand(query);
-                command.CommandText = query;
                 command.Parameters.AddWithValue("@Code", code);
-                ExecuteQuery(command);
+                return ExecuteQuery(command);
             }
+            return false;
         }
 
         /// <summary>

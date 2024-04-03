@@ -156,11 +156,22 @@ namespace EmployeeManagementSystem.ViewModel
                 return updateProject;
             }
         }
+
+        /// <summary>
+        /// Determines whether updating a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that updating a project can be executed.
+        /// </returns>
         private bool CanUpdateProjectExecute(object arg)
         {
             return true;
         }
 
+
+        /// <summary>
+        /// Executes the action to update a project.
+        /// </summary>
         private void ExecuteUpdateProject(object obj)
         {
             bool didSave = false;
@@ -174,7 +185,7 @@ namespace EmployeeManagementSystem.ViewModel
                 project = new ProjectModel() { Code = Code, Name = Name, StartingDate = StartingDate, AssociatedTechnologies = SelectedTechnologyIds };
             }
             didSave = updateData.UpdateProject(OldCode, project, EndingDate != null);
-            if(didSave) OnChangeWindowEvent(EventArgs.Empty);
+            if(didSave) OnChangeWindowEvent(EventArgs.Empty); /// if updated project is saved to database after that only we change the window.
 
         }
 

@@ -227,6 +227,7 @@
                         </Style>
                     </chart:ColumnSeries.DataPointStyle>
                 </chart:ColumnSeries>
+                
             </chart:Chart.Series>
 
             <chart:Chart.Axes>

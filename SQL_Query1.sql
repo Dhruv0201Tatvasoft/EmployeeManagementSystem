@@ -209,7 +209,7 @@ from
 	EmsTblEmployee 
 GROUP BY 
 	Designation   
-
+select * from EmsTblSkillForEmployee
 select * from EmsTblProject
 select * from EmsTblTechnologyForProject
 select * from EmsTblEmployeeAssociatedToProject
@@ -218,4 +218,3 @@ select * from EmsTblEmployeeExperience
 select * from EmsTblSkill
 select * from EmsTblTechnology
 select * from EmsTblEmployee  
-exec sp_PastSixMonthJoinedEmployee

@@ -70,7 +70,7 @@ namespace EmployeeManagementSystem.Database
         /// <param name="project">object of ProjectModel class whose project is being added.</param>
         /// <param name="endingDateHasValue">to check if project's ending date has value of it is null.</param>
         /// <returns>true if project is successfully added to database otherwise false.</returns>
-        public bool InsertNewProject(ProjectModel project, bool endingDateHasValue = true)
+        public bool InsertNewProject(ProjectModel project, bool endingDateHasValue)
         {
             string query = $"Select * from EmsTblProject where Code LIKE @Code";
             SqlCommand command = new SqlCommand(query);
@@ -137,7 +137,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{employeeName} is already added to this project", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{employeeName} is already added to this project", "Erorr", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -203,7 +203,7 @@ namespace EmployeeManagementSystem.Database
         /// <param name="employee">object of class EmployeeModel which is being inserted to database.</param>
         /// <param name="releaseDateHasValue">to check if employee's releaseDate has value.</param>
         /// <returns>true if employee successfully added to database.</returns>
-        public bool InsertEmployee(EmployeeModel employee, bool releaseDateHasValue = true)
+        public bool InsertEmployee(EmployeeModel employee, bool releaseDateHasValue)
         {
             string query = "SELECT * FROM EmsTblEmployee WHERE Code LIKE @EmployeeCode";
             SqlCommand command = new SqlCommand(query);
@@ -305,7 +305,7 @@ namespace EmployeeManagementSystem.Database
             }
             else
             {
-                MessageBox.Show($"{projectName} is already assigned to this Employee", "Alert", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show($"{projectName} is already assigned to this Employee", "Error", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
     }

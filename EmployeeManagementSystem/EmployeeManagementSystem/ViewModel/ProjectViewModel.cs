@@ -129,6 +129,10 @@ namespace EmployeeManagementSystem.ViewModel
                 return searchProject;
             }
         }
+
+        /// <summary>
+        /// Executes the search for projects based on specified criteria.
+        /// </summary>
         private void ExecuteSearchProject(object parameter)
         {
 
@@ -136,6 +140,13 @@ namespace EmployeeManagementSystem.ViewModel
             dataTable = getData.GetProjectSearchData(code!, name!, startingDate.Value, endingDate.Value);
             OnPropertyChanged("DataTable");
         }
+
+        /// <summary>
+        /// Determines whether searching for projects can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that searching for projects can be executed.
+        /// </returns>
         private bool CanSearchProjectExecute(object parameter)
         {
             return true;
@@ -157,10 +168,20 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether clearing fields can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that clearing fields can be executed.
+        /// </returns>
         private bool CanClearFieldsExecute(object arg)
         {
             return true;
         }
+
+        /// <summary>
+        /// Clears the fields and refreshes the project data table.
+        /// </summary>
         private void ExecuteClearFields(object obj)
         {
             Code = String.Empty;
@@ -186,19 +207,32 @@ namespace EmployeeManagementSystem.ViewModel
                 return deleteProject;
             }
         }
+        /// <summary>
+        /// Determines whether the deletion of a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that the deletion of a project can be executed.
+        /// </returns>
         private bool CanDeleteProjectExecute(object arg)
         {
 
             return true;
         }
 
+        /// <summary>
+        /// Executes the deletion of a project.
+        /// </summary>
         private void ExecuteDeleteProject(object obj)
         {
             if (selectedRow != null)
             {
-                deleteData.DeleteProject((string)selectedRow.Row.ItemArray[0]!);/// first row of selectedRow contains project code.
-                DataTable = getData.GetProjectData();
-                OnPropertyChanged("DataTable");
+                bool didDelete = false;
+                didDelete = deleteData.DeleteProject((string)selectedRow.Row.ItemArray[0]!);/// first row of selectedRow contains project code.
+                if (didDelete) /// if project got deleted then only we refresh datagrid.
+                {
+                    DataTable = getData.GetProjectData();
+                    OnPropertyChanged("DataTable"); 
+                }
             }
         }
 
@@ -218,16 +252,25 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether editing a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that editing the project can be executed.
+        /// </returns>
         private bool CanEditProjectExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to edit a project.
+        /// </summary>
         private void ExecuteEditProject(object obj)
         {
             if (selectedRow != null)
             {
-                ProjectModel project = getData.GetProjectFromCode(selectedRow.Row[0].ToString()!);
+                ProjectModel project = getData.GetProjectFromCode(selectedRow.Row[0].ToString()!);/// first element of selected row is project code.
                 OnEditEvent(project);
             }
 
@@ -250,12 +293,21 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the addition of an employee to a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if the employee name is not null or empty; otherwise, false.
+        /// </returns>
         private bool CanAddEmployeeToProjectExecute(object arg)
         {
             if (String.IsNullOrEmpty(employeeName)) return false;
             return true;
         }
 
+        /// <summary>
+        /// Executes the addition of an employee to a project.
+        /// </summary>
         private void ExecuteAddEmployeeToProject(object obj)
         {
             if (selectedRow != null && employeeName != null)
@@ -287,11 +339,21 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether the removal of an employee from a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that the removal can be executed.
+        /// </returns>
         private bool CanRemoveEmployeeFromProjectExecute(object arg)
         {
             return true;
         }
 
+
+        /// <summary>
+        /// Executes the removal of an employee from a project.
+        /// </summary>
         private void ExecuteRemoveEmployeeFromProject(object obj)
         {
             if (selectedRow != null && selectedEmployeeRow != null)

@@ -9,8 +9,8 @@ namespace EmployeeManagementSystem.Converter
     /// </summary>
     internal class ButtonDisbaleConverter : IMultiValueConverter
     {
-     
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) /// to enable or disable button using multibinding.
         {
             if (values.LongLength > 0)
             {
@@ -25,8 +25,9 @@ namespace EmployeeManagementSystem.Converter
             return true;
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)/// to enable or disable button using multibinding.
         {
+
             if (value is bool && (bool)value)
             {
                 object[] convertedValues = new object[targetTypes.Length];
@@ -40,6 +41,7 @@ namespace EmployeeManagementSystem.Converter
             }
 
             return new object[targetTypes.Length];
+
         }
     }
 }

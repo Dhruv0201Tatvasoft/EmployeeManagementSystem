@@ -151,12 +151,18 @@ namespace EmployeeManagementSystem.ViewModel
 
 
 
-
+        /// <summary>
+        /// Determines whether Save Project action can be executed.
+        /// </summary>
+        /// <returns>Always returns true, indicating that the Save Project action can always be executed.</returns>
         private bool CanSaveProjectExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the Save Project action .
+        /// </summary>
         private void ExecuteSaveProject(object obj)
         {
             bool didSave = false;

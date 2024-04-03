@@ -86,6 +86,8 @@ namespace EmployeeManagementSystem.ViewModel
             }
 
         }
+
+
         public LoginViewModel()
         {
             getData = new GetData();

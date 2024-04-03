@@ -28,7 +28,7 @@
             <TextBlock Margin="20 0 0 0" Text="Password" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" FontSize="16"/>
             <StackPanel  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" >
                 <PasswordBox x:Name="passwordBox" PasswordChar="●" VerticalContentAlignment="Center"  PasswordChanged="passwordBox_PasswordChanged" HorizontalAlignment="Left" Height="32" Width="300" />
-                <TextBox HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}" Height="32" Width="300" x:Name="textBox" Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"/>
+                <TextBox HorizontalAlignment="Left" Style="{DynamicResource CustomInputStyle}" Height="32" Width="300" x:Name="textBox"  Text="{Binding Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed"/>
                 <CheckBox x:Name="ShowPasswordCharsCheckBox" Content="Show Password" Checked="ShowPasswordCharsCheckBox_Checked" Unchecked="ShowPasswordCharsCheckBox_Unchecked" />
             </StackPanel>
             <StackPanel Orientation="Vertical"  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center">

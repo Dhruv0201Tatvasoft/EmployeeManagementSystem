@@ -11,7 +11,7 @@ namespace EmployeeManagementSystem.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (string)parameter == (string)value;
+            return (string)parameter == (string)value; /// if parameter and value is same means that radiobutton should be checked.
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

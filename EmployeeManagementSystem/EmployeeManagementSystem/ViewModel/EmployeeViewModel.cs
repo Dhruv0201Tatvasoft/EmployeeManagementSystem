@@ -199,16 +199,25 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether clearing fields can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that clearing fields can be executed.
+        /// </returns>
         private bool CanClearFieldsExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to clear fields.
+        /// </summary>
         private void ExecuteClearFields(object obj)
         {
-            email = String.Empty; name = String.Empty; selectedDepartment = null; selectedDesignation = null;
-            combTextDepartment = "Select Department";
-            combTextDesignation = "Select Designation";
+            Email = String.Empty; Name= String.Empty; SelectedDepartment= null; SelectedDesignation= null;
+            CombTextDepartment = "Select Department";
+            CombTextDesignation = "Select Designation";
             employeeDataTable = getData.GetEmployeeTable();
             OnPropertyChanged("EmployeeDataTable");
         }
@@ -229,6 +238,10 @@ namespace EmployeeManagementSystem.ViewModel
                 return searchEmployee;
             }
         }
+
+        /// <summary>
+        /// Executes the search for employees based on specified criteria.
+        /// </summary>
         private void ExecuteSearchEmployee(object obj)
         {
             employeeDataTable = getData.GetEmployeeSearchData(email!, name!, selectedDepartment!, selectedDesignation!);
@@ -236,6 +249,12 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
+        /// <summary>
+        /// Determines whether searching for employees can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that searching for employees can be executed.
+        /// </returns>
         private bool CanSearchEmployeeExecute(object arg)
         {
             return true;
@@ -257,11 +276,20 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether deleting an employee can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that deleting an employee can be executed.
+        /// </returns>
         private bool CanDeleteEmployeeExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the deletion of an employee.
+        /// </summary>
         private void ExecuteDeleteEmployee(object obj)
         {
             if (selectedEmployee != null)
@@ -292,12 +320,21 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether adding an employee to a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// True if the project name is not null or empty; otherwise, false.
+        /// </returns>
         private bool CanAddEmployeeToProjectExecute(object arg)
         {
             if (String.IsNullOrEmpty(projectName)) return false;
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to add an employee to a project.
+        /// </summary>
         private void ExecuteAddEmployeeToProject(object obj)
         {
             if (selectedEmployee != null && projectName != null)
@@ -327,11 +364,20 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether editing an employee can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that editing an employee can be executed.
+        /// </returns>
         private bool CanEditEmployeeExecute(object arg)
         {
             return true;
         }
 
+        /// <summary>
+        /// Executes the action to edit an employee.
+        /// </summary>
         private void ExecuteEditEmployee(object obj)
         {
             if (selectedEmployee != null)
@@ -358,12 +404,21 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
+        /// <summary>
+        /// Determines whether removing an employee from a project can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that removing an employee from a project can be executed.
+        /// </returns>
         private bool CanRemoveEmployeeFromProjectExecute(object arg)
         {
             return true;
 
         }
 
+        /// <summary>
+        /// Executes the action to remove an employee from a project.
+        /// </summary>
         private void ExecuteRemoveEmployeeFromProject(object obj)
         {
             if (selectedProjectRow != null && selectedEmployee != null)
@@ -392,10 +447,20 @@ namespace EmployeeManagementSystem.ViewModel
 
         }
 
+        /// <summary>
+        /// Determines whether viewing employee details can be executed.
+        /// </summary>
+        /// <returns>
+        /// Always returns true, indicating that viewing employee details can be executed.
+        /// </returns>
         private bool CanViewEmployeeDetailsExecute(object arg)
         {
             return true;
         }
+
+        /// <summary>
+        /// Executes the action to view employee details.
+        /// </summary>
 
         private void ExecuteViewEmployeeDetails(object obj)
         {
