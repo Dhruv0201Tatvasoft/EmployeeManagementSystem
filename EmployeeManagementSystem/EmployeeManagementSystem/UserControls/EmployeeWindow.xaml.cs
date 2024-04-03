@@ -61,6 +61,7 @@ namespace EmployeeManagementSystem.UserControls
             string EmployeeCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!;
             EmployeeNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!;
             PopUpDataGird.ItemsSource = getData.GetAssociatedProjectForEmployees(EmployeeCode).DefaultView;
+            DataGrid.IsEnabled = false; /// to stop user to select any other employee row.
 
         }
 
@@ -70,6 +71,7 @@ namespace EmployeeManagementSystem.UserControls
         private void ClosePopUpClick(object sender, RoutedEventArgs e)
         {
             MyPopup.IsOpen = false;
+            DataGrid.IsEnabled = true; /// to continue the interaction with datagrid
 
         }
 

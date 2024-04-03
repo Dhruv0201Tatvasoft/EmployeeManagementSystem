@@ -66,7 +66,7 @@
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="PermanentAddress" Grid.Column="5" Grid.Row="3" VerticalAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Desigantion" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  x:Name="Department" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <DataGrid x:Name="Education" Grid.Row="5" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" SelectionMode="Single" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column">
+            <DataGrid IsReadOnly="True" x:Name="Education" Grid.Row="5" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" SelectionMode="Single" VerticalScrollBarVisibility="Auto" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn  Width=".2*"  ElementStyle="{StaticResource WrapText}" Header="Qulification" Binding="{Binding Qualification}"/>
                     <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Board" Binding="{Binding BoardUniversity}"/>
@@ -76,7 +76,7 @@
                     <DataGridTextColumn Width=".2*" ElementStyle="{StaticResource WrapText}" Header="Percentage" Binding="{Binding Percentage,StringFormat={}{0}%}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="Experience" Grid.Row="6" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" VerticalScrollBarVisibility="Auto" SelectionMode="Single" HeadersVisibility="Column">
+            <DataGrid IsReadOnly="True" x:Name="Experience" Grid.Row="6" Grid.Column="1" AutoGenerateColumns="False" Grid.ColumnSpan="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Style="{DynamicResource DataGridStyle}" Margin="0 20 20 20 " CanUserAddRows="False" VerticalScrollBarVisibility="Auto" SelectionMode="Single" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width=".2*"  ElementStyle="{StaticResource WrapText}"  Header="Organization" Binding="{Binding Organization}"/>
                     <DataGridTextColumn Width=".2*"  ElementStyle="{StaticResource WrapText}"   Header="From" Binding="{Binding FromDate, StringFormat=dd/MM/yyyy}"/>

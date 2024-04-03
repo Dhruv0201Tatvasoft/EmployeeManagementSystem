@@ -28,8 +28,11 @@ namespace EmployeeManagementSystem.UserControls
         private void LoginViewModel_CorrectLoginEvent(object? sender, EmployeeEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.menuitem.Visibility = Visibility.Collapsed;
-            mainWindow.mainContent.Content = new EmployeeLoginDetails(e.emp);
+            if (mainWindow != null)
+            {
+                mainWindow.menuitem.Visibility = Visibility.Collapsed;
+                mainWindow.mainContent.Content = new EmployeeLoginDetails(e.emp);
+            }
 
         }
 

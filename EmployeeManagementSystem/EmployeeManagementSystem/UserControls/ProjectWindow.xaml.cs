@@ -90,6 +90,7 @@ namespace EmployeeManagementSystem.UserControls
             string projectCode = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[0]!; /// to get project code of the selected project
             ProjectNameTextBox.Text = (string)((DataRowView)((FrameworkElement)e.OriginalSource).DataContext).Row.ItemArray[1]!; /// sets the textblock with the project name.
             PopUpDataGird.ItemsSource=getData.GetAssociatedEmployeesToProject(projectCode).DefaultView;
+            DataGrid.IsEnabled = false; /// to stop user to select any other project row.
 
         }    
         
@@ -98,6 +99,7 @@ namespace EmployeeManagementSystem.UserControls
         /// </summary>
         private void ClosePopUpClick(object sender, RoutedEventArgs e) { 
             MyPopup.IsOpen=false;
+            DataGrid.IsEnabled = true; /// to user interact with the datagrid
         }
        
     }

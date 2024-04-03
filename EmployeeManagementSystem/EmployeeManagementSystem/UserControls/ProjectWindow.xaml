@@ -82,7 +82,7 @@
         
 
         <Separator Grid.Row="3" Margin="20 0 20 30" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <DataGrid   IsReadOnly="True" SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" x:Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
+        <DataGrid    IsReadOnly="True" SelectedItem="{Binding SelectedRow}"  VerticalAlignment="Center" x:Name="DataGrid"  AutoGenerateColumns="False" Style="{DynamicResource DataGridStyle}"
                     HorizontalAlignment="Stretch"
                       Grid.Row="4"
                       Margin="20 0 20 20 "
@@ -149,7 +149,7 @@
                             </input:AutoCompleteBox>
                             <Button VerticalAlignment="Center" Margin=" 0 0 10 0" Command="{Binding AddEmployeeToProject}" Content="ADD" Width="90" Height="30" Style="{DynamicResource ButtonStyle}"/>
                         </StackPanel>
-                        <DataGrid IsReadOnly="True" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}"  Grid.Row="3"  Margin="10 0 10 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
+                        <DataGrid  IsReadOnly="True" VerticalAlignment="Top" RowHeight="50" Height="auto" Style="{DynamicResource DataGridStyle}"  Grid.Row="3"  Margin="10 0 10 10" HorizontalAlignment="Stretch" Name="PopUpDataGird"  
                                   CanUserAddRows="False"
                                   AutoGenerateColumns="False"
                                   SelectionMode="Single"

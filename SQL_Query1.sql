@@ -148,6 +148,7 @@ Select * from EmsTblProject
 EXEC sp_PastSixMonthJoinedEmployee
 CREATE PROCEDURE sp_PastSixMonthJoinedEmployee
 AS
+Select
     COUNT(*) AS count,
     MONTH(JoiningDate) AS MonthNumber,
     DATENAME(month, JoiningDate) AS Month
@@ -209,12 +210,13 @@ from
 	EmsTblEmployee 
 GROUP BY 
 	Designation   
-select * from EmsTblSkillForEmployee
-select * from EmsTblProject
-select * from EmsTblTechnologyForProject
-select * from EmsTblEmployeeAssociatedToProject
-select * from EmsTblEmployeeEducation
-select * from EmsTblEmployeeExperience
-select * from EmsTblSkill
-select * from EmsTblTechnology
-select * from EmsTblEmployee  
+ 
+
+
+SELECT EmsTblTechnology.Id,COUNT(projectCode)as Count,EmsTblTechnology.Name from EmsTblTechnology 
+                LEFT JOIN EmsTblTechnologyForProject ON  
+                EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,EmsTblTechnology.Id
+
+select CONCAT(FirstName, ' ' ,LastName)as FullName  ,EmsTblEmployeeAssociatedToProject.ProjectCode  from EmsTblEmployee inner join EmsTblEmployeeAssociatedToProject
+
+on EmsTblEmployeeAssociatedToProject.EmployeeCode = Code where EmsTblEmployeeAssociatedToProject.ProjectCode like 'P0006'

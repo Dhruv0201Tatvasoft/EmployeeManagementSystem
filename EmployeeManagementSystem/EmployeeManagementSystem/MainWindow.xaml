@@ -198,8 +198,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-            </Style.Triggers>
         </Style>
 
         <!--ComboBoxItemTemplate-->

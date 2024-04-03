@@ -48,8 +48,11 @@ namespace EmployeeManagementSystem.UserControls
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.menuitem.Visibility = Visibility.Visible;
-           mainWindow.mainContent.Content = new LoginWindow();
+            if (mainWindow != null)
+            {
+                mainWindow.menuitem.Visibility = Visibility.Visible;
+                mainWindow.mainContent.Content = new LoginWindow();
+            }
         }
     }
 }

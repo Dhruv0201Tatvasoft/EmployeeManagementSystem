@@ -531,7 +531,7 @@ namespace EmployeeManagementSystem.Database
                         command.Parameters.AddWithValue("@Code", code);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            int count = reader.FieldCount;
+                            
                             while (reader.Read())
                             {
                                 EmployeeExperienceModel employeeExperienceModel = new EmployeeExperienceModel
@@ -575,7 +575,6 @@ namespace EmployeeManagementSystem.Database
                         command.Parameters.AddWithValue("@Code", code);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            int count = reader.FieldCount;
                             while (reader.Read())
                             {
                                 EmployeeEducationModel employeeEducation = new EmployeeEducationModel
@@ -613,7 +612,7 @@ namespace EmployeeManagementSystem.Database
             {
                 using (SqlConnection conn = new SqlConnection(connection.GetConnectionString()))
                 {
-                    string query = $"exec sp_DesignationWiseEmployee";
+                    string query = $"SELECT COUNT(*) as Count, Designation  from EmsTblEmployee GROUP BY Designation   ";
                     using (SqlCommand command = new SqlCommand(query, conn))
                     {
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
