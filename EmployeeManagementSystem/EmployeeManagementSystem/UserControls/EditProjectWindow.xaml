@@ -67,7 +67,7 @@
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="End Date:" Grid.Column="0" Grid.Row="3" ></TextBlock>
                 <DatePicker x:Name="EndingDate" SelectedDateFormat="Long" DisplayDateStart="01/01/1900" DisplayDateEnd="2100/12/31"  Text="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged,TargetNullValue='',ValidatesOnDataErrors=True,  Mode=TwoWay, StringFormat=dd/MM/yyyy}"  Grid.Row="3" Grid.Column="1" Width="250" Height="32" HorizontalAlignment="Left"  Style="{DynamicResource CustomDatePickerStyle}" />
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Technologies:" Grid.Column="0" Grid.Row="4" ></TextBlock>
-                <ListBox  x:Name="myListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}" BorderBrush="#507E32"    Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
+                <ListBox  x:Name="ListBox" ItemsSource="{Binding DataTable,NotifyOnSourceUpdated=True}" BorderBrush="#507E32"    Grid.Row="4" Grid.Column="1" Width="200" HorizontalAlignment="Left" SelectionMode="Multiple">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem"  BasedOn="{StaticResource ListBoxItemStyle}"/>
 
@@ -94,7 +94,7 @@
                         </MultiBinding>
                     </Button.IsEnabled>
                 </Button>
-                <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" VerticalAlignment="Top" Content="Cancel" Click="Cancel_Button_Click"/>
+                <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" VerticalAlignment="Top" Content="Cancel" Click="CancelBtnClick"/>
             </StackPanel>
         </StackPanel>
     </Grid>

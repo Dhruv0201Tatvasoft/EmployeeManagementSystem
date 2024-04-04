@@ -45,7 +45,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Converts content to login window.
         /// </summary>
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void LogoutBtnClick(object sender, System.Windows.RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             if (mainWindow != null)

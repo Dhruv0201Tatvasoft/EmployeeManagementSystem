@@ -36,15 +36,15 @@ namespace EmployeeManagementSystem.UserControls
             viewModel.StartingDate = project.StartingDate;
             viewModel.EndingDate = project.EndingDate;
             DataTable dt = getData.GetTechnologyData();
-            myListBox.ItemsSource = dt.DefaultView;
+            ListBox.ItemsSource = dt.DefaultView;
     
-                foreach (DataRowView row in myListBox.Items)
+                foreach (DataRowView row in ListBox.Items)
                 {
                     int id = Convert.ToInt32(row.Row.ItemArray[1]); /// to get id of the technology.
 
                     if (project.AssociatedTechnologies!=null &&  project.AssociatedTechnologies.Contains(id)) /// selects technologies that are associated to the project
                     {
-                        myListBox.SelectedItems.Add(row);
+                        ListBox.SelectedItems.Add(row);
 
                     }
                 }
@@ -75,7 +75,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Changes MainWindow's content to projectWindow, called after clicking cancel button.
         /// </summary>
-        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+        private void CancelBtnClick(object sender, RoutedEventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);

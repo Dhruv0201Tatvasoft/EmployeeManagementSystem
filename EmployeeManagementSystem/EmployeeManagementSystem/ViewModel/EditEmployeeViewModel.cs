@@ -14,8 +14,8 @@ namespace EmployeeManagementSystem.ViewModel
         private InsertData insertData;
         private DeleteData deleteData;
         private UpdateData updateData;
-        public event EventHandler? AddEducationButtonClickedEvent;
-        public event EventHandler? AddExperienceButtonClickedEvent;
+        public event EventHandler? AddFirstEducationRowEvent;
+        public event EventHandler? AddFirstExperienceRowEvent;
         public event EventHandler? EmployeeUpdatedEvent;
         public event EventHandler? AddEducationRowEvent;
         public event EventHandler? AddExperienceRowEvent;
@@ -23,11 +23,11 @@ namespace EmployeeManagementSystem.ViewModel
         public event EventHandler? EditExperienceRowEvent;
         public void OnAddEducationButtonClicked(EventArgs e)
         {
-            AddEducationButtonClickedEvent?.Invoke(this, e);
+            AddFirstEducationRowEvent?.Invoke(this, e);
         }
         public void OnAddExperienceButtonClicked(EventArgs e)
         {
-            AddExperienceButtonClickedEvent?.Invoke(this, e);
+            AddFirstExperienceRowEvent?.Invoke(this, e);
         }
         public void OnEmployeeAddedEvent(EventArgs e)
         {

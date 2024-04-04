@@ -583,7 +583,7 @@
                         </MenuItem>
                     </Menu>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Button x:Name="login" Click="login_Click"  Content="Login" Width="70"  Margin="0 0 20 0" Style="{StaticResource ButtonStyle}"/>
+                        <Button x:Name="login" Click="LoginClick"  Content="Login" Width="70"  Margin="0 0 20 0" Style="{StaticResource ButtonStyle}"/>
                         <Button  ToolTip="About" Click="InfoButtonClicked"  Height="auto" Width="39">
                             <Image Source="\Icons\AboutIcon.png" Width="auto" Height="auto"/>
                         </Button>

@@ -14,18 +14,18 @@ namespace EmployeeManagementSystem.UserControls
         {
             InitializeComponent();
             LoginViewModel viewModel = new LoginViewModel();
-            viewModel.IncorrectLoginEvent += LoginViewModel_IncorrectLoginEvent;
-            viewModel.CorrectLoginEvent += LoginViewModel_CorrectLoginEvent;
-            username.GotFocus += Username_GotFocus;
-            passwordBox.GotFocus += Username_GotFocus;
-            textBox.GotFocus += Username_GotFocus;
+            viewModel.IncorrectLoginEvent += IncorrectLogin;
+            viewModel.CorrectLoginEvent += CorrectLogin;
+            username.GotFocus += UsernameGotFocus;
+            passwordBox.GotFocus += UsernameGotFocus;
+            textBox.GotFocus += UsernameGotFocus;
             this.DataContext = viewModel;
         }
 
         /// <summary>
         /// On correct login changes MainWindow content to EmployeeLoginDetails and hides menuitem.
         /// </summary>
-        private void LoginViewModel_CorrectLoginEvent(object? sender, EmployeeEventArgs e)
+        private void CorrectLogin(object? sender, EmployeeEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             if (mainWindow != null)
@@ -39,7 +39,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Whenever TextBox gets focused clears txtBlock to String.Empty which is used to show Incorrect Login error.
         /// </summary>
-        private void Username_GotFocus(object sender, RoutedEventArgs e)
+        private void UsernameGotFocus(object sender, RoutedEventArgs e)
         {
             txtBlock.Text = string.Empty;
         }
@@ -50,7 +50,7 @@ namespace EmployeeManagementSystem.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LoginViewModel_IncorrectLoginEvent(object? sender, EventArgs e)
+        private void IncorrectLogin(object? sender, EventArgs e)
         {
             txtBlock.Text = "Incorrect username or password";
         }
@@ -81,7 +81,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// sets Password stirng in DataContext to the password entered by user
         /// </summary>
-        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        private void PasswordChanged(object sender, RoutedEventArgs e)
         {
             ((dynamic)this.DataContext).Password = passwordBox.Password;
            

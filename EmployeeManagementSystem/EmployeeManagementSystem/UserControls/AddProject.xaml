@@ -102,7 +102,7 @@
                     </MultiBinding>
                 </Button.IsEnabled>
                 </Button>
-                <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" VerticalAlignment="Top" Content="Cancel" Click="Button_Click"/>
+                <Button Style="{DynamicResource ButtonStyle}" Width="70" Height="32" VerticalAlignment="Top" Content="Cancel" Click="CancelButtonClick"/>
             </StackPanel> 
     </Grid>
 </UserControl>

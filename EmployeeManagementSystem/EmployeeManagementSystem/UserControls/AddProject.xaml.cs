@@ -38,7 +38,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Changes MainWindow's content to projectWindow, called after clicking cancel button.
         /// </summary>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             ProjectWindow projectWindow = new ProjectWindow();
             MainWindow mainWindow = (MainWindow) Window.GetWindow(this);

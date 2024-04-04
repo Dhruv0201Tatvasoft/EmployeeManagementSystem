@@ -16,13 +16,13 @@ namespace EmployeeManagementSystem.UserControls
             InitializeComponent();
             EditEmployeeViewModel viewModel = new EditEmployeeViewModel();
             this.DataContext = viewModel;
-            viewModel.AddEducationButtonClickedEvent += ViewModel_AddButtonClickedEvent;
-            viewModel.AddExperienceButtonClickedEvent += ViewModel_AddExperienceButtonClickedEvent;
-            viewModel.EmployeeUpdatedEvent += ViewModel_EmployeeUpdatedEvent;
-            viewModel.AddEducationRowEvent += ViewModel_AddEducationRowEvent;
-            viewModel.EditEducationRowEvent += ViewModel_EditEducationRowEvent;
-            viewModel.AddExperienceRowEvent += ViewModel_AddExperienceRowEvent;
-            viewModel.EditExperienceRowEvent += ViewModel_EditExperienceRowEvent;
+            viewModel.AddFirstEducationRowEvent += AddFirstEducationRow;
+            viewModel.AddFirstExperienceRowEvent += AddFirstExperienceRow;
+            viewModel.EmployeeUpdatedEvent += EmployeeUpdated;
+            viewModel.AddEducationRowEvent += AddEducationRow;
+            viewModel.EditEducationRowEvent += EditEducationRow;
+            viewModel.AddExperienceRowEvent += AddExperienceRow;
+            viewModel.EditExperienceRowEvent += EditExperienceRow;
         }
 
 
@@ -31,18 +31,18 @@ namespace EmployeeManagementSystem.UserControls
             InitializeComponent();
             EditEmployeeViewModel viewModel = new EditEmployeeViewModel(employeeModel);
             this.DataContext = viewModel;
-            viewModel.AddEducationButtonClickedEvent += ViewModel_AddButtonClickedEvent;
-            viewModel.AddExperienceButtonClickedEvent += ViewModel_AddExperienceButtonClickedEvent;
-            viewModel.EmployeeUpdatedEvent += ViewModel_EmployeeUpdatedEvent;
-            viewModel.AddEducationRowEvent += ViewModel_AddEducationRowEvent;
-            viewModel.EditEducationRowEvent += ViewModel_EditEducationRowEvent;
-            viewModel.AddExperienceRowEvent += ViewModel_AddExperienceRowEvent;
-            viewModel.EditExperienceRowEvent += ViewModel_EditExperienceRowEvent;
+            viewModel.AddFirstEducationRowEvent += AddFirstEducationRow;
+            viewModel.AddFirstExperienceRowEvent += AddFirstExperienceRow;
+            viewModel.EmployeeUpdatedEvent += EmployeeUpdated;
+            viewModel.AddEducationRowEvent += AddEducationRow;
+            viewModel.EditEducationRowEvent += EditEducationRow;
+            viewModel.AddExperienceRowEvent += AddExperienceRow;
+            viewModel.EditExperienceRowEvent += EditExperienceRow;
         }
         /// <summary>
         /// Method called When user starts to edit Experience Row and calls ShowCellsEditingTemplateExperience with selected row .
         /// </summary>
-        private void ViewModel_EditExperienceRowEvent(object? sender, EventArgs e)
+        private void EditExperienceRow(object? sender, EventArgs e)
         {
             DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
             ShowCellsEditingTemplateExperience(row);
@@ -51,7 +51,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Method called When user adds new Experience Row and calls ShowCellsNormalTemplateExperience with selected row .
         /// </summary>
-        private void ViewModel_AddExperienceRowEvent(object? sender, EventArgs e)
+        private void AddExperienceRow(object? sender, EventArgs e)
         {
             DataGridRow row = (DataGridRow)ExperienceDataGrid.ItemContainerGenerator.ContainerFromItem(ExperienceDataGrid.CurrentItem);
             ShowCellsNormalTemplateExperience(row, true);
@@ -60,7 +60,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Method called When user starts to edit Education Row and calls ShowCellsEditingTemplateExperience with selected row .
         /// </summary>
-        private void ViewModel_EditEducationRowEvent(object? sender, EventArgs e)
+        private void EditEducationRow(object? sender, EventArgs e)
         {
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
             ShowCellsEditingTemplateEducation(row);
@@ -70,17 +70,17 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Method called When user adds new Education Row and calls ShowCellsNormalTemplateExperience with selected row .
         /// </summary>
-        private void ViewModel_AddEducationRowEvent(object? sender, EventArgs e)
+        private void AddEducationRow(object? sender, EventArgs e)
         {
             DataGridRow row = (DataGridRow)DGrid.ItemContainerGenerator.ContainerFromItem(DGrid.CurrentItem);
-            ShowCellsNormalTemplate(row, true);
+            ShowCellsNormalTemplateEducation(row, true);
         }
 
 
         /// <summary>
         /// Method is called whenever first row is added to Experience List and this method calls ShowCellsEditingTemplateExperience with selectedRow.
         /// </summary>
-        private void ViewModel_AddExperienceButtonClickedEvent(object? sender, EventArgs e)
+        private void AddFirstExperienceRow(object? sender, EventArgs e)
         {
             ExperienceDataGrid.SelectedItem = ExperienceDataGrid.Items[ExperienceDataGrid.Items.Count - 1];
             ExperienceDataGrid.UpdateLayout();
@@ -91,7 +91,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// set selected tab to Education details tab, disables first two tabs.
         /// </summary>
-        private void ViewModel_EmployeeUpdatedEvent(object? sender, EventArgs e)
+        private void EmployeeUpdated(object? sender, EventArgs e)
         {
             TabControl.SelectedIndex = 2;
             EmployeeDetailsTabItem.IsEnabled = false;
@@ -101,7 +101,7 @@ namespace EmployeeManagementSystem.UserControls
         /// <summary>
         /// Method is called whenever first row is added to Experience List and this method calls ShowCellsEditingTemplateExperience with selectedRow.
         /// </summary>
-        private void ViewModel_AddButtonClickedEvent(object? sender, EventArgs e)
+        private void AddFirstEducationRow(object? sender, EventArgs e)
         {
             DGrid.SelectedItem = DGrid.Items[DGrid.Items.Count - 1];
             DGrid.UpdateLayout();
@@ -118,16 +118,6 @@ namespace EmployeeManagementSystem.UserControls
             TabControl.SelectedIndex = 1;
         }
 
-
-
-        /// <summary>
-        /// Method is called whenever back button is clicked this sets content to EmployeeWindow.
-        /// </summary>
-        private void BackBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.mainContent.Content = new EmployeeWindow();
-        }
 
         /// <summary>
         /// Converts cells of Education DataGrid from Normal template to editing template.
@@ -154,7 +144,7 @@ namespace EmployeeManagementSystem.UserControls
         /// </summary>
         /// <param name="row">row which is being converted from editing template to normal template</param>
         /// <param name="canCommit">To check if Changes can commit</param>
-        private void ShowCellsNormalTemplate(DataGridRow row, bool canCommit = false)
+        private void ShowCellsNormalTemplateEducation(DataGridRow row, bool canCommit = false)
         {
             foreach (DataGridColumn col in DGrid.Columns)
             {
@@ -207,6 +197,15 @@ namespace EmployeeManagementSystem.UserControls
                 DataGridTemplateColumn c = (DataGridTemplateColumn)col;
                 cell.Content = c.CellTemplate.LoadContent();
             }
+        }
+
+        /// <summary>
+        /// Method is called whenever back button is clicked this sets content to EmployeeWindow.
+        /// </summary>
+        private void BackBtnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.mainContent.Content = new EmployeeWindow();
         }
     }
 }

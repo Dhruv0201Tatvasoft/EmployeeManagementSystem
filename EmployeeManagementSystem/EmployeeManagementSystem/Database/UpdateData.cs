@@ -1,8 +1,6 @@
 ﻿using EmployeeManagementSystem.Model;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Automation.Peers;
-using System.Windows.Input;
 
 namespace EmployeeManagementSystem.Database
 {

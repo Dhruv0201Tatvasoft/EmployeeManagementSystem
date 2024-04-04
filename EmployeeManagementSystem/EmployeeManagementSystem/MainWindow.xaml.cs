@@ -61,7 +61,10 @@ namespace EmployeeManagementSystem
                         mainContent.Content = new SkillWindow();
                         selectedMenuItem = Master;
                         break;
-
+                    default:
+                        mainContent.Content = new DashboardWindow();
+                        selectedMenuItem = DashboardMenuItem;
+                        break;  
 
                 }
             }
@@ -79,7 +82,7 @@ namespace EmployeeManagementSystem
             MyPopup.IsOpen = false;
         }
 
-        private void login_Click(object sender, RoutedEventArgs e)
+        private void LoginClick(object sender, RoutedEventArgs e)
         {
             mainContent.Content = new LoginWindow();
             if(selectedMenuItem!=null)

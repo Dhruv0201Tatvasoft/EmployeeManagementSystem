@@ -85,7 +85,7 @@
         </Grid.RowDefinitions>
         <DockPanel  Grid.Row="0"  HorizontalAlignment="Stretch"  Height="auto">
             <TextBlock Text="Employee - Add" Margin="20 20 20 0" VerticalAlignment="Center" FontSize="40"/>
-            <Button Content="Back" Name="BackBtn" Click="BackBtn_Click" Style="{DynamicResource ButtonStyle}" Width="70" Height="32" HorizontalAlignment="Right" Margin="0,0,20,7" VerticalAlignment="Bottom"/>
+            <Button Content="Back" Name="BackBtn" Click="BackBtnClick" Style="{DynamicResource ButtonStyle}" Width="70" Height="32" HorizontalAlignment="Right" Margin="0,0,20,7" VerticalAlignment="Bottom"/>
         </DockPanel>
         <Separator Grid.Row="1"  Margin="20 10 20 10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <TabControl x:Name="TabControl" BorderBrush="#507E32" BorderThickness="0.5" Margin="20 0 20 20" Grid.Row="2" >

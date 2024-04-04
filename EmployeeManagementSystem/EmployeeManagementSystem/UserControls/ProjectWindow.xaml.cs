@@ -23,7 +23,7 @@ namespace EmployeeManagementSystem.UserControls
             InitializeComponent();
             ProjectViewModel viewModel = new ProjectViewModel();
             DataContext = viewModel;
-            viewModel.EditEvent += ViewModel_EditEvent;
+            viewModel.EditEvent += OpenEditProjectWindow;
             getData = new GetData();
             viewModel.AddEmployeeEvent += RefreshEmployeeDatagrid;
         }
@@ -44,7 +44,7 @@ namespace EmployeeManagementSystem.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">ProjectEventArgs, contains selected project which is being edited.</param>
-        private void ViewModel_EditEvent(object? sender, ProjectEventArgs e)
+        private void OpenEditProjectWindow(object? sender, ProjectEventArgs e)
         {            
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
 

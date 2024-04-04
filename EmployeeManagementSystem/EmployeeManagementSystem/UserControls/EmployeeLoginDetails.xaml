@@ -15,7 +15,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Content="Log Out" Click="Button_Click" Style="{DynamicResource ButtonStyle}" Width="60" Height="32" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 0"/>
+        <Button Content="Log Out" Click="LogoutBtnClick" Style="{DynamicResource ButtonStyle}" Width="60" Height="32" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 0"/>
         <Grid Margin="30" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".2*" MinWidth="100" />
