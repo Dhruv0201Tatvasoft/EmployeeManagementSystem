@@ -36,7 +36,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in Fetching data from database","Error");
             }
             return dt;
         }

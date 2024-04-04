@@ -21,19 +21,33 @@ namespace EmployeeManagementSystem.Database
             {
                 using (SqlConnection conn = connection.GenerateConnection())
                 {
-                    command.Connection = conn;
                     conn.Open();
-                    command.ExecuteNonQuery();
-                    return true;
+
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            command.Connection = conn;
+                            command.Transaction = transaction;
+
+                            command.ExecuteNonQuery();
+
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error in updating data to database.", "Error");
+                            return false;
+                        }
+                    }
                 }
             }
-            catch (SqlException )
+            catch (Exception)
             {
-                {
-                    MessageBox.Show("Error in updating data to database");
-                    return false;
-                }
-                
+                MessageBox.Show("Error in updating data to database.", "Error");
+                return false;
             }
 
         }

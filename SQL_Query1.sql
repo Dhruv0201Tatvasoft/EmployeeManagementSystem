@@ -209,14 +209,4 @@ SELECT
 from
 	EmsTblEmployee 
 GROUP BY 
-	Designation   
- 
-
-
-SELECT EmsTblTechnology.Id,COUNT(projectCode)as Count,EmsTblTechnology.Name from EmsTblTechnology 
-                LEFT JOIN EmsTblTechnologyForProject ON  
-                EmsTblTechnology.Id = EmsTblTechnologyForProject.TechnologyID GROUP BY EmsTblTechnology.Name,EmsTblTechnology.Id
-
-select CONCAT(FirstName, ' ' ,LastName)as FullName  ,EmsTblEmployeeAssociatedToProject.ProjectCode  from EmsTblEmployee inner join EmsTblEmployeeAssociatedToProject
-
-on EmsTblEmployeeAssociatedToProject.EmployeeCode = Code where EmsTblEmployeeAssociatedToProject.ProjectCode like 'P0006'
+	Designation  
