@@ -144,9 +144,7 @@ REFERENCES EmsTblTechnology(Id)
 ON UPDATE CASCADE
 ON DELETE CASCADE;
 
-Select * from EmsTblProject
-EXEC sp_PastSixMonthJoinedEmployee
-CREATE PROCEDURE sp_PastSixMonthJoinedEmployee
+CREATE PROCEDURE spPastSixMonthJoinedEmployee
 AS
 Select
     COUNT(*) AS count,
@@ -162,7 +160,7 @@ GROUP BY
 ORDER BY 
     (MONTH(GETDATE()) - MONTH(JoiningDate) + 12) % 12;
 
-CREATE PROCEDURE sp_PastSixMonthReleasedEmployee
+CREATE PROCEDURE spPastSixMonthReleasedEmployee
 AS
 SELECT 
     COUNT(*) AS count,
@@ -180,7 +178,7 @@ ORDER BY
 
 
 
-CREATE PROCEDURE sp_TechnologyWiseProject
+CREATE PROCEDURE spTechnologyWiseProject
 AS
 SELECT 
 	Id,COUNT(projectCode)as Count,Name
@@ -191,7 +189,7 @@ LEFT JOIN
 GROUP BY 
 	EmsTblTechnology.Name,EmsTblTechnology.Id;
 
-CREATE PROCEDURE sp_SkillWiseEmployee
+CREATE PROCEDURE spSkillWiseEmployee
 AS
 SELECT
 	COUNT(*) as Count,SkillId,Name 
@@ -202,7 +200,7 @@ INNER JOIN
 group by 
 	EmsTblSkillForEmployee.SkillId ,EmsTblSkill.Name
 
-CREATE PROCEDURE sp_DesignationWiseEmployee
+CREATE PROCEDURE spDesignationWiseEmployee
 AS
 SELECT 
 	COUNT(*) as Count, Designation 
@@ -210,3 +208,5 @@ from
 	EmsTblEmployee 
 GROUP BY 
 	Designation  
+
+EXEC spDesignationWiseEmployee

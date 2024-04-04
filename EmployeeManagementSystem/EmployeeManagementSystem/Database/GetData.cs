@@ -36,7 +36,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database","Error");
+                MessageBox.Show("Error in fetching data from database","Error");
             }
             return dt;
         }
@@ -104,7 +104,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database: ");
+                MessageBox.Show("Error in fetching data from database", "Error");
                 return new DataTable();
             }
         }
@@ -134,7 +134,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -193,7 +193,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database");
             }
             return project;
         }
@@ -230,7 +230,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return result;
         }
@@ -264,7 +264,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -300,7 +300,7 @@ namespace EmployeeManagementSystem.Database
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Error in Fetching data from database");
+                    MessageBox.Show("Error in fetching data from database", "Error");
                 }
             return dt;
         }
@@ -330,7 +330,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -359,7 +359,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -386,7 +386,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -453,7 +453,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -508,7 +508,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return employee;
         }
@@ -550,7 +550,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return employeeExperienceModels;
         }
@@ -596,7 +596,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return educationModels;
         }
@@ -624,7 +624,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -657,7 +657,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return result;
         }
@@ -696,7 +696,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -735,7 +735,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -767,7 +767,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -799,7 +799,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
             }
             return dt;
         }
@@ -836,7 +836,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (Exception)
             {
-                MessageBox.Show("Error in Fetching data from database");
+                MessageBox.Show("Error in fetching data from database", "Error");
                 return string.Empty;
             }
         }
