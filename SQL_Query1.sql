@@ -208,5 +208,16 @@ from
 	EmsTblEmployee 
 GROUP BY 
 	Designation  
-
-EXEC spDesignationWiseEmployee
+	
+select 
+	 EmsTblTechnology.Name,Distinct CONCAT(EmsTblEmployee.FirstName, ' ' ,EmsTblEmployee.LastName) as FullName
+From 
+	EmsTblTechnologyForProject Inner Join EmsTblEmployeeAssociatedToProject
+On 
+	EmsTblTechnologyForProject.ProjectCode = EmsTblEmployeeAssociatedToProject.ProjectCode inner join EmsTblTechnology
+On 
+	EmsTblTechnologyForProject.TechnologyId = EmsTblTechnology.Id inner join EmsTblEmployee
+On 
+	EmsTblEmployee.Code = EmsTblEmployeeAssociatedToProject.EmployeeCode
+Group By
+	EmsTblTechnology.Name

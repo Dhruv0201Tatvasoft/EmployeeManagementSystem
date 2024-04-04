@@ -6,7 +6,7 @@
              xmlns:converter="clr-namespace:EmployeeManagementSystem.Converter"
              xmlns:vm ="clr-namespace:EmployeeManagementSystem.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="560" d:DesignWidth="1025" d:Background="White">
+             d:DesignHeight="515" d:DesignWidth="995" d:Background="White">
     <UserControl.Resources>
         <vm:EditEmployeeViewModel x:Key="ViewModel"/>
         <converter:RadioButtonChoiceConverter x:Key="radiobuttonconverter"/>

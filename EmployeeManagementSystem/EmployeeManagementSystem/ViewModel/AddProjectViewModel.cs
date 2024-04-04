@@ -98,7 +98,7 @@ namespace EmployeeManagementSystem.ViewModel
             }
         }
 
-        public string Error => null!;
+        public string Error => string.Empty;
 
         public string this[string PropertyName]
         {

@@ -52,7 +52,7 @@ namespace EmployeeManagementSystem.UserControls
             {
                 if (mainWindow.mainContent != null)
                 {
-                    mainWindow.mainContent.Content = new EditProjectWindow(e.project);
+                    mainWindow.mainContent.Content = new EditProjectWindow(e.Project);
                 }
             }
         }

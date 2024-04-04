@@ -9,7 +9,7 @@
              xmlns:b="clr-namespace:EmployeeManagementSystem.Behaviours"
              xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:chartingpremitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
-             d:DesignHeight="450" d:DesignWidth="800" d:Background="White">
+             d:DesignHeight="540" d:DesignWidth="800" d:Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="PieDataPointStyle" TargetType="{x:Type b:PieDataPoint}">
@@ -31,7 +31,7 @@
                                                 <DoubleAnimation Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
                                             </Storyboard>
                                         </vsm:VisualState>
-                          
+
                                     </vsm:VisualStateGroup>
                                 </vsm:VisualStateManager.VisualStateGroups>
                                 <Path Name="Slice" Data="{TemplateBinding b:PieDataPoint.TextedGeometry}" Fill="{TemplateBinding Control.Background}" Stroke="{TemplateBinding Control.BorderBrush}"  StrokeMiterLimit="1">
@@ -69,7 +69,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <!--#region DesignationWiseEmployee -->
         <chart:Chart Grid.Column="0" Grid.Row="0" x:Name="DesignationWiseEmployee" Title="Designation-wise Employee" Margin="10">
             <chart:Chart.Template>
@@ -122,7 +122,7 @@
             </b:PieSeries>
         </chart:Chart>
         <!--#endregion-->
-        
+
         <!--#region Employee -->
         <chart:Chart Name="employeeChart" Title="Employee"  Background="Transparent" Grid.Column="1" Grid.Row="0"  Margin="10 ">
             <chart:Chart.Template>
@@ -199,7 +199,7 @@
                         </Style>
                     </chart:ColumnSeries.DataPointStyle>
                 </chart:ColumnSeries>
-                
+
             </chart:Chart.Series>
 
             <chart:Chart.Axes>
@@ -209,7 +209,7 @@
 
         </chart:Chart>
         <!--#endregion-->
-        
+
         <!--#region TechnologyWiseProject -->
         <chart:Chart Grid.Column="0" Grid.Row="1"  x:Name="TechnologyWiseProject" Title="Technology-wise Project" Margin="10">
             <chart:Chart.Template>
@@ -336,4 +336,3 @@
 
 
 </UserControl>
-    

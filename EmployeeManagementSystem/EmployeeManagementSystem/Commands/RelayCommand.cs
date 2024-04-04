@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace EmployeeManagementSystem.Commands
 {
-    internal class RelayCommand : ICommand
+    internal class RelayCommand : ICommand        
     {
         Action<object> execute;
         Func<object, bool> canExecute;
@@ -41,7 +41,6 @@ namespace EmployeeManagementSystem.Commands
             }
             else
             {
-                
                 return canExecute(parameter!);
             }
         }

@@ -31,7 +31,7 @@ namespace EmployeeManagementSystem.UserControls
             if (mainWindow != null)
             {
                 mainWindow.menuitem.Visibility = Visibility.Collapsed;
-                mainWindow.mainContent.Content = new EmployeeLoginDetails(e.emp);
+                mainWindow.mainContent.Content = new EmployeeLoginDetails(e.Employee);
             }
 
         }

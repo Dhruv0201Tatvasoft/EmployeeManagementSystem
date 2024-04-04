@@ -47,7 +47,7 @@ namespace EmployeeManagementSystem.UserControls
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             if (mainWindow != null)
             {
-                mainWindow.mainContent.Content = new EditEmployeeWindow(e.emp);
+                mainWindow.mainContent.Content = new EditEmployeeWindow(e.Employee);
             }
         }
 

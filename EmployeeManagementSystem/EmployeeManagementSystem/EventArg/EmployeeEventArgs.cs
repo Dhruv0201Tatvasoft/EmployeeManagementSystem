@@ -4,10 +4,10 @@ namespace EmployeeManagementSystem.EventArg
 {
     internal class EmployeeEventArgs:EventArgs
     {
-        public EmployeeModel emp { get; }
+        public EmployeeModel Employee { get; }
         public EmployeeEventArgs(EmployeeModel emp)
         {
-            this.emp = emp;
+            this.Employee = emp;
         }
     }
 }

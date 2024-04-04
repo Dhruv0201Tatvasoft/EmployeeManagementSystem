@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Security.Permissions;
 using System.Windows;
 
 namespace EmployeeManagementSystem.Database
@@ -410,7 +409,7 @@ namespace EmployeeManagementSystem.Database
             }
             if (!String.IsNullOrEmpty(name))
             {
-                query += " AND CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) LIKE @Name";
+                query += " AND CONCAT(COALESCE(FirstName + ' ', ''), COALESCE(Lastname, '')) like @Name";
             }
             if (!String.IsNullOrEmpty(department))
             {

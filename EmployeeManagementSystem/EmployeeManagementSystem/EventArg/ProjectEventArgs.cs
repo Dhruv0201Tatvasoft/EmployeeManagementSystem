@@ -9,10 +9,10 @@ namespace EmployeeManagementSystem.EventArg
 {
     internal class ProjectEventArgs:EventArgs
     {
-        public ProjectModel project { get; }
+        public ProjectModel Project { get; }
         public ProjectEventArgs(ProjectModel project)
         {
-            this.project = project;
+            this.Project = project;
         }
     }
 }
