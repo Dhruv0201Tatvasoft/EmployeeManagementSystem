@@ -36,7 +36,7 @@ namespace EmployeeManagementSystem.Database
                         catch (Exception)
                         {
                             transaction.Rollback();
-                            MessageBox.Show("Error in deleting data","Error");
+                            MessageBox.Show("Error in deleting data from database.","Error");
                             return false;
                         }
                     }
@@ -44,7 +44,7 @@ namespace EmployeeManagementSystem.Database
             }
             catch (SqlException)
             {
-                MessageBox.Show("Error in deleting data", "Error");
+                MessageBox.Show("Error in deleting data from database.", "Error");
                 return false;
             }
 
